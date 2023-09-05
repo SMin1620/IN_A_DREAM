@@ -1,11 +1,6 @@
 import React from "react";
-import MyBook from "./pages/BookPage";
 function App() {
-  return (
-    <div className="App">
-      <MyBook />
-    </div>
-  );
+  return <div className="App"></div>;
 }
 
 export default App;
