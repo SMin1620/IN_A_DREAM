@@ -47,7 +47,7 @@ spring:
     static-path-pattern: /static/**
 
   kafka:
-    bootstrap-servers: "kafka:9092"
+    bootstrap-servers: localhost:9092
 
     consumer:
       # consumer bootstrap servers가 따로 존재하면 설정
@@ -55,7 +55,7 @@ spring:
 
 
       # 식별 가능한 Consumer Group Id
-      group-id: logGroup
+      group-id: loggroup
       # Kafka 서버에 초기 offset이 없거나, 서버에 현재 offset이 더 이상 존재하지 않을 경우 수행할 작업을 설정
       # latest: 가장 최근에 생산된 메시지로 offeset reset
       # earliest: 가장 오래된 메시지로 offeset reset
@@ -63,17 +63,17 @@ spring:
       auto-offset-reset: earliest
       # 데이터를 받아올 때, key/value를 역직렬화
       # JSON 데이터를 받아올 것이라면 JsonDeserializer
-      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
-      value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+#      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+#      value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
 
-    producer:
+#    producer:
       # producer bootstrap servers가 따로 존재하면 설정
       # bootstrap-servers: 3.34.97.97:9092
 
       # 데이터를 보낼 때, key/value를 직렬화
       # JSON 데이터를 보낼 것이라면 JsonDeserializer
-      key-serializer: org.apache.kafka.common.serialization.StringSerializer
-      value-serializer: org.apache.kafka.common.serialization.StringSerializer
+#      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+#      value-serializer: org.apache.kafka.common.serialization.StringSerializer
 
 springdoc:
   default-consumes-media-type: application/json;charset=UTF-8

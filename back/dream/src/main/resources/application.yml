@@ -10,4 +10,4 @@ spring:
 
 message:
   topic:
-    name: log-user
+    name: member_log
