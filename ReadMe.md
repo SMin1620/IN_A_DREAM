@@ -11,3 +11,6 @@ HB_commit _ 아맞커__
 back - ERD_v1 완성
 
 컨셉투표 시작
+
+
+local ubuntu 에서 structured streaming + kafka 예제 실행
