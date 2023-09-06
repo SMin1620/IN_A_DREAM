@@ -26,4 +26,3 @@ services:  # docker-compose의 경우 docker 컨테이너로 수행될 서비스
     depends_on:
       - zookeeper
 #        condition: service_healthy # Zookeeper 서비스가 건강한 상태일 때만 시작합니다.
-    restart: always
