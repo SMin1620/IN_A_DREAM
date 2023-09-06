@@ -47,7 +47,7 @@ spring:
     static-path-pattern: /static/**
 
   kafka:
-    bootstrap-servers: 127.0.0.1:9092
+    bootstrap-servers: "kafka:9092"
 
     consumer:
       # consumer bootstrap servers가 따로 존재하면 설정
@@ -74,11 +74,6 @@ spring:
       # JSON 데이터를 보낼 것이라면 JsonDeserializer
       key-serializer: org.apache.kafka.common.serialization.StringSerializer
       value-serializer: org.apache.kafka.common.serialization.StringSerializer
-    retry:
-      topic:
-        enabled: true
-    admin:
-      auto-create: true
 
 springdoc:
   default-consumes-media-type: application/json;charset=UTF-8
@@ -111,8 +106,3 @@ jwt:
     refresh-token-expiration-sec: 1209600
 
 
-# kafka
-message:
-  topic:
-    name: log-user
-    bootstrap-servers: 127.0.0.1:9092
