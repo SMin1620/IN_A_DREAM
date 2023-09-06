@@ -46,6 +46,18 @@ spring:
   mvc:
     static-path-pattern: /static/**
 
+  kafka:
+    consumer:
+      bootstrap-servers: localhost:9092
+      group-id: group-id-mopil # 컨슈머를 유일하게 식별할 수 있는 값
+      auto-offset-reset: earliest
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+    producer:
+      bootstrap-servers: localhost:9092
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.apache.kafka.common.serialization.StringSerializer
+
 
 springdoc:
   default-consumes-media-type: application/json;charset=UTF-8
