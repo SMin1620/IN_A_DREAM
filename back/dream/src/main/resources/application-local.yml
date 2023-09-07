@@ -47,7 +47,7 @@ spring:
     static-path-pattern: /static/**
 
   kafka:
-    bootstrap-servers: localhost:9092
+    bootstrap-servers: localhost:9094
 
     consumer:
       # consumer bootstrap servers가 따로 존재하면 설정
