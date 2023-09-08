@@ -1,6 +1,7 @@
 package com.dream.dream.kafka.service;
 
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.scheduling.annotation.Async;
@@ -8,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 @Service
 @RequiredArgsConstructor
+@Slf4j
 public class KafkaProducerService {
 
     @Value(value = "${message.topic.name}")
@@ -18,12 +20,6 @@ public class KafkaProducerService {
 
     @Async
     public void sendLogDto(Object message){
-        /*try {
-            Thread.sleep(5000);*/
-        //System.out.println("Produce content : "+message.getContent());
-        kafkaTemplate.send(topicName,message);
-        /*}catch (InterruptedException e){
-            e.printStackTrace();
-        }*/
+        kafkaTemplate.send(topicName, message);
     }
 }
