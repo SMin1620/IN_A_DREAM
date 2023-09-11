@@ -1,6 +1,6 @@
 package com.dream.dream.kafka.config;
 
-import com.dream.dream.kafka.LogDto;
+import com.dream.dream.kafka.dto.LogDto;
 import org.apache.kafka.clients.consumer.ConsumerConfig;
 import org.apache.kafka.common.serialization.StringDeserializer;
 import org.springframework.beans.factory.annotation.Value;

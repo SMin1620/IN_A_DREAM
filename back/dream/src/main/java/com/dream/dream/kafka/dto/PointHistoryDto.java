@@ -1,4 +1,4 @@
-package com.dream.dream.kafka;
+package com.dream.dream.kafka.dto;
 
 import lombok.*;
 
@@ -10,7 +10,14 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @Builder
 @ToString
-public class LogDto {
+public class PointHistoryDto {
+
+    private int point;
+
+    private Long buyer;
+
+    private Long seller;
+
     private LocalDateTime localDateTime;
-    private String message;
+
 }

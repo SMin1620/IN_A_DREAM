@@ -1,6 +1,6 @@
 package com.dream.dream.kafka.service;
 
-import com.dream.dream.kafka.LogDto;
+import com.dream.dream.kafka.dto.LogDto;
 import lombok.RequiredArgsConstructor;
 import org.apache.kafka.clients.consumer.ConsumerConfig;
 import org.springframework.kafka.annotation.KafkaListener;
@@ -8,7 +8,6 @@ import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
-import java.time.LocalDateTime;
 
 @Service
 @RequiredArgsConstructor
