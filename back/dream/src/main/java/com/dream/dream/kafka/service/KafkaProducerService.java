@@ -15,11 +15,19 @@ public class KafkaProducerService {
     @Value(value = "${message.topic.name}")
     private String topicName;
 
+    @Value(value = "${message.topic.pointName}")
+    private String topicName2;
+
     private final KafkaTemplate<String, Object> kafkaTemplate;
 
 
     @Async
     public void sendLogDto(Object message){
         kafkaTemplate.send(topicName, message);
+    }
+
+    @Async
+    public void sendPointLogDto(Object message){
+        kafkaTemplate.send(topicName2, message);
     }
 }
