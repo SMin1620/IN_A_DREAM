@@ -27,7 +27,7 @@ public class KafkaController {
         logDto.setLocalDateTime(LocalDateTime.now());
         logDto.setDiaryId(1L);
         logDto.setContent(
-               "조현덕");
+               "멍청이 바보");
         logDto.setPositive(99.1F);
         logDto.setNeutral(0.02F);
         logDto.setNegative(0.88F);
