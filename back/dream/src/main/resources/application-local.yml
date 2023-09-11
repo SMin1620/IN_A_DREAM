@@ -13,9 +13,9 @@ spring:
         show_sql: true
 
   datasource:
-    url: jdbc:h2:tcp://localhost/~/test
+    url: jdbc:h2:tcp://52.78.186.98:8081/demo
     username: sa
-    password:
+    password: 1234
     driver-class-name: org.h2.Driver
 
   h2:
@@ -26,6 +26,7 @@ spring:
 #  security:
 #    user:
 #      password: 1234
+
 
   data:
     redis:
