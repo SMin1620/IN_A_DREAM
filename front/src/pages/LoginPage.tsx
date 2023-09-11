@@ -1,27 +1,19 @@
-import React, { useState } from "react";
-import Input from "../components/common/Input";
+import React from "react";
+import LoginForm from "../components/features/LoginComponents/LoginForm";
+import "../styles/LoginPage.css";
 
 const LoginPage = () => {
-  const [email, setEmail] = useState("");
-  const inputEmail = (e: React.ChangeEvent<HTMLInputElement>) => {
-    console.log(e.target.value);
-  };
-
-  const inputPassword = (e: React.ChangeEvent<HTMLInputElement>) => {
-    console.log(e.target.value);
-  };
-
   return (
-    <div>
-      <Input placeholder="이메일" type="text" onChange={(e) => inputEmail(e)} />
+    <div className="LoginForm">
+      <div className="login-form">
+        <LoginForm />
+      </div>
 
-      <br />
+      <div className="login-left-section"></div>
 
-      <Input
-        placeholder="패스워드"
-        type="password"
-        onChange={(e) => inputPassword(e)}
-      />
+      <div className="login-right-section">
+        <img src="" alt="" />
+      </div>
     </div>
   );
 };
