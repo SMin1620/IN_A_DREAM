@@ -6,13 +6,16 @@ import Button2 from "./../../common/Button2";
 
 const SignupForm = () => {
   const [gender, setGender] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [checkPassword, setCheckPassword] = useState("");
 
   const handleEmail = (e: React.ChangeEvent<HTMLInputElement>) => {
-    console.log(e.target.value);
+    setEmail(e.target.value);
   };
 
   const handlePassword = (e: React.ChangeEvent<HTMLInputElement>) => {
-    console.log(e.target.value);
+    setPassword(e.target.value);
   };
 
   const handleCheckPassword = (e: React.ChangeEvent<HTMLInputElement>) => {
