@@ -1,12 +1,12 @@
 import React from "react";
-import LoginForm from "../components/features/LoginComponents/LoginForm";
+import SignupForm from "../components/features/SignupComponents/SignupForm";
 import "../styles/LoginPage.css";
 
-const LoginPage = () => {
+const SignUpPage = () => {
   return (
     <div className="LoginForm">
       <div className="login-form">
-        <LoginForm />
+        <SignupForm />
       </div>
 
       <div className="login-left-section"></div>
@@ -18,4 +18,4 @@ const LoginPage = () => {
   );
 };
 
-export default LoginPage;
+export default SignUpPage;
