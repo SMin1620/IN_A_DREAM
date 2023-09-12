@@ -1,14 +1,16 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import Swal from "sweetalert2";
 import Label from "./../../common/Label";
 import Input from "./../../common/Input";
 import "./SignupForm.css";
 import Button2 from "./../../common/Button2";
 
 const SignupForm = () => {
-  const [gender, setGender] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [checkPassword, setCheckPassword] = useState("");
+  const [birthDay, setBirthDay] = useState("");
+  const [gender, setGender] = useState("");
 
   const handleEmail = (e: React.ChangeEvent<HTMLInputElement>) => {
     setEmail(e.target.value);
@@ -19,20 +21,23 @@ const SignupForm = () => {
   };
 
   const handleCheckPassword = (e: React.ChangeEvent<HTMLInputElement>) => {
-    console.log(e.target.value);
+    setCheckPassword(e.target.value);
   };
 
   const handleBirthday = (e: React.ChangeEvent<HTMLInputElement>) => {
-    console.log(e.target.value);
-  };
-
-  const handleGender = (e: React.ChangeEvent<HTMLInputElement>) => {
-    console.log(e.target.value);
+    setBirthDay(e.target.value);
   };
 
   const postSignup = () => {
+    if (password !== checkPassword) {
+      Swal.fire({
+        icon: "error",
+        title: "비밀번호 오류",
+        text: "비밀번호가 일치하지 않습니다.",
+      });
+    }
     // API 요청
-    console.log("회원가입");
+    console.log(email, password, checkPassword, birthDay, gender);
   };
 
   return (

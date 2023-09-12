@@ -4,6 +4,10 @@
   margin-bottom: 1.5rem;
 }
 
+.signup-form-genderbox > button:hover {
+  cursor: pointer;
+}
+
 .active {
   border: none;
   width: 50%;
