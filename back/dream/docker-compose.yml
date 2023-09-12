@@ -2,6 +2,13 @@ version: '3' # docker-compose 버전 지정
 
 services:  # docker-compose의 경우 docker 컨테이너로 수행될 서비스들은 services 하위에 기술
 
+  spring:
+    build: ./
+    image: spring
+    container_name: spring
+    ports:
+      - "8082:8082"
+
   zookeeper: # 서비스 이름. service 하위에 작성하면 해당 이름으로 동작
     image: wurstmeister/zookeeper # 도커 이미지
     container_name: zookeeper
