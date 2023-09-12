@@ -3,11 +3,11 @@ import S from "styled-components";
 import { LoginInput } from "../../types/LoginTypes";
 
 const StyledInput = S.input<LoginInput>`
-  background-color: ${(props) => props.backgroundColor};
-  height: ${(props) => props.height};
-  width: ${(props) => props.width};
-  border: ${(props) => props.border};
-  margin-bottom: ${(props) => props.marginBottom};
+  background-color: ${(props) => props.backgroundColor || "white"};
+  height: ${(props) => props.height || "3rem"};
+  width: ${(props) => props.width || "100%"};
+  border: ${(props) => props.border || "1px solid black"};
+  margin-bottom: ${(props) => props.marginBottom || "2rem"};
 `;
 
 const Input: React.FC<LoginInput> = ({

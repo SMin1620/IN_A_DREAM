@@ -4,6 +4,7 @@ import MainPage from "./pages/MainPage";
 import IntroPage from "./pages/IntroPage";
 import LoginPage from "./pages/LoginPage";
 import CreateDreamDiaryPage from "./pages/CreateDreamDiaryPage";
+import SignUpPage from "./pages/SignUpPage";
 
 function AppRouter() {
   return (
@@ -17,6 +18,7 @@ function AppRouter() {
             path="/CreateDreamDiary"
             element={<CreateDreamDiaryPage />}
           ></Route>
+          <Route path="/Signup" element={<SignUpPage />}></Route>
         </Routes>
       </BrowserRouter>
     </div>
