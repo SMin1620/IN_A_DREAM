@@ -26,6 +26,7 @@ spring:
 #  security:
 #    user:
 #      password: 1234
+#
 
 
   data:
