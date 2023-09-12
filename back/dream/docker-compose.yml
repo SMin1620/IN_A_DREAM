@@ -14,7 +14,7 @@ services:  # docker-compose의 경우 docker 컨테이너로 수행될 서비스
     ports: # 외부포트:컨테이너내부포트
       - "9094:9094"
     environment: # kafka 브로터를 위한 환경 변수 지정
-      KAFKA_ADVERTISED_LISTENERS: INSIDE://:9092,OUTSIDE://localhost:9094
+      KAFKA_ADVERTISED_LISTENERS: INSIDE://:9092,OUTSIDE://52.78.186.98:9094
       KAFKA_LISTENERS: INSIDE://:9092,OUTSIDE://0.0.0.0:9094
       KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: INSIDE:PLAINTEXT,OUTSIDE:PLAINTEXT
       KAFKA_INTER_BROKER_LISTENER_NAME: INSIDE
