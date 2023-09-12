@@ -13,7 +13,7 @@ spring:
         show_sql: true
 
   datasource:
-    url: jdbc:h2:tcp://52.78.186.98:8081/demo
+    url: jdbc:h2:tcp://52.78.186.98:1521/demo
     username: sa
     password: 1234
     driver-class-name: org.h2.Driver
