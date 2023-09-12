@@ -1,8 +1,8 @@
 import React from "react";
-import styled from "styled-components";
+import S from "styled-components";
 import { LoginInput } from "../../types/LoginTypes";
 
-const StyledInput = styled.input<LoginInput>`
+const StyledInput = S.input<LoginInput>`
   background-color: ${(props) => props.backgroundColor};
   height: ${(props) => props.height};
   width: ${(props) => props.width};

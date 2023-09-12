@@ -8,7 +8,7 @@
   top: 50%;
   left: 30%;
   width: 580px;
-  height: 700px;
+  height: 60%;
   padding: 40px 50px;
   transform: translate(-50%, -50%);
   background-color: white;
@@ -27,4 +27,32 @@
   background-color: black;
   flex-basis: 70%;
   position: relative;
+}
+
+/* 반응형 스타일 */
+@media (max-width: 1024px) {
+  .LoginForm {
+    display: flex;
+    height: 100vh;
+    background-color: black;
+  }
+
+  .login-form {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: calc(100% - 80px); /* 화면 가로 길이에서 좌우 여백을 뺀 값 */
+    max-width: 580px; /* 최대 너비 제한 */
+
+    /* 나머지 스타일 속성들 */
+    padding: 40px;
+    background-color: white;
+    box-shadow: 0px, 20px, 25px, 0 rgba(0, 0, 0, 0.07);
+    z-index: 1;
+  }
+  .login-left-section,
+  .login-right-section {
+    visibility: hidden;
+  }
 }

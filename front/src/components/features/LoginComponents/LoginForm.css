@@ -1,0 +1,23 @@
+.login-form-main {
+  padding-top: 4rem;
+}
+
+.login-form-button {
+  margin-top: 2rem;
+}
+
+.login-form-register {
+  position: relative;
+  margin-top: 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border-top: 1px solid black;
+}
+
+.login-form-register-line {
+  position: absolute;
+  top: -54%;
+  background-color: white;
+  padding: 0 1rem;
+}

@@ -17,3 +17,14 @@ export interface LoginLabel {
   fontWeight?: string;
   marginBottom?: string;
 }
+
+export interface LoginButton {
+  onClick?: (event: React.ChangeEvent<HTMLButtonElement>) => void;
+  children?: React.ReactNode;
+  width?: string;
+  height?: string;
+  border?: string;
+  marginBottom?: string;
+  backgroundColor?: string;
+  color?: string;
+}
