@@ -48,9 +48,17 @@ public class KafkaController {
         pointHistoryDto.setSeller(22L);
         pointHistoryDto.setPoint(50);
 
-//        for (int i = 0; i < 1001; i++) {
-//            kafkaProducerService.sendPointLogDto(pointHistoryDto);
-//        }
+        LocalDateTime now = LocalDateTime.now();
+
+        int idx = 1;
+        for (int i = 0; i < 400; i++) {
+            pointHistoryDto.setPoint(idx);
+            pointHistoryDto.setSeller((long) idx);
+            now = now.minusMinutes(2);
+            pointHistoryDto.setLocalDateTime(now);
+            kafkaProducerService.sendPointLogDto(pointHistoryDto);
+            idx++;
+        }
 
         kafkaProducerService.sendPointLogDto(pointHistoryDto);
 
