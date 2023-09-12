@@ -1,34 +1,20 @@
 import React from "react";
-import styles from "./styles/MainPageIntro.module.css";
+import ImgCard from "../common/imgCard";
+import CardDeck from "../features/cardDeck";
 
-interface CardProps {
-  image: string;
-}
-
-const Card: React.FC<CardProps> = ({ image }) => {
+const MainPageIntro = () => {
   return (
-    <div className={styles.card}>
-      <img src={image} alt="card" />
+    <div>
+      <ImgCard
+        image="/card/dff.png"
+        width="8rem"
+        height="16rem"
+        border="3px solid black"
+        borderRadius="20px"
+      />
+      <CardDeck />
     </div>
   );
 };
 
-const CardStack: React.FC = () => {
-  const images = [
-    "/card/background1.png",
-    "/card/dff.png",
-    "/card/igi4_tam5_210723.jpg",
-
-    // ...더 많은 이미지들
-  ];
-
-  return (
-    <div className={styles.cardStack}>
-      {images.map((image, index) => (
-        <Card key={index} image={image} />
-      ))}
-    </div>
-  );
-};
-
-export default CardStack;
+export default MainPageIntro;
