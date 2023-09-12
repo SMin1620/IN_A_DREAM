@@ -1,5 +1,5 @@
 server:
-  port: 8080
+  port: 8082
 
 
 spring:
@@ -48,7 +48,7 @@ spring:
     static-path-pattern: /static/**
 
   kafka:
-    bootstrap-servers: localhost:9094
+    bootstrap-servers: 52.78.186.98:9094
 
     consumer:
       # consumer bootstrap servers가 따로 존재하면 설정
