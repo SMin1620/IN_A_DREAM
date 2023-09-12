@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import Input from "../../common/Input";
 import Button2 from "../../common/Button2";
 import Label from "../../common/Label";
@@ -21,33 +22,18 @@ const LoginForm = () => {
     console.log(email, password);
   };
 
+  const navigate = useNavigate();
+  const handleSignup = () => {
+    navigate("/Signup");
+  };
+
   return (
     <div className="login-form-main">
-      <Label marginBottom="2rem" fontSize="1.5rem" fontWeight="500">
-        아이디
-      </Label>
+      <Label>아이디</Label>
+      <Input placeholder="Email" type="text" onChange={(e) => handleEmail(e)} />
       <br />
+      <Label>비밀번호</Label>
       <Input
-        backgroundColor="white"
-        width="100%"
-        height="3rem"
-        border="1px solid black"
-        marginBottom="2rem"
-        placeholder="Email"
-        type="text"
-        onChange={(e) => handleEmail(e)}
-      />
-      <br />
-      <Label marginBottom="2rem" fontSize="1.5rem" fontWeight="500">
-        비밀번호
-      </Label>
-      <br />
-      <Input
-        backgroundColor="white"
-        width="100%"
-        height="3rem"
-        border="1px solid black"
-        marginBottom="2rem"
         placeholder="Password"
         type="password"
         onChange={(e) => handlePassword(e)}
@@ -55,21 +41,14 @@ const LoginForm = () => {
       <br />
 
       <div className="login-form-button">
-        <Button2
-          width="100%"
-          height="4rem"
-          backgroundColor="black"
-          border="1px solid black"
-          color="white"
-          onClick={getLogin}
-        >
-          로그인
-        </Button2>
+        <Button2 onClick={getLogin}>로그인</Button2>
       </div>
 
       <div className="login-form-register">
         <p className="login-form-register-line">or</p>
-        <p>회원가입</p>
+        <p className="signup-btn" onClick={handleSignup}>
+          회원가입
+        </p>
       </div>
     </div>
   );

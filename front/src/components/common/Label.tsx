@@ -3,9 +3,9 @@ import styled from "styled-components";
 import { LoginLabel } from "../../types/LoginTypes";
 
 const StyledLabel = styled.label<LoginLabel>`
-  font-size: ${(props) => props.fontSize};
-  font-weight: ${(props) => props.fontWeight};
-  margin-bottom: ${(props) => props.marginBottom};
+  font-size: ${(props) => props.fontSize || "1rem"};
+  font-weight: ${(props) => props.fontWeight || "bold"};
+  margin-bottom: ${(props) => props.marginBottom || "2rem"};
 `;
 
 const Label: React.FC<LoginLabel> = ({

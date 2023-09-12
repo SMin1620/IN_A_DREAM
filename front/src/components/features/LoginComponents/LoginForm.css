@@ -21,3 +21,7 @@
   background-color: white;
   padding: 0 1rem;
 }
+
+.signup-btn:hover {
+  cursor: pointer;
+}

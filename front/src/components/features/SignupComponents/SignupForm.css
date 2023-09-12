@@ -1,0 +1,23 @@
+.signup-form-genderbox {
+  display: flex;
+  justify-content: space-around;
+  margin-bottom: 1.5rem;
+}
+
+.active {
+  border: none;
+  width: 50%;
+  height: 3rem;
+  background-color: black;
+  color: white;
+  border: 1px solid white;
+}
+
+.basic {
+  border: none;
+  width: 50%;
+  height: 3rem;
+  background-color: lightgray;
+  color: black;
+  border: 1px solid white;
+}
