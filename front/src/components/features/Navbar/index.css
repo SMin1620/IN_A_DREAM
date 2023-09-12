@@ -1,0 +1,38 @@
+.nav__bar {
+  --app-height: 715px;
+  color: white;
+  user-select: none;
+  -webkit-font-smoothing: antialiased;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  border-style: solid;
+  font: inherit;
+  vertical-align: baseline;
+  box-sizing: border-box;
+  pointer-events: auto;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 6.8rem;
+  height: 100%;
+  border-right: 1px solid rgba(255, 255, 255, 0.25);
+  z-index: 3;
+  background-color: black;
+}
+
+.nav__logo img {
+  /* 로고 이미지에 대한 스타일을 여기에 추가하세요 */
+}
+
+.nav__toggle {
+  /* 토글 버튼에 대한 스타일을 여기에 추가하세요 */
+}
+
+.nav__dot {
+  /* 도트 이미지에 대한 스타일을 여기에 추가하세요 */
+}
+
+.dotLink {
+  /* 링크 버튼에 대한 스타일을 여기에 추가하세요 */
+}

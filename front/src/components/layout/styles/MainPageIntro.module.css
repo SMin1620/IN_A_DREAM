@@ -1,0 +1,72 @@
+.cardStack {
+  perspective: 1200px;
+  position: relative;
+}
+
+.card {
+  position: absolute;
+  width: 200px;
+  height: auto;
+
+  /* transform-style 속성을 preserve-3d로 설정 */
+  /* nth-child를 이용해 각 카드에 다른 스타일 적용 */
+
+  transform-style: preserve-3d;
+
+  /* 애니메이션 추가 */
+  animation-name: slideIn;
+  animation-duration: 1s;
+
+  /* 초기 상태 설정 (숨김) */
+  opacity: 0;
+
+  /* 마지막 키 프레임의 스타일 유지 */
+  animation-fill-mode: forwards;
+}
+
+/* 애니메이션 정의 */
+@keyframes slideIn {
+  from {
+    transform: translateY(500px) rotate(0deg);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0) rotate(-5deg);
+    opacity: 1;
+  }
+}
+
+.card:nth-child(1) {
+  transform: translateZ(60px) rotate(-7deg);
+
+  /* z-index 추가 */
+  z-index: -3;
+
+  /* 애니메이션이 차례대로 실행되도록 delay 추가 */
+  animation-delay: 0.5s;
+}
+.card:nth-child(2) {
+  transform: translateZ(40px) rotate(-4deg);
+
+  /* z-index 추가 */
+  z-index: -2;
+
+  /* 애니메시션이 차례대로 실행되도록 delay 추가 */
+  animation-delay: 0.75s;
+}
+.card:nth-child(3) {
+  transform: translateZ(20px);
+
+  /* z-index 추가 */
+  z-index: -1;
+
+  /* 애니메시션이 차례대로 실행되도록 delay 추가 */
+  animation-delay: 1s;
+}
+/* 필요한만큼 추가하세요. */
+
+img {
+  width: 100%;
+  height: auto;
+  object-fit: cover; /* 이미지가 카드 크기에 맞게 조절되도록 설정 */
+}
