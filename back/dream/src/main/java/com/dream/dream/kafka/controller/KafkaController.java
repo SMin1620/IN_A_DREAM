@@ -5,9 +5,13 @@ import com.dream.dream.kafka.dto.PointHistoryDto;
 import com.dream.dream.kafka.service.KafkaProducerService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.elasticsearch.core.ElasticsearchRestTemplate;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.temporal.ChronoUnit;
 
 @Slf4j
 @CrossOrigin("*")
@@ -43,17 +47,35 @@ public class KafkaController {
     public PointHistoryDto sendMessage(@RequestBody PointHistoryDto pointHistoryDto){
 
         // 로그 생성 날짜
-        pointHistoryDto.setLocalDateTime(LocalDateTime.now());
-        pointHistoryDto.setBuyer(1L);
-        pointHistoryDto.setSeller(22L);
-        pointHistoryDto.setPoint(50);
+//        pointHistoryDto.setBuyer(1L);
+//        pointHistoryDto.setSeller(22L);
+//        pointHistoryDto.setPoint(50);
 
-//        for (int i = 0; i < 1001; i++) {
-//            kafkaProducerService.sendPointLogDto(pointHistoryDto);
-//        }
+        LocalDateTime currentTime = LocalDateTime.now();
 
-        kafkaProducerService.sendPointLogDto(pointHistoryDto);
+        PointHistoryDto data = new PointHistoryDto();
 
-        return pointHistoryDto;
+        int idx = 1;
+        for (int i = 0; i < 40; i++) {
+            data.setPoint(idx);
+            data.setSeller((long) idx);
+            data.setTimestamp(currentTime);
+
+            // 2분씩 시간 차이 추가
+            currentTime = currentTime.minus(2, ChronoUnit.MINUTES);
+
+            // 원하는 포맷 지정
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMM dd, yyyy @ HH:mm:ss.SSS");
+//            data.setTimestamp(currentTime.format(formatter));
+
+            data.setTimestamp(currentTime);
+
+            kafkaProducerService.sendPointLogDto(data);
+            idx++;
+        }
+
+//        kafkaProducerService.sendPointLogDto(pointHistoryDto);
+
+        return data;
     }
 }
