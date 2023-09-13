@@ -13,9 +13,9 @@ spring:
         show_sql: true
 
   datasource:
-    url: jdbc:h2:tcp://localhost/~/test
+    url: jdbc:h2:tcp://52.78.186.98:1521/demo
     username: sa
-    password:
+    password: 1234
     driver-class-name: org.h2.Driver
 
   h2:
@@ -23,10 +23,10 @@ spring:
       enabled: true
       path: /h2-console
 
-#  security:
-#    user:
-#      password: 1234
-#
+  #  security:
+  #    user:
+  #      password: 1234
+  #
 
 
   data:
@@ -65,10 +65,10 @@ spring:
       auto-offset-reset: earliest
       # 데이터를 받아올 때, key/value를 역직렬화
       # JSON 데이터를 받아올 것이라면 JsonDeserializer
-#      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
-#      value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      #      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      #      value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
 
-#    producer:
+      #    producer:
       # producer bootstrap servers가 따로 존재하면 설정
       # bootstrap-servers: 3.34.97.97:9092
 
