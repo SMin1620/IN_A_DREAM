@@ -1,6 +1,6 @@
 import React from "react";
 
-interface ImgCardProps {
+export interface ImgCardProps {
   image: string;
   width?: string | number;
   height?: string | number;

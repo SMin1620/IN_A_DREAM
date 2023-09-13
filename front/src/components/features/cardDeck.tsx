@@ -1,63 +1,46 @@
-import React from "react";
-import ImgCard from "../common/imgCard";
-import styled, { keyframes, css } from "styled-components";
+import React, { useState, useEffect } from "react";
+import ImgCard, { ImgCardProps } from "../common/imgCard";
 
-const images = [
-  "/card/background1.png",
-  "/card/dff.png",
-  "/card/ggum3.jpg",
-  "/card/igi4_tam5_210723.jpg",
-  // 나머지 이미지 경로들...
-];
-
-const appear = keyframes`
-from {
-    transform: translateZ(-100px);
+interface CardDeckProps {
+  images: string[];
+  imgCardProps?: Omit<ImgCardProps, "image">;
 }
 
-to {
-    transform: translateZ(0);
-}
-`;
+const CardDeck: React.FC<CardDeckProps> = ({ images, imgCardProps }) => {
+  const [visibleCards, setVisibleCards] = useState<number>(0);
+  const [intervalTime, setIntervalTime] = useState<number>(1000); // Start with 1 second
 
-interface CardProps {
-  index: number;
-}
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setVisibleCards((prevCount) => prevCount + 1);
+      setIntervalTime((prevInterval) => Math.max(100, prevInterval * 0.9)); // Decrease interval by 10%, minimum of 100ms
+    }, intervalTime);
 
-const CardWrapper = styled.div`
-  display: flex;
-  flexdirection: column-reverse;
-  alignitems: center;
-  position: relative;
-  perspective: 1200px;
-`;
+    return () => clearInterval(timer);
+  }, [intervalTime]);
 
-const StyledCard = styled.div<CardProps>`
-  position: absolute;
-  top: ${(props) => `${props.index * 10}px`};
-  z-index: ${(props) => `${props.index}`};
-  animation: ${(props) =>
-    css`
-      ${appear} ${(props.index + 1) * 0.5}s ease-in-out forwards
-    `};
-  transform-style: preserve-3d;
-`;
+  const deckStyle: React.CSSProperties = {
+    position: "relative",
+    width: "100px",
+    height: "100px",
+  };
 
-const CardDeck = () => {
   return (
-    <CardWrapper>
-      {images.map((image, index) => (
-        <StyledCard key={index} index={index}>
-          <ImgCard
-            image={image}
-            width="8rem"
-            height="16rem"
-            border="3px solid black"
-            borderRadius="20px"
-          />
-        </StyledCard>
+    <div style={deckStyle}>
+      {images.slice(0, visibleCards).map((image, index) => (
+        <div
+          key={index}
+          style={{
+            position: "absolute",
+            top: `${index * 0.5}px`,
+            left: `${index * 0.5}px`,
+            transform: `rotate(${(index % 2 === 0 ? index : -index) * 0.5}deg)`, // Alternate between rotating to the left and right
+          }}
+        >
+          <ImgCard image={image} {...imgCardProps} />
+        </div>
       ))}
-    </CardWrapper>
+    </div>
   );
 };
 
