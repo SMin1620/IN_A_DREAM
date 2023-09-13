@@ -1,5 +1,5 @@
 server:
-  port: 8082
+  port: 8080
 
 
 spring:
@@ -13,9 +13,9 @@ spring:
         show_sql: true
 
   datasource:
-    url: jdbc:h2:tcp://52.78.186.98:1521/demo
+    url: jdbc:h2:tcp://localhost/~/test
     username: sa
-    password: 1234
+    password:
     driver-class-name: org.h2.Driver
 
   h2:
@@ -49,7 +49,7 @@ spring:
     static-path-pattern: /static/**
 
   kafka:
-    bootstrap-servers: 52.78.186.98:9094
+    bootstrap-servers: localhost:9094
 
     consumer:
       # consumer bootstrap servers가 따로 존재하면 설정
