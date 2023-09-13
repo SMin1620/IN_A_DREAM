@@ -24,7 +24,7 @@ export interface LoginButton {
   width?: string;
   height?: string;
   border?: string;
-  marginBottom?: string;
+  margin?: string;
   backgroundColor?: string;
   color?: string;
 }
