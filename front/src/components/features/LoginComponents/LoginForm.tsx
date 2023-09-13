@@ -7,7 +7,11 @@ import Label from "../../common/Label";
 import "./LoginForm.css";
 import { setToken } from "../../../stores/reducers/LoginToken";
 
-const LoginForm = () => {
+interface LoginFormProps {
+  onLoginSuccess: () => void;
+}
+
+const LoginForm: React.FC<LoginFormProps> = ({ onLoginSuccess }) => {
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
 
@@ -26,6 +30,7 @@ const LoginForm = () => {
     const responseToken = "토큰값";
     dispatch(setToken(responseToken));
     console.log(email, password);
+    onLoginSuccess();
   };
 
   const navigate = useNavigate();
