@@ -1,5 +1,6 @@
 package com.dream.dream.kafka.config;
 
+import com.dream.dream.kafka.dto.DiaryDto;
 import com.dream.dream.kafka.dto.LogDto;
 import org.apache.kafka.clients.consumer.ConsumerConfig;
 import org.apache.kafka.common.serialization.StringDeserializer;
@@ -37,6 +38,26 @@ public class KafkaLogDtoConsumerConfig {
     public ConcurrentKafkaListenerContainerFactory<String, LogDto> logDtoListener() {
         ConcurrentKafkaListenerContainerFactory<String, LogDto> factory = new ConcurrentKafkaListenerContainerFactory<>();
         factory.setConsumerFactory(logDtoConsumer());
+        return factory;
+    }
+
+    @Bean
+    public ConsumerFactory<String, DiaryDto> diaryConsumer() {
+
+        Map<String, Object> configs = new HashMap<>();
+        configs.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, bootstrapServers);
+        configs.put(ConsumerConfig.GROUP_ID_CONFIG, "loggroup");
+
+        return new DefaultKafkaConsumerFactory<>(
+                configs,
+                new StringDeserializer(),
+                new JsonDeserializer<>(DiaryDto.class,false));
+    }
+
+    @Bean
+    public ConcurrentKafkaListenerContainerFactory<String, DiaryDto> diaryListener(){
+        ConcurrentKafkaListenerContainerFactory<String, DiaryDto> factory = new ConcurrentKafkaListenerContainerFactory<>();
+        factory.setConsumerFactory(diaryConsumer());
         return factory;
     }
 }

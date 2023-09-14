@@ -22,6 +22,9 @@ public class KafkaTopicConfig {
     @Value(value = "${message.topic.pointName}")
     private String topicName2;
 
+    @Value(value = "{message.topic.diaryName}")
+    private String topicName3;
+
     @Bean
     public KafkaAdmin kafkaAdmin() {
         Map<String, Object> configs = new HashMap<>();
@@ -37,5 +40,10 @@ public class KafkaTopicConfig {
     @Bean
     public NewTopic newTopic2() {
         return new NewTopic(topicName2, 3, (short) 3);
+    }
+
+    @Bean
+    public NewTopic newTopic3(){
+        return new NewTopic(topicName3, 1, (short) 1);
     }
 }
