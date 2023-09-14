@@ -16,7 +16,7 @@ const MainPage = () => {
 
   return (
     <div>
-      {/* <NavBar /> */}
+      <NavBar />
       {showIntro ? <MainPageIntro /> : <MainStart />}
     </div>
   );
