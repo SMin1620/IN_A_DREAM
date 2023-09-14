@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import "./Navbar.css"; // 이 파일에 CSS를 복사해두세요.
+import "./styles/Navbar.css"; // 이 파일에 CSS를 복사해두세요.
 import main from "../../../assets/navbar/main.png";
 import dream_default from "../../../assets/navbar/dream_default.png";
 import dream_activate from "../../../assets/navbar/dream_activate.png";

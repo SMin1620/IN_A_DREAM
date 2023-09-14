@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import ImgCard, { ImgCardProps } from "../common/imgCard";
+import ImgCard, { ImgCardProps } from "../../common/ImgCard";
 
 interface CardDeckProps {
   images: string[];

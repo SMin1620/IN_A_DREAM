@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router";
 import LoginForm from "../components/features/LoginComponents/LoginForm";
-import "../styles/LoginPage.css";
+import "./styles/LoginPage.css";
 import MainPageIntro from "./../components/layout/MainPageIntro";
 
 const LoginPage = () => {
