@@ -8,8 +8,7 @@ interface CardDeckProps {
 
 const CardDeck: React.FC<CardDeckProps> = ({ images, imgCardProps }) => {
   const [visibleCards, setVisibleCards] = useState<number>(0);
-  const [intervalTime, setIntervalTime] = useState<number>(1000); // Start with 1 second
-
+  const [intervalTime, setIntervalTime] = useState<number>(500);
   useEffect(() => {
     const timer = setInterval(() => {
       setVisibleCards((prevCount) => prevCount + 1);

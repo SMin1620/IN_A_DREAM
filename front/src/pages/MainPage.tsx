@@ -1,15 +1,23 @@
-import React from "react";
-import NavBar from "../components/features/Navbar";
+import React, { useState, useEffect } from "react";
+import NavBar from "../components/features/NavbarComponents/Navbar";
 import MainStart from "../components/layout/MainStart";
 import MainPageIntro from "../components/layout/MainPageIntro";
 
 const MainPage = () => {
+  const [showIntro, setShowIntro] = useState(true);
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setShowIntro(false);
+    }, 6000); // After 5 seconds
+
+    return () => clearTimeout(timer); // Clean up on unmount
+  }, []);
+
   return (
     <div>
-      {/* <NavBar /> */}
-      <MainPageIntro />
-      <MainStart />
-      소개 프로젝트
+      <NavBar />
+      {showIntro ? <MainPageIntro /> : <MainStart />}
     </div>
   );
 };
