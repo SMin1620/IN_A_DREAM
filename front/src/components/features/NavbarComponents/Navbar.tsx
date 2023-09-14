@@ -9,12 +9,12 @@ const Navbar = () => {
   const [logoActivate, setLogoActivate] = useState<boolean>(false);
 
   return (
-    <div className="navbarWrapper">
-      <a className="navbarMain" href="/">
+    <div className="navbar-wrapper">
+      <a className="navbar-main" href="/">
         <img src={main} alt="main" />
       </a>
       <div
-        className="navbarLogo"
+        className="navbar-logo"
         onClick={() => setLogoActivate(!logoActivate)}
       >
         {logoActivate ? (
@@ -23,7 +23,7 @@ const Navbar = () => {
           <img src={dream_activate} alt="dream_activate" />
         )}
       </div>
-      <div className="navbarMy">
+      <div className="navbar-my">
         <img src={my} alt="my" />
       </div>
     </div>

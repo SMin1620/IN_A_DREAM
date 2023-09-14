@@ -1,4 +1,4 @@
-.navbarWrapper {
+.navbar-wrapper {
   --app-height: 715px;
   color: white;
   user-select: none;
@@ -25,28 +25,16 @@
   justify-content: space-between;
 }
 
-.navbarMain img {
+.navbar-main img {
   padding-top: 20%;
   width: 50%;
 }
 
-.navbarLogo img {
+.navbar-logo img {
   width: 40%;
 }
 
-.navbarMy img {
+.navbar-my img {
   padding-bottom: 20%;
   width: 40%;
-}
-
-.nav__toggle {
-  /* 토글 버튼에 대한 스타일을 여기에 추가하세요 */
-}
-
-.nav__dot {
-  /* 도트 이미지에 대한 스타일을 여기에 추가하세요 */
-}
-
-.dotLink {
-  /* 링크 버튼에 대한 스타일을 여기에 추가하세요 */
 }
