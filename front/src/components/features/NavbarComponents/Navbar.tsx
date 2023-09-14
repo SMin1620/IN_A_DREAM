@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import "./index.css"; // 이 파일에 CSS를 복사해두세요.
+import "./Navbar.css"; // 이 파일에 CSS를 복사해두세요.
 import main from "../../../assets/navbar/main.png";
 import dream_default from "../../../assets/navbar/dream_default.png";
 import dream_activate from "../../../assets/navbar/dream_activate.png";
@@ -9,7 +9,7 @@ const Navbar = () => {
   const [logoActivate, setLogoActivate] = useState<boolean>(false);
 
   return (
-    <div className="navbarWrapper" id="nav-bar">
+    <div className="navbarWrapper">
       <a className="navbarMain" href="/">
         <img src={main} alt="main" />
       </a>
