@@ -6,8 +6,14 @@ import Button2 from "../../common/Button2";
 import Label from "../../common/Label";
 import "./LoginForm.css";
 import { setToken } from "../../../stores/reducers/LoginToken";
+import LogoImg from "../../common/LogoBlack";
+import logoImg from "../../../assets/logo/IN A DREAM Black.png";
 
-const LoginForm = () => {
+interface LoginFormProps {
+  onLoginSuccess: () => void;
+}
+
+const LoginForm: React.FC<LoginFormProps> = ({ onLoginSuccess }) => {
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
 
@@ -26,6 +32,7 @@ const LoginForm = () => {
     const responseToken = "토큰값";
     dispatch(setToken(responseToken));
     console.log(email, password);
+    onLoginSuccess();
   };
 
   const navigate = useNavigate();
@@ -35,6 +42,10 @@ const LoginForm = () => {
 
   return (
     <div className="login-form-main">
+      <div className="login-form-logo">
+        <LogoImg src={logoImg} />
+      </div>
+
       <Label>아이디</Label>
       <Input placeholder="Email" type="text" onChange={(e) => handleEmail(e)} />
       <br />
