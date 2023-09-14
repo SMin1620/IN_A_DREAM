@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import NavBar from "../components/features/Navbar";
+import NavBar from "../components/features/NavbarComponents/Navbar";
 import MainStart from "../components/layout/MainStart";
 import MainPageIntro from "../components/layout/MainPageIntro";
 
@@ -16,7 +16,7 @@ const MainPage = () => {
 
   return (
     <div>
-      {/* <NavBar /> */}
+      <NavBar />
       {showIntro ? <MainPageIntro /> : <MainStart />}
     </div>
   );
