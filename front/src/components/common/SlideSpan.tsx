@@ -12,15 +12,16 @@ const slideRight = keyframes`
 
 const slideLeft = keyframes`
 0% {
-  transform: translateX(300%);
+  transform: translateX(160px);
 }
 100% {
-  transform: translateX(-300%);
+  transform: translateX(-160px);
 }
 `;
 
 export interface SlideSpanProps {
   animation?: any;
+  delay: string;
   children: React.ReactNode;
   margin?: string;
   width?: string;
@@ -43,7 +44,8 @@ export const SlideRightSpan = S.span<SlideSpanProps>`
 `;
 
 export const SlideLeftSpan = S.span<SlideSpanProps>`
-  animation: ${slideLeft} 3s linear infinite;
+  animation: ${slideLeft} 5s linear infinite;
+  animation-delay: ${(props) => props.delay || "0s"}
   margin:${(props) => props.margin};
   width:${(props) => props.width};
   height:${(props) => props.height};

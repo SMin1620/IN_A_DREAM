@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import S from "styled-components";
 import { LoginInput, LoginButton } from "../../../types/index";
 import "./SearchBar.css";
@@ -11,11 +11,30 @@ export interface SearchBarInput extends LoginInput {
 export interface SearchBarButton extends LoginButton {}
 
 const SearchBar = () => {
+  const [searchKeyword, setSearchKeyword] = useState("");
+
+  console.log(searchKeyword);
+
   return (
     <div className="search-main">
-      <input type="text" />
+      <input
+        type="text"
+        placeholder="검색어를 입력하세요"
+        onChange={(e) => setSearchKeyword(e.target.value)}
+      />
       <button>
-        <SlideLeftSpan>검색</SlideLeftSpan>
+        <SlideLeftSpan margin="0 0.3rem" delay="0s">
+          SEARCH{" "}
+        </SlideLeftSpan>
+        <SlideLeftSpan margin="0 0.3rem" delay="1.25s">
+          SEARCH{" "}
+        </SlideLeftSpan>
+        <SlideLeftSpan margin="0 0.3rem" delay="2.5s">
+          SEARCH{" "}
+        </SlideLeftSpan>
+        <SlideLeftSpan margin="0 0.3rem" delay="3.75s">
+          SEARCH{" "}
+        </SlideLeftSpan>
       </button>
     </div>
   );

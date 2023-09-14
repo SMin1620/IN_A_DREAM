@@ -5,6 +5,7 @@ import IntroPage from "./pages/IntroPage";
 import LoginPage from "./pages/LoginPage";
 import CreateDreamDiaryPage from "./pages/CreateDreamDiaryPage";
 import SignUpPage from "./pages/SignUpPage";
+import SearchBar from "./components/features/SearchBarComponents/SearchBar";
 
 function AppRouter() {
   return (
@@ -19,6 +20,7 @@ function AppRouter() {
             element={<CreateDreamDiaryPage />}
           ></Route>
           <Route path="/Signup" element={<SignUpPage />}></Route>
+          <Route path="/" element={<SearchBar />}></Route>
         </Routes>
       </BrowserRouter>
     </div>
