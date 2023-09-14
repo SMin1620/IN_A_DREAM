@@ -44,8 +44,6 @@ public class Diary {
     @Builder.Default
     private int likeTime = 0;
 
-    @Column(nullable = false)
-    @ColumnDefault("CURRENT_TIMESTAMP")
     private LocalDateTime localDateTime;
 
 //    private Member member;
