@@ -1,6 +1,5 @@
 import React from "react";
-import ImgCard from "../common/imgCard";
-import CardDeck from "../features/cardDeck";
+import CardDeck from "../features/CardDeck/CardDeck";
 import styled from "styled-components";
 
 const images = [
