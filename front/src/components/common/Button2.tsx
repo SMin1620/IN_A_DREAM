@@ -1,6 +1,6 @@
 import React from "react";
 import S from "styled-components";
-import { LoginButton } from "../../types/LoginTypes";
+import { LoginButton } from "../../types/index";
 
 const StyledButton = S.button<LoginButton>`
   background-color: ${(props) => props.backgroundColor || "black"};

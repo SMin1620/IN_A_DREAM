@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import { LoginLabel } from "../../types/LoginTypes";
+import { LoginLabel } from "../../types/index";
 
 const StyledLabel = styled.label<LoginLabel>`
   font-size: ${(props) => props.fontSize || "1rem"};
