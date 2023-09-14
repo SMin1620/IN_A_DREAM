@@ -19,8 +19,8 @@
 }
 
 .search-main > button {
-  display: flex;
-  width: 5rem;
+  display: block;
+  width: 13rem;
   height: 100%;
   align-items: center;
   font-size: 1.2rem;
@@ -29,4 +29,12 @@
   background-color: #c3baa5;
   color: black;
   border-radius: 25rem;
+  transform: translate(-50% -50%);
+}
+
+.search-main button span {
+  display: flex;
+  flex: 0 0 auto;
+  white-space: nowrap;
+  overflow: hidden;
 }

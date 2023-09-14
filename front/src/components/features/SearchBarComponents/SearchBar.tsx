@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import S from "styled-components";
 import { LoginInput, LoginButton } from "../../../types/index";
 import "./SearchBar.css";
-import { SlideLeftSpan } from "../../common/SlideSpan";
+import { SlideSpan } from "../../common/SlideSpan";
 
 export interface SearchBarInput extends LoginInput {
   color?: string;
@@ -23,18 +23,44 @@ const SearchBar = () => {
         onChange={(e) => setSearchKeyword(e.target.value)}
       />
       <button>
-        {/* <SlideLeftSpan margin="0 0.3rem" delay="0s">
-          SEARCH{" "}
-        </SlideLeftSpan>
-        <SlideLeftSpan margin="0 0.3rem" delay="1.25s">
-          SEARCH{" "}
-        </SlideLeftSpan>
-        <SlideLeftSpan margin="0 0.3rem" delay="2.5s">
-          SEARCH{" "}
-        </SlideLeftSpan>
-        <SlideLeftSpan margin="0 0.3rem" delay="3.75s">
-          SEARCH{" "}
-        </SlideLeftSpan> */}
+        <span>
+          <SlideSpan
+            startPosition={200}
+            endPosition={-420}
+            speed={10}
+            padding="0 0.3rem"
+            fontFamily="IAMAPLAYER"
+          >
+            search
+          </SlideSpan>
+          <SlideSpan
+            startPosition={200}
+            endPosition={-420}
+            speed={10}
+            padding="0 0.3rem"
+            fontFamily="IAMAPLAYER"
+          >
+            search
+          </SlideSpan>
+          <SlideSpan
+            startPosition={200}
+            endPosition={-420}
+            speed={10}
+            padding="0 0.3rem"
+            fontFamily="IAMAPLAYER"
+          >
+            search
+          </SlideSpan>
+          <SlideSpan
+            startPosition={200}
+            endPosition={-420}
+            speed={10}
+            padding="0 0.3rem"
+            fontFamily="IAMAPLAYER"
+          >
+            search
+          </SlideSpan>
+        </span>
       </button>
     </div>
   );
