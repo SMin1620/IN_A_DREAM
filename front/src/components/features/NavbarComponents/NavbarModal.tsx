@@ -7,7 +7,7 @@ const NavbarModal: React.FC<isModalOpen> = ({ isNavbarModalOpen, onClose }) => {
   return (
     <Box position="absolute" width={80} height={70} left={0} top={15}>
       <div className="navbar-gallery">
-        <SlideLeftSpan
+        {/* <SlideLeftSpan
           fontSize="2.5rem"
           margin="1%"
           speed={5}
@@ -38,7 +38,7 @@ const NavbarModal: React.FC<isModalOpen> = ({ isNavbarModalOpen, onClose }) => {
           fontFamily="OKDDUNG"
         >
           GALLERY
-        </SlideLeftSpan>
+        </SlideLeftSpan> */}
       </div>
     </Box>
   );
