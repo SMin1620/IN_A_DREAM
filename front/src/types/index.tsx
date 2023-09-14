@@ -1,3 +1,8 @@
+// 그냥 모달 오픈 클로우즈 용도
+export interface isModalOpen {
+  isNavbarModalOpen: boolean;
+  onClose: () => void;
+}
 export interface LoginInput {
   type?: string;
   placeholder?: string;
