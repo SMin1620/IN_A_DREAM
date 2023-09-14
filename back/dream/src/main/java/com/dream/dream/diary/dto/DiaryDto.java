@@ -1,5 +1,6 @@
 package com.dream.dream.diary.dto;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.*;
 
 import java.time.LocalDateTime;
@@ -64,6 +65,29 @@ public class DiaryDto {
         private float neutral;
         private float negative;
         private int like;
+        private LocalDateTime localDateTime;
+        private int emotion;
+    }
+
+    /**
+     * 꿈 일기 response Dto
+     */
+    @Getter
+    @Setter
+    @NoArgsConstructor
+    @AllArgsConstructor
+    @Builder
+    @ToString
+    public static class DiaryResponseDto {
+        private Long id;
+        private String image;
+        private String title;
+        private String content;
+        private float positive;
+        private float neutral;
+        private float negative;
+        private int like;
+        @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
         private LocalDateTime localDateTime;
         private int emotion;
     }

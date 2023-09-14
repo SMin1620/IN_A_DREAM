@@ -3,6 +3,7 @@ package com.dream.dream.diary.entity;
 import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.ColumnDefault;
+import org.springframework.data.annotation.CreatedDate;
 
 import java.time.LocalDateTime;
 
@@ -12,7 +13,7 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "dreams")
+@Table(name = "diaries")
 public class Diary {
 
     @Id
@@ -44,7 +45,9 @@ public class Diary {
     @Builder.Default
     private int likeTime = 0;
 
-    private LocalDateTime localDateTime;
+    @Column(updatable = false)
+    @CreatedDate
+    private LocalDateTime createdAt;
 
 //    private Member member;
     private int member;
