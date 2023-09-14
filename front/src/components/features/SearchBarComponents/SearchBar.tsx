@@ -23,7 +23,7 @@ const SearchBar = () => {
         onChange={(e) => setSearchKeyword(e.target.value)}
       />
       <button>
-        <SlideLeftSpan margin="0 0.3rem" delay="0s">
+        {/* <SlideLeftSpan margin="0 0.3rem" delay="0s">
           SEARCH{" "}
         </SlideLeftSpan>
         <SlideLeftSpan margin="0 0.3rem" delay="1.25s">
@@ -34,7 +34,7 @@ const SearchBar = () => {
         </SlideLeftSpan>
         <SlideLeftSpan margin="0 0.3rem" delay="3.75s">
           SEARCH{" "}
-        </SlideLeftSpan>
+        </SlideLeftSpan> */}
       </button>
     </div>
   );
