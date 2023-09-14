@@ -19,8 +19,8 @@ const CardSplit = () => {
       <div
         style={{
           position: "absolute",
-          top: isLoaded ? "20vh" : "35vh",
-          left: isLoaded ? "10vw" : "45vw",
+          top: isLoaded ? "20vh" : "30vh",
+          left: isLoaded ? "10vw" : "50vw",
           transition: "all 0.5s",
         }}
       >
@@ -29,8 +29,8 @@ const CardSplit = () => {
       <div
         style={{
           position: "absolute",
-          top: isLoaded ? "10vh" : "37vh",
-          left: isLoaded ? "35vw" : "47vw",
+          top: isLoaded ? "10vh" : "35vh",
+          left: isLoaded ? "35vw" : "60vw",
           transition: "all 0.5s",
         }}
       >
@@ -39,8 +39,8 @@ const CardSplit = () => {
       <div
         style={{
           position: "absolute",
-          top: isLoaded ? "5vh" : "39vh",
-          left: isLoaded ? "55vw" : "49vw",
+          top: isLoaded ? "5vh" : "50vh",
+          left: isLoaded ? "55vw" : "70vw",
           transition: "all 0.5s",
         }}
       >
@@ -49,8 +49,8 @@ const CardSplit = () => {
       <div
         style={{
           position: "absolute",
-          top: isLoaded ? "20vh" : "41vh",
-          left: isLoaded ? "80vw" : "51vw",
+          top: isLoaded ? "20vh" : "65vh",
+          left: isLoaded ? "80vw" : "60vw",
           transition: "all 0.5s",
         }}
       >
@@ -59,8 +59,8 @@ const CardSplit = () => {
       <div
         style={{
           position: "absolute",
-          top: isLoaded ? "80vh" : "43vh",
-          left: isLoaded ? "80vw" : "53vw",
+          top: isLoaded ? "80vh" : "70vh",
+          left: isLoaded ? "80vw" : "50vw",
           transition: "all 0.5s",
         }}
       >
@@ -69,8 +69,8 @@ const CardSplit = () => {
       <div
         style={{
           position: "absolute",
-          top: isLoaded ? "82vh" : "45vh",
-          left: isLoaded ? "63vw" : "55vw",
+          top: isLoaded ? "82vh" : "65vh",
+          left: isLoaded ? "63vw" : "40vw",
           transition: "all 0.5s",
         }}
       >
@@ -79,8 +79,8 @@ const CardSplit = () => {
       <div
         style={{
           position: "absolute",
-          top: isLoaded ? "80vh" : "47vh",
-          left: isLoaded ? "30vw" : "57vw",
+          top: isLoaded ? "80vh" : "50vh",
+          left: isLoaded ? "30vw" : "30vw",
           transition: "all 0.5s",
         }}
       >
@@ -89,8 +89,8 @@ const CardSplit = () => {
       <div
         style={{
           position: "absolute",
-          top: isLoaded ? "79vh" : "49vh",
-          left: isLoaded ? "12vw" : "59vw",
+          top: isLoaded ? "79vh" : "35vh",
+          left: isLoaded ? "12vw" : "40vw",
           transition: "all 0.5s",
         }}
       >
