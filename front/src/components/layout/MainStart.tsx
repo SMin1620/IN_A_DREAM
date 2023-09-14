@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import { TypeAnimation } from "react-type-animation";
 
@@ -11,35 +11,59 @@ const MainStartDiv = styled.div`
   height: 102vh; // make it full screen
 `;
 
-// const H1 = styled.h1`
-//   font-size: 13.5rem;
-//   @media (max-width: 768px) {
-//     font-size: 6rem;
-//   }
-// `;
+const ResponsiveTypeAnimation = styled(TypeAnimation)`
+  white-space: pre-line;
+  font-size: calc(1.5em + 1vw); // dynamic font size based on viewport width
+  display: inline-block;
+  color: white;
+
+  @media (max-width: 768px) {
+    font-size: calc(1em + 1vw);
+  }
+`;
+
+interface OverlayProps {
+  show?: boolean;
+}
+
+const OverlayText = styled.span<OverlayProps>`
+  position: absolute;
+  z-index: ${(props) => (props.show ? "2" : "-1")};
+  opacity: ${(props) => (props.show ? "1" : "0")};
+  transition: 0.5s ease-in-out;
+  font-size: calc(7em + 1vw);
+  line-height: 0.8;
+  color: #e9e4d9;
+  @media (max-width: 768px) {
+    font-size: calc(5em + 1vw);
+  }
+`;
 
 const MainStart = () => {
+  const [showOverlayText, setShowOverlayText] = useState(false);
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setShowOverlayText(true);
+    }, 4000); // Change this to control the delay
+
+    return () => clearTimeout(timer);
+  }, []);
   return (
     <MainStartDiv>
-      {/* <H1>
-        IN <br /> A <br /> DREAM
-      </H1> */}
-      <TypeAnimation
+      <ResponsiveTypeAnimation
         sequence={[
-          // Same substring at the start will only be typed out once, initially
-          "IN \n A \n DREAM",
-          1000, // wait 1s before replacing "Mice" with "Hamsters"
-          "IN \n A \n DREAM IN \n A \n DREAM",
-          1000,
-          "IN \n A \n DREAMIN \n A \n DREAMIN \n A \n DREAMIN \n A \n DREAM",
-          1000,
-          "IN\nA\nDREAM",
-          1000,
+          "What was your dream\nlast night?\nShare your dreams here!",
+          500,
         ]}
         wrapper="span"
         speed={50}
-        style={{ fontSize: "10em", display: "inline-block", color: "white" }}
       />
+      <OverlayText show={showOverlayText}>
+        IN
+        <br />A<br />
+        DREAM
+      </OverlayText>
     </MainStartDiv>
   );
 };
