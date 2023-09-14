@@ -1,6 +1,6 @@
 import React from "react";
 import S from "styled-components";
-import { LoginInput } from "../../types/LoginTypes";
+import { LoginInput } from "../../types/index";
 
 const StyledInput = S.input<LoginInput>`
   background-color: ${(props) => props.backgroundColor || "white"};
