@@ -1,5 +1,12 @@
-.login-form-main {
-  padding-top: 4rem;
+.login-form-logo {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 1rem;
+}
+
+.login-form-logo > img {
+  width: 10rem;
+  height: 10rem;
 }
 
 .login-form-button {

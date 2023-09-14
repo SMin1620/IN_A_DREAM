@@ -6,6 +6,8 @@ import Button2 from "../../common/Button2";
 import Label from "../../common/Label";
 import "./LoginForm.css";
 import { setToken } from "../../../stores/reducers/LoginToken";
+import LogoImg from "../../common/LogoBlack";
+import logoImg from "../../../assets/logo/IN A DREAM Black.png";
 
 interface LoginFormProps {
   onLoginSuccess: () => void;
@@ -40,6 +42,10 @@ const LoginForm: React.FC<LoginFormProps> = ({ onLoginSuccess }) => {
 
   return (
     <div className="login-form-main">
+      <div className="login-form-logo">
+        <LogoImg src={logoImg} />
+      </div>
+
       <Label>아이디</Label>
       <Input placeholder="Email" type="text" onChange={(e) => handleEmail(e)} />
       <br />
