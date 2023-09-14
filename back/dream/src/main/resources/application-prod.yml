@@ -11,12 +11,14 @@ spring:
       hibernate:
         format_sql: true
         show_sql: true
+        dialect: org.hibernate.dialect.MySQL8Dialect
 
-  datasource:
-    url: jdbc:h2:tcp://52.78.186.98:1521/demo
-    username: sa
-    password: 1234
-    driver-class-name: org.h2.Driver
+    datasource:
+      url: jdbc:mysql://52.78.186.98:3306/dream?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=Asia/Seoul
+      username: root
+      password: 1234
+      driver-class-name: com.mysql.cj.jdbc.Driver
+
 
   h2:
     console:
