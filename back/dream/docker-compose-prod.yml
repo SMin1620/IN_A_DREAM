@@ -21,7 +21,7 @@ services:  # docker-compose의 경우 docker 컨테이너로 수행될 서비스
 
   spring:
     build:
-      context: ./backend/dream-spring
+      context: ./
       dockerfile: Dockerfile
     container_name: spring
     volumes:
