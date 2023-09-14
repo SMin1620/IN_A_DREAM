@@ -42,7 +42,7 @@ public class Diary {
     private float negative = 0F;
 
     @Builder.Default
-    private int like = 0;
+    private int likeTime = 0;
 
     @Column(nullable = false)
     @ColumnDefault("CURRENT_TIMESTAMP")
