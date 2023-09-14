@@ -1,7 +1,5 @@
-import React from "react";
-
-const index = () => {
-  return <div>index</div>;
-};
-
-export default index;
+// 그냥 모달 오픈 클로우즈 용도
+export interface isModalOpen {
+  isNavbarModalOpen: boolean;
+  onClose: () => void;
+}
