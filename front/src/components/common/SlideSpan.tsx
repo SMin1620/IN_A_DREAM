@@ -12,15 +12,16 @@ const slideRight = keyframes`
 
 const slideLeft = keyframes`
 0% {
-  transform: translateX(300%);
+  transform: translateX(160px);
 }
 100% {
-  transform: translateX(-300%);
+  transform: translateX(-160px);
 }
 `;
 
 export interface SlideSpanProps {
   animation?: any;
+  delay: string;
   children: React.ReactNode;
   margin?: string;
   width?: string;

@@ -15,11 +15,11 @@
   height: 100%;
   border: none;
   margin-right: 1rem;
+  background-color: transparent;
 }
 
 .search-main > button {
   display: flex;
-  text-wrap: nowrap;
   width: 5rem;
   height: 100%;
   align-items: center;
@@ -28,4 +28,5 @@
   border: none;
   background-color: #c3baa5;
   color: black;
+  border-radius: 25rem;
 }
