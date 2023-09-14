@@ -30,10 +30,11 @@ export interface SlideSpanProps {
   fontSize?: string;
   fontFamily?: string;
   backgroundColor?: string;
+  speed?: number;
 }
 
 export const SlideRightSpan = S.span<SlideSpanProps>`
-  animation: ${slideRight} 3s linear infinite;
+animation: ${slideRight} ${(props) => props.speed || 3}s linear infinite;
   margin:${(props) => props.margin};
   width:${(props) => props.width};
   height:${(props) => props.height};
@@ -44,8 +45,8 @@ export const SlideRightSpan = S.span<SlideSpanProps>`
 `;
 
 export const SlideLeftSpan = S.span<SlideSpanProps>`
-  animation: ${slideLeft} 5s linear infinite;
-  animation-delay: ${(props) => props.delay || "0s"}
+  
+animation: ${slideLeft} ${(props) => props.speed || 3}s linear infinite;
   margin:${(props) => props.margin};
   width:${(props) => props.width};
   height:${(props) => props.height};
