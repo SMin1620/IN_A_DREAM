@@ -100,7 +100,7 @@ public class DiaryDto {
         private int negativePoint;
         private int like;
         @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-        private LocalDateTime localDateTime;
+        private LocalDateTime createdAt;
         private int emotion;
     }
 
