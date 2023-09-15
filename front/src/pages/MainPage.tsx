@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from "react";
 import NavBar from "../components/features/NavbarComponents/Navbar";
-import MainStart from "../components/layout/MainStart";
 import MainPageIntro from "../components/layout/MainPageIntro";
+import MainStart from "../components/layout/MainStart";
+import MainSecond from "../components/layout/MainSecond";
+import MainThird from "../components/layout/MainThird";
 
 const MainPage = () => {
   const [showIntro, setShowIntro] = useState(true);
@@ -15,9 +17,11 @@ const MainPage = () => {
   }, []);
 
   return (
-    <div>
+    <div style={{ backgroundColor: "black" }}>
       <NavBar />
       {showIntro ? <MainPageIntro /> : <MainStart />}
+      <MainSecond />
+      <MainThird />
     </div>
   );
 };
