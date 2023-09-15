@@ -5,7 +5,6 @@ import CardSplit from "../features/CardSplit/CardSplit";
 import { motion } from "framer-motion";
 
 const MainStartDiv = styled.div`
-  background-color: black;
   color: white;
   display: flex;
   justify-content: center;
