@@ -1,6 +1,7 @@
 package com.dream.dream.diary.dto;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.*;
 
 import java.time.LocalDateTime;
@@ -16,13 +17,21 @@ public class DiaryDto {
     @AllArgsConstructor
     @Builder
     public static class DiaryCreateRequestDto {
+        @Schema(example = "./test.jpg")
         private String image;
+        @Schema(example = "test title")
         private String title;
+        @Schema(example = "test content")
         private String content;
+        @Schema(example = "99.1")
         private float positive;
+        @Schema(example = "0.02")
         private float neutral;
+        @Schema(example = "0.88")
         private float negative;
+        @Schema(example = "1")
         private int emotion;    // 수정 가능성
+        @Schema(example = "1")
         private int member;    // 수정 가능성
     }
 
@@ -86,6 +95,9 @@ public class DiaryDto {
         private float positive;
         private float neutral;
         private float negative;
+        private int positivePoint;
+        private int neutralPoint;
+        private int negativePoint;
         private int like;
         @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
         private LocalDateTime localDateTime;
