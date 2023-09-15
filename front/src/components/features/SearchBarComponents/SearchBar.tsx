@@ -13,7 +13,10 @@ export interface SearchBarButton extends LoginButton {}
 const SearchBar = () => {
   const [searchKeyword, setSearchKeyword] = useState("");
 
-  console.log(searchKeyword);
+  const postSearch = () => {
+    // API 요청
+    console.log(searchKeyword);
+  };
 
   return (
     <div className="search-main">
@@ -22,11 +25,11 @@ const SearchBar = () => {
         placeholder="검색어를 입력하세요"
         onChange={(e) => setSearchKeyword(e.target.value)}
       />
-      <button>
+      <button onClick={postSearch}>
         <span>
           <SlideSpan
             startPosition={200}
-            endPosition={-420}
+            endPosition={-520}
             speed={10}
             padding="0 0.3rem"
             fontFamily="IAMAPLAYER"
@@ -35,7 +38,7 @@ const SearchBar = () => {
           </SlideSpan>
           <SlideSpan
             startPosition={200}
-            endPosition={-420}
+            endPosition={-520}
             speed={10}
             padding="0 0.3rem"
             fontFamily="IAMAPLAYER"
@@ -44,7 +47,7 @@ const SearchBar = () => {
           </SlideSpan>
           <SlideSpan
             startPosition={200}
-            endPosition={-420}
+            endPosition={-520}
             speed={10}
             padding="0 0.3rem"
             fontFamily="IAMAPLAYER"
@@ -53,7 +56,7 @@ const SearchBar = () => {
           </SlideSpan>
           <SlideSpan
             startPosition={200}
-            endPosition={-420}
+            endPosition={-520}
             speed={10}
             padding="0 0.3rem"
             fontFamily="IAMAPLAYER"
