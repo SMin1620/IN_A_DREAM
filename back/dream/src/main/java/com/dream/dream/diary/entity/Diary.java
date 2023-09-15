@@ -51,7 +51,6 @@ public class Diary {
     @Column(nullable = false)
     private int negativePoint;
 
-    @Builder.Default
     private int likeCount = 0;
 
     @Column(updatable = false)
