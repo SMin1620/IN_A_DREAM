@@ -6,3 +6,4 @@ COPY ./pipeline/logstash.conf /usr/share/logstash/pipeline/logstash.conf
 
 RUN bin/logstash-plugin install logstash-output-opsgenie
 RUN bin/logstash-plugin install logstash-output-opensearch
+RUN bin/logstash-plugin install logstash-integration-jdbc

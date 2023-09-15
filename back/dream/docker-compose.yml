@@ -89,5 +89,22 @@ services:  # docker-compose의 경우 docker 컨테이너로 수행될 서비스
       - "LS_JAVA_OPTS=-Xmx256m -Xms256m"
     ports:
       - "5044:5044"
+      - "9600:9600"
     depends_on:
       - elasticsearch
+
+  mysql:
+    image: mysql
+    container_name: mysql
+    volumes:
+      - ./:/app/server/mysql/
+    environment:
+      MYSQL_DATABASE: dream
+      MYSQL_ROOT_PASSWORD: 1234
+    ports:
+      - "3306:3306"
+    command:
+      - --character-set-server=utf8mb4
+      - --collation-server=utf8mb4_unicode_ci
+      - --default-authentication-plugin=mysql_native_password  # 추가한 부분
+    restart: always
