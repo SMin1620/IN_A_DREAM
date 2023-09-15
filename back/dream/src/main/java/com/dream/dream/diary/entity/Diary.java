@@ -42,8 +42,17 @@ public class Diary {
     @Builder.Default
     private float negative = 0F;
 
+    @Column(nullable = false)
+    private int positivePoint;
+
+    @Column(nullable = false)
+    private int neutralPoint;
+
+    @Column(nullable = false)
+    private int negativePoint;
+
     @Builder.Default
-    private int likeTime = 0;
+    private int likeCount = 0;
 
     @Column(updatable = false)
     @CreatedDate
