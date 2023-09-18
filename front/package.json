@@ -29,11 +29,13 @@
     "react-redux": "^8.1.2",
     "react-router-dom": "^6.15.0",
     "react-scripts": "5.0.1",
+    "react-slick": "^0.29.0",
     "react-spring": "^9.7.2",
     "react-text-transition": "^3.1.0",
     "react-type-animation": "^3.1.0",
     "react-typewriter-effect": "^1.1.0",
     "react-use-gesture": "^9.1.3",
+    "slick-carousel": "^1.8.1",
     "styled-components": "^6.0.7",
     "sweetalert2": "^11.7.27",
     "three": "^0.156.0",
@@ -65,6 +67,7 @@
     ]
   },
   "devDependencies": {
+    "@types/react-slick": "^0.23.10",
     "@types/styled-components": "^5.1.27"
   }
 }
