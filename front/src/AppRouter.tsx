@@ -7,6 +7,7 @@ import CreateDreamDiaryPage from "./pages/CreateDreamDiaryPage";
 import SignUpPage from "./pages/SignUpPage";
 import SearchBar from "./components/features/SearchBarComponents/SearchBar";
 import MyPage from "./pages/MyPage";
+import Navbar from "./components/features/NavbarComponents/Navbar";
 
 function AppRouter() {
   return (

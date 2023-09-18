@@ -58,5 +58,15 @@
   text-align: center;
   font-family: "Pretendard Variable", sans-serif;
   font-weight: 700;
+}
+
+* {
   box-sizing: border-box;
+}
+
+/*  나중에 지울꺼 */
+div,
+[class],
+[id] {
+  border: 1px solid red;
 }
