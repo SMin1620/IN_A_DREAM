@@ -1,49 +1,46 @@
+import React, { useState } from "react";
 import S from "styled-components";
-import { LoginButton } from "../../types";
 
-export interface ToggleProps extends LoginButton {
-  borderRadius?: string;
-  padding?: string;
-}
-
-const StyledToggleButton = S.button<ToggleProps>`
-  background-color: ${(props) => props.backgroundColor};
-  height: ${(props) => props.height};
-  width: ${(props) => props.width};
-  border: ${(props) => props.border};
-  margin: ${(props) => props.margin};
-  padding: ${(props) => props.padding};
-  color: ${(props) => props.color};
-  border-radius: ${(props) => props.borderRadius};
+const Button = S.button`
+  width: 5rem;
+  height: 4rem;
+  font-size: 2rem;
+  text-align: center;
+  border: none;
 `;
 
-const ToggleButton: React.FC<ToggleProps> = ({
-  onClick,
-  children,
-  width,
-  height,
-  border,
-  margin,
-  backgroundColor,
-  color,
-  borderRadius,
-  padding,
-}) => {
+const OnButton = S(Button)`
+  border-radius: 1rem 0 0 1rem;
+`;
+
+const OffButton = S(Button)`
+  border-radius: 0 1rem 1rem 0;
+`;
+
+const Able = {
+  border: "none",
+  backgroundColor: "#e9c980",
+  color: "white",
+};
+
+const Disable = {
+  backgroundColor: "#c3baa5",
+  color: "white",
+};
+
+const Toggle = () => {
+  const [sell, setSell] = useState(false);
+
   return (
-    <StyledToggleButton
-      onClick={onClick}
-      width={width}
-      height={height}
-      border={border}
-      margin={margin}
-      backgroundColor={backgroundColor}
-      color={color}
-      borderRadius={borderRadius}
-      padding={padding}
-    >
-      {children}
-    </StyledToggleButton>
+    <div>
+      <OnButton style={sell ? Able : Disable} onClick={() => setSell(true)}>
+        on
+      </OnButton>
+      <OffButton style={sell ? Disable : Able} onClick={() => setSell(false)}>
+        off
+      </OffButton>
+    </div>
   );
 };
 
-export default ToggleButton;
+export default Toggle;
