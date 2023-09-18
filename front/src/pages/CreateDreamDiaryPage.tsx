@@ -3,34 +3,40 @@ import Button from "../components/common/Button";
 import Input from "../components/common/Input";
 import Navbar from "../components/features/NavbarComponents/Navbar";
 import "./styles/CreateDreamDiaryPage.css";
-import ToggleButton from "../components/common/Toggle";
+import Toggle from "../components/common/Toggle";
 
 const CreateDreamDiaryPage = () => {
-  const [sell, setSell] = useState(false);
+  const [sell, setSell] = useState<boolean>(false);
+  const [diaryImage, setDiaryImage] = useState(false);
 
   const inputTitle = (e: React.ChangeEvent<HTMLInputElement>) => {
     console.log(e.target.value);
   };
 
-  const handleSell = () => {
-    console.log("눌림");
+  const handleCreateImage = () => {
+    // 로직처리 후 다이어리 이미지 넣어주기
+    setDiaryImage(true);
   };
-
-  console.log(sell);
 
   return (
     <div>
       <Navbar />
       <div className="create-dream-diary">
-        <div className="create-dream-diary-left">
+        <div
+          className={`create-dream-diary-left ${diaryImage ? "on-diary" : ""}`}
+        >
           <div className="create-dream-diary-left-top">top</div>
           <div className="create-dream-diary-left-bottom">bottom</div>
         </div>
 
         <div className="create-dream-diary-right">
-          <ToggleButton onClick={handleSell}>on</ToggleButton>
-          <ToggleButton onClick={() => setSell(false)}>off</ToggleButton>
-          <button onClick={handleSell}>ㅇㅇ</button>
+          <div className="create-dream-diary-right-head">
+            <input type="text" />
+            <Toggle />
+            <Toggle />
+          </div>
+          <textarea className="create-dream-diary-textarea" />
+          <button onClick={handleCreateImage}>그림생성</button>
         </div>
       </div>
     </div>
