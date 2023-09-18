@@ -7,7 +7,7 @@ import SearchBar from "../SearchBarComponents/SearchBar";
 const NavbarModal: React.FC<isModalOpen> = ({ isNavbarModalOpen, onClose }) => {
   return (
     <Box
-      position="absolute"
+      position="fixed"
       width={80}
       height={70}
       left={0}

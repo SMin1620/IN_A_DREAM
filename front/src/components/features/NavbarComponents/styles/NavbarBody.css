@@ -1,5 +1,5 @@
 .navbar-body-wrapper {
-  --app-height: 715px;
+  /* --app-height: 715px;
   color: white;
   user-select: none;
   -webkit-font-smoothing: antialiased;
@@ -10,8 +10,7 @@
   font: inherit;
   vertical-align: baseline;
   box-sizing: border-box;
-  pointer-events: auto;
-  /* position: absolute; */
+  pointer-events: auto; */
   top: 0;
   left: 0;
   width: 4rem;
@@ -23,7 +22,7 @@
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  position: fixed;
+  position: absolute;
 }
 .navbar-body-main img {
   padding-top: 30%;
