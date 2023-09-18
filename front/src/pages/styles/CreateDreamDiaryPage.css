@@ -1,0 +1,21 @@
+.create-dream-diary {
+  margin-left: 3.6rem;
+  height: 100vh;
+  display: flex;
+}
+
+.create-dream-diary-left {
+  width: 50vw;
+}
+
+.create-dream-diary-left-top {
+  height: 50vh;
+}
+
+.create-dream-diary-left-bottom {
+  height: 50vh;
+}
+
+.create-dream-diary-right {
+  width: 50vw;
+}
