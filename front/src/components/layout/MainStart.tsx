@@ -9,7 +9,7 @@ const MainStartDiv = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 102vh; // make it full screen
+  height: 100vh; // make it full screen
 `;
 
 const ResponsiveTypeAnimation = styled(TypeAnimation)`
