@@ -24,9 +24,13 @@
 
 .login-form-register-line {
   position: absolute;
-  top: -54%;
+  top: -20%;
   background-color: white;
   padding: 0 1rem;
+}
+
+.signup-btn {
+  margin-top: 2rem;
 }
 
 .signup-btn:hover {

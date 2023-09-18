@@ -8,24 +8,17 @@ import SignUpPage from "./pages/SignUpPage";
 import SearchBar from "./components/features/SearchBarComponents/SearchBar";
 import MyPage from "./pages/MyPage";
 
-function AppRouter() {
+function AppRouter2() {
   return (
     <div>
       <BrowserRouter>
         <Routes>
-          <Route path="/Main" element={<MainPage />}></Route>
-          <Route path="/Intro" element={<IntroPage />}></Route>
-          {/* <Route path="/Login" element={<LoginPage />}></Route> */}
-          <Route
-            path="/CreateDreamDiary"
-            element={<CreateDreamDiaryPage />}
-          ></Route>
-          {/* <Route path="/Signup" element={<SignUpPage />}></Route> */}
-          <Route path="/Mypage" element={<MyPage />}></Route>
+          <Route path="/Login" element={<LoginPage />}></Route>
+          <Route path="/Signup" element={<SignUpPage />}></Route>
         </Routes>
       </BrowserRouter>
     </div>
   );
 }
 
-export default AppRouter;
+export default AppRouter2;

@@ -15,6 +15,7 @@
   background-color: white;
   box-shadow: 0 20px 25px 0 rgba(0, 0, 0, 0.07);
   z-index: 1;
+  overflow: hidden;
 }
 
 .login-left-section {
@@ -23,6 +24,7 @@
   justify-content: center;
   align-items: center;
   transition: width 0.8s ease;
+  background-color: white;
 }
 
 .login-right-section {
