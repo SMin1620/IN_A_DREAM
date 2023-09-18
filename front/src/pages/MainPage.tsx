@@ -17,7 +17,7 @@ const MainPage = () => {
   }, []);
 
   return (
-    <div style={{ backgroundColor: "black" }}>
+    <div className="MainPage" style={{ backgroundColor: "black" }}>
       <NavBar />
       <div>
         {showIntro ? <MainPageIntro /> : <MainStart />}

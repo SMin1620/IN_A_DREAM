@@ -13,8 +13,8 @@ const CardSplit = () => {
 
   return (
     <div
-      className="dfdfdfdf"
-      style={{ position: "relative", height: "100vh", width: "100vh" }}
+      className="cardSplit"
+      style={{ position: "relative", width: "100vw", height: "100vh" }}
     >
       <div
         style={{
@@ -96,7 +96,6 @@ const CardSplit = () => {
       >
         <ImgCard image="/CardSplit/image8.png" width="11vw" height="18vh" />
       </div>
-      {/* Add more ImgCards as needed */}
     </div>
   );
 };

@@ -36,11 +36,11 @@ const Impimg = styled.img`
 const HangImg = styled.img`
   height: 10vh;
   width: auto;
-  top: 85vh;
+  top: 25vh;
   left: 50%;
   transform: translateX(-20%);
   z-index: 3;
-  position: absolute;
+  position: relative;
   // left: 50%;
   // bottom: 0;
 `;
@@ -85,6 +85,9 @@ const IntroPage: React.FC = () => {
 
   const divRefs = [ref1, ref2, ref3, ref4, ref5, ref6];
 
+  const imageRef = useRef<HTMLImageElement | null>(null);
+  const listItemsRef = useRef<NodeListOf<HTMLLIElement> | null>(null);
+
   useEffect(() => {
     const observerCallback = (entries: IntersectionObserverEntry[]) => {
       entries.forEach((entry) => {
@@ -104,10 +107,46 @@ const IntroPage: React.FC = () => {
       if (divRef.current) observer.observe(divRef.current);
     });
 
+    let imageStyleChangeStartY = 0;
+    let listStyleChangeEndY = 0;
+
+    if (imageRef.current) {
+      imageStyleChangeStartY = imageRef.current.offsetTop;
+      // listStyleChangeEndY =
+      //   imageRef.current.offsetTop + imageRef.current.clientHeight;
+      // listItemsRef.current = document.querySelectorAll(".list-item"); // 리스트 아이템들을 참조
+      console.log(imageStyleChangeStartY);
+      // console.log(listStyleChangeEndY);
+    }
+
+    const handleScroll = () => {
+      console.log(window.scrollY);
+      const onElement = document.getElementById("on");
+      if (onElement) {
+        onElement.removeAttribute("id");
+      }
+      if (
+        window.scrollY > imageStyleChangeStartY &&
+        window.scrollY < listStyleChangeEndY &&
+        listItemsRef.current
+      ) {
+        const division =
+          (listStyleChangeEndY - imageStyleChangeStartY) /
+          listItemsRef.current.length;
+        const targetIndex = Math.floor(
+          (window.scrollY - imageStyleChangeStartY) / division,
+        );
+        listItemsRef.current[targetIndex].id = "on";
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll);
+
     return () => {
       divRefs.forEach((divRef) => {
         if (divRef.current) observer.unobserve(divRef.current);
       });
+      window.removeEventListener("scroll", handleScroll);
     };
   }, []); // useEffect 안에 빈 dependency array를 넣어주어 컴포넌트가 마운트될 때만 이벤트 리스너가 등록되게 합니다.
 
@@ -131,7 +170,7 @@ const IntroPage: React.FC = () => {
           <Impimg src={ropeImg} alt="img" />
           <Impimg className="second" src={ropeImg} alt="img" />
         </div>
-        <HangImg src={hangingImg} alt="img" />
+        <HangImg src={hangingImg} alt="img" ref={imageRef} />
         <ul id="list-item-wrapper">
           <div className="introtext" ref={ref1}>
             당신은 어떤 꿈을 꾸셨나요?
