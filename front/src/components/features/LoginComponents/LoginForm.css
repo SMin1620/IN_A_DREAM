@@ -9,10 +9,6 @@
   height: 10rem;
 }
 
-.login-form-button {
-  margin-top: 2rem;
-}
-
 .login-form-register {
   position: relative;
   margin-top: 2rem;
@@ -30,7 +26,7 @@
 }
 
 .signup-btn {
-  margin-top: 2rem;
+  margin-top: 1rem;
 }
 
 .signup-btn:hover {
