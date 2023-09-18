@@ -7,6 +7,8 @@
   justify-content: center;
   overflow: hidden;
   flex-wrap: nowrap;
+  align-items: center;
+  /* height: 20%; */
 }
 .navbar-shop {
   display: flex;
@@ -39,32 +41,41 @@
   left: 15%;
   width: 80%;
 }
+
+.navbar-body-search {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 90%;
+  height: 20%;
+}
+
 .navbar-font1 {
   font-family: PartialSansKR-Regular;
-  font-size: 1.4rem;
+  font-size: 3.4rem;
   margin-right: 2%;
 }
 
 .navbar-font2 {
   font-family: omyu_pretty;
   margin-right: 2%;
-  font-size: 1.6rem;
+  font-size: 3.6rem;
 }
 
 .navbar-font3 {
   font-family: IAMAPLAYER;
   margin-right: 2%;
-  font-size: 1.5rem;
+  font-size: 3.5rem;
 }
 
 .navbar-font4 {
   font-family: OKDDUNG;
   margin-right: 2%;
-  font-size: 1.4rem;
+  font-size: 3.4rem;
 }
 
 .navbar-font5 {
   margin-right: 2%;
-  font-size: 1.7rem;
+  font-size: 3.7rem;
   font-family: "Freckle Face";
 }

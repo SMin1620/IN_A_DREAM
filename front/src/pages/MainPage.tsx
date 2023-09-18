@@ -19,9 +19,11 @@ const MainPage = () => {
   return (
     <div style={{ backgroundColor: "black" }}>
       <NavBar />
-      {showIntro ? <MainPageIntro /> : <MainStart />}
-      <MainSecond />
-      <MainThird />
+      <div>
+        {showIntro ? <MainPageIntro /> : <MainStart />}
+        <MainSecond />
+        <MainThird />
+      </div>
     </div>
   );
 };

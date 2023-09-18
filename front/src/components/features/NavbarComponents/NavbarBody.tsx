@@ -5,6 +5,7 @@ import dream_default from "../../../assets/navbar/dream_default.png";
 import dream_activate from "../../../assets/navbar/dream_activate.png";
 import my_default from "../../../assets/navbar/my_default.png";
 import my_activate from "../../../assets/navbar/my_activate.png";
+import SearchBar from "../SearchBarComponents/SearchBar";
 
 interface NavbarBodyProps {
   setIsNavbarModalOpen: (v: boolean) => void;
@@ -39,6 +40,7 @@ const NavbarBody: React.FC<NavbarBodyProps> = ({
           <img src={dream_default} alt="dream_default" />
         )}
       </div>
+
       <div className="navbar-body-my" onClick={() => handleOpenMyModal()}>
         {myActivate ? (
           <img src={my_activate} alt="my_activate" />

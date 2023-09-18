@@ -9,6 +9,7 @@ interface BoxPropsComponents {
   width: number;
   height: number;
   children?: React.ReactNode;
+  textWrap?: string;
 }
 
 const StyledBox = S.div<BoxPropsComponents>`
@@ -18,6 +19,7 @@ const StyledBox = S.div<BoxPropsComponents>`
   left: ${(props) => props.left}%;
   width: ${(props) => props.width}%;
   height: ${(props) => props.height}%;
+  text-wrap: ${(props) => props.textWrap};
   
   font-size: 1rem;
   background-color:#C3BAA5;
