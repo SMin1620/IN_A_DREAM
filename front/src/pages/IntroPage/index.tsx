@@ -13,15 +13,15 @@ const BackGround = styled.div`
   background-image: url(${bgImage});
   background-repeat: repeat;
   background-size: 100vw 25vh;
-  height: 300vh;
+  height: 500vh;
   width: 100vw;
   z-index: -1;
   position: absolute;
 `;
 
 const Impimg = styled.img`
-  height: 95vh;
-  width: auto;
+  height: 180vh;
+  width: 4.6vw;
   left: 3vh;
   z-index: 1;
   position: relative;
@@ -41,6 +41,7 @@ const HangImg = styled.img`
   transform: translateX(-20%);
   z-index: 3;
   position: relative;
+  transition: 1.5s;
   // left: 50%;
   // bottom: 0;
 `;
@@ -77,7 +78,7 @@ const LandImg = styled.div`
   bottom: 0;
   left: 50%;
   opacity: 0;
-  transition: 1.5s;
+  transition: 5s;
 `;
 
 const GlobalStyle = createGlobalStyle`
@@ -107,6 +108,7 @@ const IntroPage: React.FC = () => {
       entries.forEach((entry) => {
         // 타입 단언을 사용하여 오류를 수정합니다.
         const target = entry.target as HTMLElement;
+
         if (entry.isIntersecting) {
           target.style.opacity = "1";
         } else {
@@ -114,6 +116,10 @@ const IntroPage: React.FC = () => {
         }
       });
     };
+    console.log(
+      "document.documentElement.scrollHeight",
+      document.documentElement.scrollHeight,
+    );
 
     const observer = new IntersectionObserver(observerCallback);
 
@@ -124,43 +130,46 @@ const IntroPage: React.FC = () => {
     });
 
     let imageStyleChangeStartY = 0;
-    let listStyleChangeEndY = 0;
 
     if (imageRef.current) {
       imageStyleChangeStartY = imageRef.current.offsetTop;
       const imagePositionVH =
         (imageStyleChangeStartY / window.innerHeight) * 100;
       console.log("imagePositionVH : ", imagePositionVH);
-      // listStyleChangeEndY =
-      //   imageRef.current.offsetTop + imageRef.current.clientHeight;
-      // listItemsRef.current = document.querySelectorAll(".list-item"); // 리스트 아이템들을 참조
       console.log(imageStyleChangeStartY);
-      // console.log(listStyleChangeEndY);
     }
+
+    let startScrollY = 0; // scrollPositionVH가 40이 될 때의 scrollY 값을 저장하기 위한 변수
 
     const handleScroll = () => {
       console.log(window.scrollY);
       const scrollPositionVH = (window.scrollY / window.innerHeight) * 100;
       console.log("scrollPositionVH : ", scrollPositionVH);
-      const onElement = document.getElementById("on");
-      if (onElement) {
-        onElement.removeAttribute("id");
-      }
-      if (
-        window.scrollY > imageStyleChangeStartY &&
-        window.scrollY < listStyleChangeEndY &&
-        listItemsRef.current
-      ) {
-        const division =
-          (listStyleChangeEndY - imageStyleChangeStartY) /
-          listItemsRef.current.length;
-        const targetIndex = Math.floor(
-          (window.scrollY - imageStyleChangeStartY) / division,
-        );
-        listItemsRef.current[targetIndex].id = "on";
+
+      // 스크롤이 맨 아래에 도달했는지 확인
+      const isLanding =
+        window.scrollY + window.innerHeight >=
+        document.documentElement.scrollHeight - 0.05 * window.innerHeight;
+
+      if (imageRef.current) {
+        if (scrollPositionVH >= 40) {
+          if (startScrollY === 0) {
+            // 처음으로 scrollPositionVH가 40이 되는 순간의 scrollY 값을 저장
+            startScrollY = window.scrollY;
+          }
+
+          // 현재 scrollY에서 시작 scrollY 값을 뺀 값만큼 이미지를 움직이게 합니다.
+          const translateYValue = window.scrollY - startScrollY;
+          imageRef.current.style.transform = `translateX(-20%) translateY(${translateYValue}px)`;
+        } else if (imageRef.current) {
+          // scrollPositionVH 값이 40 미만이 되면 원래대로 돌려놓습니다.
+          imageRef.current.style.transform = `translateX(-20%)`;
+          startScrollY = 0; // startScrollY 값을 초기화
+        }
+        // isLanding에 따라 이미지의 opacity를 설정합니다.
+        imageRef.current.style.opacity = isLanding ? "0" : "1";
       }
     };
-
     window.addEventListener("scroll", handleScroll);
 
     return () => {
