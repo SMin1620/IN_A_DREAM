@@ -67,6 +67,19 @@ const Castle = styled.img.attrs({
   z-index: 1;
 `;
 
+const LandImg = styled.div`
+  background-image: url(${landingImg});
+  background-size: cover;
+  height: 10vh;
+  width: calc(10vh * 226 / 213); /* 비율을 기반으로 width 계산 */
+  z-index: 2;
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  opacity: 0;
+  transition: 1.5s;
+`;
+
 const GlobalStyle = createGlobalStyle`
   body {
     overflow-x: hidden; // 좌우 스크롤을 숨깁니다.
@@ -82,8 +95,9 @@ const IntroPage: React.FC = () => {
   const ref4 = useRef<HTMLDivElement>(null);
   const ref5 = useRef<HTMLDivElement>(null);
   const ref6 = useRef<HTMLDivElement>(null);
+  const ref7 = useRef<HTMLDivElement>(null);
 
-  const divRefs = [ref1, ref2, ref3, ref4, ref5, ref6];
+  const divRefs = [ref1, ref2, ref3, ref4, ref5, ref6, ref7];
 
   const imageRef = useRef<HTMLImageElement | null>(null);
   const listItemsRef = useRef<NodeListOf<HTMLLIElement> | null>(null);
@@ -104,7 +118,9 @@ const IntroPage: React.FC = () => {
     const observer = new IntersectionObserver(observerCallback);
 
     divRefs.forEach((divRef) => {
-      if (divRef.current) observer.observe(divRef.current);
+      if (divRef.current) {
+        observer.observe(divRef.current);
+      }
     });
 
     let imageStyleChangeStartY = 0;
@@ -112,6 +128,9 @@ const IntroPage: React.FC = () => {
 
     if (imageRef.current) {
       imageStyleChangeStartY = imageRef.current.offsetTop;
+      const imagePositionVH =
+        (imageStyleChangeStartY / window.innerHeight) * 100;
+      console.log("imagePositionVH : ", imagePositionVH);
       // listStyleChangeEndY =
       //   imageRef.current.offsetTop + imageRef.current.clientHeight;
       // listItemsRef.current = document.querySelectorAll(".list-item"); // 리스트 아이템들을 참조
@@ -121,6 +140,8 @@ const IntroPage: React.FC = () => {
 
     const handleScroll = () => {
       console.log(window.scrollY);
+      const scrollPositionVH = (window.scrollY / window.innerHeight) * 100;
+      console.log("scrollPositionVH : ", scrollPositionVH);
       const onElement = document.getElementById("on");
       if (onElement) {
         onElement.removeAttribute("id");
@@ -151,7 +172,7 @@ const IntroPage: React.FC = () => {
   }, []); // useEffect 안에 빈 dependency array를 넣어주어 컴포넌트가 마운트될 때만 이벤트 리스너가 등록되게 합니다.
 
   return (
-    <>
+    <div className="intro">
       <GlobalStyle />
       <BackGround>
         <div id="intro-main">
@@ -192,9 +213,10 @@ const IntroPage: React.FC = () => {
             있습니다.
           </div>
         </ul>
+        <LandImg ref={ref7} />
         <Castle />
       </BackGround>
-    </>
+    </div>
   );
 };
 
