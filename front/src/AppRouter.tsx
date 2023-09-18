@@ -16,12 +16,12 @@ function AppRouter() {
         <Routes>
           <Route path="/Main" element={<MainPage />}></Route>
           <Route path="/Intro" element={<IntroPage />}></Route>
-          <Route path="/Login" element={<LoginPage />}></Route>
+          {/* <Route path="/Login" element={<LoginPage />}></Route> */}
           <Route
             path="/CreateDreamDiary"
             element={<CreateDreamDiaryPage />}
           ></Route>
-          <Route path="/Signup" element={<SignUpPage />}></Route>
+          {/* <Route path="/Signup" element={<SignUpPage />}></Route> */}
           <Route path="/Mypage" element={<MyPage />}></Route>
         </Routes>
       </BrowserRouter>
