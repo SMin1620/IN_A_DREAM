@@ -236,8 +236,7 @@ const IntroPage: React.FC = () => {
           </div>
         </ul>
         <div id="hold-on">
-          <p id="dream-text">IN</p>
-          <p id="dream-text">A</p>
+          <p id="dream-text">Hold On!</p>
           <img
             id="down-arrow-icon"
             src="./down-arrow.png"

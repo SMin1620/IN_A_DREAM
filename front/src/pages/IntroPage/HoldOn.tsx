@@ -11,11 +11,13 @@ const PreloaderBtn = styled.button`
   height: 120px;
   border-radius: 50%;
   border: none;
-  opacity: 0.5;
-  color: rgb(213, 165, 78);
-  background-color: rgb(30, 64, 41);
+  opacity: 0.7;
+  color: #fff;
+  background-color: #f1cf83;
   margin-top: -60px;
   margin-left: -60px;
+  text-shadow: 1px 0px #494949, 0px 1px #494949, 1px 0px #494949,
+    0px 1px #494949;
 `;
 
 const PreloaderBtnHold = styled.div`
@@ -92,7 +94,10 @@ const HoldOn: React.FC = () => {
         onMouseDown={handleMouseDown}
         onMouseUp={handleMouseUp}
       >
-        <PreloaderBtnHold ref={textRef}>Dream</PreloaderBtnHold>
+        <PreloaderBtnHold ref={textRef}>
+          IN <br />A <br />
+          DREAM
+        </PreloaderBtnHold>
       </PreloaderBtn>
     </div>
   );
