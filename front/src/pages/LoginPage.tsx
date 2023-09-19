@@ -7,12 +7,14 @@ import MainPageIntro from "./../components/layout/MainPageIntro";
 const LoginPage = () => {
   const navigate = useNavigate();
   const [isExpanded, setIsExpanded] = useState(false);
+  const [fadeIn, setFadeIn] = useState(false);
 
   const handleLoginSuccess = () => {
     setIsExpanded(true);
   };
 
   useEffect(() => {
+    setFadeIn(true); // 컴포넌트가 마운트될 때 fadeIn 애니메이션 시작
     if (isExpanded) {
       setTimeout(() => {
         navigate("/Main");
@@ -21,7 +23,7 @@ const LoginPage = () => {
   }, [isExpanded]);
 
   return (
-    <div className="LoginForm">
+    <div className={`LoginForm ${fadeIn ? "fadeIn" : ""}`}>
       {isExpanded ? (
         <div></div>
       ) : (

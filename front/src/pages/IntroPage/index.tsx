@@ -17,7 +17,7 @@ const BackGround = styled.div`
   background-size: 100vw 25vh;
   height: 500vh;
   width: 100vw;
-  z-index: -1;
+  z-index: -5;
   position: absolute;
 `;
 
