@@ -2,9 +2,7 @@ package com.dream.dream.member.entity;
 
 import jakarta.persistence.*;
 import lombok.*;
-import org.hibernate.annotations.SQLDelete;
-import org.hibernate.annotations.Where;
-import org.springframework.security.crypto.password.PasswordEncoder;
+
 
 import java.time.LocalDateTime;
 
@@ -39,5 +37,7 @@ public class Member {
 
     // 리프레시 토큰
     private String refreshToken;
+
+    private int isWrite;
 
 }
