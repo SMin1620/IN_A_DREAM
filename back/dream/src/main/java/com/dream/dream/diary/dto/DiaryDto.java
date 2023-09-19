@@ -98,7 +98,7 @@ public class DiaryDto {
         private int positivePoint;
         private int neutralPoint;
         private int negativePoint;
-        private int like;
+        private int likeCount;
         @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
         private LocalDateTime createdAt;
         private int emotion;
