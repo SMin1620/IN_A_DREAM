@@ -8,6 +8,7 @@ import SignUpPage from "./pages/SignUpPage";
 import SearchBar from "./components/features/SearchBarComponents/SearchBar";
 import MyPage from "./pages/MyPage";
 import Navbar from "./components/features/NavbarComponents/Navbar";
+import GalleryPage from "./pages/GalleryPage";
 
 function AppRouter() {
   return (
@@ -23,6 +24,7 @@ function AppRouter() {
           ></Route>
           <Route path="/Signup" element={<SignUpPage />}></Route>
           <Route path="/Mypage" element={<MyPage />}></Route>
+          <Route path="/Gallery" element={<GalleryPage />}></Route>
         </Routes>
       </BrowserRouter>
     </div>
