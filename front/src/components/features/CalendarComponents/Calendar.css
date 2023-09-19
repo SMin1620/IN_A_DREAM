@@ -1,0 +1,30 @@
+/* Calendar.css */
+
+.calendar-main {
+  display: flex;
+  flex-wrap: wrap;
+  width: 30rem; /* = .day width (3rem + 1rem margin) * 7 */
+  border: 1px solid black;
+  padding: 1rem;
+  margin: auto;
+}
+
+.day {
+  width: 3rem;
+  height: 3rem;
+  margin: 0.5rem;
+  background-color: #c3baa5;
+  border-radius: 10px;
+}
+
+.empty-day {
+  width: 3rem;
+  height: 3rem;
+  margin: 0.5rem;
+  border-radius: 10px;
+  background-color: transparent;
+}
+
+.active-day {
+  background-color: green;
+}

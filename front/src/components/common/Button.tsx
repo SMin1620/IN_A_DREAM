@@ -2,11 +2,12 @@ import React from "react";
 import S from "styled-components";
 
 interface ButtonPropsComponent {
-  position: string;
+  position?: string;
   bottom?: number;
   top?: number;
   right?: number;
   left?: number;
+  children?: React.ReactNode;
 }
 
 const StyledButton = S.button<ButtonPropsComponent>`
@@ -30,7 +31,7 @@ font-size: 1rem;
 `;
 
 const Button = (props: ButtonPropsComponent) => {
-  return <StyledButton {...props}>Button</StyledButton>;
+  return <StyledButton {...props}>{props.children}</StyledButton>;
 };
 
 export default Button;
