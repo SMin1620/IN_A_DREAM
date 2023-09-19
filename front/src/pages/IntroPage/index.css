@@ -7,6 +7,8 @@
 }
 
 #intro-main {
+  position: relative;
+  z-index: 50;
   display: flex;
   flex-direction: column;
   padding-top: 54px;
@@ -23,7 +25,7 @@
   margin-top: 73px;
   font-size: 4vh;
   font-weight: 400;
-  opacity: 0.6;
+  opacity: 0.75;
 }
 
 #intro-main p {
@@ -39,6 +41,18 @@
   }
   100% {
     transform: translateY(0);
+  }
+}
+
+@keyframes leftAndRight {
+  0% {
+    transform: translateX(0);
+  }
+  50% {
+    transform: translateX(-10px); /* 원하는 거리만큼 우측으로 이동 */
+  }
+  100% {
+    transform: translateX(0);
   }
 }
 
@@ -65,13 +79,59 @@
 /*  Moon보다 상위 레이어로 설정
  z-index를 위해 필요 */
 .introtext {
-  font-size: 2.7vh;
+  font-size: 5vh;
   font-weight: 600;
-  margin-top: 15vh;
+  margin-top: 40vh;
   color: white;
   text-align: center;
   opacity: 0;
   transition: 1.5s;
   position: relative;
   z-index: 4;
+}
+
+.skip {
+  position: absolute;
+  z-index: 2;
+  top: 0;
+  right: 0;
+  display: flex;
+  flex-direction: row;
+  width: 8vw;
+  align-items: center;
+  color: white;
+  font-size: 2vw;
+  font-weight: 500;
+  background-color: #111111;
+  opacity: 0.6;
+  animation: leftAndRight 3s infinite;
+}
+
+#leftRight {
+  width: 2vw;
+}
+
+#hold-on {
+  position: absolute;
+  z-index: 6;
+
+  display: flex;
+  flex-direction: column;
+  padding-top: 54px;
+  margin: 0px auto;
+  width: 300px;
+  align-items: center;
+  color: white;
+  font-size: 8vh;
+  font-weight: 500;
+  gap: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  bottom: 15vh;
+}
+
+#dream-text {
+  font-size: 4vh;
+  font-weight: 400;
+  opacity: 0.75;
 }
