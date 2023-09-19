@@ -1,27 +1,42 @@
-import React, { useState } from "react";
-import Input from "../components/common/Input";
+import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router";
+import LoginForm from "../components/features/LoginComponents/LoginForm";
+import "./styles/LoginPage.css";
+import MainPageIntro from "./../components/layout/MainPageIntro";
 
 const LoginPage = () => {
-  const [email, setEmail] = useState("");
-  const inputEmail = (e: React.ChangeEvent<HTMLInputElement>) => {
-    console.log(e.target.value);
+  const navigate = useNavigate();
+  const [isExpanded, setIsExpanded] = useState(false);
+
+  const handleLoginSuccess = () => {
+    setIsExpanded(true);
   };
 
-  const inputPassword = (e: React.ChangeEvent<HTMLInputElement>) => {
-    console.log(e.target.value);
-  };
+  useEffect(() => {
+    if (isExpanded) {
+      setTimeout(() => {
+        navigate("/Main");
+      }, 1000);
+    }
+  }, [isExpanded]);
 
   return (
-    <div>
-      <Input placeholder="이메일" type="text" onChange={(e) => inputEmail(e)} />
+    <div className="LoginForm">
+      {isExpanded ? (
+        <div></div>
+      ) : (
+        <div className="login-form">
+          <LoginForm onLoginSuccess={handleLoginSuccess} />
+        </div>
+      )}
 
-      <br />
+      <div
+        className={`login-left-section ${isExpanded ? "expanded" : ""}`}
+      ></div>
 
-      <Input
-        placeholder="패스워드"
-        type="password"
-        onChange={(e) => inputPassword(e)}
-      />
+      <div
+        className={`login-right-section ${isExpanded ? "expanded" : ""}`}
+      ></div>
     </div>
   );
 };

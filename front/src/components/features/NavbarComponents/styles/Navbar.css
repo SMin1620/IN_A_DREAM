@@ -1,0 +1,6 @@
+.navbar-wrapper {
+  height: 100%;
+  width: 4rem;
+  position: fixed;
+  z-index: 10;
+}
