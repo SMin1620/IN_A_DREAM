@@ -90,6 +90,7 @@ function Frame({ url, c = new THREE.Color(), ...props }) {
   const [rnd] = useState(() => Math.random());
   const name = getUuid(url);
   const isActive = params?.id === name;
+
   useCursor(hovered);
   useFrame((state, dt) => {
     image.current.material.zoom =
@@ -149,8 +150,10 @@ function Frame({ url, c = new THREE.Color(), ...props }) {
         anchorY="top"
         position={[0.55, GOLDENRATIO, 0]}
         fontSize={0.025}
+        font="/fonts/Noto Sans KR Medium_Regular"
       >
-        {name.split("-").join(" ")}
+        안농 HELLO 나 집에간다
+        {/* {name.split("-").join(" ")} */}
       </Text>
     </group>
   );
