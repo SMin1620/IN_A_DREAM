@@ -17,6 +17,8 @@ interface ImageResponse {
 
 const useKarlo = (prompt: string) => {
   const [imageUrl, setImageUrl] = useState<string | null>(null);
+  console.log("오나요");
+  console.log(process.env.REACT_APP_KAKAO_KEY);
 
   useEffect(() => {
     const fetchData = async () => {
