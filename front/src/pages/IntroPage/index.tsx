@@ -44,8 +44,6 @@ const HangImg = styled.img`
   z-index: 3;
   position: relative;
   transition: 1.5s;
-  // left: 50%;
-  // bottom: 0;
 `;
 
 const Moon = styled.img.attrs({
