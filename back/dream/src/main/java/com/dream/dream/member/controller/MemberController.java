@@ -45,7 +45,7 @@ public class MemberController {
     /**
      * 이메일 중복 확인
      */
-    @GetMapping
+    @GetMapping("/email")
     public BaseResponse emailDoubleCheck(@RequestParam String email){
 
         boolean isDouble = memberService.emailDoubleCheck(email);
@@ -57,7 +57,10 @@ public class MemberController {
         }
     }
 
-    @GetMapping
+    /**
+     * 닉네임 중복 확인(api 명세서랑 다름)
+     */
+    @GetMapping("/nickname")
     public BaseResponse nicknameDoubleCheck(@RequestParam String nickname){
 
         boolean isDouble = memberService.nicknameDoubleCheck(nickname);
@@ -69,6 +72,9 @@ public class MemberController {
         }
     }
 
+    /**
+     * 멤버 정보 확인(api 명세서랑 다름)
+     */
     @GetMapping
     public BaseResponse getMemberInfo() throws Exception {
         Long id = Long.parseLong(SecurityContextHolder.getContext().getAuthentication().getName());
@@ -76,6 +82,14 @@ public class MemberController {
         Member member = memberService.memberInfo(id);
 
         return new BaseResponse(HttpStatus.OK, "로그인 성공", memberMapper.memberToResponseDto(member));
+    }
+
+    /**
+     * 멤버 정보 확인
+     */
+    @GetMapping("/test")
+    public BaseResponse test() {
+        return new BaseResponse(HttpStatus.OK, "테스트", "라이따");
     }
 
 }
