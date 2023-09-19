@@ -58,3 +58,31 @@
 .create-dream-diary-textarea::-webkit-scrollbar {
   display: none;
 }
+
+@media (max-width: 1024px) {
+  .create-dream-diary {
+    flex-direction: column;
+  }
+
+  .create-dream-diary-left {
+    display: flex;
+
+    width: 100vw;
+  }
+
+  .create-dream-diary-left-top {
+    width: 50vw;
+    height: 30vh;
+    border: 1px solid blue;
+    margin-left: 0.4rem;
+  }
+
+  .create-dream-diary-left-bottom {
+    width: 50vw;
+    height: 30vh;
+  }
+
+  .create-dream-diary-right {
+    width: 100vw;
+  }
+}
