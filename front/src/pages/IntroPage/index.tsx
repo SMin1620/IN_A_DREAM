@@ -1,5 +1,6 @@
 import "./index.css";
-import React, { useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef } from "react";
+import HoldOn from "./HoldOn";
 import styled, { createGlobalStyle } from "styled-components";
 import bgImage from "../../assets/background/blackBG.jpg";
 import moonImg from "../../assets/image/moon.png";
@@ -7,6 +8,7 @@ import castleImg from "../../assets/image/castle.png";
 import landingImg from "../../assets/image/landing.png";
 import hangingImg from "../../assets/image/hanging.png";
 import ropeImg from "../../assets/image/rope.png";
+import { useNavigate } from "react-router";
 
 // styled-component 정의는 컴포넌트 외부에 위치해야 합니다.
 const BackGround = styled.div`
@@ -63,7 +65,7 @@ const Castle = styled.img.attrs({
   width: auto; // 너비도 자동으로 설정합니다.
   left: 50%;
   bottom: 0;
-  transform: translateX(-50%);
+  transform: translateX(-49%);
   position: absolute;
   z-index: 1;
 `;
@@ -101,7 +103,8 @@ const IntroPage: React.FC = () => {
   const divRefs = [ref1, ref2, ref3, ref4, ref5, ref6, ref7];
 
   const imageRef = useRef<HTMLImageElement | null>(null);
-  const listItemsRef = useRef<NodeListOf<HTMLLIElement> | null>(null);
+
+  const navigate = useNavigate();
 
   useEffect(() => {
     const observerCallback = (entries: IntersectionObserverEntry[]) => {
@@ -184,6 +187,16 @@ const IntroPage: React.FC = () => {
     <div className="intro">
       <GlobalStyle />
       <BackGround>
+        {/* <button className="skip" onClick={() => navigate("/Login")}>
+            <div className="skip-wrapper">
+              <p>skip</p>
+              <img
+                id="leftRight"
+                src="./right-arrow.png"
+                alt="right arrow icon"
+              ></img>
+            </div>
+          </button> */}
         <div id="intro-main">
           <p>IN</p>
           <p>A</p>
@@ -222,6 +235,16 @@ const IntroPage: React.FC = () => {
             있습니다.
           </div>
         </ul>
+        <div id="hold-on">
+          <p id="dream-text">IN</p>
+          <p id="dream-text">A</p>
+          <img
+            id="down-arrow-icon"
+            src="./down-arrow.png"
+            alt="down arrow icon"
+          ></img>
+        </div>
+        <HoldOn />
         <LandImg ref={ref7} />
         <Castle />
       </BackGround>
