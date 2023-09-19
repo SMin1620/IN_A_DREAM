@@ -1,5 +1,6 @@
 import "./index.css";
-import React, { useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef } from "react";
+import HoldOn from "./HoldOn";
 import styled, { createGlobalStyle } from "styled-components";
 import bgImage from "../../assets/background/blackBG.jpg";
 import moonImg from "../../assets/image/moon.png";
@@ -7,21 +8,22 @@ import castleImg from "../../assets/image/castle.png";
 import landingImg from "../../assets/image/landing.png";
 import hangingImg from "../../assets/image/hanging.png";
 import ropeImg from "../../assets/image/rope.png";
+import { useNavigate } from "react-router";
 
 // styled-component 정의는 컴포넌트 외부에 위치해야 합니다.
 const BackGround = styled.div`
   background-image: url(${bgImage});
   background-repeat: repeat;
   background-size: 100vw 25vh;
-  height: 300vh;
+  height: 500vh;
   width: 100vw;
   z-index: -1;
   position: absolute;
 `;
 
 const Impimg = styled.img`
-  height: 95vh;
-  width: auto;
+  height: 180vh;
+  width: 4.6vw;
   left: 3vh;
   z-index: 1;
   position: relative;
@@ -41,6 +43,7 @@ const HangImg = styled.img`
   transform: translateX(-20%);
   z-index: 3;
   position: relative;
+  transition: 1.5s;
   // left: 50%;
   // bottom: 0;
 `;
@@ -62,7 +65,7 @@ const Castle = styled.img.attrs({
   width: auto; // 너비도 자동으로 설정합니다.
   left: 50%;
   bottom: 0;
-  transform: translateX(-50%);
+  transform: translateX(-49%);
   position: absolute;
   z-index: 1;
 `;
@@ -77,7 +80,7 @@ const LandImg = styled.div`
   bottom: 0;
   left: 50%;
   opacity: 0;
-  transition: 1.5s;
+  transition: 5s;
 `;
 
 const GlobalStyle = createGlobalStyle`
@@ -100,13 +103,15 @@ const IntroPage: React.FC = () => {
   const divRefs = [ref1, ref2, ref3, ref4, ref5, ref6, ref7];
 
   const imageRef = useRef<HTMLImageElement | null>(null);
-  const listItemsRef = useRef<NodeListOf<HTMLLIElement> | null>(null);
+
+  const navigate = useNavigate();
 
   useEffect(() => {
     const observerCallback = (entries: IntersectionObserverEntry[]) => {
       entries.forEach((entry) => {
         // 타입 단언을 사용하여 오류를 수정합니다.
         const target = entry.target as HTMLElement;
+
         if (entry.isIntersecting) {
           target.style.opacity = "1";
         } else {
@@ -114,6 +119,10 @@ const IntroPage: React.FC = () => {
         }
       });
     };
+    console.log(
+      "document.documentElement.scrollHeight",
+      document.documentElement.scrollHeight,
+    );
 
     const observer = new IntersectionObserver(observerCallback);
 
@@ -124,43 +133,46 @@ const IntroPage: React.FC = () => {
     });
 
     let imageStyleChangeStartY = 0;
-    let listStyleChangeEndY = 0;
 
     if (imageRef.current) {
       imageStyleChangeStartY = imageRef.current.offsetTop;
       const imagePositionVH =
         (imageStyleChangeStartY / window.innerHeight) * 100;
       console.log("imagePositionVH : ", imagePositionVH);
-      // listStyleChangeEndY =
-      //   imageRef.current.offsetTop + imageRef.current.clientHeight;
-      // listItemsRef.current = document.querySelectorAll(".list-item"); // 리스트 아이템들을 참조
       console.log(imageStyleChangeStartY);
-      // console.log(listStyleChangeEndY);
     }
+
+    let startScrollY = 0; // scrollPositionVH가 40이 될 때의 scrollY 값을 저장하기 위한 변수
 
     const handleScroll = () => {
       console.log(window.scrollY);
       const scrollPositionVH = (window.scrollY / window.innerHeight) * 100;
       console.log("scrollPositionVH : ", scrollPositionVH);
-      const onElement = document.getElementById("on");
-      if (onElement) {
-        onElement.removeAttribute("id");
-      }
-      if (
-        window.scrollY > imageStyleChangeStartY &&
-        window.scrollY < listStyleChangeEndY &&
-        listItemsRef.current
-      ) {
-        const division =
-          (listStyleChangeEndY - imageStyleChangeStartY) /
-          listItemsRef.current.length;
-        const targetIndex = Math.floor(
-          (window.scrollY - imageStyleChangeStartY) / division,
-        );
-        listItemsRef.current[targetIndex].id = "on";
+
+      // 스크롤이 맨 아래에 도달했는지 확인
+      const isLanding =
+        window.scrollY + window.innerHeight >=
+        document.documentElement.scrollHeight - 0.05 * window.innerHeight;
+
+      if (imageRef.current) {
+        if (scrollPositionVH >= 40) {
+          if (startScrollY === 0) {
+            // 처음으로 scrollPositionVH가 40이 되는 순간의 scrollY 값을 저장
+            startScrollY = window.scrollY;
+          }
+
+          // 현재 scrollY에서 시작 scrollY 값을 뺀 값만큼 이미지를 움직이게 합니다.
+          const translateYValue = window.scrollY - startScrollY;
+          imageRef.current.style.transform = `translateX(-20%) translateY(${translateYValue}px)`;
+        } else if (imageRef.current) {
+          // scrollPositionVH 값이 40 미만이 되면 원래대로 돌려놓습니다.
+          imageRef.current.style.transform = `translateX(-20%)`;
+          startScrollY = 0; // startScrollY 값을 초기화
+        }
+        // isLanding에 따라 이미지의 opacity를 설정합니다.
+        imageRef.current.style.opacity = isLanding ? "0" : "1";
       }
     };
-
     window.addEventListener("scroll", handleScroll);
 
     return () => {
@@ -175,6 +187,16 @@ const IntroPage: React.FC = () => {
     <div className="intro">
       <GlobalStyle />
       <BackGround>
+        {/* <button className="skip" onClick={() => navigate("/Login")}>
+            <div className="skip-wrapper">
+              <p>skip</p>
+              <img
+                id="leftRight"
+                src="./right-arrow.png"
+                alt="right arrow icon"
+              ></img>
+            </div>
+          </button> */}
         <div id="intro-main">
           <p>IN</p>
           <p>A</p>
@@ -213,6 +235,15 @@ const IntroPage: React.FC = () => {
             있습니다.
           </div>
         </ul>
+        <div id="hold-on">
+          <p id="dream-text">Hold On!</p>
+          <img
+            id="down-arrow-icon"
+            src="./down-arrow.png"
+            alt="down arrow icon"
+          ></img>
+        </div>
+        <HoldOn />
         <LandImg ref={ref7} />
         <Castle />
       </BackGround>
