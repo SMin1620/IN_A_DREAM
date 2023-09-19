@@ -10,10 +10,10 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Tag(name = "Diary")
 @RestController
@@ -39,5 +39,15 @@ public class DiaryController {
         Diary diary = diaryService.diaryCreate(requestBody);
 
         return new BaseResponse(HttpStatus.OK, "굿", diaryMapper.diaryToResponseDto(diary));
+    }
+
+    /**
+     * 일기 목록 조회
+     */
+    @GetMapping("/api/diary")
+    public BaseResponse diaryListCheck(){
+        List<Diary> diaryList = new ArrayList<>();
+        diaryList = diaryService.getDiaryList();
+        return new BaseResponse(HttpStatus.OK, "일기 목록 반환 성공", diaryList);
     }
 }

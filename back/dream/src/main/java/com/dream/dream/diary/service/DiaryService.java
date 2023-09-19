@@ -8,6 +8,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Service
 @Slf4j
@@ -38,4 +39,12 @@ public class DiaryService {
 
         return diary;
     }
+
+    /**
+     * 일기 목록 조회
+     */
+    public List<Diary> getDiaryList(){
+        return diaryRepository.findAll();
+    }
+
 }
