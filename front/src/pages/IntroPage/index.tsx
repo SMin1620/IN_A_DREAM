@@ -4,7 +4,7 @@ import HoldOn from "./HoldOn";
 import styled, { createGlobalStyle } from "styled-components";
 import bgImage from "../../assets/background/blackBG.jpg";
 import moonImg from "../../assets/image/moon.png";
-import castleImg from "../../assets/image/castle.png";
+// import castleImg from "../../assets/image/castle.png";
 import landingImg from "../../assets/image/landing.png";
 import hangingImg from "../../assets/image/hanging.png";
 import ropeImg from "../../assets/image/rope.png";
@@ -39,8 +39,7 @@ const HangImg = styled.img`
   height: 10vh;
   width: auto;
   top: 25vh;
-  left: 50%;
-  transform: translateX(-20%);
+  transform: translateX(30%);
   z-index: 3;
   position: relative;
   transition: 1.5s;
@@ -56,17 +55,17 @@ const Moon = styled.img.attrs({
   z-index: 1;
   position: relative;
 `;
-const Castle = styled.img.attrs({
-  src: castleImg,
-})`
-  height: 70vh; // 높이를 자동으로 설정하여 이미지의 원래 비율을 유지합니다.
-  width: auto; // 너비도 자동으로 설정합니다.
-  left: 50%;
-  bottom: 0;
-  transform: translateX(-49%);
-  position: absolute;
-  z-index: 1;
-`;
+// const Castle = styled.img.attrs({
+//   src: castleImg,
+// })`
+//   height: 70vh; // 높이를 자동으로 설정하여 이미지의 원래 비율을 유지합니다.
+//   width: auto; // 너비도 자동으로 설정합니다.
+//   left: 50%;
+//   bottom: 0;
+//   transform: translateX(-49%);
+//   position: absolute;
+//   z-index: 1;
+// `;
 
 const LandImg = styled.div`
   background-image: url(${landingImg});
@@ -76,7 +75,7 @@ const LandImg = styled.div`
   z-index: 2;
   position: absolute;
   bottom: 0;
-  left: 50%;
+  left: 53%;
   opacity: 0;
   transition: 5s;
 `;
@@ -161,10 +160,10 @@ const IntroPage: React.FC = () => {
 
           // 현재 scrollY에서 시작 scrollY 값을 뺀 값만큼 이미지를 움직이게 합니다.
           const translateYValue = window.scrollY - startScrollY;
-          imageRef.current.style.transform = `translateX(-20%) translateY(${translateYValue}px)`;
+          imageRef.current.style.transform = `translateX(30%) translateY(${translateYValue}px)`;
         } else if (imageRef.current) {
           // scrollPositionVH 값이 40 미만이 되면 원래대로 돌려놓습니다.
-          imageRef.current.style.transform = `translateX(-20%)`;
+          imageRef.current.style.transform = `translateX(30%)`;
           startScrollY = 0; // startScrollY 값을 초기화
         }
         // isLanding에 따라 이미지의 opacity를 설정합니다.
@@ -185,16 +184,16 @@ const IntroPage: React.FC = () => {
     <div className="intro">
       <GlobalStyle />
       <BackGround>
-        {/* <button className="skip" onClick={() => navigate("/Login")}>
-            <div className="skip-wrapper">
-              <p>skip</p>
-              <img
-                id="leftRight"
-                src="./right-arrow.png"
-                alt="right arrow icon"
-              ></img>
-            </div>
-          </button> */}
+        <button className="skip" onClick={() => navigate("/Login")}>
+          {/* <div className="skip-wrapper"> */}
+          <p>Skip</p>
+          <img
+            id="leftRight"
+            src="./skip-arrow.png"
+            alt="skip arrow icon"
+          ></img>
+          {/* </div> */}
+        </button>
         <div id="intro-main">
           <p>IN</p>
           <p>A</p>
@@ -243,7 +242,7 @@ const IntroPage: React.FC = () => {
         </div>
         <HoldOn />
         <LandImg ref={ref7} />
-        <Castle />
+        {/* <Castle /> */}
       </BackGround>
     </div>
   );
