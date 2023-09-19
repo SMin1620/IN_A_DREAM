@@ -1,7 +1,9 @@
 .create-dream-diary {
-  margin-left: 3.6rem;
+  width: 98.5vw;
   height: 100vh;
   display: flex;
+  border: 10px green solid;
+  overflow-y: hidden;
 }
 
 .create-dream-diary-left {
@@ -10,7 +12,8 @@
 }
 
 .on-diary {
-  width: 50vw;
+  width: 50%;
+  border: 10px solid orange;
 }
 
 .create-dream-diary-left-top {
@@ -22,8 +25,10 @@
 }
 
 .create-dream-diary-right {
-  width: 50vw;
-  background-color: blue;
+  border: 10px solid blue;
+  width: 50%;
+  display: flex;
+  flex-direction: column;
 }
 
 .create-dream-diary-right-head {
@@ -59,30 +64,27 @@
   display: none;
 }
 
+.create-dream-diary-right > button {
+  background-color: #c3baa5;
+  width: 10vw;
+  height: 3rem;
+  margin-top: 1rem;
+  align-self: end;
+  border: none;
+  border-radius: 2.4rem;
+  color: white;
+  margin-right: 2rem;
+}
+
 @media (max-width: 1024px) {
   .create-dream-diary {
+    display: flex;
     flex-direction: column;
   }
 
   .create-dream-diary-left {
     display: flex;
-
     width: 100vw;
-  }
-
-  .create-dream-diary-left-top {
-    width: 50vw;
-    height: 30vh;
-    border: 1px solid blue;
-    margin-left: 0.4rem;
-  }
-
-  .create-dream-diary-left-bottom {
-    width: 50vw;
-    height: 30vh;
-  }
-
-  .create-dream-diary-right {
-    width: 100vw;
+    background-color: blue;
   }
 }
