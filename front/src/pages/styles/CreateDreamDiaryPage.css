@@ -1,9 +1,21 @@
 .create-dream-diary {
-  width: 98.5vw;
+  width: 100vw;
   height: 100vh;
+  background-color: #f1e7d1;
   display: flex;
-  border: 10px green solid;
-  overflow-y: hidden;
+  flex-direction: column;
+  overflow-x: hidden;
+}
+
+.create-dream-diary-main {
+  display: flex;
+  padding-left: 4rem;
+  padding-right: 2rem;
+  width: 100%;
+}
+
+.create-dream-diary-main::-webkit-scrollbar {
+  display: none;
 }
 
 .create-dream-diary-left {
@@ -13,7 +25,6 @@
 
 .on-diary {
   width: 50%;
-  border: 10px solid orange;
 }
 
 .create-dream-diary-left-top {
@@ -25,66 +36,41 @@
 }
 
 .create-dream-diary-right {
-  border: 10px solid blue;
   width: 50%;
   display: flex;
   flex-direction: column;
-}
-
-.create-dream-diary-right-head {
-  display: flex;
-  align-items: center;
-  justify-content: space-around;
-}
-
-.create-dream-diary-right-head > input {
-  border: none;
-  background-color: bisque;
-  font-size: 2rem;
-  width: 15rem;
-  height: 2rem;
-}
-
-.create-dream-diary-textarea {
-  width: 100%;
-  height: 70vh;
-  padding: 1rem;
-  font-size: 2rem;
-  font-weight: bold;
-  resize: none;
-  border: none;
-}
-
-.create-dream-diary-textarea:focus {
-  outline: none;
-  border: 1px solid green;
-}
-
-.create-dream-diary-textarea::-webkit-scrollbar {
-  display: none;
-}
-
-.create-dream-diary-right > button {
-  background-color: #c3baa5;
-  width: 10vw;
-  height: 3rem;
-  margin-top: 1rem;
-  align-self: end;
-  border: none;
-  border-radius: 2.4rem;
-  color: white;
-  margin-right: 2rem;
+  background-color: #f1e7d1;
 }
 
 @media (max-width: 1024px) {
-  .create-dream-diary {
+  .create-dream-diary-main {
     display: flex;
     flex-direction: column;
   }
 
   .create-dream-diary-left {
     display: flex;
-    width: 100vw;
-    background-color: blue;
+    width: 100%;
+    height: 0;
+    transition: height 1s cubic-bezier(0.22, 0.61, 0.36, 1);
+  }
+
+  .on-diary {
+    height: 30vh;
+  }
+
+  .create-dream-diary-right {
+    width: 100%;
+    height: 70vh;
+  }
+
+  .create-dream-diary-left-top {
+    height: 30vh;
+    width: 50%;
+  }
+
+  .create-dream-diary-left-bottom {
+    height: 30vh;
+    width: 50%;
   }
 }
