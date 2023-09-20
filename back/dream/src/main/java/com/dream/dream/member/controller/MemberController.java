@@ -1,19 +1,26 @@
 package com.dream.dream.member.controller;
 
 import com.dream.dream.common.BaseResponse;
+import com.dream.dream.jwt.JwtTokenProvider;
 import com.dream.dream.member.dto.TokenDto;
 import com.dream.dream.member.entity.Member;
 import com.dream.dream.member.dto.MemberDto;
 import com.dream.dream.member.mapper.MemberMapper;
+import com.dream.dream.member.repository.MemberRepository;
 import com.dream.dream.member.service.MemberService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
+
+import java.nio.file.attribute.UserPrincipalNotFoundException;
 
 @Tag(name = "회원 API")
 @RestController
@@ -24,6 +31,8 @@ public class MemberController {
 
     private final MemberService memberService;
     private final MemberMapper memberMapper;
+    private final JwtTokenProvider jwtTokenProvider;
+    private final MemberRepository memberRepository;
 
     /**
      * 로그인 (닉네임만 보내주기)
@@ -89,10 +98,24 @@ public class MemberController {
      */
     @Operation(summary = "자기 자신 조회")
     @GetMapping
-    public BaseResponse getMemberInfo() throws Exception {
-        Long id = Long.parseLong(SecurityContextHolder.getContext().getAuthentication().getName());
+    public BaseResponse getMemberInfo(HttpServletRequest request) throws Exception {
+        //////////////////////// 토큰으로 인가된 사용자 정보 처리하는 로직
+        String token = jwtTokenProvider.resolveToken(request);
+        jwtTokenProvider.validateToken(token);
 
-        Member member = memberService.memberInfo(id);
+        System.out.println("token >>> " + token);
+
+        Authentication authentication = jwtTokenProvider.getAuthentication(token);
+        UserDetails userDetails = (UserDetails) authentication.getPrincipal();
+
+        Member getMember = memberRepository.findByEmail(userDetails.getUsername()).get();
+
+        // 유저 예외처리 :: 예외처리 커스텀 필요
+        if (getMember == null) {
+            throw new UserPrincipalNotFoundException("유효한 사용자가 아닙니다.");
+        }
+
+        Member member = memberService.memberInfo(getMember.getId());
 
         return new BaseResponse(HttpStatus.OK, "로그인 성공", memberMapper.memberToResponseDto(member));
     }
