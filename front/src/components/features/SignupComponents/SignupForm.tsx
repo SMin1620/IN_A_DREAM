@@ -4,14 +4,27 @@ import Label from "./../../common/Label";
 import Input from "./../../common/Input";
 import "./SignupForm.css";
 import Button2 from "./../../common/Button2";
+import useSignUp from "../../../hooks/useSignUp";
+import { useNavigate } from "react-router-dom";
 
 const SignupForm = () => {
-  const [email, setEmail] = useState("");
-  const [nickname, setNickname] = useState("");
-  const [password, setPassword] = useState("");
-  const [checkPassword, setCheckPassword] = useState("");
-  const [birthDay, setBirthDay] = useState("");
-  const [gender, setGender] = useState("");
+  const {
+    email,
+    setEmail,
+    nickname,
+    setNickname,
+    password,
+    setPassword,
+    checkPassword,
+    setCheckPassword,
+    birthDay,
+    setBirthDay,
+    gender,
+    setGender,
+    postSignup,
+  } = useSignUp();
+
+  const navigate = useNavigate();
 
   const handleNickname = (e: React.ChangeEvent<HTMLInputElement>) => {
     setNickname(e.target.value);
@@ -38,17 +51,17 @@ const SignupForm = () => {
     console.log(nickname);
   };
 
-  const postSignup = () => {
-    if (password !== checkPassword) {
-      Swal.fire({
-        icon: "error",
-        title: "비밀번호 오류",
-        text: "비밀번호가 일치하지 않습니다.",
-      });
-    }
-    // API 요청
-    console.log(nickname, email, password, checkPassword, birthDay, gender);
-  };
+  // const postSignup = () => {
+  //   if (password !== checkPassword) {
+  //     Swal.fire({
+  //       icon: "error",
+  //       title: "비밀번호 오류",
+  //       text: "비밀번호가 일치하지 않습니다.",
+  //     });
+  //   }
+  //   // API 요청
+  //   console.log(nickname, email, password, checkPassword, birthDay, gender);
+  // };
 
   return (
     <div>
@@ -118,7 +131,14 @@ const SignupForm = () => {
         </button>
       </div>
 
-      <Button2 onClick={postSignup}>회원가입</Button2>
+      <Button2
+        onClick={async () => {
+          const success = await postSignup();
+          if (success) navigate("/login");
+        }}
+      >
+        회원가입
+      </Button2>
     </div>
   );
 };
