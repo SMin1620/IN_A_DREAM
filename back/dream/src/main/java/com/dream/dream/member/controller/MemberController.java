@@ -40,10 +40,7 @@ public class MemberController {
      */
     @Operation(summary = "로그인")
     @PostMapping("/login")
-    public BaseResponse login(
-            HttpServletResponse response,
-            @RequestBody MemberDto.MemberLoginRequestDto requestBody
-    ) throws Exception {
+    public BaseResponse login(HttpServletResponse response, @RequestBody MemberDto.MemberLoginRequestDto requestBody) throws Exception {
 
         TokenDto tokenDto = memberService.memberLogin(response, requestBody);
 
