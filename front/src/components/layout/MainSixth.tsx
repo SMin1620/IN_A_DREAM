@@ -4,9 +4,19 @@ import "./styles/MainSixth.css";
 const MainSixth = () => {
   return (
     <div className="MainSixth">
-      <div className="만들데바꿔주세오">
+      <div className="SixthTitleBox">
         <h1>Let's see all dream</h1>
-        <h5>꿈검색 + 마지막 페이지 </h5>
+      </div>
+      <div className="SixthMainBox">
+        <div className="SixthMainleft">
+          <h1>In A Dream</h1>
+        </div>
+        <div className="SixthMainright">
+          <h1>이미지 세마리 들어올자리</h1>
+        </div>
+      </div>
+      <div className="SixthSearchBox">
+        <h1>검색바 넣으면될듯</h1>
       </div>
     </div>
   );
