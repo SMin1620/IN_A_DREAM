@@ -8,6 +8,7 @@ import com.dream.dream.diary.service.DiaryService;
 import com.dream.dream.jwt.JwtTokenProvider;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
@@ -34,12 +35,13 @@ public class DiaryController {
     @Operation(summary = "일기 생성")
     @PostMapping()
     public BaseResponse diaryCreate(
-            @RequestHeader(name = "Authorization") String token,
+            HttpServletRequest request,
             @RequestBody DiaryDto.DiaryCreateRequestDto requestBody)  {
 
         System.out.println("일기 생성 컨트롤러");
 
-        token = token.substring(7);
+        String token = jwtTokenProvider.resolveToken(request);
+
         jwtTokenProvider.validateToken(token);
 
         String memberEmail = jwtTokenProvider.getUserEmail(token);
@@ -55,15 +57,15 @@ public class DiaryController {
     @GetMapping()
     public BaseResponse diaryListCheck(){
         List<Diary> diaryList = diaryService.getDiaryList();
-        return new BaseResponse(HttpStatus.OK, "일기 목록 반환 성공", diaryList);
+        return new BaseResponse(HttpStatus.OK, "일기 목록 반환 성공", diaryMapper.toListResponseDtos(diaryList));
     }
 
     /**
      * 내 일기 목록 조회
      */
     @GetMapping("/my")
-    public BaseResponse myDiaryList(@RequestHeader(name = "Authorization") String token){
-        token = token.substring(7);
+    public BaseResponse myDiaryList(HttpServletRequest request){
+        String token = jwtTokenProvider.resolveToken(request);
         jwtTokenProvider.validateToken(token);
 
         String memberEmail = jwtTokenProvider.getUserEmail(token);
