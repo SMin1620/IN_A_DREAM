@@ -1,7 +1,10 @@
 package com.dream.dream.diary.repository;
 
 import com.dream.dream.diary.entity.Diary;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
 
 import java.util.List;
 
@@ -9,7 +12,9 @@ public interface DiaryRepository extends JpaRepository<Diary, Long> {
     /**
      * 일기 전체 조회
      */
-    public List<Diary> findAll();
+    List<Diary> findAll();
 
-    public List<Diary> findAllByMember_Email(String memberEmail);
+    @Query(value = "SELECT d FROM Diary d WHERE d.member.email = :email")
+    Page<Diary> findAllByMemberEmail(String email, Pageable pageable);
+//    Page<Diary> findAllByMemberEmail(String email, Pageable pageable);
 }

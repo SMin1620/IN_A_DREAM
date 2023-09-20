@@ -10,6 +10,8 @@ import com.dream.dream.member.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.util.FileCopyUtils;
 
@@ -110,8 +112,10 @@ public class DiaryService {
     /**
      * 내 일기 목록 조회
      */
-    public List<Diary> getDiaryList(String memberEmail){
-        return diaryRepository.findAllByMember_Email(memberEmail);
+    public Page<Diary> getDiaryList(String memberEmail, Pageable pageable){
+        Page<Diary> diaryPage = diaryRepository.findAllByMemberEmail(memberEmail, pageable);
+
+        return diaryPage;
     }
 
     /**
