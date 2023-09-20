@@ -14,7 +14,7 @@ const CardSplit = () => {
   return (
     <div
       className="cardSplit"
-      style={{ position: "relative", width: "100vw", height: "100vh" }}
+      style={{ position: "relative", height: "100vh", width: "100vw" }}
     >
       <div
         style={{
