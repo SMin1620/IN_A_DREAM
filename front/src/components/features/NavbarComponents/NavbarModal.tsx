@@ -1,16 +1,27 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import "./styles/NavbarModal.css";
 import Box from "../../common/Box";
 import { isModalOpen } from "../../../types/index";
 import { SlideSpan } from "../../common/SlideSpan";
 import SearchBar from "../SearchBarComponents/SearchBar";
 const NavbarModal: React.FC<isModalOpen> = ({ isNavbarModalOpen, onClose }) => {
+  const [isOpen, setIsOpen] = useState(false);
+
+  useEffect(() => {
+    if (isNavbarModalOpen) {
+      setIsOpen(true);
+    } else {
+      setTimeout(() => setIsOpen(false), 500);
+    }
+  }, [isNavbarModalOpen]);
+
   return (
     <Box
+      isOpen={isOpen} // isOpen 속성 추가
       position="fixed"
       width={80}
       height={70}
-      left={0}
+      // left={0}
       top={15}
       textWrap="nowrap"
     >
@@ -48,12 +59,7 @@ const NavbarModal: React.FC<isModalOpen> = ({ isNavbarModalOpen, onClose }) => {
         </SlideSpan>
       </div>
       <div className="navbar-shop">
-        <SlideSpan
-          startPosition={100}
-          endPosition={-100}
-          speed={38}
-          width="90%"
-        >
+        <SlideSpan startPosition={10} endPosition={-120} speed={38} width="90%">
           <span className="navbar-font1">SHOP</span>
           <span>{"   "}</span>
           <span className="navbar-font2">SHOP</span>
@@ -114,12 +120,7 @@ const NavbarModal: React.FC<isModalOpen> = ({ isNavbarModalOpen, onClose }) => {
         </SlideSpan>
       </div>
       <div className="navbar-statistics">
-        <SlideSpan
-          startPosition={100}
-          endPosition={-100}
-          speed={39}
-          width="90%"
-        >
+        <SlideSpan startPosition={10} endPosition={-120} speed={39} width="90%">
           <span className="navbar-font1">STATISTICS</span>
           <span>{"   "}</span>
           <span className="navbar-font2">STATISTICS</span>
