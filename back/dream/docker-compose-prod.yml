@@ -19,6 +19,14 @@ services:  # docker-compose의 경우 docker 컨테이너로 수행될 서비스
     restart: always
 
 
+  redis:
+    image: redis
+    container_name: redis
+    ports:
+      - 6379:6379
+    restart: always
+
+
   spring:
     build:
       context: ./
@@ -37,10 +45,10 @@ services:  # docker-compose의 경우 docker 컨테이너로 수행될 서비스
 
     depends_on:
       - mysql
-#      - redis
+      - redis
     links:
       - mysql
-#      - redis
+      - redis
     restart: always
 
 
