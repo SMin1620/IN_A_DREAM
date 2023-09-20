@@ -1,6 +1,8 @@
 package com.dream.dream.member.dto;
 
 import io.swagger.v3.oas.annotations.media.Schema;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.Pattern;
 import lombok.*;
 
 public class MemberDto {
@@ -24,9 +26,15 @@ public class MemberDto {
     @AllArgsConstructor
     @Builder
     public static class MemberLoginRequestDto{
-        @Schema(example = "asdasdas@naver.com")
+
+        @NotEmpty(message = "이메일은 필수 입력입니다.")
+        @Pattern(regexp = "(?:\\w+\\.?)*\\w+@(?:\\w+\\.)+\\w+$", message = "이메일 형식이 올바르지 않습니다.")
+        @Schema(example = "email@naver.com")
         private String email;
-        @Schema(example = "akchasc51445")
+
+        @NotEmpty(message = "비밀번호는 필수 입력입니다.")
+//        @Pattern(regexp = "(?=.*[0-9])(?=.*[a-zA-Z])(?=.*\\W)(?=\\S+$).{6,20}", message = "비밀번호는 8~16자 영문 대 소문자, 숫자, 특수문자를 사용하세요.")
+        @Schema(example = "email")
         private String password;
     }
 
@@ -36,9 +44,13 @@ public class MemberDto {
     @AllArgsConstructor
     @Builder
     public static class MemberRegisterRequestDto{
-        @Schema(example = "asdasdas@naver.com")
+        @NotEmpty(message = "이메일은 필수 입력입니다.")
+        @Pattern(regexp = "(?:\\w+\\.?)*\\w+@(?:\\w+\\.)+\\w+$", message = "이메일 형식이 올바르지 않습니다.")
+        @Schema(example = "email@naver.com")
         private String email;
-        @Schema(example = "akchasc51445")
+
+        @NotEmpty(message = "비밀번호는 필수 입력입니다.")
+        @Schema(example = "email")
         private String password;
         @Schema(example = "차두리")
         private String nickname;
