@@ -68,6 +68,7 @@ services:  # docker-compose의 경우 docker 컨테이너로 수행될 서비스
       - /var/run/docker.sock:/var/run/docker.sock
     depends_on:
       - zookeeper
+      - spring
 
   kafka-ui:
     image: provectuslabs/kafka-ui
