@@ -19,7 +19,7 @@ export const createUser = (
   });
 
 export const checkEmailExists = (email: string) =>
-  api1.get(`/api/members`, { params: { email } });
+  api1.get(`/api/members/email`, { params: { email } });
 
 export const checkNicknameExists = (nickname: string) =>
-  api1.get(`/api/members`, { params: { nickname } });
+  api1.get(`/api/members/nickname`, { params: { nickname } });
