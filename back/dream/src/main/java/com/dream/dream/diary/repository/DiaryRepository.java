@@ -10,4 +10,6 @@ public interface DiaryRepository extends JpaRepository<Diary, Long> {
      * 일기 전체 조회
      */
     public List<Diary> findAll();
+
+    public List<Diary> findAllByMember_Email(String memberEmail);
 }

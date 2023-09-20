@@ -38,6 +38,10 @@ public class DiaryController {
             @RequestBody DiaryDto.DiaryCreateRequestDto requestBody)  {
 
         System.out.println("일기 생성 컨트롤러");
+
+        token = token.substring(7);
+        jwtTokenProvider.validateToken(token);
+
         String memberEmail = jwtTokenProvider.getUserEmail(token);
 
         Diary diary = diaryService.diaryCreate(requestBody, memberEmail);
@@ -48,11 +52,24 @@ public class DiaryController {
     /**
      * 일기 목록 조회
      */
-    @GetMapping("/api/diary")
+    @GetMapping()
     public BaseResponse diaryListCheck(){
-        List<Diary> diaryList = new ArrayList<>();
-        diaryList = diaryService.getDiaryList();
+        List<Diary> diaryList = diaryService.getDiaryList();
         return new BaseResponse(HttpStatus.OK, "일기 목록 반환 성공", diaryList);
+    }
+
+    /**
+     * 내 일기 목록 조회
+     */
+    @GetMapping("/my")
+    public BaseResponse myDiaryList(@RequestHeader(name = "Authorization") String token){
+        token = token.substring(7);
+        jwtTokenProvider.validateToken(token);
+
+        String memberEmail = jwtTokenProvider.getUserEmail(token);
+        List<Diary> diaryList = diaryService.getDiaryList(memberEmail);
+
+        return new BaseResponse(HttpStatus.OK, "내 일기 목록 반환 성공", diaryMapper.toListResponseDtos(diaryList));
     }
 
     /**
