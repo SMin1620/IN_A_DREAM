@@ -2,6 +2,7 @@ package com.dream.dream.member.entity;
 
 import jakarta.persistence.*;
 import lombok.*;
+import org.springframework.boot.context.properties.bind.DefaultValue;
 
 
 import java.time.LocalDateTime;
@@ -34,6 +35,10 @@ public class Member {
 
     @Column(nullable = false)
     private LocalDateTime createAt;
+
+    private Long positivePoint;
+    private Long negativePoint;
+    private Long neutralPoint;
 
     // 리프레시 토큰
     private String refreshToken;
