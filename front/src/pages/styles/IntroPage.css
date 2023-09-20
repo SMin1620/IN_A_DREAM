@@ -92,7 +92,7 @@
 
 .skip {
   position: absolute;
-  z-index: 20;
+  z-index: 10;
   top: 0;
   right: 0;
   display: flex;
@@ -102,7 +102,7 @@
   color: white;
   font-size: 2vw;
   font-weight: 500;
-  background-color: #111111;
+  background-color: transparent;
   opacity: 0.6;
   animation: leftAndRight 3s infinite;
 }

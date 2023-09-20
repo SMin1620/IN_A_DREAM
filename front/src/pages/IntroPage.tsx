@@ -1,14 +1,26 @@
-import "./index.css";
+import "./styles/IntroPage.css";
 import React, { useState, useEffect, useRef } from "react";
-import HoldOn from "./HoldOn";
-import styled, { createGlobalStyle } from "styled-components";
-import bgImage from "../../assets/background/blackBG.jpg";
-import moonImg from "../../assets/image/moon.png";
-// import castleImg from "../../assets/image/castle.png";
-import landingImg from "../../assets/image/landing.png";
-import hangingImg from "../../assets/image/hanging.png";
-import ropeImg from "../../assets/image/rope.png";
+import HoldOn from "../components/features/IntroPage/HoldOn";
+import styled, { createGlobalStyle, keyframes, css } from "styled-components";
+import bgImage from "../assets/background/blackBG.jpg";
+import moonImg from "../assets/image/moon.png";
+import landingImg from "../assets/image/landing.png";
+import hangingImg from "../assets/image/hanging.png";
+import ropeImg from "../assets/image/rope.png";
 import { useNavigate } from "react-router";
+
+const backWhiteAnimation = keyframes`
+  from {
+    opacity: 0;
+    background-color: transparent;
+    z-index: 4;
+  }
+  to {
+    opacity: 1;
+    background-color: white;
+    z-index: 15;
+  }
+`;
 
 // styled-component 정의는 컴포넌트 외부에 위치해야 합니다.
 const BackGround = styled.div`
@@ -55,17 +67,6 @@ const Moon = styled.img.attrs({
   z-index: 1;
   position: relative;
 `;
-// const Castle = styled.img.attrs({
-//   src: castleImg,
-// })`
-//   height: 70vh; // 높이를 자동으로 설정하여 이미지의 원래 비율을 유지합니다.
-//   width: auto; // 너비도 자동으로 설정합니다.
-//   left: 50%;
-//   bottom: 0;
-//   transform: translateX(-49%);
-//   position: absolute;
-//   z-index: 1;
-// `;
 
 const LandImg = styled.div`
   background-image: url(${landingImg});
@@ -81,9 +82,29 @@ const LandImg = styled.div`
 `;
 
 const GlobalStyle = createGlobalStyle`
-  body {
-    overflow-x: hidden; // 좌우 스크롤을 숨깁니다.
-  }
+body {
+  overflow-x: hidden; // 좌우 스크롤을 숨깁니다.
+}
+`;
+
+type FadeProps = {
+  fade: boolean;
+};
+
+const Overlay = styled.div<FadeProps>`
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: transparent;
+  z-index: 4; // 다른 요소들보다 위에 위치하도록 z-index 설정
+  animation: ${(props) =>
+    props.fade
+      ? css`
+          ${backWhiteAnimation} 3s ease-out forwards
+        `
+      : "none"};
 `;
 
 const IntroPage: React.FC = () => {
@@ -102,6 +123,17 @@ const IntroPage: React.FC = () => {
   const imageRef = useRef<HTMLImageElement | null>(null);
 
   const navigate = useNavigate();
+
+  const [fade, setFade] = useState(false);
+
+  const handleSkip = () => {
+    setFade(true);
+
+    // 3초 후 (애니메이션이 완료된 후)에 네비게이션을 수행합니다.
+    setTimeout(() => {
+      navigate("/Login");
+    }, 3000); // 애니메이션 지속 시간과 동일하게 설정합니다.
+  };
 
   useEffect(() => {
     const observerCallback = (entries: IntersectionObserverEntry[]) => {
@@ -184,7 +216,8 @@ const IntroPage: React.FC = () => {
     <div className="intro">
       <GlobalStyle />
       <BackGround>
-        <button className="skip" onClick={() => navigate("/Login")}>
+        <Overlay fade={fade} />
+        <button className="skip" onClick={handleSkip}>
           {/* <div className="skip-wrapper"> */}
           <p>Skip</p>
           <img
