@@ -3,6 +3,7 @@ import "./styles/Navbar.css";
 import NavbarBody from "./NavbarBody";
 import NavbarModal from "./NavbarModal";
 import NavbarMyModal from "./NavbarMyModal";
+
 const Navbar = () => {
   const [isNavbarModalOpen, setIsNavbarModalOpen] = useState<boolean>(false);
   const [isMyModalOpen, setIsMyModalOpen] = useState<boolean>(false);
