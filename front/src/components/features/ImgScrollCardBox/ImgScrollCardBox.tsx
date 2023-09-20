@@ -15,7 +15,10 @@ interface Props {
 
 const ImgScrollCardBox: React.FC<Props> = ({ itemData }) => {
   return (
-    <Box sx={{ width: "80%", height: 450, overflowY: "scroll" }}>
+    <Box
+      sx={{ width: "80%", height: 450, overflowY: "scroll" }}
+      component="div"
+    >
       <ImageList variant="masonry" cols={3} gap={15}>
         {itemData.map((item) => (
           <ImageListItem key={item.img}>
