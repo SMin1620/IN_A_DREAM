@@ -93,7 +93,7 @@ public class MemberService {
     }
 
     public boolean nicknameDoubleCheck(String nickname) {
-        Optional<Member> member = memberRepository.findByEmail(nickname);
+        Optional<Member> member = memberRepository.findByNickname(nickname);
         return member.isPresent();
 
     }
