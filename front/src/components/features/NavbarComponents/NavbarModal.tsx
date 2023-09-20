@@ -4,6 +4,7 @@ import Box from "../../common/Box";
 import { isModalOpen } from "../../../types/index";
 import { SlideSpan } from "../../common/SlideSpan";
 import SearchBar from "../SearchBarComponents/SearchBar";
+
 const NavbarModal: React.FC<isModalOpen> = ({ isNavbarModalOpen, onClose }) => {
   const [isOpen, setIsOpen] = useState(false);
 

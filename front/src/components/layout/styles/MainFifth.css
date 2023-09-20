@@ -1,23 +1,47 @@
-.MainFifth {
+.main-fifth-wrapper {
   height: 100vh;
-  color: black;
+  color: #646464;
 }
-.FifthTitleBox {
+.main-fifth-title-box {
   height: 15%;
+  text-align: left;
+  padding-left: 3%;
+}
+.main-fifth-title-box h1 {
+  color: #c3baa5;
+  font-size: 3rem;
+  font-style: italic;
+  font-weight: bolder;
+}
+.main-fifth-title-box h2 {
+  /* color: #646464; */
+  font-size: 1.2rem;
 }
 
-.GamsungBox {
+.main-fifth-gamsung-box {
   height: 30%;
   display: flex;
+  text-align: left;
+  padding-left: 3%;
 }
 
-.Gamsungleft {
+.main-fifth-gamsung-left {
+  /* color: #363636; */
   width: 35%;
 }
 
-.Gamsungright {
+.main-fifth-gamsung-right {
   width: 65%;
+  text-align: right;
+  font-size: 1.8rem;
 }
 .KeywordImgBox {
   height: 55%;
+}
+.main-fifth-gamsung-title {
+  font-weight: bolder;
+}
+.main-fifth-gamsung-more {
+  font-size: 3rem;
+  color: #363636;
 }
