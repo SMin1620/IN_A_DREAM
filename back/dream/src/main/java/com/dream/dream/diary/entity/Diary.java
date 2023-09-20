@@ -1,7 +1,9 @@
 package com.dream.dream.diary.entity;
 
+import com.dream.dream.member.entity.Member;
 import jakarta.persistence.*;
 import lombok.*;
+import org.hibernate.annotations.BatchSize;
 import org.hibernate.annotations.ColumnDefault;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
@@ -59,8 +61,11 @@ public class Diary {
     @CreatedDate
     private LocalDateTime createdAt;
 
-//    private Member member;
-    private int member;
+    @ManyToOne(optional = false)
+    @JoinColumn(nullable = false, name = "member_id")
+    @BatchSize(size = 100)
+    private Member member;
+//    private int member;
 
 //    private Emotion emotion;
     private int emotion;

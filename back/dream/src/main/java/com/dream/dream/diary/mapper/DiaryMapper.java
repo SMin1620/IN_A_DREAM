@@ -8,4 +8,5 @@ import org.mapstruct.Mapper;
 public interface DiaryMapper {
 
     DiaryDto.DiaryResponseDto diaryToResponseDto(Diary diary);
+    DiaryDto.DiaryDetailResponseDto diaryToDetailResponseDto(Diary diary);
 }
