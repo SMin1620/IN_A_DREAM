@@ -9,15 +9,16 @@ const StyledButton = S.button<LoginButton>`
   border: ${(props) => props.border || "1px solid black"};
   margin: ${(props) => props.margin};
   color: ${(props) => props.color || "white"};
+  border-radius: ${(props) => props.borderRadius};
 
   &:hover {
     cursor: pointer;
   }
 
   &:active {
-    background-color: lightgray;
-    color: black;
-    border: none;
+    background-color: ${(props) => props.backgroundColor || "lightgray"};
+    color: ${(props) => props.color || "black"};
+    border: ${(props) => props.border || "none"};
   }
 `;
 
