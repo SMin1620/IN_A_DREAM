@@ -12,7 +12,7 @@ const NavbarModal: React.FC<isModalOpen> = ({ isNavbarModalOpen, onClose }) => {
     if (isNavbarModalOpen) {
       setIsOpen(true);
     } else {
-      setTimeout(() => setIsOpen(false), 500);
+      setTimeout(() => setIsOpen(false), 1000);
     }
   }, [isNavbarModalOpen]);
 

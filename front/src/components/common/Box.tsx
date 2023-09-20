@@ -26,7 +26,6 @@ const StyledBox = S.div<BoxPropsComponents>`
   transform: translateX(${(props) => (props.isOpen ? "0" : "-100%")});
   transition: transform 1s ease-in-out;
 
-  // transition: all 0.5s ease-out;
   font-size: 1rem;
   background-color: #C3BAA5;
   border-radius: 40px;
