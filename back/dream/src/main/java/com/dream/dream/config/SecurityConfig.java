@@ -56,21 +56,16 @@ public class SecurityConfig {
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS); // jwt token으로 인증 > 세션 필요없음
 
         http.authorizeHttpRequests((req) -> req
-                        .requestMatchers(mvcMatcherBuilder.pattern("/api/user/signup")).permitAll()
-                        .requestMatchers(mvcMatcherBuilder.pattern("https://oauth2.googleapis.com/token")).permitAll()
-                        .requestMatchers(mvcMatcherBuilder.pattern("https://www.googleapis.com/oauth2/v2/userinfo")).permitAll()
-                        .requestMatchers(mvcMatcherBuilder.pattern("/api/login/oauth2/code/google")).permitAll()
-                        .requestMatchers(mvcMatcherBuilder.pattern("/api/user/idcheck")).permitAll()
-                        .requestMatchers(mvcMatcherBuilder.pattern("/api/user/nicknamecheck")).permitAll()
-                        .requestMatchers(mvcMatcherBuilder.pattern("/api/user/phonecheck")).permitAll()
-                        .requestMatchers(mvcMatcherBuilder.pattern("/api/user/login")).permitAll()
+                        .requestMatchers(mvcMatcherBuilder.pattern("/api/members/register")).permitAll()
+                        .requestMatchers(mvcMatcherBuilder.pattern("/api/members/login")).permitAll()
+                        .requestMatchers(mvcMatcherBuilder.pattern("/api/members/email")).permitAll()
+                        .requestMatchers(mvcMatcherBuilder.pattern("/api/members/nickname")).permitAll()
                         .requestMatchers(mvcMatcherBuilder.pattern( "/h2-console/**")).permitAll()
                         .requestMatchers(mvcMatcherBuilder.pattern( "/favicon.ico")).permitAll()
                         .requestMatchers(mvcMatcherBuilder.pattern( "/error")).permitAll()
                         .requestMatchers(mvcMatcherBuilder.pattern( "/swagger-ui/**")).permitAll()
                         .requestMatchers(mvcMatcherBuilder.pattern( "/swagger-resources/**")).permitAll()
                         .requestMatchers(mvcMatcherBuilder.pattern( "/v3/api-docs/**")).permitAll()
-                                .requestMatchers(mvcMatcherBuilder.pattern("/api/color/makeup/send/django")).permitAll()
                         .anyRequest().authenticated()
 //                        .anyRequest().permitAll()
                 )   // 다음 리퀘스트에 대한 사용권한 체크
