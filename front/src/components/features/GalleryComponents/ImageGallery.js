@@ -7,6 +7,7 @@ import {
   Image,
   Text,
   Environment,
+  Html,
 } from "@react-three/drei";
 import { useRoute, useLocation } from "wouter";
 import { easing } from "maath";
@@ -47,7 +48,7 @@ function Frames({
 }) {
   const ref = useRef();
   const clicked = useRef();
-  const [, params] = useRoute("/item/:id");
+  const [, params] = useRoute("/gallery/item/:id");
   const [, setLocation] = useLocation();
   useEffect(() => {
     clicked.current = ref.current.getObjectByName(params?.id);
@@ -70,7 +71,9 @@ function Frames({
       onClick={(e) => (
         e.stopPropagation(),
         setLocation(
-          clicked.current === e.object ? "/" : "/item/" + e.object.name
+          clicked.current === e.object
+            ? "/gallery"
+            : "/gallery/item/" + e.object.name
         )
       )}
       onPointerMissed={() => setLocation("/")}
@@ -85,11 +88,12 @@ function Frames({
 function Frame({ url, c = new THREE.Color(), ...props }) {
   const image = useRef();
   const frame = useRef();
-  const [, params] = useRoute("/item/:id");
+  const [, params] = useRoute("/gallery/item/:id");
   const [hovered, hover] = useState(false);
   const [rnd] = useState(() => Math.random());
   const name = getUuid(url);
   const isActive = params?.id === name;
+  // const [hidden, set] = useState();
 
   useCursor(hovered);
   useFrame((state, dt) => {
@@ -144,17 +148,29 @@ function Frame({ url, c = new THREE.Color(), ...props }) {
           url={url}
         />
       </mesh>
-      <Text
+
+      {/* <Text
         maxWidth={0.1}
         anchorX="left"
         anchorY="top"
         position={[0.55, GOLDENRATIO, 0]}
         fontSize={0.025}
-        font="/fonts/Noto Sans KR Medium_Regular"
+      > */}
+      <Html
+        position={[0.55, GOLDENRATIO, 0]}
+        // onOcclude={set}
+        style={{
+          color: "white",
+          position: "relative",
+          right: "0",
+          bottom: "0",
+          opacity: isActive ? 1 : 0,
+          fontFamily: "OTWelcomeRA",
+        }}
       >
-        안농 HELLO 나 집에간다
-        {/* {name.split("-").join(" ")} */}
-      </Text>
+        안녕
+      </Html>
+      {/* </Text> */}
     </group>
   );
 }
