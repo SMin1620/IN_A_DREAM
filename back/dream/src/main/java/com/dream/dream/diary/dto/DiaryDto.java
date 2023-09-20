@@ -1,5 +1,6 @@
 package com.dream.dream.diary.dto;
 
+import com.dream.dream.member.dto.MemberDto;
 import com.dream.dream.member.entity.Member;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -32,8 +33,6 @@ public class DiaryDto {
         private float negative;
         @Schema(example = "1")
         private int emotion;    // 수정 가능성
-        @Schema(example = "1")
-        private int member;    // 수정 가능성
     }
 
 
@@ -53,7 +52,8 @@ public class DiaryDto {
         private float neutral;
         private float negative;
         private int like;
-        private LocalDateTime localDateTime;
+        @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+        private LocalDateTime createdAt;
         private int emotion;
     }
 
@@ -75,9 +75,10 @@ public class DiaryDto {
         private float neutral;
         private float negative;
         private int like;
-        private LocalDateTime localDateTime;
+        @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+        private LocalDateTime createdAt;
         private int emotion;
-        private Member member;
+        private MemberDto.Response member;
     }
 
     /**
@@ -104,6 +105,7 @@ public class DiaryDto {
         @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
         private LocalDateTime createdAt;
         private int emotion;
+        private MemberDto.Response member;
     }
 
 }
