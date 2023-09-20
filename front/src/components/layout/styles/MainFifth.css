@@ -2,3 +2,22 @@
   height: 100vh;
   color: black;
 }
+.FifthTitleBox {
+  height: 15%;
+}
+
+.GamsungBox {
+  height: 30%;
+  display: flex;
+}
+
+.Gamsungleft {
+  width: 35%;
+}
+
+.Gamsungright {
+  width: 65%;
+}
+.KeywordImgBox {
+  height: 55%;
+}

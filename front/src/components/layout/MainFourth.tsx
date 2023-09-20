@@ -14,11 +14,21 @@ const itemData = [
 const MainFourth = () => {
   return (
     <div className="MainFourth">
-      <div className="만들떄바구쎄요">
+      <div className="FourthTitleBox">
         <h1>COME SEE OUR USERS</h1>
         <h1>DREAM STATISCTICS</h1>
-        <h5>네번째 페이지 상점페이지입니다요</h5>
+      </div>
 
+      <div className="SeeMoreButtonBox">
+        <h1>You CAN SEE MORE STATISTICS</h1>
+      </div>
+
+      <div className="StatisticsBox">
+        <div className="StatisticsNum">통계 숫자 들어갈곳</div>
+        <div className="StatisticsKeyword">키워드 통계 들어갈곳</div>
+      </div>
+
+      <div className="MovigImgBox">
         <div style={{ display: "flex", overflow: "hidden" }}>
           <SlideSpan
             startPosition={-100}
@@ -56,6 +66,7 @@ const MainFourth = () => {
             </span>
           </SlideSpan>
         </div>
+        <div>여기는 나중에 위에 슬라이드스팬 크기 조절해서 채우고 없애기</div>
       </div>
     </div>
   );

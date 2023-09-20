@@ -2,3 +2,25 @@
   height: 100vh;
   color: black;
 }
+
+.FourthTitleBox {
+  height: 20%;
+}
+.SeeMoreButtonBox {
+  height: 5%;
+}
+.StatisticsNum {
+  width: 50%;
+}
+.StatisticsKeyword {
+  width: 50%;
+}
+
+.StatisticsBox {
+  height: 30%;
+  display: flex;
+}
+
+.MovigImgBox {
+  height: 45%;
+}
