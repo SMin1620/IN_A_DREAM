@@ -1,12 +1,23 @@
 package com.dream.dream.member.service;
 
+import com.dream.dream.exception.BusinessLogicException;
+import com.dream.dream.exception.ExceptionCode;
+import com.dream.dream.jwt.JwtTokenProvider;
 import com.dream.dream.member.dto.MemberDto;
+import com.dream.dream.member.dto.TokenDto;
 import com.dream.dream.member.entity.Member;
 import com.dream.dream.member.repository.MemberRepository;
+import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDateTime;
 import java.util.Optional;
 
 @Service
@@ -15,13 +26,47 @@ import java.util.Optional;
 public class MemberService {
 
     private final MemberRepository memberRepository;
-    public Member memberLogin(MemberDto.MemberLoginRequestDto requestBody) throws Exception {
+    private final RedisTemplate<String, String> redisTemplate;
+    private final AuthenticationManager authenticationManager;
+    private final JwtTokenProvider jwtTokenProvider;
+    private final PasswordEncoder passwordEncoder;
 
-        Optional<Member> member = memberRepository.findByEmailAndPassword(requestBody.getEmail(), requestBody.getPassword());
+
+    public TokenDto memberLogin(
+            HttpServletResponse response,
+            MemberDto.MemberLoginRequestDto requestBody
+    ) throws Exception {
+
+//        Optional<Member> member = memberRepository.findByEmailAndPassword(requestBody.getEmail(), requestBody.getPassword());
+
+        Optional<Member> member = memberRepository.findByEmail(requestBody.getEmail());
+        System.out.println(member.get());
+
         if(member.isPresent()){
-            return member.get();
+
+            System.out.println("로그인 시작 ");
+            Authentication authentication = authenticationManager.authenticate(
+                    new UsernamePasswordAuthenticationToken(
+                            requestBody.getEmail(),
+                            requestBody.getPassword()
+                    )
+            );
+
+            String accessToken = jwtTokenProvider.createAccessToken(authentication);
+            String refreshToken = jwtTokenProvider.createRefreshToken(authentication);
+
+            TokenDto tokenDto =TokenDto.builder()
+                    .accessToken(accessToken)
+                    .refreshToken(refreshToken)
+                    .memberId(member.get().getId())
+                    .build();
+            // 헤더에 토큰 담기
+            jwtTokenProvider.setHeaderAccessToken(response, accessToken);
+            jwtTokenProvider.setHeaderRefreshToken(response, refreshToken);
+
+            return tokenDto;
         }else{
-            throw new Exception("유저가 존재하지 않습니다"); // 우짜쓰카잉
+            throw new BusinessLogicException(ExceptionCode.MEMBER_NOT_FOUND);
         }
     }
 
@@ -29,9 +74,11 @@ public class MemberService {
 
         Member member = Member.builder()
                 .email(requestBody.getEmail())
-                .password(requestBody.getPassword())
+                .password(passwordEncoder.encode(requestBody.getPassword()))
+                .nickname(requestBody.getNickname())
                 .gender(requestBody.getGender())
                 .birth(requestBody.getBirth())
+                .createAt(LocalDateTime.now())
                 .build();
 
         memberRepository.save(member);
