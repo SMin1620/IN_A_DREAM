@@ -1,7 +1,7 @@
 import React, { useState, useRef, useEffect } from "react";
 import { useNavigate } from "react-router-dom"; // react-router-dom을 사용한다고 가정
 import styled, { keyframes, css } from "styled-components";
-import castleImg from "../../assets/image/castle.png";
+import castleImg from "../../../assets/image/castle.png";
 
 const fadeOutAnimation = keyframes`
   from {
