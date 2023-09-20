@@ -1,6 +1,10 @@
 import { useState } from "react";
 import Swal from "sweetalert2";
-import { createUser } from "../api/services/authAPI"; // 경로는 실제 파일 위치에 따라 변경해주세요
+import {
+  createUser,
+  checkEmailExists,
+  checkNicknameExists,
+} from "../api/services/authAPI"; // 경로는 실제 파일 위치에 따라 변경해주세요
 
 const useSignUp = () => {
   const [email, setEmail] = useState("");
@@ -43,6 +47,34 @@ const useSignUp = () => {
     }
   };
 
+  const checkEmailDuplication = async () => {
+    try {
+      const response = await checkEmailExists(email);
+      if (response.data.data) {
+        // 서버가 보낸 응답에 따라 다르게 처리
+        Swal.fire("Error", "이미 사용중인 이메일입니다.", "error");
+      } else {
+        Swal.fire("Success", "사용 가능한 이메일입니다.", "success");
+      }
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  const checkNicknameDuplication = async () => {
+    try {
+      const response = await checkNicknameExists(nickname);
+      if (response.data.data) {
+        // 서버가 보낸 응답에 따라 다르게 처리
+        Swal.fire("Error", "이미 사용중인 닉네임입니다.", "error");
+      } else {
+        Swal.fire("Success", "사용 가능한 닉네임입니다.", "success");
+      }
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
   return {
     email,
     setEmail,
@@ -56,6 +88,8 @@ const useSignUp = () => {
     setBirthDay,
     gender,
     setGender,
+    checkEmailDuplication,
+    checkNicknameDuplication,
 
     postSignup,
   };

@@ -21,6 +21,8 @@ const SignupForm = () => {
     setBirthDay,
     gender,
     setGender,
+    checkEmailDuplication,
+    checkNicknameDuplication,
     postSignup,
   } = useSignUp();
 
@@ -49,19 +51,8 @@ const SignupForm = () => {
   const postCheck = () => {
     // API 요청
     console.log(nickname);
+    console.log(email);
   };
-
-  // const postSignup = () => {
-  //   if (password !== checkPassword) {
-  //     Swal.fire({
-  //       icon: "error",
-  //       title: "비밀번호 오류",
-  //       text: "비밀번호가 일치하지 않습니다.",
-  //     });
-  //   }
-  //   // API 요청
-  //   console.log(nickname, email, password, checkPassword, birthDay, gender);
-  // };
 
   return (
     <div>
@@ -75,17 +66,20 @@ const SignupForm = () => {
           type="text"
           onChange={(e) => handleNickname(e)}
         />
-        <button onClick={postCheck}>중복확인</button>
+        <button onClick={checkNicknameDuplication}>중복확인</button>
       </div>
-
       <Label>이메일</Label>
-      <Input
-        height="2.5rem"
-        marginBottom="1rem"
-        placeholder="Email"
-        type="text"
-        onChange={(e) => handleEmail(e)}
-      />
+      <div className="signup-form-nicknameBox">
+        <Input
+          width="85%"
+          height="2.5rem"
+          marginBottom="0"
+          placeholder="Email"
+          type="text"
+          onChange={(e) => handleEmail(e)}
+        />
+        <button onClick={checkEmailDuplication}>중복확인</button>
+      </div>
 
       <Label>비밀번호</Label>
       <Input
