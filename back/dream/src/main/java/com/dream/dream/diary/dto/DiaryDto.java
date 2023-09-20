@@ -1,5 +1,6 @@
 package com.dream.dream.diary.dto;
 
+import com.dream.dream.member.entity.Member;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.*;
@@ -76,6 +77,7 @@ public class DiaryDto {
         private int like;
         private LocalDateTime localDateTime;
         private int emotion;
+        private Member member;
     }
 
     /**
