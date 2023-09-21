@@ -42,8 +42,6 @@ public class DiaryController {
             HttpServletRequest request,
             @RequestBody DiaryDto.DiaryCreateRequestDto requestBody)  {
 
-//        System.out.println("일기 생성 컨트롤러");
-
         String token = jwtTokenProvider.resolveToken(request);
 
         jwtTokenProvider.validateToken(token);
@@ -60,6 +58,7 @@ public class DiaryController {
     /**
      * 일기 목록 조회
      */
+    @Operation(summary = "전체 일기 목록 조회")
     @GetMapping()
     public BaseResponse diaryListCheck(){
         List<Diary> diaryList = diaryService.getDiaryList();
@@ -90,6 +89,7 @@ public class DiaryController {
     /**
      * 일기 상세 조회
      */
+    @Operation(summary = "일기 상세 조회")
     @GetMapping("/{diaryId}")
     public BaseResponse diaryDetail(@PathVariable Long diaryId){
         Diary diary = diaryService.getDiary(diaryId);
