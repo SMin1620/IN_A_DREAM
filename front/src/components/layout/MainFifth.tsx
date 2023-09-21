@@ -11,16 +11,22 @@ const MainFifth = () => {
       </div>
       <div className="main-fifth-gamsung-box">
         <div className="main-fifth-gamsung-left">
-          <div className="main-fifth-gamsung-title ">KEEP YOUR DREAM DIARY</div>
-          <div>
+          <div className="main-fifth-gamsung-title">
+            ● KEEP YOUR DREAM DIARY
+          </div>
+
+          <div className="main-fifth-gamsung-content">
             Unveil the narratives of your dreamscape, pen down the whimsical
             tales that unfold in the theater of your mind.
           </div>
           <br />
           <br />
           <br />
-          <div>PURCHASE A DREAM DIARY</div>
-          <div>
+          <div className="main-fifth-gamsung-title">
+            ● PURCHASE A DREAM DIARY
+          </div>
+
+          <div className="main-fifth-gamsung-content">
             Purchase a dream diary, for who knows? When you buy a good dream,
             perhaps good things may unfold.
           </div>

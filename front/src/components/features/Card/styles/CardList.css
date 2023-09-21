@@ -1,5 +1,7 @@
 .card-list-wrapper {
-  width: 100%;
+  width: calc(100% - 4rem);
+  margin-left: 4rem;
+  left: 0;
   /* height: 80%; */
 }
 .card-list-row {
@@ -7,5 +9,5 @@
   justify-content: space-between;
   flex-wrap: wrap;
   margin-bottom: 2rem;
-  /* border: #ff24d3 1px solid; */
+  width: 100%;
 }

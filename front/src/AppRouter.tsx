@@ -9,6 +9,8 @@ import SearchBar from "./components/features/SearchBarComponents/SearchBar";
 import MyPage from "./pages/MyPage";
 import Navbar from "./components/features/NavbarComponents/Navbar";
 import GalleryPage from "./pages/GalleryPage";
+import SearchResultPage from "./pages/SearchResultPage";
+import DreamShopPage from "./pages/DreamShopPage";
 
 function AppRouter() {
   return (
@@ -25,6 +27,8 @@ function AppRouter() {
           <Route path="/Signup" element={<SignUpPage />}></Route>
           <Route path="/Mypage" element={<MyPage />}></Route>
           <Route path="/Gallery" element={<GalleryPage />}></Route>
+          <Route path="/SearchResult" element={<SearchResultPage />}></Route>
+          <Route path="/DreamShop" element={<DreamShopPage />}></Route>
         </Routes>
       </BrowserRouter>
     </div>
