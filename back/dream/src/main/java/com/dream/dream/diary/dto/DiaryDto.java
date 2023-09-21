@@ -1,5 +1,8 @@
 package com.dream.dream.diary.dto;
 
+import com.dream.dream.diary.entity.Emotion;
+import com.dream.dream.member.dto.MemberDto;
+import com.dream.dream.member.entity.Member;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.*;
@@ -23,16 +26,22 @@ public class DiaryDto {
         private String title;
         @Schema(example = "test content")
         private String content;
-        @Schema(example = "99.1")
-        private float positive;
-        @Schema(example = "0.02")
-        private float neutral;
-        @Schema(example = "0.88")
-        private float negative;
-        @Schema(example = "1")
-        private int emotion;    // 수정 가능성
-        @Schema(example = "1")
-        private int member;    // 수정 가능성
+        @Schema
+        private boolean open;
+        @Schema
+        private boolean sale;
+    }
+
+    /**
+     * 일기 좋아요 요청 Dto
+     */
+    @Getter
+    @Setter
+    @NoArgsConstructor
+    @AllArgsConstructor
+    @Builder
+    public static class DiaryLikeDto{
+        private Long diaryId;
     }
 
 
@@ -52,8 +61,11 @@ public class DiaryDto {
         private float neutral;
         private float negative;
         private int like;
-        private LocalDateTime localDateTime;
-        private int emotion;
+        private boolean open;
+        private boolean sale;
+        @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+        private LocalDateTime createdAt;
+        private Emotion emotion;
     }
 
 
@@ -74,8 +86,12 @@ public class DiaryDto {
         private float neutral;
         private float negative;
         private int like;
-        private LocalDateTime localDateTime;
-        private int emotion;
+        private boolean open;
+        private boolean sale;
+        @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+        private LocalDateTime createdAt;
+        private Emotion emotion;
+        private MemberDto.Response member;
     }
 
     /**
@@ -99,9 +115,12 @@ public class DiaryDto {
         private int neutralPoint;
         private int negativePoint;
         private int likeCount;
+        private boolean open;
+        private boolean sale;
         @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
         private LocalDateTime createdAt;
-        private int emotion;
+        private Emotion emotion;
+        private MemberDto.Response member;
     }
 
 }

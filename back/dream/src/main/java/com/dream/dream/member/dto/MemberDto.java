@@ -70,4 +70,21 @@ public class MemberDto {
         private String email;
         private String password;
     }
+
+
+    @Getter
+    @Setter
+    @NoArgsConstructor
+    @AllArgsConstructor
+    @Builder
+    public static class Response{
+        private long memberId;
+        private String email;
+        private String nickname;
+        private String birth;
+        private int isWrite;
+        private long positivePoint;
+        private long negativePoint;
+        private long neutralPoint;
+    }
 }
