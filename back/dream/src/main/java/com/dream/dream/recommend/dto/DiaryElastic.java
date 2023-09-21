@@ -1,4 +1,4 @@
-package com.dream.dream.elk.dto;
+package com.dream.dream.recommend.dto;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Id;
@@ -30,4 +30,10 @@ public class DiaryElastic {
 
     @Field(type = FieldType.Auto)
     private String content;
+
+    @Field(type = FieldType.Auto)
+    private String image;
+
+    @Field(type = FieldType.Auto)
+    private String emotion;
 }

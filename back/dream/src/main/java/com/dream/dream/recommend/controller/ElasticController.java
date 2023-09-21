@@ -1,17 +1,14 @@
-package com.dream.dream.elk.controller;
+package com.dream.dream.recommend.controller;
 
 import com.dream.dream.common.BaseResponse;
-import com.dream.dream.elk.repository.ElasticRepository;
-import com.dream.dream.elk.service.ElasticService;
+import com.dream.dream.recommend.service.ElasticService;
 import com.dream.dream.jwt.JwtTokenProvider;
 import com.dream.dream.member.entity.Member;
 import com.dream.dream.member.repository.MemberRepository;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.servlet.http.HttpServletRequest;
-import lombok.Getter;
 import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -34,8 +31,7 @@ public class ElasticController {
     @Operation(summary = "엘라스틱 테스트")
     @GetMapping
     public BaseResponse listElasticDiary(
-            HttpServletRequest request,
-            String keyword
+            HttpServletRequest request
     ) throws UserPrincipalNotFoundException {
         //////////////////////// 토큰으로 인가된 사용자 정보 처리하는 로직
         String token = jwtTokenProvider.resolveToken(request);
@@ -46,13 +42,13 @@ public class ElasticController {
         Authentication authentication = jwtTokenProvider.getAuthentication(token);
         UserDetails userDetails = (UserDetails) authentication.getPrincipal();
 
-        Member getMember = memberRepository.findByEmail(userDetails.getUsername()).get();
+        Member member = memberRepository.findByEmail(userDetails.getUsername()).get();
 
         // 유저 예외처리 :: 예외처리 커스텀 필요
-        if (getMember == null) {
+        if (member == null) {
             throw new UserPrincipalNotFoundException("유효한 사용자가 아닙니다.");
         }
 
-        return new BaseResponse(HttpStatus.OK, "", elasticService.list(keyword));
+        return new BaseResponse(HttpStatus.OK, "", elasticService.listRecommend(member.getId()));
     }
 }

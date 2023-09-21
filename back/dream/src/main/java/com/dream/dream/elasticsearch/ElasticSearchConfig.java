@@ -1,4 +1,4 @@
-package com.dream.dream.elk;
+package com.dream.dream.elasticsearch;
 
 import org.elasticsearch.client.RestHighLevelClient;
 import org.springframework.beans.factory.annotation.Value;
