@@ -52,7 +52,18 @@ public class DiaryController {
 
         Diary diary = diaryService.diaryCreate(requestBody, memberEmail);
 
-        return new BaseResponse(HttpStatus.OK, "굿", diaryMapper.diaryToResponseDto(diary));
+        System.out.println("##################### boolean 여부");
+        System.out.println(diary.isOpen());
+        System.out.println(diary.isSale());
+
+        DiaryDto.DiaryResponseDto diaryResponseDto = diaryMapper.diaryToResponseDto(diary);
+
+        System.out.println("##################### boolean 여부");
+        System.out.println(diaryResponseDto.isOpen());
+        System.out.println(diaryResponseDto.isSale());
+
+
+        return new BaseResponse(HttpStatus.OK, "굿", diaryResponseDto);
     }
 
     /**

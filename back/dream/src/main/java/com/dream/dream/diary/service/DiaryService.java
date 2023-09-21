@@ -2,6 +2,7 @@ package com.dream.dream.diary.service;
 
 import com.dream.dream.diary.dto.DiaryDto;
 import com.dream.dream.diary.entity.Diary;
+import com.dream.dream.diary.entity.Emotion;
 import com.dream.dream.diary.repository.DiaryRepository;
 import com.dream.dream.exception.BusinessLogicException;
 import com.dream.dream.exception.ExceptionCode;
@@ -27,6 +28,7 @@ import java.nio.file.Path;
 import java.nio.file.StandardOpenOption;
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Random;
 import java.util.UUID;
 
 @Service
@@ -85,17 +87,37 @@ public class DiaryService {
             throw new BusinessLogicException(ExceptionCode.FAILED_TO_UPDATE_FILE);
         }
 
+        // 일기 감정 분석 더미 데이터 생성
+        Random random = new Random();
+
+        int number1 = random.nextInt(100); // 0부터 99까지의 난수 생성
+        int number2 = random.nextInt(100 - number1); // 0부터 (100 - number1)까지의 난수 생성
+        int number3 = 100 - number1 - number2; // 난수 3개의 합이 100이 되도록 계산
+
+
         // 일기 내용 RDB에 저장
         Diary diary = Diary.builder()
                 .image("classpath:/media/" + rollback.getFileName().toString())
                 .title(requestBody.getTitle())
                 .content(requestBody.getContent())
-                .positive(requestBody.getPositive())
-                .neutral(requestBody.getNeutral())
-                .negative(requestBody.getNegative())
+                .positive(number1)
+                .neutral(number2)
+                .negative(number3)
+                .positivePoint(number1)
+                .neutralPoint(number2)
+                .negativePoint(number3)
+                .open(requestBody.isOpen())
+                .sale(requestBody.isSale())
                 .member(member)
-                .emotion(requestBody.getEmotion())
                 .build();
+
+        if (number1 >= number2 && number1 >= number3) {
+            diary.setEmotion(Emotion.POSITIVE);
+        } else if (number2 >= number1 && number2 >= number3) {
+            diary.setEmotion(Emotion.NEUTRAL);
+        } else {
+            diary.setEmotion(Emotion.NEGATIVE);
+        }
 
         diaryRepository.save(diary);
 

@@ -65,9 +65,13 @@ public class Diary {
     @JoinColumn(nullable = false, name = "member_id")
     @BatchSize(size = 100)
     private Member member;
-//    private int member;
 
-//    private Emotion emotion;
-    private int emotion;
+    @Enumerated(EnumType.STRING)
+    private Emotion emotion;
 
+    @Column(nullable = false)
+    private boolean open;
+
+    @Column(nullable = false)
+    private boolean sale;
 }
