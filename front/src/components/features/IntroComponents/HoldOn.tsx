@@ -95,7 +95,7 @@ const HoldOn: React.FC = () => {
   const navigate = useNavigate();
   const [fade, setFade] = useState(false);
 
-  const preloaderHideThreshold = 10;
+  const preloaderHideThreshold = 8;
 
   const intervalId = useRef<NodeJS.Timeout | number | null>(null);
 
