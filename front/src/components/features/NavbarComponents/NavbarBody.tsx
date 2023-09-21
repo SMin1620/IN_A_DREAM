@@ -31,7 +31,9 @@ const NavbarBody: React.FC<NavbarBodyProps> = ({
   return (
     <div className="navbar-body-wrapper">
       <a className="navbar-body-main" href="/">
-        <img src={main} alt="main" />
+        <p>^</p>
+        <p>MAIN</p>
+        {/* <img src={main} alt="main" /> */}
       </a>
       <div className="navbar-body-logo" onClick={() => handleOpenNavbarModal()}>
         {logoActivate ? (

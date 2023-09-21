@@ -23,8 +23,22 @@
   justify-content: space-between;
   position: absolute;
 }
-.navbar-body-main img {
+.navbar-body-main {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  text-decoration-line: none;
   padding-top: 30%;
+  font-family: "Freckle Face";
+  font-weight: lighter;
+  color: #fff;
+}
+.navbar-body-main:hover {
+  color: #f1e7d1;
+}
+
+.navbar-body-main p {
   width: 50%;
 }
 
