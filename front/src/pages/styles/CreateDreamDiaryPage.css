@@ -1,5 +1,5 @@
 .create-dream-diary {
-  width: 100vw;
+  width: calc(100%-4rem);
   height: 100vh;
   background-color: #f1e7d1;
   display: flex;

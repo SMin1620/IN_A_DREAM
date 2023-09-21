@@ -8,6 +8,8 @@
   overflow: hidden;
   flex-wrap: nowrap;
   align-items: center;
+  text-decoration-line: none;
+  color: #646464;
   /* height: 20%; */
 }
 
@@ -20,6 +22,8 @@
   top: 25%;
   left: 15%;
   width: 80%;
+  text-decoration-line: none;
+  color: #646464;
 }
 .navbar-diary {
   display: flex;
@@ -30,6 +34,8 @@
   top: 45%;
   left: 15%;
   width: 80%;
+  text-decoration-line: none;
+  color: #646464;
 }
 
 .navbar-statistics {
@@ -41,6 +47,8 @@
   top: 65%;
   left: 15%;
   width: 80%;
+  text-decoration-line: none;
+  color: #646464;
 }
 
 .navbar-body-search {

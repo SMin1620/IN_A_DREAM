@@ -15,7 +15,7 @@ background-color: #0F006A;
 display:flex;
 justify-content: center;
 align-items: center;
-font-size: 1.5rem;
+font-size: 1.6vw;
 text-shadow: 1px 1px 1px black;
 
 `;

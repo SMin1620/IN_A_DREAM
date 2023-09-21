@@ -1,0 +1,5 @@
+.search-result-wrapper {
+  width: calc(100%-4rem);
+  /* height: 100vh; */
+  background-color: #000000;
+}

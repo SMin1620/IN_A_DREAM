@@ -9,39 +9,76 @@
 }
 .main-fifth-title-box h1 {
   color: #c3baa5;
-  font-size: 3rem;
+  font-size: 4rem;
   font-style: italic;
   font-weight: bolder;
+  font-family: "SBAggroB";
 }
 .main-fifth-title-box h2 {
   /* color: #646464; */
-  font-size: 1.2rem;
+  font-size: 1.8rem;
+  font-weight: lighter;
 }
 
 .main-fifth-gamsung-box {
-  height: 30%;
+  height: 25%;
   display: flex;
   text-align: left;
   padding-left: 3%;
+  justify-content: space-between;
 }
 
 .main-fifth-gamsung-left {
   /* color: #363636; */
-  width: 35%;
+  width: 30%;
+  padding-right: 3%;
 }
 
 .main-fifth-gamsung-right {
-  width: 65%;
+  width: 50%;
   text-align: right;
-  font-size: 1.8rem;
+  font-size: 1.5rem;
+  line-height: 1.2em;
+  font-family: "Godo";
+  padding-right: 3%;
+  /* position: relative; */
+  /* left: 0; */
 }
+
 .KeywordImgBox {
   height: 55%;
 }
 .main-fifth-gamsung-title {
   font-weight: bolder;
+  font-family: "SBAggroB";
+  /* font-weight: normal; */
 }
 .main-fifth-gamsung-more {
   font-size: 3rem;
   color: #363636;
+  font-family: "SBAggroB";
+  font-weight: 800;
+  padding-top: 10%;
+}
+.main-fifth-gamsung-content {
+  font-family: "NEXON Lv2 Gothic";
+  font-size: 1rem;
+  font-weight: lighter;
+  margin-top: 3%;
+}
+@media (max-width: 1200px) {
+  .main-fifth-gamsung-right {
+    font-size: 1.3rem;
+  }
+}
+@media (max-width: 1024px) {
+  .main-fifth-gamsung-right {
+    font-size: 1rem;
+  }
+  .main-fifth-gamsung-content {
+    font-size: 0.7rem;
+  }
+  .main-fifth-gamsung-title {
+    font-size: 0.7rem;
+  }
 }

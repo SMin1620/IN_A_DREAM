@@ -24,7 +24,7 @@ const NavbarBody: React.FC<NavbarBodyProps> = ({
 
   return (
     <div className="navbar-body-wrapper">
-      <a className="navbar-body-main" href="/">
+      <a className="navbar-body-main" href="/main">
         <p>^</p>
         <p>MAIN</p>
         {/* <img src={main} alt="main" /> */}
