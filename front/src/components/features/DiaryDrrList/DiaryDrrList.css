@@ -1,0 +1,27 @@
+.diary-item {
+  position: relative; /* 상대 위치 설정 */
+  border: 1px solid #ccc;
+  margin: 10px;
+  padding: 10px;
+  cursor: pointer;
+  background: white;
+  transition: transform 0.2s; /* 호버 시 확대 효과를 위한 트랜지션 추가 */
+}
+
+.diary-item:hover {
+  transform: scale(2); /* 호버 시 5% 확대 */
+  background: #eee;
+}
+
+.diary-image {
+  position: absolute; /* 절대 위치 설정 */
+  top: 0;
+  left: 100%; /* 이미지는 일기 항목 오른쪽에 위치 */
+  width: 150px; /* 이미지 크기 조절 */
+  opacity: 0; /* 호버 전에는 이미지를 숨김 */
+  transition: opacity 0.2s ease-in-out; /* 이미지 나타내고 숨기는 트랜지션 */
+}
+
+.diary-item:hover .diary-image {
+  opacity: 1; /* 호버 시 이미지를 나타냄 */
+}

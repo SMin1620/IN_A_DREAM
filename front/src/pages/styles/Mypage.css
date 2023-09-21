@@ -1,0 +1,16 @@
+.MyPage-main {
+  height: 100vh;
+}
+
+.mypage-top {
+  height: 40%;
+  display: flex;
+  margin-left: 4rem;
+  background-color: #e9e4d9;
+}
+
+.mypage-bottom {
+  height: 60%;
+  background-color: black;
+  color: white;
+}
