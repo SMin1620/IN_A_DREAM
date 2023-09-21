@@ -138,8 +138,8 @@ public class DiaryService {
     /**
      * 일기 목록 조회
      */
-    public List<Diary> getDiaryList() {
-        return diaryRepository.findAll();
+    public Page<Diary> getDiaryList(Pageable pageable) {
+        return diaryRepository.findAll(pageable);
     }
 
     /**
@@ -219,4 +219,5 @@ public class DiaryService {
 
         return diary;
     }
+
 }
