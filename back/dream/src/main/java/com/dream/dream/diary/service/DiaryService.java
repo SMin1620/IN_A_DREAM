@@ -81,6 +81,7 @@ public class DiaryService {
             }
 
         } catch (IOException e) {
+            e.printStackTrace();
             if (rollback != null) {
                 try {
                     Files.deleteIfExists(rollback);
