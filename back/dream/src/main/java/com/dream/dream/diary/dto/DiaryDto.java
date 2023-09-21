@@ -86,6 +86,9 @@ public class DiaryDto {
         private float positive;
         private float neutral;
         private float negative;
+        private int positivePoint;
+        private int neutralPoint;
+        private int negativePoint;
         private int like;
         private boolean open;
         private boolean sale;
@@ -111,6 +114,9 @@ public class DiaryDto {
         private float positive;
         private float neutral;
         private float negative;
+        private int positivePoint;
+        private int neutralPoint;
+        private int negativePoint;
         private int like;
         private boolean open;
         private boolean sale;

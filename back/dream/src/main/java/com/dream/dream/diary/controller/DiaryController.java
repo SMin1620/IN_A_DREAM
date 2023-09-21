@@ -60,8 +60,10 @@ public class DiaryController {
      */
     @Operation(summary = "전체 일기 목록 조회")
     @GetMapping()
-    public BaseResponse diaryListCheck() {
-        List<Diary> diaryList = diaryService.getDiaryList();
+    public BaseResponse diaryListCheck(
+            @PageableDefault(size = 3, sort = "id", direction = Sort.Direction.DESC) Pageable pageable) {
+        Page<Diary> diaryPage = diaryService.getDiaryList(pageable);
+        List<Diary> diaryList = diaryPage.getContent();
         return new BaseResponse(HttpStatus.OK, "일기 목록 반환 성공", diaryMapper.toListResponseDtos(diaryList));
     }
 
