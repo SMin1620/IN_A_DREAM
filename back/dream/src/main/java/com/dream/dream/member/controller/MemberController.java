@@ -98,7 +98,7 @@ public class MemberController {
      */
     @Operation(summary = "자기 자신 조회")
     @GetMapping
-    public BaseResponse getMemberInfo(HttpServletRequest request) throws Exception {
+    public BaseResponse getMemberInfo(HttpServletRequest request)  {
         //////////////////////// 토큰으로 인가된 사용자 정보 처리하는 로직
         String token = jwtTokenProvider.resolveToken(request);
         jwtTokenProvider.validateToken(token);
@@ -108,14 +108,9 @@ public class MemberController {
         Authentication authentication = jwtTokenProvider.getAuthentication(token);
         UserDetails userDetails = (UserDetails) authentication.getPrincipal();
 
-        Member getMember = memberRepository.findByEmail(userDetails.getUsername()).get();
+        String memberEmail = userDetails.getUsername();
 
-        // 유저 예외처리 :: 예외처리 커스텀 필요
-        if (getMember == null) {
-            throw new UserPrincipalNotFoundException("유효한 사용자가 아닙니다.");
-        }
-
-        Member member = memberService.memberInfo(getMember.getId());
+        Member member = memberService.memberInfo(memberEmail);
 
         return new BaseResponse(HttpStatus.OK, "로그인 성공", memberMapper.memberToResponseDto(member));
     }
