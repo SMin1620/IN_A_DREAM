@@ -4,6 +4,7 @@ import S from "styled-components";
 interface TogglePorps {
   AbleColor: string;
   DisableColor: string;
+  ToggleType: "sell" | "public";
   setSell?: (value: boolean) => void;
   setIsPublic?: (value: boolean) => void;
 }
@@ -37,6 +38,7 @@ const OffButton = S(Button)`
 const Toggle = ({
   AbleColor,
   DisableColor,
+  ToggleType,
   setSell,
   setIsPublic,
 }: TogglePorps) => {
@@ -57,11 +59,10 @@ const Toggle = ({
     const newStatus = !status;
     setStatus(newStatus);
 
-    if (setSell) {
+    if (ToggleType === "sell" && setSell) {
       setSell(newStatus);
     }
-
-    if (setIsPublic) {
+    if (ToggleType === "public" && setIsPublic) {
       setIsPublic(newStatus);
     }
   };

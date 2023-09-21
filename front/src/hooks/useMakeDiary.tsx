@@ -1,19 +1,48 @@
 import { useState } from "react";
-import api1 from "../api/instances/api1";
+import { createDiary } from "../api/services/diaryAPI";
+
+interface DiaryData {
+  title: string;
+  content: string;
+  isPublic: boolean;
+  sell: boolean;
+  imageUrl: string | null;
+}
 
 const useMakeDiary = () => {
-  const [DiaryData, setDiaryData] = useState(null);
+  const [diaryData, setDiaryData] = useState<DiaryData>({
+    title: "",
+    content: "",
+    isPublic: false,
+    sell: false,
+    imageUrl: "",
+  });
+  // console.log(diaryData);
 
-  const createDiary = async (diaryData: object) => {
+  const handleTitleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setDiaryData({ ...diaryData, title: e.target.value });
+  };
+
+  const handleContentChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+    setDiaryData({ ...diaryData, content: e.target.value });
+  };
+
+  const postDiary = async (diaryData: object) => {
     try {
-      const response = await api1.post(`/api/diary`, diaryData);
-      setDiaryData(response.data.data);
+      const response = await createDiary(diaryData);
+      console.log(response.data);
     } catch (error) {
-      console.log(error);
+      console.error(error);
     }
   };
 
-  return { DiaryData, createDiary };
+  return {
+    diaryData,
+    handleTitleChange,
+    handleContentChange,
+    setDiaryData,
+    postDiary,
+  };
 };
 
 export default useMakeDiary;
