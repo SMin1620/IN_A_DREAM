@@ -3,6 +3,7 @@ import Toggle from "../../common/Toggle";
 import "./CreateDreamDiaryForm.css";
 import useKarlo from "../../../hooks/useKarlo";
 import Label from "./../../common/Label";
+import Swal from "sweetalert2";
 
 interface OwnProps {
   setDiaryImage: (value: boolean) => void;
@@ -11,7 +12,7 @@ interface OwnProps {
 
 const CreateDreamDiaryForm = ({ setDiaryImage, setImageUrl }: OwnProps) => {
   const [clicked, setClicked] = useState<boolean>(false);
-  const [mainText, setMainText] = useState<string>("");
+  const [mainText, setMainText] = useState<string | null>();
   const { imageUrl, fetchData } = useKarlo();
   const [sell, setSell] = useState<boolean>(false);
   const [isPublic, setIsPublic] = useState<boolean>(false);
@@ -26,9 +27,17 @@ const CreateDreamDiaryForm = ({ setDiaryImage, setImageUrl }: OwnProps) => {
 
   const handleCreateImage = () => {
     // 로직처리 후 다이어리 이미지 넣어주기
-    fetchData(mainText).then(setImageUrl);
-    setDiaryImage(true);
-    setClicked(true);
+    if (mainText) {
+      fetchData(mainText).then(setImageUrl);
+      setDiaryImage(true);
+      setClicked(true);
+    } else {
+      Swal.fire({
+        icon: "error",
+        title: "그림생성에 실패하였습니다!",
+        text: "내용을 입력후 다시 시도해 주세요!",
+      });
+    }
   };
 
   const postDiary = () => {
@@ -70,13 +79,28 @@ const CreateDreamDiaryForm = ({ setDiaryImage, setImageUrl }: OwnProps) => {
         className="create-dream-diary-form-textarea"
         placeholder="내용을 입력해 주세요"
       />
-      <button
-        className={`create-diary-form-button`}
-        onClick={handleCreateImage}
-      >
-        그림생성
-      </button>
-      <button onClick={postDiary}>저장하기</button>
+      <div className="create-dream-diary-form-button-box">
+        {clicked ? (
+          <div>
+            <button
+              className="create-diary-form-button"
+              onClick={handleCreateImage}
+            >
+              다시생성
+            </button>
+            <button className="create-diary-form-button" onClick={postDiary}>
+              저장하기
+            </button>
+          </div>
+        ) : (
+          <button
+            className="create-diary-form-button"
+            onClick={handleCreateImage}
+          >
+            그림생성
+          </button>
+        )}
+      </div>
     </div>
   );
 };

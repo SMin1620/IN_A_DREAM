@@ -69,8 +69,9 @@
   display: none;
 }
 
-.create-dream-diary-form > button {
-  background-color: #c3baa5;
+.create-diary-form-button {
+  background-color: #c2ac79;
+  margin: 0 1rem;
   color: white;
   width: 10vw;
   height: 3rem;
@@ -78,10 +79,11 @@
   border: none;
   border-radius: 2.4rem;
   align-self: flex-end;
+  cursor: pointer;
 }
 
-.create-dream-diary-form > button:active {
-  background-color: #c9c5bb;
+.create-diary-form-button:active {
+  background-color: #c3baa5;
 }
 
 @media (max-width: 1024px) {

@@ -15,6 +15,7 @@ const Button = S.button`
   text-align: center;
   border: none;
   margin: 1rem 0;
+  cursor: pointer;
 
   @media (max-width:1024px) {
     width:7vw; 
