@@ -1,4 +1,20 @@
-.MainThird {
+.main-third-wrapper {
   height: 100vh;
   color: white;
+}
+.main-third-storeshop {
+  padding-left: 3%;
+}
+.main-third-storeshop h1 {
+  font-weight: bolder;
+  font-style: italic;
+  font-size: 8vw;
+  text-align: left;
+}
+
+.main-third-storeshop h5 {
+  padding-left: 3%;
+  font-size: 2vw;
+  text-align: left;
+  font-weight: lighter;
 }

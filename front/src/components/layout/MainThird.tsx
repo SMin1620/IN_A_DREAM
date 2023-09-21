@@ -54,11 +54,10 @@ const itemData = [
 ];
 const MainThird = () => {
   return (
-    <div className="MainThird">
-      <div className="StoreShop">
+    <div className="main-third-wrapper">
+      <div className="main-third-storeshop">
         <h1>STORE</h1>
         <h5>SEE ALL DREAMS</h5>
-        <h5>세번째 페이지 상점페이지입니다요</h5>
         <ImgScrollCardBox itemData={itemData} />
       </div>
     </div>
