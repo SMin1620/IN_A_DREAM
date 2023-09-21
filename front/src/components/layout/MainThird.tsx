@@ -1,6 +1,7 @@
 import React from "react";
 import "./styles/MainThird.css";
 import ImgScrollCardBox from "../features/ImgScrollCardBox/ImgScrollCardBox";
+import CardList from "../features/Card/CardList";
 
 const itemData = [
   {
@@ -54,12 +55,13 @@ const itemData = [
 ];
 const MainThird = () => {
   return (
-    <div className="MainThird">
-      <div className="StoreShop">
-        <h1>STORE</h1>
-        <h5>SEE ALL DREAMS</h5>
-        <h5>세번째 페이지 상점페이지입니다요</h5>
-        <ImgScrollCardBox itemData={itemData} />
+    <div className="main-third-wrapper">
+      <h1>STORE</h1>
+      <h5>SEE ALL DREAMS</h5>
+
+      <div className="main-third-storeshop">
+        {/* <ImgScrollCardBox itemData={itemData} /> */}
+        <CardList />
       </div>
     </div>
   );

@@ -12,13 +12,17 @@ const NavbarModal: React.FC<isModalOpen> = ({ isNavbarModalOpen, onClose }) => {
     if (isNavbarModalOpen) {
       setIsOpen(true);
     } else {
-      setTimeout(() => setIsOpen(false), 1000);
+      setTimeout(() => {
+        setIsOpen(false);
+      }, 1000);
     }
   }, [isNavbarModalOpen]);
 
+  // 박스 닫힐 때 애니메이션 클래스 추가
+
   return (
     <Box
-      isOpen={isOpen} // isOpen 속성 추가
+      isopen={isOpen}
       position="fixed"
       width={80}
       height={70}
