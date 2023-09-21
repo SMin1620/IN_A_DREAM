@@ -32,6 +32,18 @@ public class DiaryDto {
         private boolean sale;
     }
 
+    /**
+     * 일기 좋아요 요청 Dto
+     */
+    @Getter
+    @Setter
+    @NoArgsConstructor
+    @AllArgsConstructor
+    @Builder
+    public static class DiaryLikeDto{
+        private Long diaryId;
+    }
+
 
     /**
      * 꿈 일기 리스트 Dto
