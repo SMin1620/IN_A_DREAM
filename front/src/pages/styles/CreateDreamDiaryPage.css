@@ -29,19 +29,15 @@
 }
 
 .create-dream-diary-left-top {
-  height: 50vh;
+  height: 100vh;
 }
 
 .create-dream-diary-left-top > img {
-  width: 100%;
-  height: 100%;
+  width: 80%;
+  height: 80%;
   object-fit: contain;
   padding: 1rem;
   border-radius: 2.4rem;
-}
-
-.create-dream-diary-left-bottom {
-  height: 50vh;
 }
 
 .create-dream-diary-right {
@@ -92,11 +88,12 @@
 
   .create-dream-diary-left-top {
     height: 30vh;
-    width: 50%;
+    width: 100%;
   }
 
-  .create-dream-diary-left-bottom {
-    height: 30vh;
-    width: 50%;
+  .create-dream-diary-left-top > img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
   }
 }

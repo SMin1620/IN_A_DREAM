@@ -20,7 +20,6 @@ const CreateDreamDiaryPage = () => {
           <div className="create-dream-diary-left-top">
             {imageUrl && <img src={imageUrl} alt="diagram" />}
           </div>
-          <div className="create-dream-diary-left-bottom">bottom</div>
         </div>
 
         <div className="create-dream-diary-right">
