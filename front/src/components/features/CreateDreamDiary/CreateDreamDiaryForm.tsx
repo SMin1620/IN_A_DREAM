@@ -1,13 +1,16 @@
 import React, { useState } from "react";
 import Toggle from "../../common/Toggle";
 import "./CreateDreamDiaryForm.css";
+import useKarlo from "../../../hooks/useKarlo";
 
 interface OwnProps {
   setDiaryImage: (value: boolean) => void;
+  setImageUrl: (url: string | null) => void;
 }
 
-const CreateDreamDiaryForm = ({ setDiaryImage }: OwnProps) => {
+const CreateDreamDiaryForm = ({ setDiaryImage, setImageUrl }: OwnProps) => {
   const [mainText, setMainText] = useState<string>("");
+  const { imageUrl, fetchData } = useKarlo();
   console.log(mainText);
 
   const inputTitle = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -20,6 +23,7 @@ const CreateDreamDiaryForm = ({ setDiaryImage }: OwnProps) => {
 
   const handleCreateImage = () => {
     // 로직처리 후 다이어리 이미지 넣어주기
+    fetchData(mainText).then(setImageUrl);
     setDiaryImage(true);
   };
   return (
