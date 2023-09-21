@@ -44,6 +44,32 @@ public class DiaryDto {
         private Long diaryId;
     }
 
+    /**
+     * 일기 공개 설정 Dto
+     */
+    @Getter
+    @Setter
+    @NoArgsConstructor
+    @AllArgsConstructor
+    @Builder
+    public static class openDto{
+        private Long diaryId;
+        private boolean open;
+    }
+
+    /**
+     * 일기 판매 설정 Dto
+     */
+    @Getter
+    @Setter
+    @NoArgsConstructor
+    @AllArgsConstructor
+    @Builder
+    public static class saleDto{
+        private Long diaryId;
+        private boolean sale;
+    }
+
 
     /**
      * 꿈 일기 리스트 Dto
