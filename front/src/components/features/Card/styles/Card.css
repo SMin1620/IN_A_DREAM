@@ -1,0 +1,24 @@
+/* .card-wrapper { */
+/* width: 52rem; */
+
+/* bottom: 0; */
+/* position: absolute; */
+/* position: relative; */
+
+/* transition: opacity 500ms ease-out, */
+/* transform 800ms cubic-bezier(0.155, 0.055, 0.14, 1), */
+/* -webkit-transform 800ms cubic-bezier(0.155, 0.055, 0.14, 1); */
+/* transition: top 0.3s ease; */
+/* } */
+
+.card-wrapper {
+  width: 30%;
+  /* box-shadow: 0 2px 5px rgba(255, 255, 255, 0.2); */
+  transition: transform 1.2s ease; /* transform 속성에 대한 부드러운 전환 설정 */
+
+  /* 필요한 다른 스타일을 추가하세요 */
+}
+
+.card-wrapper img {
+  border-radius: 20px;
+}

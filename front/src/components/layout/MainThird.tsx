@@ -1,6 +1,7 @@
 import React from "react";
 import "./styles/MainThird.css";
 import ImgScrollCardBox from "../features/ImgScrollCardBox/ImgScrollCardBox";
+import CardList from "../features/Card/CardList";
 
 const itemData = [
   {
@@ -55,10 +56,12 @@ const itemData = [
 const MainThird = () => {
   return (
     <div className="main-third-wrapper">
+      <h1>STORE</h1>
+      <h5>SEE ALL DREAMS</h5>
+
       <div className="main-third-storeshop">
-        <h1>STORE</h1>
-        <h5>SEE ALL DREAMS</h5>
-        <ImgScrollCardBox itemData={itemData} />
+        {/* <ImgScrollCardBox itemData={itemData} /> */}
+        <CardList />
       </div>
     </div>
   );
