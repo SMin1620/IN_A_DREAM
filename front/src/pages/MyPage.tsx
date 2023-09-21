@@ -2,30 +2,30 @@ import React from "react";
 import Navbar from "../components/features/NavbarComponents/Navbar";
 import Calendar from "../components/features/CalendarComponents/Calendar";
 import "./styles/Mypage.css";
-import DiaryDrrList from "../components/features/DiaryDrrList/DiaryDrrList";
+import DiaryDrrList, {
+  Diary,
+} from "../components/features/DiaryDrrList/DiaryDrrList";
 
 const MyPage = () => {
-  const diaries = [
+  const diaries: Diary[] = [
     {
       id: 1,
-      author: "Alice",
-      title: "오늘의 일기",
-      keyword: "행복",
-      emotion: ["기쁨:20", "우울:20", "중립:20"],
-      imageURL: "URL_기쁨_이미지",
-      content: "오늘은 기분이 좋았어요!",
+      author: "Author 1",
+      title: "Title 1",
+      emotion: ["happy"],
+      keyword: "Keyword 1",
+      imageURL: "https://example.com/image1.jpg",
     },
     {
       id: 2,
-      author: "Bob",
-      title: "우울한 날",
-      keyword: "우울",
-      emotion: ["기쁨:20", "우울:20", "중립:20"],
-      imageURL: "URL_우울_이미지",
-      content: "오늘은 기분이 안 좋았어요.",
+      author: "Author 2",
+      title: "Title 2",
+      emotion: ["sad"],
+      keyword: "Keyword 2",
+      imageURL: "https://example.com/image2.jpg",
     },
+    // Add more diary objects as needed...
   ];
-
   return (
     <div className="MyPage-main">
       <Navbar></Navbar>
@@ -35,8 +35,9 @@ const MyPage = () => {
         <div className="mypage-top-statistics">스태티스틱 존</div>
       </div>
       <div className="mypage-bottom">
-        <div className="mypage-bottom-diaryDrr">카드 드르륵 컴포넌트</div>
-        <DiaryDrrList diaries={diaries} />
+        <div className="mypage-bottom-diaryDrr">
+          <DiaryDrrList diaries={diaries} />
+        </div>
       </div>
     </div>
   );
