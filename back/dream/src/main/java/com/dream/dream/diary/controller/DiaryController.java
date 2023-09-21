@@ -40,7 +40,7 @@ public class DiaryController {
     @PostMapping()
     public BaseResponse diaryCreate(
             HttpServletRequest request,
-            @RequestBody DiaryDto.DiaryCreateRequestDto requestBody)  {
+            @RequestBody DiaryDto.DiaryCreateRequestDto requestBody) {
 
         String token = jwtTokenProvider.resolveToken(request);
 
@@ -60,7 +60,7 @@ public class DiaryController {
      */
     @Operation(summary = "전체 일기 목록 조회")
     @GetMapping()
-    public BaseResponse diaryListCheck(){
+    public BaseResponse diaryListCheck() {
         List<Diary> diaryList = diaryService.getDiaryList();
         return new BaseResponse(HttpStatus.OK, "일기 목록 반환 성공", diaryMapper.toListResponseDtos(diaryList));
     }
@@ -72,7 +72,7 @@ public class DiaryController {
     @GetMapping("/my")
     public BaseResponse myDiaryList(
             HttpServletRequest request,
-            @PageableDefault(size = 3, sort = "id", direction = Sort.Direction.DESC) Pageable pageable){
+            @PageableDefault(size = 3, sort = "id", direction = Sort.Direction.DESC) Pageable pageable) {
         String token = jwtTokenProvider.resolveToken(request);
         jwtTokenProvider.validateToken(token);
 
@@ -91,7 +91,7 @@ public class DiaryController {
      */
     @Operation(summary = "일기 상세 조회")
     @GetMapping("/{diaryId}")
-    public BaseResponse diaryDetail(@PathVariable Long diaryId){
+    public BaseResponse diaryDetail(@PathVariable Long diaryId) {
         Diary diary = diaryService.getDiary(diaryId);
         return new BaseResponse(HttpStatus.OK, "일기 상세 조회 성공", diaryMapper.diaryToDetailResponseDto(diary));
     }
@@ -103,7 +103,7 @@ public class DiaryController {
     @PostMapping("/like")
     public BaseResponse diaryLike(
             HttpServletRequest request,
-            @RequestBody DiaryDto.DiaryLikeDto requestBody){
+            @RequestBody DiaryDto.DiaryLikeDto requestBody) {
         String token = jwtTokenProvider.resolveToken(request);
         jwtTokenProvider.validateToken(token);
 
@@ -116,5 +116,38 @@ public class DiaryController {
         return new BaseResponse(HttpStatus.OK, "좋아요 수정", diaryMapper.diaryToResponseDto(diary));
     }
 
+    /**
+     * 일기 공개 설정
+     */
+    @PutMapping("/open")
+    public BaseResponse openCheck(
+            HttpServletRequest request,
+            @RequestBody DiaryDto.openDto requestBody) {
+        String token = jwtTokenProvider.resolveToken(request);
+        jwtTokenProvider.validateToken(token);
+
+        String memberEmail = jwtTokenProvider.getUserEmail(token);
+
+        Diary diary = diaryService.openCheck(memberEmail, requestBody);
+
+        return new BaseResponse(HttpStatus.OK, "공개 변경", diaryMapper.diaryToResponseDto(diary));
+    }
+
+    /**
+     * 일기 판매 설정
+     */
+    @PutMapping("/sale")
+    public BaseResponse saleCheck(
+            HttpServletRequest request,
+            @RequestBody DiaryDto.saleDto requestBody) {
+        String token = jwtTokenProvider.resolveToken(request);
+        jwtTokenProvider.validateToken(token);
+
+        String memberEmail = jwtTokenProvider.getUserEmail(token);
+
+        Diary diary = diaryService.saleCheck(memberEmail, requestBody);
+
+        return new BaseResponse(HttpStatus.OK, "거래 변경", diaryMapper.diaryToResponseDto(diary));
+    }
 
 }

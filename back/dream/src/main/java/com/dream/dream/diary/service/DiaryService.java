@@ -189,4 +189,34 @@ public class DiaryService {
 
         return diary;
     }
+
+    /**
+     * 일기 공개 설정
+     */
+    public Diary openCheck(String email, DiaryDto.openDto requestBody) {
+        Member member = memberRepository.findByEmail(email).orElseThrow(() -> new BusinessLogicException(ExceptionCode.MEMBER_NOT_FOUND));
+        Diary diary = diaryRepository.findById(requestBody.getDiaryId()).orElseThrow(() -> new BusinessLogicException(ExceptionCode.DIARY_NOT_FOUND));
+
+        // 소유자, 작성자 구분 필요하면 수정해야함
+
+        diary.setOpen(requestBody.isOpen());
+        diaryRepository.save(diary);
+
+        return diary;
+    }
+
+    /**
+     * 일기 거래 설정
+     */
+    public Diary saleCheck(String email, DiaryDto.saleDto requestBody) {
+        Member member = memberRepository.findByEmail(email).orElseThrow(() -> new BusinessLogicException(ExceptionCode.MEMBER_NOT_FOUND));
+        Diary diary = diaryRepository.findById(requestBody.getDiaryId()).orElseThrow(() -> new BusinessLogicException(ExceptionCode.DIARY_NOT_FOUND));
+
+        // 소유자, 작성자 구분 필요하면 수정해야함
+
+        diary.setSale(requestBody.isSale());
+        diaryRepository.save(diary);
+
+        return diary;
+    }
 }
