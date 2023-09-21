@@ -3,11 +3,14 @@ package com.dream.dream.diary.service;
 import com.dream.dream.diary.dto.DiaryDto;
 import com.dream.dream.diary.entity.Diary;
 import com.dream.dream.diary.entity.Emotion;
+import com.dream.dream.diary.entity.Like;
 import com.dream.dream.diary.repository.DiaryRepository;
+import com.dream.dream.diary.repository.LikeRepository;
 import com.dream.dream.exception.BusinessLogicException;
 import com.dream.dream.exception.ExceptionCode;
 import com.dream.dream.member.entity.Member;
 import com.dream.dream.member.repository.MemberRepository;
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
@@ -38,11 +41,13 @@ public class DiaryService {
 
     private final DiaryRepository diaryRepository;
     private final MemberRepository memberRepository;
+    private final LikeRepository likeRepository;
 
 
     /**
      * 꿈 일기 생성 서비스
      */
+    @Transactional
     public Diary diaryCreate(DiaryDto.DiaryCreateRequestDto requestBody, String memberEmail) {
         Member member = memberRepository.findByEmail(memberEmail).orElseThrow(() -> new BusinessLogicException(ExceptionCode.MEMBER_NOT_FOUND));
 
@@ -121,6 +126,12 @@ public class DiaryService {
 
         diaryRepository.save(diary);
 
+        member.setPositivePoint(member.getPositivePoint() + number1);
+        member.setNeutralPoint(member.getNeutralPoint() + number2);
+        member.setNegativePoint(member.getNegativePoint() + number3);
+
+        memberRepository.save(member);
+
         return diary;
     }
 
@@ -134,7 +145,7 @@ public class DiaryService {
     /**
      * 내 일기 목록 조회
      */
-    public Page<Diary> getDiaryList(String memberEmail, Pageable pageable){
+    public Page<Diary> getDiaryList(String memberEmail, Pageable pageable) {
         Page<Diary> diaryPage = diaryRepository.findAllByMemberEmail(memberEmail, pageable);
 
         return diaryPage;
@@ -148,6 +159,34 @@ public class DiaryService {
      */
     public Diary getDiary(Long diaryId) {
         Diary diary = diaryRepository.findById(diaryId).orElseThrow(() -> new BusinessLogicException(ExceptionCode.DIARY_NOT_FOUND));
+        return diary;
+    }
+
+    /**
+     * 일기 좋아요 처리
+     */
+    @Transactional
+    public Diary likeDiary(String email, DiaryDto.DiaryLikeDto requestBody) {
+        Member member = memberRepository.findByEmail(email).orElseThrow(() -> new BusinessLogicException(ExceptionCode.MEMBER_NOT_FOUND));
+        Diary diary = diaryRepository.findById(requestBody.getDiaryId()).orElseThrow(() -> new BusinessLogicException(ExceptionCode.DIARY_NOT_FOUND));
+
+
+        // 이미 like를 눌렀는지 확인
+        Like like = likeRepository.findLikeByMemberAndDiary(member, diary).orElse(null);
+
+        if (like == null) {
+            like = Like.builder().diary(diary).member(member).build();
+            likeRepository.save(like);
+            // diary의 like count를 올림
+            diary.setLikeCount(diary.getLikeCount() + 1);
+            diaryRepository.save(diary);
+        } else {
+            likeRepository.delete(like);
+            // diary의 like count를 내림
+            diary.setLikeCount(diary.getLikeCount() - 1);
+            diaryRepository.save(diary);
+        }
+
         return diary;
     }
 }

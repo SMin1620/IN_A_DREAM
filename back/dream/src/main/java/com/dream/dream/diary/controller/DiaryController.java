@@ -42,7 +42,7 @@ public class DiaryController {
             HttpServletRequest request,
             @RequestBody DiaryDto.DiaryCreateRequestDto requestBody)  {
 
-        System.out.println("일기 생성 컨트롤러");
+//        System.out.println("일기 생성 컨트롤러");
 
         String token = jwtTokenProvider.resolveToken(request);
 
@@ -52,16 +52,7 @@ public class DiaryController {
 
         Diary diary = diaryService.diaryCreate(requestBody, memberEmail);
 
-        System.out.println("##################### boolean 여부");
-        System.out.println(diary.isOpen());
-        System.out.println(diary.isSale());
-
         DiaryDto.DiaryResponseDto diaryResponseDto = diaryMapper.diaryToResponseDto(diary);
-
-        System.out.println("##################### boolean 여부");
-        System.out.println(diaryResponseDto.isOpen());
-        System.out.println(diaryResponseDto.isSale());
-
 
         return new BaseResponse(HttpStatus.OK, "굿", diaryResponseDto);
     }
@@ -86,7 +77,7 @@ public class DiaryController {
         String token = jwtTokenProvider.resolveToken(request);
         jwtTokenProvider.validateToken(token);
 
-        System.out.println(token);
+//        System.out.println(token);
 
         String memberEmail = jwtTokenProvider.getUserEmail(token);
 
@@ -103,6 +94,26 @@ public class DiaryController {
     public BaseResponse diaryDetail(@PathVariable Long diaryId){
         Diary diary = diaryService.getDiary(diaryId);
         return new BaseResponse(HttpStatus.OK, "일기 상세 조회 성공", diaryMapper.diaryToDetailResponseDto(diary));
+    }
+
+    /**
+     * 좋아요
+     */
+    @Operation(summary = "좋아요, 좋아요 취소")
+    @PostMapping("/like")
+    public BaseResponse diaryLike(
+            HttpServletRequest request,
+            @RequestBody DiaryDto.DiaryLikeDto requestBody){
+        String token = jwtTokenProvider.resolveToken(request);
+        jwtTokenProvider.validateToken(token);
+
+//        System.out.println(token);
+
+        String memberEmail = jwtTokenProvider.getUserEmail(token);
+
+        Diary diary = diaryService.likeDiary(memberEmail, requestBody);
+
+        return new BaseResponse(HttpStatus.OK, "좋아요 수정", diaryMapper.diaryToResponseDto(diary));
     }
 
 
