@@ -15,37 +15,33 @@ interface ImageResponse {
   ];
 }
 
-const useKarlo = (prompt: string) => {
+const useKarlo = () => {
   const [imageUrl, setImageUrl] = useState<string | null>(null);
-  console.log("오나요");
-  console.log(process.env.REACT_APP_KAKAO_KEY);
 
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await axios.post<ImageResponse>(
-          "https://api.kakaobrain.com/v2/inference/karlo/t2i",
-          { prompt },
-          {
-            headers: {
-              Authorization: process.env.REACT_APP_KAKAO_KEY,
-              "Content-Type": "application/json",
-            },
-          }
-        );
-
-        if (response.data.images && response.data.images[0]) {
-          setImageUrl(response.data.images[0].image);
+  const fetchData = async (prompt: string): Promise<string | null> => {
+    try {
+      const response = await axios.post<ImageResponse>(
+        "https://api.kakaobrain.com/v2/inference/karlo/t2i",
+        { prompt },
+        {
+          headers: {
+            Authorization: process.env.REACT_APP_KAKAO_KEY,
+            "Content-Type": "application/json",
+          },
         }
-      } catch (error) {
-        console.error(error);
+      );
+
+      if (response.data.images && response.data.images[0]) {
+        setImageUrl(response.data.images[0].image);
+        return response.data.images[0].image;
       }
-    };
+    } catch (error) {
+      console.error(error);
+    }
+    return null;
+  };
 
-    fetchData();
-  }, [prompt]);
-
-  return imageUrl;
+  return { imageUrl, fetchData };
 };
 
 export default useKarlo;
