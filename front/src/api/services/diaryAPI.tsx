@@ -15,7 +15,7 @@ export const createDiary = (diaryData: object) =>
   api1.post(`/api/diary`, diaryData);
 
 // 일기 좋아요 + 취소
-export const toggleLikeDiary = (diaryId: string, diaryLikeData: object) =>
+export const toggleLikeDiary = (diaryId: string) =>
   api1.post(`/api/diary/like`);
 
 // 다이어리 키워드 검색
