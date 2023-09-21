@@ -2,7 +2,6 @@ import React from "react";
 import "./styles/MainThird.css";
 import ImgScrollCardBox from "../features/ImgScrollCardBox/ImgScrollCardBox";
 import CardList from "../features/Card/CardList";
-
 const itemData = [
   {
     img: "https://images.unsplash.com/photo-1549388604-817d15aa0110",

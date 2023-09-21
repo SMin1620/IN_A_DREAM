@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Box from "../../common/Box";
 import { isModalOpen } from "../../../types/index";
 import S from "styled-components";
@@ -6,7 +6,6 @@ import "./styles/NavbarMyModal.css";
 import positive from "../../../assets/coin/positive.png";
 import neutral from "../../../assets/coin/neutral.png";
 import negative from "../../../assets/coin/negative.png";
-// import gotomy from "../../../assets/navbar/gotomy.png";
 
 interface CoinPropsComponent {}
 
@@ -25,8 +24,25 @@ const NavbarMyModal: React.FC<isModalOpen> = ({
   isNavbarModalOpen,
   onClose,
 }) => {
+  const [isOpen, setIsOpen] = useState(false);
+  useEffect(() => {
+    if (isNavbarModalOpen) {
+      setIsOpen(true);
+    } else {
+      setTimeout(() => {
+        setIsOpen(false);
+      }, 1000);
+    }
+  }, [isNavbarModalOpen]);
   return (
-    <Box position="absolute" width={50} height={5} left={3} bottom={1}>
+    <Box
+      position="fixed"
+      width={50}
+      height={5}
+      left={3}
+      bottom={1}
+      isopen={isOpen}
+    >
       <div className="coin-box">
         <CoinComponent>
           <img src={positive} alt="positiveCoin" />

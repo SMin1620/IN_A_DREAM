@@ -20,5 +20,11 @@
 }
 
 .card-wrapper img {
-  border-radius: 20px;
+  border-radius: 50px;
+}
+
+.card-date {
+  float: right;
+  position: relative;
+  top: -5%;
 }

@@ -1,16 +1,7 @@
 .navbar-body-wrapper {
-  /* --app-height: 715px;
-  color: white;
-  user-select: none;
-  -webkit-font-smoothing: antialiased;
-  margin: 0;
-  padding: 0;
-  border: 0;
-  border-style: solid;
-  font: inherit;
-  vertical-align: baseline;
-  box-sizing: border-box;
-  pointer-events: auto; */
+  font-family: "Freckle Face";
+  font-weight: lighter;
+  color: #fff;
   top: 0;
   left: 0;
   width: 4rem;
@@ -23,16 +14,45 @@
   justify-content: space-between;
   position: absolute;
 }
-.navbar-body-main img {
+.navbar-body-main {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  text-decoration-line: none;
   padding-top: 30%;
+  color: #fff;
+}
+.navbar-body-main:hover {
+  color: #f1e7d1;
+}
+
+.navbar-body-main p {
   width: 50%;
 }
-
-.navbar-body-logo img {
-  width: 40%;
+.navbar-body-logo {
+  /* writing-mode: vertical-rl; */
+  /* text-orientation: upright; */
+  writing-mode: vertical-rl;
+  transform: rotate(180deg);
+  font-size: 2.3rem;
+  display: flex;
+  align-items: center;
 }
 
-.navbar-body-my img {
+.navbar-body-logo:hover {
+  color: #f1e7d1;
+}
+
+.navbar-body-my {
   padding-bottom: 30%;
-  width: 40%;
+  font-size: 1.3rem;
+}
+
+.navbar-body-my:hover {
+  color: #f1e7d1;
+}
+
+.navbar-body-active {
+  color: #f1e7d1;
 }
