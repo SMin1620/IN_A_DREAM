@@ -36,9 +36,15 @@
   display: flex;
 }
 
+.create-dream-diary-form-label-box {
+  display: flex;
+  padding: 0 1rem;
+  justify-content: space-around;
+}
+
 .create-dream-diary-form-textarea {
   width: 100%;
-  height: 70vh;
+  height: 50vh;
   padding: 1rem;
   font-size: 2rem;
   font-weight: bold;
@@ -80,7 +86,7 @@
 
 @media (max-width: 1024px) {
   .create-dream-diary-form-textarea {
-    height: 45vh;
+    height: 40vh;
   }
 
   .create-dream-diary-form-top {

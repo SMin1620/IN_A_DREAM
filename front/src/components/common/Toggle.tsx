@@ -4,6 +4,8 @@ import S from "styled-components";
 interface TogglePorps {
   AbleColor: string;
   DisableColor: string;
+  setSell?: (value: boolean) => void;
+  setIsPublic?: (value: boolean) => void;
 }
 
 const Button = S.button`
@@ -31,8 +33,13 @@ const OffButton = S(Button)`
   margin-right: 1rem;
 `;
 
-const Toggle = ({ AbleColor, DisableColor }: TogglePorps) => {
-  const [sell, setSell] = useState(false);
+const Toggle = ({
+  AbleColor,
+  DisableColor,
+  setSell,
+  setIsPublic,
+}: TogglePorps) => {
+  const [status, setStatus] = useState<boolean>(false);
   const Able = {
     border: "none",
     backgroundColor: AbleColor,
@@ -45,12 +52,25 @@ const Toggle = ({ AbleColor, DisableColor }: TogglePorps) => {
     color: "white",
   };
 
+  const handleClick = () => {
+    const newStatus = !status;
+    setStatus(newStatus);
+
+    if (setSell) {
+      setSell(newStatus);
+    }
+
+    if (setIsPublic) {
+      setIsPublic(newStatus);
+    }
+  };
+
   return (
     <div>
-      <OnButton style={sell ? Able : Disable} onClick={() => setSell(true)}>
+      <OnButton style={status ? Able : Disable} onClick={handleClick}>
         ON
       </OnButton>
-      <OffButton style={sell ? Disable : Able} onClick={() => setSell(false)}>
+      <OffButton style={status ? Disable : Able} onClick={handleClick}>
         OFF
       </OffButton>
     </div>

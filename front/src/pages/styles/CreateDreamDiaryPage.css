@@ -21,6 +21,7 @@
 .create-dream-diary-left {
   width: 0vw;
   transition: width 1s cubic-bezier(0.22, 0.61, 0.36, 1);
+  margin-top: 1rem;
 }
 
 .on-diary {
@@ -29,6 +30,14 @@
 
 .create-dream-diary-left-top {
   height: 50vh;
+}
+
+.create-dream-diary-left-top > img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  padding: 1rem;
+  border-radius: 2.4rem;
 }
 
 .create-dream-diary-left-bottom {
@@ -40,6 +49,23 @@
   display: flex;
   flex-direction: column;
   background-color: #f1e7d1;
+  margin-top: 1rem;
+  justify-content: center;
+}
+
+.date-box {
+  width: 15vw;
+  margin-left: auto;
+  height: 3rem;
+  font-size: 2vw;
+  background-color: #0f006a;
+  color: #bcbcbc;
+  border: none;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 5rem;
 }
 
 @media (max-width: 1024px) {
