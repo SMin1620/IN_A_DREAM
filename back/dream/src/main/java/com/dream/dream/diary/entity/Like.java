@@ -12,6 +12,7 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 @Builder
 @EntityListeners(AuditingEntityListener.class)
 @ToString
+@Table(name = "likes")
 public class Like {
     @Id
     @Column(name = "like_id")
@@ -19,12 +20,12 @@ public class Like {
     private Long likeId;
 
     @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "diary_id", nullable = true)
+    @JoinColumn(name = "diary_id")
     @Setter
     private Diary diary;
 
     @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "member_id", nullable = true)
+    @JoinColumn(name = "member_id")
     @Setter
     private Member member;
 }
