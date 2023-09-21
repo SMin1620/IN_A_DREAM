@@ -119,6 +119,7 @@ public class DiaryController {
     /**
      * 일기 공개 설정
      */
+    @Operation(summary = "일기 공개 설정")
     @PutMapping("/open")
     public BaseResponse openCheck(
             HttpServletRequest request,
@@ -136,6 +137,7 @@ public class DiaryController {
     /**
      * 일기 판매 설정
      */
+    @Operation(summary = "일기 판매 설정")
     @PutMapping("/sale")
     public BaseResponse saleCheck(
             HttpServletRequest request,
