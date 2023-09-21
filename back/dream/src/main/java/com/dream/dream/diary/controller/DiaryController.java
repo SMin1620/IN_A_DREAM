@@ -11,6 +11,10 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
@@ -48,7 +52,18 @@ public class DiaryController {
 
         Diary diary = diaryService.diaryCreate(requestBody, memberEmail);
 
-        return new BaseResponse(HttpStatus.OK, "굿", diaryMapper.diaryToResponseDto(diary));
+        System.out.println("##################### boolean 여부");
+        System.out.println(diary.isOpen());
+        System.out.println(diary.isSale());
+
+        DiaryDto.DiaryResponseDto diaryResponseDto = diaryMapper.diaryToResponseDto(diary);
+
+        System.out.println("##################### boolean 여부");
+        System.out.println(diaryResponseDto.isOpen());
+        System.out.println(diaryResponseDto.isSale());
+
+
+        return new BaseResponse(HttpStatus.OK, "굿", diaryResponseDto);
     }
 
     /**
@@ -63,13 +78,20 @@ public class DiaryController {
     /**
      * 내 일기 목록 조회
      */
+    @Operation(summary = "내 일기 목록 조회")
     @GetMapping("/my")
-    public BaseResponse myDiaryList(HttpServletRequest request){
+    public BaseResponse myDiaryList(
+            HttpServletRequest request,
+            @PageableDefault(size = 3, sort = "id", direction = Sort.Direction.DESC) Pageable pageable){
         String token = jwtTokenProvider.resolveToken(request);
         jwtTokenProvider.validateToken(token);
 
+        System.out.println(token);
+
         String memberEmail = jwtTokenProvider.getUserEmail(token);
-        List<Diary> diaryList = diaryService.getDiaryList(memberEmail);
+
+        Page<Diary> diaryPage = diaryService.getDiaryList(memberEmail, pageable);
+        List<Diary> diaryList = diaryPage.getContent();
 
         return new BaseResponse(HttpStatus.OK, "내 일기 목록 반환 성공", diaryMapper.toListResponseDtos(diaryList));
     }
