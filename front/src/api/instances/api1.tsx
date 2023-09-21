@@ -10,6 +10,10 @@ api1.interceptors.request.use(
   (config) => {
     // 여기에 원하는 요청 전처리 로직을 추가할 수 있습니다.
     // 예를 들어, 토큰을 헤더에 추가하거나 요청 데이터를 수정할 수 있습니다.
+    const token = localStorage.getItem("token");
+    if (token) {
+      config.headers["Authorization"] = token;
+    }
     return config;
   },
   (error) => {

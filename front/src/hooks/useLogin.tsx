@@ -32,6 +32,8 @@ const useLogin = (onLoginSuccess: () => void) => {
 
         // axios headers에 토큰 설정
         axios.defaults.headers.common["Authorization"] = token;
+        console.log(axios.defaults.headers.common["Authorization"]);
+        console.log("로그인에서 토큰확인!!!!!!!!!!!!!!!!!!");
 
         onLoginSuccess();
       }

@@ -1,10 +1,14 @@
 import api1 from "../instances/api1";
+import { pageable } from "../../types";
 
 // 모든 일기 목록 조회
 export const fetchAllDiaries = () => api1.get(`/api/diary`);
 
 // 내 일기 목록 조회 수정예상 유저id없음
-export const fetchMyDiaries = () => api1.get(`/api/mydiary`);
+export const fetchMyDiaries = (pageable: pageable) =>
+  api1.get(`/api/diary/my`, {
+    params: pageable,
+  });
 
 // 일기 상세 조회
 export const fetchDiaryDetail = (diaryId: string) =>

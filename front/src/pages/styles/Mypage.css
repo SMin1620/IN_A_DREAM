@@ -6,11 +6,14 @@
   height: 40%;
   display: flex;
   margin-left: 4rem;
-  background-color: #e9e4d9;
+  background-color: #f1e7d1;
 }
 
 .mypage-bottom {
   height: 60%;
   background-color: black;
   color: white;
+}
+.mypage-bottom-diaryDrr {
+  margin: auto;
 }
