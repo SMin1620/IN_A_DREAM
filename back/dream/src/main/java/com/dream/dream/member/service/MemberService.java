@@ -32,46 +32,33 @@ public class MemberService {
     private final PasswordEncoder passwordEncoder;
 
 
-    public TokenDto memberLogin(
-            HttpServletResponse response,
-            MemberDto.MemberLoginRequestDto requestBody
-    ) throws Exception {
+    public TokenDto memberLogin(HttpServletResponse response, MemberDto.MemberLoginRequestDto requestBody) {
+        Member member = memberRepository.findByEmail(requestBody.getEmail()).orElseThrow(() -> new BusinessLogicException(ExceptionCode.MEMBER_NOT_FOUND));
 
-//        Optional<Member> member = memberRepository.findByEmailAndPassword(requestBody.getEmail(), requestBody.getPassword());
+        System.out.println("로그인 시작 ");
+        Authentication authentication = authenticationManager.authenticate(
+                new UsernamePasswordAuthenticationToken(
+                        requestBody.getEmail(),
+                        requestBody.getPassword()
+                )
+        );
 
-        Optional<Member> member = memberRepository.findByEmail(requestBody.getEmail());
-        System.out.println(member.get());
+        String accessToken = jwtTokenProvider.createAccessToken(authentication);
+        String refreshToken = jwtTokenProvider.createRefreshToken(authentication);
 
-        if(member.isPresent()){
+        TokenDto tokenDto =TokenDto.builder()
+                .accessToken(accessToken)
+                .refreshToken(refreshToken)
+                .memberId(member.getId())
+                .build();
+        // 헤더에 토큰 담기
+        jwtTokenProvider.setHeaderAccessToken(response, accessToken);
+        jwtTokenProvider.setHeaderRefreshToken(response, refreshToken);
 
-            System.out.println("로그인 시작 ");
-            Authentication authentication = authenticationManager.authenticate(
-                    new UsernamePasswordAuthenticationToken(
-                            requestBody.getEmail(),
-                            requestBody.getPassword()
-                    )
-            );
-
-            String accessToken = jwtTokenProvider.createAccessToken(authentication);
-            String refreshToken = jwtTokenProvider.createRefreshToken(authentication);
-
-            TokenDto tokenDto =TokenDto.builder()
-                    .accessToken(accessToken)
-                    .refreshToken(refreshToken)
-                    .memberId(member.get().getId())
-                    .build();
-            // 헤더에 토큰 담기
-            jwtTokenProvider.setHeaderAccessToken(response, accessToken);
-            jwtTokenProvider.setHeaderRefreshToken(response, refreshToken);
-
-            return tokenDto;
-        }else{
-            throw new BusinessLogicException(ExceptionCode.MEMBER_NOT_FOUND);
-        }
+        return tokenDto;
     }
 
     public Member memberRegister(MemberDto.MemberRegisterRequestDto requestBody) {
-
         long temp = 0;
         Member member = Member.builder()
                 .email(requestBody.getEmail())
@@ -91,7 +78,6 @@ public class MemberService {
     }
 
     public boolean emailDoubleCheck(String email) {
-
         Optional<Member> member = memberRepository.findByEmail(email);
         return member.isPresent();
     }
@@ -102,12 +88,8 @@ public class MemberService {
 
     }
 
-    public Member memberInfo(Long id) throws Exception {
-        Optional<Member> member = memberRepository.findById(id);
-        if(member.isPresent()){
-            return member.get();
-        }else{
-            throw new Exception("유저가 존재하지 않습니다");
-        }
+    public Member memberInfo(String memberEmail) {
+        Member member = memberRepository.findByEmail(memberEmail).orElseThrow(() -> new BusinessLogicException(ExceptionCode.MEMBER_NOT_FOUND));
+        return member;
     }
 }
