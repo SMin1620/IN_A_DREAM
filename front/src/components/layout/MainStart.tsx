@@ -17,7 +17,7 @@ const ResponsiveTypeAnimation = styled(TypeAnimation)`
   font-size: calc(1.5em + 1vw); // dynamic font size based on viewport width
   display: inline-block;
   color: white;
-
+  font-family: "BMDOHYEON";
   @media (max-width: 768px) {
     font-size: calc(1em + 1vw);
   }
