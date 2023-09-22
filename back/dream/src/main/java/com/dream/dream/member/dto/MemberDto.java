@@ -82,6 +82,7 @@ public class MemberDto {
         private String email;
         private String nickname;
         private String birth;
+        private String gender;
         private int isWrite;
         private long positiveCoin;
         private long negativeCoin;
