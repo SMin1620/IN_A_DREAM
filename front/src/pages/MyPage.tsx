@@ -1,31 +1,27 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import Navbar from "../components/features/NavbarComponents/Navbar";
 import Calendar from "../components/features/CalendarComponents/Calendar";
 import "./styles/Mypage.css";
-import DiaryDrrList, {
-  Diary,
-} from "../components/features/DiaryDrrList/DiaryDrrList";
+import DiaryDrrList from "../components/features/DiaryDrrList/DiaryDrrList";
+import { useMyDiaries } from "../hooks/useMyDiary";
+import { DiaryInfo } from "../types/ApiType";
 
 const MyPage = () => {
-  const diaries: Diary[] = [
-    {
-      id: 1,
-      author: "Author 1",
-      title: "Title 1",
-      emotion: ["happy"],
-      keyword: "Keyword 1",
-      imageURL: "https://example.com/image1.jpg",
-    },
-    {
-      id: 2,
-      author: "Author 2",
-      title: "Title 2",
-      emotion: ["sad"],
-      keyword: "Keyword 2",
-      imageURL: "https://example.com/image2.jpg",
-    },
-    // Add more diary objects as needed...
-  ];
+  const [MyDiaryData, setMyDiaryData] = useState<DiaryInfo[]>([]);
+
+  const {
+    data: response,
+    isLoading,
+    error,
+  } = useMyDiaries({ page: 0, size: 1 });
+
+  useEffect(() => {
+    if (response) {
+      console.log(response.data.data);
+      setMyDiaryData(response.data.data); // Assuming response.data.data is of type DiaryInfo[]
+    }
+  }, [response]); // Only run this effect when 'response' changes
+
   return (
     <div className="MyPage-main">
       <Navbar></Navbar>
@@ -36,7 +32,7 @@ const MyPage = () => {
       </div>
       <div className="mypage-bottom">
         <div className="mypage-bottom-diaryDrr">
-          <DiaryDrrList diaries={diaries} />
+          <DiaryDrrList diaries={MyDiaryData} />
         </div>
       </div>
     </div>

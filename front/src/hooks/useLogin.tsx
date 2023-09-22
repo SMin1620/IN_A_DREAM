@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { loginUser } from "../api/services/authAPI"; // 경로는 실제 파일 위치에 따라 변경해주세요
 import { setToken } from "../stores/reducers/LoginToken";
 import axios from "axios";
+import Swal from "sweetalert2";
 
 const useLogin = (onLoginSuccess: () => void) => {
   const [email, setEmail] = useState<string>("");
@@ -39,6 +40,11 @@ const useLogin = (onLoginSuccess: () => void) => {
       }
     } catch (error) {
       console.error(error);
+      Swal.fire({
+        icon: "error",
+        title: "로그인 실패",
+        text: "로그인에 실패하였습니다. 아이디 비밀번호 확인해주세요.",
+      });
       // 에러 처리 로직 추가 필요.
     }
 
