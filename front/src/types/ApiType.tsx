@@ -28,3 +28,7 @@ export interface UserInfo {
   negativePoint: number;
   today: boolean;
 }
+export interface pageable {
+  page: number;
+  size: number;
+}
