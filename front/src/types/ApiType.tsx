@@ -31,4 +31,5 @@ export interface UserInfo {
 export interface pageable {
   page: number;
   size: number;
+  sort?: string[];
 }
