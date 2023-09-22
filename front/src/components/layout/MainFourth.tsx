@@ -4,6 +4,9 @@ import ImageSlide from "../features/ImgSlide/ImgSlide";
 import { SlideSpan } from "../common/SlideSpan";
 import { useAllDiary } from "../../hooks/useAllDiary";
 import { DiaryInfo } from "../../types/ApiType";
+import { useNavigate } from "react-router-dom";
+import { SERVER_URL } from "../../constants";
+
 const MainFourth = () => {
   const [diaries, setDiaries] = useState<DiaryInfo[]>([]);
   const {
@@ -11,9 +14,10 @@ const MainFourth = () => {
     isLoading,
     error,
   } = useAllDiary({ page: 0, size: 10 });
+  const navigate = useNavigate();
+
   useEffect(() => {
     if (response) {
-      console.log("폴슾페이지", response.data.data);
       setDiaries(response.data.data);
     }
   }, [response]);
@@ -57,12 +61,13 @@ const MainFourth = () => {
               >
                 <img
                   style={{
-                    width: index % 2 === 0 ? "400px" : "300px", // 짝수는 100px, 홀수는 150px
-                    height: index % 2 === 0 ? "300px" : "400px", // 짝수는 100px, 홀수는 150px
-                    borderRadius: 20,
+                    width: index % 2 === 0 ? "400px" : "300px",
+                    height: index % 2 === 0 ? "300px" : "400px",
+                    borderRadius: 40,
                     margin: "40px",
                   }}
-                  src={`http://192.168.30.162:8080/${diary.image}`}
+                  onClick={() => navigate(`/DreamDetail/${diary.id}`)}
+                  src={`${SERVER_URL}/${diary.image}`}
                   alt="Diary"
                 />
               </div>
