@@ -4,7 +4,7 @@ services:  # docker-compose의 경우 docker 컨테이너로 수행될 서비스
 
   elasticsearch:
     restart: unless-stopped
-    build: ./elastic/elasticsearch
+    build: ./elasticsearch
     container_name: elasticsearch
     volumes:
       - ./elasticsearch/config/elasticsearch.yml:/usr/share/elasticsearch/config/elasticsearch.yml
@@ -29,7 +29,7 @@ services:  # docker-compose의 경우 docker 컨테이너로 수행될 서비스
 
   kibana:
     restart: unless-stopped
-    build: ./elastic/kibana
+    build: ./kibana
     container_name: kibana
     environment:
       - TZ=Asia/Seoul
@@ -42,7 +42,7 @@ services:  # docker-compose의 경우 docker 컨테이너로 수행될 서비스
 
   logstash:
     restart: unless-stopped
-    build: ./elastic/logstash
+    build: ./logstash
     container_name: logstash
     volumes:
       - ./logstash/config/logstash.yml:/usr/share/logstash/config/logstash.yml
