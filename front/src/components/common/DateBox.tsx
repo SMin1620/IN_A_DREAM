@@ -10,8 +10,8 @@ const StyledDateButton = S.div<ButtonProps>`
 height:auto;
 width:10vw;
 color:#BCBCBC;
-padding-top:2%;
-padding-bottom:2%;
+padding-top:5%;
+padding-bottom:5%;
 border-radius:5px;
 background-color: #0F006A;
 display:flex;

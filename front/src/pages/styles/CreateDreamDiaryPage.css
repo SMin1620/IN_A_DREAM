@@ -1,10 +1,11 @@
 .create-dream-diary {
-  width: calc(100%-4rem);
+  /* width: calc(100% - 4rem); */
   height: 100vh;
   background-color: #f1e7d1;
   display: flex;
   flex-direction: column;
   overflow-x: hidden;
+  font-family: "Pretendard Variable";
 }
 
 .create-dream-diary-main {
@@ -34,7 +35,8 @@
 
 .create-dream-diary-left-top > img {
   width: 80%;
-  height: 80%;
+  height: auto;
+  /* height: 80%; */
   object-fit: contain;
   padding: 1rem;
   border-radius: 2.4rem;
@@ -49,19 +51,19 @@
   justify-content: center;
 }
 
-.date-box {
-  width: 15vw;
+.create-dream-diary-date-box {
+  /* width: 15vw; */
   margin-left: auto;
-  height: 3rem;
-  font-size: 2vw;
-  background-color: #0f006a;
-  color: #bcbcbc;
-  border: none;
-  border-radius: 10px;
+  /* height: 3rem; */
+  /* font-size: 2vw; */
+  /* background-color: #0f006a; */
+  /* color: #bcbcbc; */
+  /* border: none; */
+  /* border-radius: 10px; */
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-bottom: 5rem;
+  /* margin-bottom: 5rem; */
 }
 
 @media (max-width: 1024px) {

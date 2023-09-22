@@ -7,16 +7,20 @@ interface TogglePorps {
   ToggleType: "sell" | "public";
   setSell?: (value: boolean) => void;
   setIsPublic?: (value: boolean) => void;
+  data1: string;
+  data2: string;
 }
 
 const Button = S.button`
-  width: 4vw;
+  width: 4.2vw;
+  text-wrap: nowrap;
   height: 5vh;
   font-size: calc(1rem + 0.5vw);
   text-align: center;
   border: none;
   margin: 1rem 0;
   cursor: pointer;
+  font-family: "Pretendard Variable";
 
   @media (max-width:1024px) {
     width:7vw; 
@@ -27,12 +31,15 @@ const Button = S.button`
 
 const OnButton = S(Button)`
   border-radius: 1rem 0 0 1rem;
-  margin-left: 1rem
+  margin-left: 1rem;
+  font-size:1rem;
 `;
 
 const OffButton = S(Button)`
   border-radius: 0 1rem 1rem 0;
   margin-right: 1rem;
+  font-size:1rem;
+
 `;
 
 const Toggle = ({
@@ -41,12 +48,16 @@ const Toggle = ({
   ToggleType,
   setSell,
   setIsPublic,
+  data1,
+  data2,
 }: TogglePorps) => {
   const [status, setStatus] = useState<boolean>(false);
+
   const Able = {
     border: "none",
     backgroundColor: AbleColor,
-    color: "white",
+    color: "black",
+    fontWeight: "bold",
   };
 
   const Disable = {
@@ -70,10 +81,10 @@ const Toggle = ({
   return (
     <div>
       <OnButton style={status ? Able : Disable} onClick={handleClick}>
-        ON
+        {data1}
       </OnButton>
       <OffButton style={status ? Disable : Able} onClick={handleClick}>
-        OFF
+        {data2}
       </OffButton>
     </div>
   );
