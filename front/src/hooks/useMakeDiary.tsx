@@ -1,21 +1,21 @@
 import { useState } from "react";
 import { createDiary } from "../api/services/diaryAPI";
 
-interface DiaryData {
+export interface DiaryData {
   title: string;
   content: string;
-  isPublic: boolean;
-  sell: boolean;
-  imageUrl: string | null;
+  open: boolean;
+  sale: boolean;
+  image: string | null;
 }
 
 const useMakeDiary = () => {
   const [diaryData, setDiaryData] = useState<DiaryData>({
+    image: "",
     title: "",
     content: "",
-    isPublic: false,
-    sell: false,
-    imageUrl: "",
+    open: false,
+    sale: false,
   });
   // console.log(diaryData);
 
@@ -27,10 +27,10 @@ const useMakeDiary = () => {
     setDiaryData({ ...diaryData, content: e.target.value });
   };
 
-  const postDiary = async (diaryData: object) => {
+  const postDiary = async (diaryData: DiaryData) => {
     try {
       const response = await createDiary(diaryData);
-      console.log(response.data);
+      console.log(response);
     } catch (error) {
       console.error(error);
     }

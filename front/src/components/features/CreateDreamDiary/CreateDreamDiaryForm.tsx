@@ -54,9 +54,9 @@ const CreateDreamDiaryForm: React.FC<OwnProps> = ({
   const saveDiary = () => {
     setDiaryData((prev) => ({
       ...prev,
-      sell: sell,
-      isPublic: isPublic,
-      imageUrl: imageUrl,
+      sale: sell,
+      open: isPublic,
+      image: imageUrl,
     }));
     setPost(true);
   };
@@ -64,7 +64,7 @@ const CreateDreamDiaryForm: React.FC<OwnProps> = ({
   useEffect(() => {
     if (post === true) {
       postDiary(diaryData);
-      navigate("/main");
+      // navigate("/main"); 여기 디테일로 이동되게 해야할듯
     }
   }, [post]);
 
