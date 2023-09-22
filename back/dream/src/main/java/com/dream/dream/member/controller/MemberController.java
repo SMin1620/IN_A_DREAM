@@ -99,6 +99,6 @@ public class MemberController {
 
         Member member = memberService.memberInfo(memberEmail);
 
-        return new BaseResponse(HttpStatus.OK, "로그인 성공", memberMapper.memberToResponseDto(member));
+        return new BaseResponse(HttpStatus.OK, "로그인 성공", memberMapper.toResponse(member));
     }
 }

@@ -64,7 +64,7 @@ public class DiaryController {
             @PageableDefault(size = 3, sort = "id", direction = Sort.Direction.DESC) Pageable pageable) {
         Page<Diary> diaryPage = diaryService.getDiaryList(pageable);
         List<Diary> diaryList = diaryPage.getContent();
-        return new BaseResponse(HttpStatus.OK, "일기 목록 반환 성공", diaryMapper.toListResponseDtos(diaryList));
+        return new BaseResponse(HttpStatus.OK, "일기 목록 반환 성공", diaryMapper.toResponseDtos(diaryList));
     }
 
     /**
@@ -81,11 +81,10 @@ public class DiaryController {
 //        System.out.println(token);
 
         String memberEmail = jwtTokenProvider.getUserEmail(token);
-
         Page<Diary> diaryPage = diaryService.getDiaryList(memberEmail, pageable);
         List<Diary> diaryList = diaryPage.getContent();
 
-        return new BaseResponse(HttpStatus.OK, "내 일기 목록 반환 성공", diaryMapper.toListResponseDtos(diaryList));
+        return new BaseResponse(HttpStatus.OK, "내 일기 목록 반환 성공", diaryMapper.toResponseDtos(diaryList));
     }
 
     /**
