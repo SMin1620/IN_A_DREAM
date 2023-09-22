@@ -16,21 +16,33 @@ const data = [
     id: 3,
     img: cloud,
   },
+  {
+    id: 4,
+    img: cloud,
+  },
+  {
+    id: 5,
+    img: cloud,
+  },
+  {
+    id: 6,
+    img: cloud,
+  },
 ];
 
 const CardList = () => {
   return (
     <div className="card-list-wrapper">
-      <div className="card-list-row">
-        {data.map((d, index) => (
-          <Card key={index} id={d.id} img={d.img} index={index} />
-        ))}
-      </div>
-      <div className="card-list-row">
-        {data.map((d, index) => (
-          <Card key={index} id={d.id} img={d.img} index={index} />
-        ))}
-      </div>
+      {/* <div className="card-list-row"> */}
+      {data.map((d, index) => (
+        <Card key={index} id={d.id} img={d.img} index={index} />
+      ))}
+      {/* </div> */}
+      {/* <div className="card-list-row"> */}
+      {/* {data.map((d, index) => ( */}
+      {/* <Card key={index} id={d.id} img={d.img} index={index} /> */}
+      {/* ))} */}
+      {/* </div> */}
     </div>
   );
 };
