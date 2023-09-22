@@ -83,8 +83,8 @@ public class MemberDto {
         private String nickname;
         private String birth;
         private int isWrite;
-        private long positivePoint;
-        private long negativePoint;
-        private long neutralPoint;
+        private long positiveCoin;
+        private long negativeCoin;
+        private long neutralCoin;
     }
 }

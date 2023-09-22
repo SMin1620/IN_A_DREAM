@@ -44,6 +44,12 @@ public class DiaryService {
     private final LikeRepository likeRepository;
 
 
+    @Value("${app.fileupload.uploadDir}")
+    String uploadFolder;
+
+    @Value("${app.fileupload.uploadPath}")
+    String uploadPath;
+
     /**
      * 꿈 일기 생성 서비스
      */
@@ -52,21 +58,27 @@ public class DiaryService {
         Member member = memberRepository.findByEmail(memberEmail).orElseThrow(() -> new BusinessLogicException(ExceptionCode.MEMBER_NOT_FOUND));
 
         // 이미지 저장 결로
-        File uploadDir = new File("src" + File.separator + "main" + File.separator + "resources" + File.separator + "media");
+        File uploadDir = new File(uploadPath + File.separator + uploadFolder);
         log.error(uploadDir.getAbsolutePath());
         if (!uploadDir.exists()) {
             boolean e = uploadDir.mkdirs();
             String er = e ? "OK" : "NO";
             log.error(er);
         }
+
         Path rollback = null;
+        String fileUrl = null;
 
         try {
             // 이미지 다운로드
             URL url = new URL(requestBody.getImage());
             UUID uuid = UUID.randomUUID();
             String extension = "jpg";
-            Path outputPath = Path.of(uploadDir.getAbsolutePath(), uuid + "." + extension);
+            String savingFileName = uuid + "." + extension;
+            Path outputPath = Path.of(uploadDir.getAbsolutePath(), savingFileName);
+            System.out.println(outputPath.toString());
+            fileUrl = uploadFolder + "/" + savingFileName;
+            System.out.println(fileUrl);
             rollback = outputPath;
             try (InputStream in = url.openStream();
                  OutputStream out = Files.newOutputStream(outputPath, StandardOpenOption.CREATE)) {
@@ -81,6 +93,7 @@ public class DiaryService {
             }
 
         } catch (IOException e) {
+            e.printStackTrace();
             if (rollback != null) {
                 try {
                     Files.deleteIfExists(rollback);
@@ -102,7 +115,7 @@ public class DiaryService {
 
         // 일기 내용 RDB에 저장
         Diary diary = Diary.builder()
-                .image("classpath:/media/" + rollback.getFileName().toString())
+                .image(fileUrl)
                 .title(requestBody.getTitle())
                 .content(requestBody.getContent())
                 .positive(number1)
@@ -126,9 +139,9 @@ public class DiaryService {
 
         diaryRepository.save(diary);
 
-        member.setPositivePoint(member.getPositivePoint() + number1);
-        member.setNeutralPoint(member.getNeutralPoint() + number2);
-        member.setNegativePoint(member.getNegativePoint() + number3);
+        member.setPositiveCoin(member.getPositiveCoin() + number1);
+        member.setNeutralCoin(member.getNeutralCoin() + number2);
+        member.setNegativeCoin(member.getNegativeCoin() + number3);
 
         memberRepository.save(member);
 

@@ -17,7 +17,7 @@ import java.time.LocalDateTime;
 public class Member {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "member_id")
     private Long id;
 
@@ -36,9 +36,9 @@ public class Member {
     @Column(nullable = false)
     private LocalDateTime createAt;
 
-    private Long positivePoint;
-    private Long negativePoint;
-    private Long neutralPoint;
+    private Long positiveCoin;
+    private Long negativeCoin;
+    private Long neutralCoin;
 
     // 리프레시 토큰
     private String refreshToken;

@@ -11,6 +11,8 @@ public interface DiaryMapper {
 
     DiaryDto.DiaryResponseDto diaryToResponseDto(Diary diary);
 
+    List<DiaryDto.DiaryResponseDto> toResponseDtos(List<Diary> diaryList);
+
     DiaryDto.DiaryDetailResponseDto diaryToDetailResponseDto(Diary diary);
 
     DiaryDto.DiaryListResponseDto toListResponseDto(Diary diary);

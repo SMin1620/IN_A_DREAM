@@ -27,27 +27,27 @@ public class ExchangeService {
     public ExchangeDto.ExchangeResponseDto exchangeEmotion(String memberEmail, ExchangeDto.ExchangeRequestDto requestBody){
         Member member = memberRepository.findByEmail(memberEmail).orElseThrow(()->new BusinessLogicException(ExceptionCode.MEMBER_NOT_FOUND));
 
-        member.setPositivePoint(member.getPositivePoint() - requestBody.getSend().getPositivePoint());
-        member.setNegativePoint(member.getNegativePoint() - requestBody.getSend().getNegativePoint());
-        member.setNeutralPoint(member.getNeutralPoint() - requestBody.getSend().getNeutralPoint());
+        member.setPositiveCoin(member.getPositiveCoin() - requestBody.getSend().getPositivePoint());
+        member.setNegativeCoin(member.getNegativeCoin() - requestBody.getSend().getNegativePoint());
+        member.setNeutralCoin(member.getNeutralCoin() - requestBody.getSend().getNeutralPoint());
 
-        member.setPositivePoint(member.getPositivePoint() + requestBody.getReceive().getPositivePoint());
-        member.setNegativePoint(member.getNegativePoint() + requestBody.getReceive().getNegativePoint());
-        member.setNeutralPoint(member.getNeutralPoint() + requestBody.getReceive().getNeutralPoint());
+        member.setPositiveCoin(member.getPositiveCoin() + requestBody.getReceive().getPositivePoint());
+        member.setNegativeCoin(member.getNegativeCoin() + requestBody.getReceive().getNegativePoint());
+        member.setNeutralCoin(member.getNeutralCoin() + requestBody.getReceive().getNeutralPoint());
 
         Exchange exchange = Exchange.builder().
                 member(member).
-                positivePoint(member.getPositivePoint()).
-                negativePoint(member.getNeutralPoint()).
-                neutralPoint(member.getNeutralPoint()).
+                positivePoint(member.getPositiveCoin()).
+                negativePoint(member.getNeutralCoin()).
+                neutralPoint(member.getNeutralCoin()).
                 build();
 
         exchangeRepository.save(exchange);
 
         return ExchangeDto.ExchangeResponseDto.builder().
-                positivePoint(member.getPositivePoint()).
-                negativePoint(member.getNegativePoint()).
-                neutralPoint(member.getNeutralPoint()).
+                positivePoint(member.getPositiveCoin()).
+                negativePoint(member.getNegativeCoin()).
+                neutralPoint(member.getNeutralCoin()).
                 build();
     }
 
