@@ -41,7 +41,7 @@ const NavbarMyModal: React.FC<isModalOpen> = ({
       height={5}
       left={3}
       bottom={1}
-      isopen={isOpen}
+      open={isOpen}
     >
       <div className="coin-box">
         <CoinComponent>

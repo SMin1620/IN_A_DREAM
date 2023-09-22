@@ -9,21 +9,21 @@ interface BoxPropsComponents {
   width: number;
   height: number;
   children?: React.ReactNode;
-  textWrap?: string;
-  isopen?: boolean;
+  textwrap?: string;
+  open?: boolean;
 }
 
 const StyledBox = S.div<BoxPropsComponents>`
   position: ${(props) => props.position};
   top: ${(props) => props.top}%;
   bottom: ${(props) => props.bottom}%;
-  left: ${(props) => (props.isopen ? "0" : "-80")}%;
+  left: ${(props) => (props.open ? "0" : "-80")}%;
 
   width: ${(props) => props.width}%;
   height: ${(props) => props.height}%;
-  text-wrap: ${(props) => props.textWrap};
+  text-wrap: ${(props) => props.textwrap};
 
-  transform: translateX(${(props) => (props.isopen ? "0" : "-100%")});
+  transform: translateX(${(props) => (props.open ? "0" : "-100%")});
   transition: transform 1s ease-in-out;
 
   font-size: 1rem;

@@ -18,7 +18,7 @@ const DiaryContainer = styled.div<{ selected?: boolean }>`
   transition: transform 0.1s ease-in-out;
   margin: 20px;
   z-index: ${(props) => (props.selected ? "2" : "1")};
-  transition: padding-top 0.5s ease-in-out, padding-bottom 0.5s ease-in-out;
+  transition: padding-top 1s ease-in-out, padding-bottom 1s ease-in-out;
 
   display: flex;
   align-items: center;
@@ -31,7 +31,7 @@ const Image = styled.img`
   position: relative;
   top: 0;
   right: 0;
-  width: 70%;
+  width: 50%;
   height: auto;
 `;
 

@@ -14,23 +14,23 @@ export interface SlideSpanProps {
   speed?: number;
   padding?: string;
   display?: string;
-  startPosition: number;
-  endPosition: number;
+  startposition: number;
+  endposition: number;
 }
 
-const slide = (startPosition: number, endPosition: number) => keyframes`
+const slide = (startposition: number, endposition: number) => keyframes`
 0% {
-  transform: translateX(${startPosition}%);
+  transform: translateX(${startposition}%);
 }
 
 100% {
-  transform: translateX(${endPosition}%);
+  transform: translateX(${endposition}%);
 }
 `;
 
 export const SlideSpan = S.span<SlideSpanProps>`
   
-  animation: ${(props) => slide(props.startPosition, props.endPosition)} ${(
+  animation: ${(props) => slide(props.startposition, props.endposition)} ${(
   props
 ) => props.speed || 15}s linear infinite;
   margin:${(props) => props.margin};

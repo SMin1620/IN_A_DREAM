@@ -28,8 +28,8 @@ const SearchBar = () => {
       <button onClick={postSearch}>
         <span>
           <SlideSpan
-            startPosition={200}
-            endPosition={-520}
+            startposition={200}
+            endposition={-520}
             speed={10}
             padding="0 0.3rem"
             fontFamily="IAMAPLAYER"
@@ -37,8 +37,8 @@ const SearchBar = () => {
             search
           </SlideSpan>
           <SlideSpan
-            startPosition={200}
-            endPosition={-520}
+            startposition={200}
+            endposition={-520}
             speed={10}
             padding="0 0.3rem"
             fontFamily="IAMAPLAYER"
@@ -46,8 +46,8 @@ const SearchBar = () => {
             search
           </SlideSpan>
           <SlideSpan
-            startPosition={200}
-            endPosition={-520}
+            startposition={200}
+            endposition={-520}
             speed={10}
             padding="0 0.3rem"
             fontFamily="IAMAPLAYER"
@@ -55,8 +55,8 @@ const SearchBar = () => {
             search
           </SlideSpan>
           <SlideSpan
-            startPosition={200}
-            endPosition={-520}
+            startposition={200}
+            endposition={-520}
             speed={10}
             padding="0 0.3rem"
             fontFamily="IAMAPLAYER"
