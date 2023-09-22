@@ -32,6 +32,7 @@ public class Diary {
     private String title;
 
     @Column(nullable = false)
+    @Lob
     private String content;
 
     @Column(nullable = false)
