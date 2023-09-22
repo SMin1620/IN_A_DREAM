@@ -1,6 +1,11 @@
 .create-dream-diary-form {
   display: flex;
   flex-direction: column;
+  border: #c3baa5 solid 0.4rem;
+  margin-left: 3%;
+  border-radius: 20px;
+  padding-bottom: 3%;
+  padding-left: 3%;
 }
 
 .create-dream-diary-form-top {
@@ -9,6 +14,7 @@
   align-items: center;
   padding-left: 1rem;
   width: 100%;
+  padding-top: 3%;
 }
 
 .create-dream-diary-form-top > input {
@@ -17,6 +23,8 @@
   font-size: 2rem;
   width: 20vw;
   height: 3rem;
+  font-family: omyu_pretty;
+  font-weight: bold;
 }
 
 .create-dream-diary-form-top > input:focus {
@@ -51,6 +59,8 @@
   resize: none;
   border: none;
   background-color: transparent;
+  font-family: omyu_pretty;
+  font-weight: normal;
 }
 
 .create-dream-diary-form-textarea:focus {
@@ -73,13 +83,16 @@
   background-color: #c2ac79;
   margin: 0 1rem;
   color: white;
-  width: 10vw;
+  width: 8vw;
   height: 3rem;
   margin-top: 1rem;
   border: none;
   border-radius: 2.4rem;
   align-self: flex-end;
   cursor: pointer;
+  font-family: "Pretendard Variable";
+  font-weight: bold;
+  font-size: 1.2rem;
 }
 
 .create-diary-form-button:active {

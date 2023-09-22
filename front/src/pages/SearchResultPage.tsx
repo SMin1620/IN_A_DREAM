@@ -8,9 +8,6 @@ const SearchResultPage = () => {
     <div className="search-result-wrapper">
       <Navbar />
       {/* <CardList /> */}
-      {/* <CardList /> */}
-      {/* <CardList /> */}
-      {/* <CardList /> */}
     </div>
   );
 };
