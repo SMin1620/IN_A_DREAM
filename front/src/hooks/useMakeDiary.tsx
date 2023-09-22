@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { createDiary } from "../api/services/diaryAPI";
+import { useNavigate } from "react-router-dom";
 
 export interface DiaryData {
   title: string;
@@ -10,6 +11,7 @@ export interface DiaryData {
 }
 
 const useMakeDiary = () => {
+  const navigate = useNavigate();
   const [diaryData, setDiaryData] = useState<DiaryData>({
     image: "",
     title: "",
@@ -30,7 +32,7 @@ const useMakeDiary = () => {
   const postDiary = async (diaryData: DiaryData) => {
     try {
       const response = await createDiary(diaryData);
-      console.log(response);
+      navigate(`/DreamDetail/${response.data.data.id}`);
     } catch (error) {
       console.error(error);
     }
