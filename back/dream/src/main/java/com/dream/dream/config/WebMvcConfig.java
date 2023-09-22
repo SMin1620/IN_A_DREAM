@@ -16,9 +16,12 @@ public class WebMvcConfig implements WebMvcConfigurer {
     @Value("${app.fileupload.uploadPath}")
     String uploadPath;
 
+    @Value("${app.fileupload.readPath}")
+    String readPath;
+
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
         registry.addResourceHandler("/image/**")
-                .addResourceLocations("file://" + uploadPath + File.separator + uploadFolder + File.separator);
+                .addResourceLocations("file:/" + readPath + File.separator + uploadFolder + File.separator);
     }
 }
