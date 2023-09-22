@@ -30,7 +30,7 @@ export interface LoginButton {
   height?: string;
   border?: string;
   margin?: string;
-  backgroundColor?: string;
+  backgroundcolor?: string;
   color?: string;
-  borderRadius?: string;
+  borderradius?: string;
 }

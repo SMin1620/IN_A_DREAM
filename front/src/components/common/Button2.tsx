@@ -3,20 +3,20 @@ import S from "styled-components";
 import { LoginButton } from "../../types/index";
 
 const StyledButton = S.button<LoginButton>`
-  background-color: ${(props) => props.backgroundColor || "black"};
+  background-color: ${(props) => props.backgroundcolor || "black"};
   height: ${(props) => props.height || "4rem"};
   width: ${(props) => props.width || "100%"};
   border: ${(props) => props.border || "1px solid black"};
   margin: ${(props) => props.margin};
   color: ${(props) => props.color || "white"};
-  border-radius: ${(props) => props.borderRadius};
+  border-radius: ${(props) => props.borderradius};
 
   &:hover {
     cursor: pointer;
   }
 
   &:active {
-    background-color: ${(props) => props.backgroundColor || "lightgray"};
+    background-color: ${(props) => props.backgroundcolor || "lightgray"};
     color: ${(props) => props.color || "black"};
     border: ${(props) => props.border || "none"};
   }
@@ -29,7 +29,7 @@ const Button2: React.FC<LoginButton> = ({
   height,
   border,
   margin,
-  backgroundColor,
+  backgroundcolor,
   color,
 }) => {
   return (
@@ -39,7 +39,7 @@ const Button2: React.FC<LoginButton> = ({
       height={height}
       border={border}
       margin={margin}
-      backgroundColor={backgroundColor}
+      backgroundcolor={backgroundcolor}
       color={color}
     >
       {children}

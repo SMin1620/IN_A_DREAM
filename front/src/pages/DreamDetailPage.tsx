@@ -19,6 +19,8 @@ const DreamDetailPage = () => {
     getDiaryDetail(id);
   }, [id]);
 
+  console.log(diaryDetail);
+
   return (
     <div className="diary-detail">
       <Navbar />

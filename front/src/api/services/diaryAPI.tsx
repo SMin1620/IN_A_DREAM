@@ -41,9 +41,13 @@ export const analyzeKeywordsInDiaryContent = (content: string) =>
   api1.post("/api/diary/keyword", { content });
 
 // 일기 공개 설정
-export const updateDiaryVisibility = (diaryId: string, isPublic: boolean) =>
-  api1.put(`api/diary/public`, { diaryId, isPublic });
+export const updateDiaryVisibility = (
+  diaryId: string | undefined,
+  isPublic: boolean | undefined
+) => api1.put(`api/diary/public`, { diaryId, isPublic });
 
 // 일기 판매 설정
-export const updateDiarySaleStatus = (diaryId: string, isSale: boolean) =>
-  api1.put("api/dairy/sale");
+export const updateDiarySaleStatus = (
+  diaryId: string | undefined,
+  isSale: boolean | undefined
+) => api1.put("api/dairy/sale");
