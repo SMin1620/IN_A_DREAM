@@ -30,9 +30,7 @@ const DreamDetailPage = () => {
               src={`${SERVER_URL}/${diaryDetail?.image}`}
               alt="일기일기"
             />
-            <DateBox>
-              <DateForm />
-            </DateBox>
+            <DateForm />
           </div>
           <div className="diary-detail-left-bottom">
             <div className="coin-wraper">
@@ -51,7 +49,7 @@ const DreamDetailPage = () => {
             </div>
 
             <div className="diary-detail-left-bottom-etc">
-              <DetailETC diaryDetail={diaryDetail} />
+              <DetailETC diaryDetail={diaryDetail} diaryId={id} />
             </div>
           </div>
         </div>
