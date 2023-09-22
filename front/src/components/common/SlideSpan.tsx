@@ -13,6 +13,7 @@ export interface SlideSpanProps {
   backgroundColor?: string;
   speed?: number;
   padding?: string;
+  display?: string;
   startPosition: number;
   endPosition: number;
 }
@@ -40,4 +41,5 @@ export const SlideSpan = S.span<SlideSpanProps>`
   font-family :${(props) => props.fontFamily};
   background-color :${(props) => props.backgroundColor};
   padding :${(props) => props.padding};
+  display :${(props) => props.display};
 `;

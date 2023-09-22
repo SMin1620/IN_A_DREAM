@@ -130,11 +130,13 @@
   font-family: "Pretendard Variable", sans-serif;
   font-weight: 700;
 }
-
 * {
   box-sizing: border-box;
 }
 
+body {
+  background-color: black;
+}
 /*  나중에 지울꺼 */
 div,
 [class],
