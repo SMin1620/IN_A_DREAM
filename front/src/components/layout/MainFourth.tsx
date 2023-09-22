@@ -1,17 +1,23 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "./styles/MainFourth.css";
 import ImageSlide from "../features/ImgSlide/ImgSlide";
 import { SlideSpan } from "../common/SlideSpan";
-
-const itemData = [
-  "https://images.unsplash.com/photo-1597262975002-c5c3b14bbd62",
-  "https://images.unsplash.com/photo-1519710164239-da123dc03ef4",
-  "https://images.unsplash.com/photo-1597262975002-c5c3b14bbd62",
-  "https://images.unsplash.com/photo-1519710164239-da123dc03ef4",
-  "https://images.unsplash.com/photo-1597262975002-c5c3b14bbd62",
-  "https://images.unsplash.com/photo-1519710164239-da123dc03ef4",
-];
+import { useAllDiary } from "../../hooks/useAllDiary";
+import { DiaryInfo } from "../../types/ApiType";
 const MainFourth = () => {
+  const [diaries, setDiaries] = useState<DiaryInfo[]>([]);
+  const {
+    data: response,
+    isLoading,
+    error,
+  } = useAllDiary({ page: 0, size: 10 });
+  useEffect(() => {
+    if (response) {
+      console.log("폴슾페이지", response.data.data);
+      setDiaries(response.data.data);
+    }
+  }, [response]);
+
   return (
     <div className="MainFourth">
       <div className="FourthTitleBox">
@@ -29,44 +35,40 @@ const MainFourth = () => {
       </div>
 
       <div className="MovigImgBox">
-        <div style={{ display: "flex", overflow: "hidden" }}>
+        <div
+          className="MovingImgs"
+          style={{ display: "flex", overflow: "hidden" }}
+        >
           <SlideSpan
             startPosition={-100}
             endPosition={100}
-            speed={7}
-            width="90%"
+            speed={15}
+            width="100%"
+            display="flex"
           >
-            <span>
-              <img
-                style={{ width: "100px", height: "100px" }}
-                src="https://images.unsplash.com/photo-1597262975002-c5c3b14bbd62"
-                alt=""
-              />
-            </span>
-            <span>
-              <img
-                style={{ width: "100px", height: "100px" }}
-                src="https://images.unsplash.com/photo-1597262975002-c5c3b14bbd62"
-                alt=""
-              />
-            </span>
-            <span>
-              <img
-                style={{ width: "100px", height: "100px" }}
-                src="https://images.unsplash.com/photo-1597262975002-c5c3b14bbd62"
-                alt=""
-              />
-            </span>
-            <span>
-              <img
-                style={{ width: "100px", height: "100px" }}
-                src="https://images.unsplash.com/photo-1597262975002-c5c3b14bbd62"
-                alt=""
-              />
-            </span>
+            {diaries.map((diary, index) => (
+              <div
+                key={index}
+                style={{
+                  display: "flex",
+                  justifyContent: "center",
+                  alignItems: "center",
+                }}
+              >
+                <img
+                  style={{
+                    width: index % 2 === 0 ? "400px" : "300px", // 짝수는 100px, 홀수는 150px
+                    height: index % 2 === 0 ? "300px" : "400px", // 짝수는 100px, 홀수는 150px
+                    borderRadius: 20,
+                    margin: "40px",
+                  }}
+                  src={`http://192.168.30.162:8080/${diary.image}`}
+                  alt="Diary"
+                />
+              </div>
+            ))}
           </SlideSpan>
         </div>
-        <div>여기는 나중에 위에 슬라이드스팬 크기 조절해서 채우고 없애기</div>
       </div>
     </div>
   );
