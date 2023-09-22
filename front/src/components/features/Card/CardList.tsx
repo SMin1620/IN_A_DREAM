@@ -2,35 +2,18 @@ import React from "react";
 import Card from "./Card";
 import "./styles/CardList.css";
 import cloud from "../../../assets/image/cloud.png";
+import { DiaryInfo } from "../../../types/ApiType";
 
-const data = [
-  {
-    id: 1,
-    img: cloud,
-  },
-  {
-    id: 2,
-    img: cloud,
-  },
-  {
-    id: 3,
-    img: cloud,
-  },
-];
+interface CardListProps {
+  diaries: Array<DiaryInfo>;
+}
 
-const CardList = () => {
+const CardList: React.FC<CardListProps> = (props) => {
   return (
     <div className="card-list-wrapper">
-      <div className="card-list-row">
-        {data.map((d, index) => (
-          <Card key={index} id={d.id} img={d.img} index={index} />
-        ))}
-      </div>
-      <div className="card-list-row">
-        {data.map((d, index) => (
-          <Card key={index} id={d.id} img={d.img} index={index} />
-        ))}
-      </div>
+      {props.diaries.map((diary, index) => (
+        <Card key={index} index={index} diary={diary} />
+      ))}
     </div>
   );
 };

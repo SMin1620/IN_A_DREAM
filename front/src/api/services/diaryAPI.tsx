@@ -1,9 +1,12 @@
 import api1 from "../instances/api1";
-import { pageable } from "../../types";
+import { pageable } from "../../types/ApiType";
 import { DiaryData } from "./../../hooks/useMakeDiary";
 
 // 모든 일기 목록 조회
-export const fetchAllDiaries = () => api1.get(`/api/diary`);
+export const fetchAllDiaries = (pageable: pageable) =>
+  api1.get(`/api/diary`, {
+    params: pageable,
+  });
 
 // 내 일기 목록 조회 수정예상 유저id없음
 export const fetchMyDiaries = (pageable: pageable) =>

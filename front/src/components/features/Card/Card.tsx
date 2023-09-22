@@ -2,10 +2,10 @@ import React, { useEffect, useState } from "react";
 import cloud from "../../../assets/image/cloud.png";
 import "./styles/Card.css";
 import DateBox from "../../common/DateBox";
+import { DiaryInfo } from "../../../types/ApiType";
 
 interface CardProps {
-  id: number;
-  img: string;
+  diary: DiaryInfo;
   index: number;
 }
 
@@ -40,10 +40,12 @@ const Card: React.FC<CardProps> = (props) => {
     <div className="card-wrapper" style={cardStyle}>
       <img src={cloud} alt="" style={{ width: "20vw" }} />
       <div className="card-date">
-        <DateBox>2023.03.23</DateBox>
+        <DateBox>{props.diary.createdAt}</DateBox>
       </div>
-
-      {/* Card */}
+      <div className="card-content">
+        <div className="card-nickname">{props.diary.member.nickname}</div>
+        <div className="card-title">{props.diary.title}</div>
+      </div>
     </div>
   );
 };

@@ -1,21 +1,9 @@
 import { useState } from "react";
+import { useQuery } from "react-query";
 import { fetchAllDiaries } from "../api/services/diaryAPI";
+import { DiaryInfo, pageable } from "../types/ApiType";
 
-const useAllDiary = () => {
-  const handleGetAllDiary = async () => {
-    console.log("다이어리 다 불러오기 함수 실행");
-
-    try {
-      const response = await fetchAllDiaries();
-      console.log(response);
-      console.log("성공");
-    } catch (error) {
-      console.log(error);
-      console.log("실패");
-    }
-  };
-
-  return { handleGetAllDiary };
+export const useAllDiary = (pageable: pageable) => {
+  console.log("다이어리 다 받기");
+  return useQuery(["diaries", pageable], () => fetchAllDiaries(pageable));
 };
-
-export default useAllDiary;

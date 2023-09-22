@@ -1,7 +1,3 @@
-import React from "react";
-
-const index = () => {
-  return <div>index</div>;
-};
-
-export default index;
+export function padNumber(num: number): string {
+  return num < 10 ? `0${num}` : `${num}`;
+}

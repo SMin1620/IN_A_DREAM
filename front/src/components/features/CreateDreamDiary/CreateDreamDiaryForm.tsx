@@ -70,32 +70,36 @@ const CreateDreamDiaryForm: React.FC<OwnProps> = ({
       <div className="create-dream-diary-form-top">
         <input
           type="text"
-          placeholder="제목을 입력하세요"
+          placeholder="제목을 입력하세요."
           onChange={handleTitleChange}
         />
         <div className="create-dream-diary-form-toggle-box">
           <div>
             <div className="create-dream-diary-form-label-box">
-              <Label marginBottom="0">판매</Label>
-              <Label marginBottom="0">보관</Label>
+              {/* <Label marginBottom="0">판매</Label> */}
+              {/* <Label marginBottom="0">보관</Label> */}
             </div>
             <Toggle
               AbleColor="#C3BAA5"
               DisableColor="#E9DEC6"
               ToggleType="sell"
               setSell={setSell}
+              data1="판  매"
+              data2="보  관"
             />
           </div>
           <div>
             <div className="create-dream-diary-form-label-box">
-              <Label marginBottom="0">공개</Label>
-              <Label marginBottom="0">비공개</Label>
+              {/* <Label marginBottom="0">공개</Label> */}
+              {/* <Label marginBottom="0">비공개</Label> */}
             </div>
             <Toggle
               AbleColor="#EFBCAE"
               DisableColor="#F6E0DA"
               ToggleType="public"
               setIsPublic={setIsPublic}
+              data1="공  개"
+              data2="비공개"
             />
           </div>
         </div>
@@ -103,7 +107,7 @@ const CreateDreamDiaryForm: React.FC<OwnProps> = ({
       <textarea
         onChange={handleContentChange}
         className="create-dream-diary-form-textarea"
-        placeholder="내용을 입력해 주세요"
+        placeholder="내용을 입력해 주세요."
       />
       <div className="create-dream-diary-form-button-box">
         {clicked ? (
