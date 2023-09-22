@@ -13,6 +13,10 @@ public interface ElasticRepository extends ElasticsearchRepository<DiaryElastic,
 
     List<DiaryElastic> findAll();
 
-    @Query("{\"match\": {\"title_nori\": {\"query\": \"?0\"}}}")
+//    @Query("{\"match\": {\"title_nori\": {\"query\": \"?0\"}}}")
+    @Query("{\"bool\": {\"must\": [{\"term\": {\"member_id\" : \"?0\"}}]}}")
     List<DiaryElastic> findAllByMemberId(Long memberId);
+
+//    @Query("{ \"query\" : {\"bool\": {\"must\": [{\"term\": {\"member_id\" : \"?0\"}}]}}}")
+//    List<DiaryElastic> findByKeyword(Long memberId);
 }
