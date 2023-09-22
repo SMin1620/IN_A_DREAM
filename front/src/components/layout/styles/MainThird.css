@@ -1,5 +1,5 @@
 .main-third-wrapper {
-  height: 100vh;
+  height: 130vh;
   color: white;
   /* color: #c3baa5; */
   padding-left: 3%;
@@ -7,6 +7,7 @@
 .main-third-storeshop {
   height: 100%;
   width: 100%;
+  padding-right: 6%;
   /* border: #ff24d3 1px solid; */
 }
 .main-third-wrapper h1 {

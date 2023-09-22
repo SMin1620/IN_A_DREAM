@@ -1,7 +1,8 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "./styles/MainThird.css";
 import ImgScrollCardBox from "../features/ImgScrollCardBox/ImgScrollCardBox";
 import CardList from "../features/Card/CardList";
+import useAllDiary from "../../hooks/useAllDiary";
 
 const itemData = [
   {
@@ -54,11 +55,17 @@ const itemData = [
   },
 ];
 const MainThird = () => {
+  const { handleGetAllDiary } = useAllDiary();
+
+  useEffect(() => {
+    console.log("여기여");
+    handleGetAllDiary();
+  }, []);
+
   return (
     <div className="main-third-wrapper">
       <h1>STORE</h1>
       <h5>SEE ALL DREAMS</h5>
-
       <div className="main-third-storeshop">
         {/* <ImgScrollCardBox itemData={itemData} /> */}
         <CardList />

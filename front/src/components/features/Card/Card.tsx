@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import cloud from "../../../assets/image/cloud.png";
 import "./styles/Card.css";
+import DateBox from "../../common/DateBox";
 
 interface CardProps {
   id: number;
@@ -38,6 +39,10 @@ const Card: React.FC<CardProps> = (props) => {
   return (
     <div className="card-wrapper" style={cardStyle}>
       <img src={cloud} alt="" style={{ width: "20vw" }} />
+      <div className="card-date">
+        <DateBox>2023.03.23</DateBox>
+      </div>
+
       {/* Card */}
     </div>
   );
