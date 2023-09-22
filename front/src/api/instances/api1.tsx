@@ -2,6 +2,7 @@ import axios from "axios";
 
 // Axios 인스턴스 생성
 const api1 = axios.create({
+  // baseURL: "http://52.78.186.98:8082", // API의 기본 URL
   baseURL: "http://192.168.30.162:8080/", // API의 기본 URL
 });
 
