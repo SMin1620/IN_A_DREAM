@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.io.IOException;
 import java.nio.file.attribute.UserPrincipalNotFoundException;
 
 @RestController
@@ -32,7 +33,7 @@ public class ElasticController {
     @GetMapping
     public BaseResponse listElasticDiary(
             HttpServletRequest request
-    ) throws UserPrincipalNotFoundException {
+    ) throws IOException {
         //////////////////////// 토큰으로 인가된 사용자 정보 처리하는 로직
         String token = jwtTokenProvider.resolveToken(request);
         jwtTokenProvider.validateToken(token);
