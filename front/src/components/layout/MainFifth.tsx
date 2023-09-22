@@ -1,6 +1,9 @@
 import React from "react";
 import "./styles/MainFifth.css";
 import useKarlo from "../../hooks/useKarlo";
+import image10 from "../../assets/image/image10.png";
+import image9 from "../../assets/image/image9.png";
+import image8 from "../../assets/image/image8.png";
 
 const MainFifth = () => {
   return (
@@ -41,24 +44,23 @@ const MainFifth = () => {
           expressions of our inner selves.
         </div>
       </div>
-      <div className="KeywordImgBox">
+      <div className="main-fifth-keyword-imgbox">
         <div className="main-fifth-gamsung-more">MORE</div>
         <div className="HappyBox">
-          해피이미지
+          <img src={image10} alt="" />
           <span>HAPPY</span>
-          해피이미지
+          <img src={image10} alt="" />
         </div>
         <div className="SadBox">
           <span>SAD</span>
-          해피이미지
+          <img src={image9} alt="" />
           <span>SAD</span>
         </div>
         <div className="BalancedBox">
-          발란스이미지
+          <img src={image8} alt="" />
           <span>BALANCED</span>
-          발란스이미지
+          <img src={image8} alt="" />
         </div>
-        위에 것들 크기 컴포넌트 만들어서 넣고 맞추기
       </div>
     </div>
   );

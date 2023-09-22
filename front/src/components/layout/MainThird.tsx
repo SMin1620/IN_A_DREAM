@@ -55,10 +55,9 @@ const itemData = [
   },
 ];
 const MainThird = () => {
-  const { handleGetAllDiary } = useAllDiary();
+  const { handleGetAllDiary, diaries } = useAllDiary();
 
   useEffect(() => {
-    console.log("여기여");
     handleGetAllDiary();
   }, []);
 

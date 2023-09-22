@@ -1,5 +1,5 @@
 .main-fifth-wrapper {
-  height: 100vh;
+  height: 200vh;
   color: #646464;
 }
 .main-fifth-title-box {
@@ -45,9 +45,19 @@
   /* left: 0; */
 }
 
-.KeywordImgBox {
+.main-fifth-keyword-imgbox {
   height: 55%;
+  font-family: "BMDOHYEON";
+  font-size: 10rem;
+  color: #c3baa5;
 }
+
+.main-fifth-keyword-imgbox img {
+  border-radius: 10px;
+  width: 200px;
+  height: 150px;
+}
+
 .main-fifth-gamsung-title {
   font-weight: bolder;
   font-family: "SBAggroB";
