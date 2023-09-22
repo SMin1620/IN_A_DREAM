@@ -20,11 +20,11 @@ public class DiaryDto {
     @AllArgsConstructor
     @Builder
     public static class DiaryCreateRequestDto {
-        @Schema(example = "./test.jpg")
+        @Schema(example = "test.jpg")
         private String image;
-        @Schema(example = "test title")
+        @Schema(example = "일기 제목")
         private String title;
-        @Schema(example = "test content")
+        @Schema(example = "일기 내용입니다. 나는 고래상어")
         private String content;
         @Schema
         private boolean open;
