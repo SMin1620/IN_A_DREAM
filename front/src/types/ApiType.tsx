@@ -14,7 +14,7 @@ export interface DiaryInfo {
   sale: Boolean;
   createdAt: string;
   emotion: string;
-  member: object;
+  member: UserInfo;
 }
 
 export interface UserInfo {
