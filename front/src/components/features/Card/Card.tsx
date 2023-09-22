@@ -38,7 +38,11 @@ const Card: React.FC<CardProps> = (props) => {
 
   return (
     <div className="card-wrapper" style={cardStyle}>
-      <img src={cloud} alt="" style={{ width: "20vw" }} />
+      <img
+        src={`http://192.168.30.162:8080/${props.diary.image}`}
+        alt="이미지"
+        style={{ width: "20vw" }}
+      />
       <div className="card-date">
         <DateBox>{props.diary.createdAt}</DateBox>
       </div>
