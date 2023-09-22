@@ -34,8 +34,3 @@ export interface LoginButton {
   color?: string;
   borderRadius?: string;
 }
-
-export interface pageable {
-  page: number;
-  size: number;
-}

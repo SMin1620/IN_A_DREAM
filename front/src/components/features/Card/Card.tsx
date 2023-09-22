@@ -2,10 +2,10 @@ import React, { useEffect, useState } from "react";
 import cloud from "../../../assets/image/cloud.png";
 import "./styles/Card.css";
 import DateBox from "../../common/DateBox";
+import { DiaryInfo } from "../../../types/ApiType";
 
 interface CardProps {
-  id: number;
-  img: string;
+  diary: DiaryInfo;
   index: number;
 }
 
@@ -42,8 +42,6 @@ const Card: React.FC<CardProps> = (props) => {
       <div className="card-date">
         <DateBox>2023.03.23</DateBox>
       </div>
-
-      {/* Card */}
     </div>
   );
 };
