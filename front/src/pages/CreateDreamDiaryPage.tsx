@@ -23,9 +23,9 @@ const CreateDreamDiaryPage = () => {
         </div>
 
         <div className="create-dream-diary-right">
-          <div className="date-box">
+          {/* <div className="date-box">
             <DateForm />
-          </div>
+          </div> */}
           <CreateDreamDiaryForm
             setDiaryImage={setDiaryImage}
             setImageUrl={setImageUrl}

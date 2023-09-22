@@ -1,5 +1,6 @@
 import api1 from "../instances/api1";
 import { pageable } from "../../types";
+import { DiaryData } from "./../../hooks/useMakeDiary";
 
 // 모든 일기 목록 조회
 export const fetchAllDiaries = () => api1.get(`/api/diary`);
@@ -15,8 +16,14 @@ export const fetchDiaryDetail = (diaryId: string) =>
   api1.get(`/api/diary/${diaryId}`);
 
 // 일기 최종 생성 다이어리 데이터타입 나중에 어떤식으로해야할지 정해지면 따로정의해줘야할듯
-export const createDiary = (diaryData: object) =>
-  api1.post(`/api/diary`, diaryData);
+export const createDiary = (diaryData: DiaryData) =>
+  api1.post(`/api/diary`, {
+    image: diaryData.image,
+    title: diaryData.title,
+    content: diaryData.content,
+    open: diaryData.open,
+    sale: diaryData.sale,
+  });
 
 // 일기 좋아요 + 취소
 export const toggleLikeDiary = (diaryId: string) =>
