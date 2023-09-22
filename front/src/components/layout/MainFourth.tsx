@@ -40,8 +40,8 @@ const MainFourth = () => {
           style={{ display: "flex", overflow: "hidden" }}
         >
           <SlideSpan
-            startPosition={-100}
-            endPosition={100}
+            startposition={-100}
+            endposition={100}
             speed={15}
             width="100%"
             display="flex"
