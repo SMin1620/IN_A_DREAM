@@ -1,6 +1,6 @@
 FROM openjdk:17-alpine
 
-WORKDIR /usr/src/app
+WORKDIR /
 
 ARG JAR_PATH=./build/libs
 
