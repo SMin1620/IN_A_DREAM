@@ -9,6 +9,7 @@ import negative from "../assets/coin/negative.png";
 import neutral from "../assets/coin/neutral.png";
 import postive from "../assets/coin/positive.png";
 import DetailETC from "../components/features/DetailETC/DetailETC";
+import { SERVER_URL } from "../constants";
 
 const DreamDetailPage = () => {
   const { id } = useParams();
@@ -26,7 +27,7 @@ const DreamDetailPage = () => {
           <div className="diary-detail-left-top">
             <img
               className="diary-image"
-              src={diaryDetail?.image}
+              src={`${SERVER_URL}/${diaryDetail?.image}`}
               alt="일기일기"
             />
             <DateBox>

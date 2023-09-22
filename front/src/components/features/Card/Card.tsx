@@ -3,6 +3,8 @@ import cloud from "../../../assets/image/cloud.png";
 import "./styles/Card.css";
 import DateBox from "../../common/DateBox";
 import { DiaryInfo } from "../../../types/ApiType";
+import useNavigateOnClick from "../../../hooks/useNavigateOnclick";
+import { SERVER_URL } from "../../../constants";
 
 interface CardProps {
   diary: DiaryInfo;
@@ -39,9 +41,10 @@ const Card: React.FC<CardProps> = (props) => {
   return (
     <div className="card-wrapper" style={cardStyle}>
       <img
-        src={`http://192.168.30.162:8080/${props.diary.image}`}
+        src={`${SERVER_URL}/${props.diary.image}`}
         alt="이미지"
         style={{ width: "20vw" }}
+        onClick={useNavigateOnClick(`/DreamDetail/${props.diary.id}`)}
       />
       <div className="card-date">
         <DateBox>{props.diary.createdAt}</DateBox>
