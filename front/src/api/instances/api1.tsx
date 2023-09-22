@@ -31,8 +31,12 @@ api1.interceptors.response.use(
     // console.log(response);
     return response;
   },
-  (error) => {
+  async (error) => {
     // 에러 처리 로직을 추가합니다.
+
+    if (error.response.status === 401) {
+      console.log("4014014014014010410401에러에러에러에ㅓ레ㅓㅇ");
+    }
     return Promise.reject(error);
   }
 );

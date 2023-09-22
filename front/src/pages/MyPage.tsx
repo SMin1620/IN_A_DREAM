@@ -13,7 +13,7 @@ const MyPage = () => {
     data: response,
     isLoading,
     error,
-  } = useMyDiaries({ page: 0, size: 1 });
+  } = useMyDiaries({ page: 0, size: 100 });
 
   useEffect(() => {
     if (response) {

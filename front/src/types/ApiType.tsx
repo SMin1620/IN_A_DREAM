@@ -14,19 +14,20 @@ export interface DiaryInfo {
   sale: Boolean;
   createdAt: string;
   emotion: string;
-  member: object;
+  // 맴버 나중에 타입바꿔주삼
+  member: any;
 }
 
 export interface UserInfo {
+  id: number;
   email: string;
-  password: string;
   birth: string;
   gender: string;
   nickname: string;
   positivePoint: number;
   neutralPoint: number;
   negativePoint: number;
-  today: boolean;
+  isWrite: number;
 }
 export interface pageable {
   page: number;
