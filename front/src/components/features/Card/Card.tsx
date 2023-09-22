@@ -40,7 +40,11 @@ const Card: React.FC<CardProps> = (props) => {
     <div className="card-wrapper" style={cardStyle}>
       <img src={cloud} alt="" style={{ width: "20vw" }} />
       <div className="card-date">
-        <DateBox>2023.03.23</DateBox>
+        <DateBox>{props.diary.createdAt}</DateBox>
+      </div>
+      <div className="card-content">
+        <div className="card-nickname">{props.diary.member.nickname}</div>
+        <div className="card-title">{props.diary.title}</div>
       </div>
     </div>
   );
