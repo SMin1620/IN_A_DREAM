@@ -63,7 +63,7 @@ const MainFourth = () => {
                   style={{
                     width: index % 2 === 0 ? "400px" : "300px",
                     height: index % 2 === 0 ? "300px" : "400px",
-                    borderRadius: 20,
+                    borderRadius: 40,
                     margin: "40px",
                   }}
                   onClick={() => navigate(`/DreamDetail/${diary.id}`)}
