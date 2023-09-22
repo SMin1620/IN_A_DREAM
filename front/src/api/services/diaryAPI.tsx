@@ -12,7 +12,7 @@ export const fetchMyDiaries = (pageable: pageable) =>
   });
 
 // 일기 상세 조회
-export const fetchDiaryDetail = (diaryId: string) =>
+export const fetchDiaryDetail = (diaryId: string | undefined) =>
   api1.get(`/api/diary/${diaryId}`);
 
 // 일기 최종 생성 다이어리 데이터타입 나중에 어떤식으로해야할지 정해지면 따로정의해줘야할듯
@@ -26,7 +26,7 @@ export const createDiary = (diaryData: DiaryData) =>
   });
 
 // 일기 좋아요 + 취소
-export const toggleLikeDiary = (diaryId: string) =>
+export const toggleLikeDiary = (diaryId: string | undefined) =>
   api1.post(`/api/diary/like`);
 
 // 다이어리 키워드 검색

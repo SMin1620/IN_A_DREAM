@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
 import Toggle from "../../common/Toggle";
 import "./CreateDreamDiaryForm.css";
 import useKarlo from "../../../hooks/useKarlo";
@@ -23,7 +22,6 @@ const CreateDreamDiaryForm: React.FC<OwnProps> = ({
     setDiaryData,
     postDiary,
   } = useMakeDiary();
-  const navigate = useNavigate();
   const [clicked, setClicked] = useState<boolean>(false);
   const { imageUrl, fetchData } = useKarlo();
   const [sell, setSell] = useState<boolean>(false);
@@ -64,7 +62,6 @@ const CreateDreamDiaryForm: React.FC<OwnProps> = ({
   useEffect(() => {
     if (post === true) {
       postDiary(diaryData);
-      // navigate("/main"); 여기 디테일로 이동되게 해야할듯
     }
   }, [post]);
 

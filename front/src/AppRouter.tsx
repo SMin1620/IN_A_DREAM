@@ -11,6 +11,7 @@ import Navbar from "./components/features/NavbarComponents/Navbar";
 import GalleryPage from "./pages/GalleryPage";
 import SearchResultPage from "./pages/SearchResultPage";
 import DreamShopPage from "./pages/DreamShopPage";
+import DreamDetailPage from "./pages/DreamDetailPage";
 
 function AppRouter() {
   return (
@@ -29,6 +30,7 @@ function AppRouter() {
           <Route path="/Gallery" element={<GalleryPage />}></Route>
           <Route path="/SearchResult" element={<SearchResultPage />}></Route>
           <Route path="/DreamShop" element={<DreamShopPage />}></Route>
+          <Route path="/DreamDetail/:id" element={<DreamDetailPage />}></Route>
         </Routes>
       </BrowserRouter>
     </div>

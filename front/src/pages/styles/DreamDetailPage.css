@@ -1,0 +1,105 @@
+.diary-detail {
+  width: 100vw;
+  height: 100vh;
+  background-color: #f1e7d1;
+  overflow-x: hidden;
+}
+
+.diary-detail-main {
+  display: flex;
+  height: 100vh;
+  width: 100%;
+  padding-left: 4rem;
+}
+
+.diary-detail-left {
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+}
+
+.diary-detail-left-top {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 60%;
+  margin-top: 2vh;
+}
+
+.diary-image {
+  width: 60%;
+  height: 80%;
+  object-fit: contain;
+  border: 1px solid black;
+  border-radius: 10px;
+  margin-bottom: 1rem;
+}
+
+.diary-detail-left-bottom {
+  height: 40%;
+}
+
+.diary-detail-right {
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+}
+
+.diary-detail-right-top {
+  display: flex;
+  justify-content: space-between;
+  padding: 0 1rem;
+  margin-top: 15vh;
+}
+
+.diary-title {
+  font-size: 2.5vw;
+}
+
+.diary-member {
+  display: flex;
+}
+
+.diary-writer {
+  font-size: 2vw;
+  margin: 0 2rem;
+  padding: 0.5rem 1rem;
+  background-color: #c3baa5;
+  color: white;
+  border: none;
+  border-radius: 10px;
+  text-align: center;
+}
+
+.diary-buyer {
+  font-size: 2vw;
+  margin: 0 2rem;
+  background-color: #efbcae;
+  padding: 0.5rem 1rem;
+  color: white;
+  border: none;
+  border-radius: 10px;
+}
+
+.diary-detail-right-bottom {
+  margin-top: 3rem;
+  padding: 0 1rem;
+}
+
+.coin-wraper > img {
+  width: 5vw;
+  margin: 0 1vw;
+  background-color: black;
+}
+
+.coin-count-wraper > span {
+  margin: 0 2.2vw;
+  font-size: 1.5vw;
+}
+
+.diary-detail-left-bottom-etc {
+  margin-top: 1rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
