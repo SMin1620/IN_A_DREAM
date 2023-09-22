@@ -10,8 +10,8 @@ export interface DiaryInfo {
   neutralPoint: number;
   negativePoint: number;
   likeCount: number;
-  open: Boolean;
-  sale: Boolean;
+  open: boolean;
+  sale: boolean;
   createdAt: string;
   emotion: string;
   // 맴버 나중에 타입바꿔주삼

@@ -12,7 +12,10 @@ const useDetailDiaryETC = () => {
     }
   };
 
-  const visibility = async (diaryId: string, isPublic: boolean) => {
+  const visibility = async (
+    diaryId: string | undefined,
+    isPublic: boolean | undefined
+  ) => {
     try {
       const response = await updateDiaryVisibility(diaryId, isPublic);
     } catch (error) {
@@ -20,7 +23,10 @@ const useDetailDiaryETC = () => {
     }
   };
 
-  const saleStatus = async (diaryId: string, isSale: boolean) => {
+  const saleStatus = async (
+    diaryId: string | undefined,
+    isSale: boolean | undefined
+  ) => {
     try {
       const response = await updateDiarySaleStatus(diaryId, isSale);
     } catch (error) {
