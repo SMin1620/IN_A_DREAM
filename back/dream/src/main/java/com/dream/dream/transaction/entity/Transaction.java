@@ -28,11 +28,11 @@ public class Transaction {
 
     @ManyToOne
     @JoinColumn(name = "buyer_id")
-    private Member buyer_id;
+    private Member buyer;
 
     @ManyToOne
     @JoinColumn(name = "seller_id")
-    private Member seller_id;
+    private Member seller;
 
     @NotNull
     private int positivePoint;
