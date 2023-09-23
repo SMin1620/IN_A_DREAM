@@ -67,7 +67,7 @@ public class Diary {
     private Member member;
 
     @ManyToOne(optional = false)
-    @JoinColumn(nullable = false, name = "member_id")
+    @JoinColumn(nullable = false, name = "owner_id")
     @BatchSize(size = 100)
     private Member owner;
 
