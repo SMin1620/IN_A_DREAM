@@ -55,7 +55,8 @@ public class ElasticController {
         Member member = memberRepository.findByEmail(userDetails.getUsername())
                 .orElseThrow(() -> new BusinessLogicException(ExceptionCode.MEMBER_NOT_FOUND));
 
-        return new BaseResponse(HttpStatus.OK, "사용자 맞춤 꿈 목록 추천", elasticService.listRecommend(member.getId()));
+        List<DiaryElastic> diaryElastics = elasticService.listRecommend(member.getId());
+        return new BaseResponse(HttpStatus.OK, "사용자 맞춤 꿈 목록 추천", recommendMapper.memberRecommendResponseDto(diaryElastics));
     }
 
     /**
