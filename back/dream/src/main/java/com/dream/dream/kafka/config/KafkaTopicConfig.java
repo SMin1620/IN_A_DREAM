@@ -22,7 +22,7 @@ public class KafkaTopicConfig {
     @Value(value = "${message.topic.pointName}")
     private String topicName2;
 
-    @Value(value = "{message.topic.diaryName}")
+    @Value(value = "${message.topic.diaryName}")
     private String topicName3;
 
     @Bean
