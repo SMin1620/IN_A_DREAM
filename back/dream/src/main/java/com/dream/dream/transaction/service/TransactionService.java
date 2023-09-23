@@ -40,9 +40,9 @@ public class TransactionService {
         seller.setPositiveCoin(seller.getPositiveCoin() + tradeDiaryRequestDto.getPositivePoint());
         seller.setNeutralCoin(seller.getNeutralCoin() + tradeDiaryRequestDto.getNeutralPoint());
 
-        log.info("다이어릴ㄹㄹㄹㄹㄹㄹㄹㄹㄹㄹㄹㄹDiaryId: " + tradeDiaryRequestDto.getDiary_id());
+        log.info("다이어릴ㄹㄹㄹㄹㄹㄹㄹㄹㄹㄹㄹㄹDiaryId: " + tradeDiaryRequestDto.getDiaryId());
 
-        Diary diary = diaryRepository.findById(tradeDiaryRequestDto.getDiary_id()).orElseThrow(() -> new BusinessLogicException(ExceptionCode.DIARY_NOT_FOUND));
+        Diary diary = diaryRepository.findById(tradeDiaryRequestDto.getDiaryId()).orElseThrow(() -> new BusinessLogicException(ExceptionCode.DIARY_NOT_FOUND));
 
         diary.setOwner(buyer);
 

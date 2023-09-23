@@ -24,7 +24,7 @@ public class TransactionDto {
     @AllArgsConstructor
     @Builder
     public static class TradeDiaryRequestDto{
-        private Long diary_id;
+        private Long diaryId;
         private String sellerEmail;
         private int positivePoint;
         private int neutralPoint;
