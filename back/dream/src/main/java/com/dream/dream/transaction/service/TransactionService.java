@@ -39,7 +39,7 @@ public class TransactionService {
         seller.setNeutralCoin(seller.getNeutralCoin() + tradeDiaryRequestDto.getNeutralPoint());
 
         Diary diary = diaryRepository.findById(tradeDiaryRequestDto.getDiary_id()).orElseThrow(() -> new BusinessLogicException(ExceptionCode.DIARY_NOT_FOUND));
-        Transaction transaction = Transaction.builder().diary(diary).positivePoint(tradeDiaryRequestDto.getPositivePoint()).neutralPoint(tradeDiaryRequestDto.getNeutralPoint()).negativePoint(tradeDiaryRequestDto.getNegativePoint()).buyer_id(buyer).seller_id(seller).build();
+        Transaction transaction = Transaction.builder().diary(diary).positivePoint(tradeDiaryRequestDto.getPositivePoint()).neutralPoint(tradeDiaryRequestDto.getNeutralPoint()).negativePoint(tradeDiaryRequestDto.getNegativePoint()).buyer(buyer).seller(seller).build();
 
         transactionRepository.save(transaction);
 
@@ -49,7 +49,7 @@ public class TransactionService {
     public TransactionDto.MySellHistoryResponseDto mySellHistory(String memberEmail) {
         Member member = memberRepository.findByEmail(memberEmail).orElseThrow(() -> new BusinessLogicException(ExceptionCode.MEMBER_NOT_FOUND));
 
-        List<Transaction> transactions = transactionRepository.findAllBySeller_id(member.getId());
+        List<Transaction> transactions = transactionRepository.findAllBySeller(member.getId());
 
         TransactionDto.MySellHistoryResponseDto mySellHistoryResponseDto = new TransactionDto.MySellHistoryResponseDto(member.getEmail(), transactions);
 
@@ -59,7 +59,7 @@ public class TransactionService {
     public TransactionDto.MyBuyHistoryResponseDto myBuyHistory(String memberEmail) {
         Member member = memberRepository.findByEmail(memberEmail).orElseThrow(() -> new BusinessLogicException(ExceptionCode.MEMBER_NOT_FOUND));
 
-        List<Transaction> transactions = transactionRepository.findAllByBuyer_id(member.getId());
+        List<Transaction> transactions = transactionRepository.findAllByBuyer(member.getId());
 
         TransactionDto.MyBuyHistoryResponseDto myBuyHistoryResponseDto = new TransactionDto.MyBuyHistoryResponseDto(member.getEmail(), transactions);
 

@@ -7,8 +7,8 @@ import java.util.List;
 
 public interface TransactionRepository extends JpaRepository<Transaction, Long> {
 
-    List<Transaction> findAllByBuyer_id(Long buyerId);
-    List<Transaction> findAllBySeller_id(Long sellerId);
+    List<Transaction> findAllByBuyer(Long buyerId);
+    List<Transaction> findAllBySeller(Long sellerId);
 
 
 }
