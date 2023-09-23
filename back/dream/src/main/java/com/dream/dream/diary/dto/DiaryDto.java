@@ -72,6 +72,36 @@ public class DiaryDto {
 
 
     /**
+     * 꿈 일기 response Dto
+     */
+    @Getter
+    @Setter
+    @NoArgsConstructor
+    @AllArgsConstructor
+    @Builder
+    @ToString
+    public static class DiaryResponseDto {
+        private Long id;
+        private String image;
+        private String title;
+        private String content;
+        private int positivePoint;
+        private int neutralPoint;
+        private int negativePoint;
+        private int likeCount;
+        private boolean open;
+        private boolean sale;
+        @JsonFormat(pattern = "yyyy-MM-dd")
+        private LocalDateTime createdAt;
+        private Emotion emotion;
+        private MemberDto.Response member;
+        private MemberDto.Response owner;
+
+        // 내가 좋아요 했는지 여부
+        private boolean myLike;
+    }
+
+    /**
      * 꿈 일기 리스트 Dto
      */
     @Getter
@@ -127,33 +157,6 @@ public class DiaryDto {
         private MemberDto.Response member;
     }
 
-    /**
-     * 꿈 일기 response Dto
-     */
-    @Getter
-    @Setter
-    @NoArgsConstructor
-    @AllArgsConstructor
-    @Builder
-    @ToString
-    public static class DiaryResponseDto {
-        private Long id;
-        private String image;
-        private String title;
-        private String content;
-//        private float positive;
-//        private float neutral;
-//        private float negative;
-        private int positivePoint;
-        private int neutralPoint;
-        private int negativePoint;
-        private int likeCount;
-        private boolean open;
-        private boolean sale;
-        @JsonFormat(pattern = "yyyy-MM-dd")
-        private LocalDateTime createdAt;
-        private Emotion emotion;
-        private MemberDto.Response member;
-    }
+
 
 }
