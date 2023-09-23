@@ -1,8 +1,12 @@
 package com.dream.dream.transaction.entity;
 
 
+import com.dream.dream.diary.entity.Diary;
+import com.dream.dream.member.entity.Member;
 import jakarta.persistence.*;
 import lombok.*;
+
+import javax.validation.constraints.NotNull;
 
 @Entity
 @Getter
@@ -17,5 +21,24 @@ public class Transaction {
     @GeneratedValue
     @Column(name = "transaction_id")
     private Long id;
+
+    @ManyToOne
+    @JoinColumn(name = "diary_id")
+    private Diary diary;
+
+    @ManyToOne
+    @JoinColumn(name = "buyer_id")
+    private Member buyer_id;
+
+    @ManyToOne
+    @JoinColumn(name = "seller_id")
+    private Member seller_id;
+
+    @NotNull
+    private int positivePoint;
+    @NotNull
+    private int neutralPoint;
+    @NotNull
+    private int negativePoint;
 
 }
