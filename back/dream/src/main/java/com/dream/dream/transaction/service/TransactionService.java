@@ -11,6 +11,7 @@ import com.dream.dream.transaction.dto.TransactionDto;
 import com.dream.dream.transaction.entity.Transaction;
 import com.dream.dream.transaction.repository.TransactionRepository;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -19,6 +20,7 @@ import java.util.List;
 @Service
 @Transactional
 @RequiredArgsConstructor
+@Slf4j
 public class TransactionService {
 
     private final TransactionRepository transactionRepository;
@@ -37,6 +39,8 @@ public class TransactionService {
         seller.setNegativeCoin(seller.getNegativeCoin() + tradeDiaryRequestDto.getNegativePoint());
         seller.setPositiveCoin(seller.getPositiveCoin() + tradeDiaryRequestDto.getPositivePoint());
         seller.setNeutralCoin(seller.getNeutralCoin() + tradeDiaryRequestDto.getNeutralPoint());
+
+        log.info("다이어릴ㄹㄹㄹㄹㄹㄹㄹㄹㄹㄹㄹㄹDiaryId: " + tradeDiaryRequestDto.getDiary_id());
 
         Diary diary = diaryRepository.findById(tradeDiaryRequestDto.getDiary_id()).orElseThrow(() -> new BusinessLogicException(ExceptionCode.DIARY_NOT_FOUND));
 
