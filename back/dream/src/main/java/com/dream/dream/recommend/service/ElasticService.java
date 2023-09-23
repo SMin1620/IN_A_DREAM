@@ -5,6 +5,7 @@ import com.dream.dream.exception.ExceptionCode;
 import com.dream.dream.member.entity.Member;
 import com.dream.dream.member.repository.MemberRepository;
 import com.dream.dream.recommend.entity.DiaryElastic;
+import com.dream.dream.recommend.mapper.RecommendMapper;
 import com.dream.dream.recommend.repository.ElasticRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -22,6 +23,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
@@ -90,18 +92,33 @@ public class ElasticService {
 
         System.out.println(result);
 
-        Long maxValue = Collections.max(result.values());
-        for (String getKey : result.keySet()) {
-            if (maxValue.equals(result.get(getKey))) {
-                key = getKey;
-                break;
+        if (! result.isEmpty()) {
+            Long maxValue = Collections.max(result.values());
+
+            for (String getKey : result.keySet()) {
+                if (maxValue.equals(result.get(getKey))) {
+                    key = getKey;
+                    break;
+                }
             }
+
+            System.out.println("key : " + key);
+
+            List<DiaryElastic> diaryElastics = new ArrayList<>();
+            for (DiaryElastic diary : elasticRepository.findByDairy(key)) {
+
+                Member member = memberRepository.findById(diary.getMemberId())
+                        .orElseThrow(() -> new BusinessLogicException(ExceptionCode.MEMBER_NOT_FOUND));
+                System.out.println("diary : " + diary.toString());
+                diary.setMember(member);
+                diaryElastics.add(diary);
+            }
+            return diaryElastics;
         }
 
-        System.out.println("key : " + key);
-
-        List<DiaryElastic> diaryElastics = elasticRepository.findByKeyword(key);
-        return diaryElastics;
+        else {
+            throw new BusinessLogicException(ExceptionCode.DIARY_NOT_FOUND);
+        }
     }
 
 
