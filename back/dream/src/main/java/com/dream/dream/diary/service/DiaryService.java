@@ -127,6 +127,7 @@ public class DiaryService {
                 .open(requestBody.isOpen())
                 .sale(requestBody.isSale())
                 .member(member)
+                .owner(member)
                 .build();
 
         if (number1 >= number2 && number1 >= number3) {
@@ -159,7 +160,7 @@ public class DiaryService {
      * 내 일기 목록 조회
      */
     public Page<Diary> getDiaryList(String memberEmail, Pageable pageable) {
-        Page<Diary> diaryPage = diaryRepository.findAllByMemberEmail(memberEmail, pageable);
+        Page<Diary> diaryPage = diaryRepository.findAllByOwnerEmail(memberEmail, pageable);
 
         return diaryPage;
     }
@@ -233,4 +234,18 @@ public class DiaryService {
         return diary;
     }
 
+    /**
+     * 사용자의 좋아요 여부 반환
+     * @param diaryList
+     */
+    public List<Boolean> getMyLike(String email, List<Diary> diaryList) {
+        Member member = memberRepository.findByEmail(email).orElseThrow(() -> new BusinessLogicException(ExceptionCode.MEMBER_NOT_FOUND));
+
+
+        for(Diary diary : diaryList){
+            Like like = likeRepository.findLikeByMemberAndDiary(member, diary).orElse(null);
+
+        }
+        return null;
+    }
 }
