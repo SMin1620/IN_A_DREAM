@@ -24,6 +24,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 
@@ -46,9 +47,9 @@ public class ElasticService {
         TermQueryBuilder filter = QueryBuilders.termQuery("member_id", memberId);
         SearchSourceBuilder sourceBuilder = new SearchSourceBuilder();
         sourceBuilder.query(QueryBuilders.boolQuery().filter(filter));
-        sourceBuilder.size(1);
+        sourceBuilder.size(10);
 
-        sourceBuilder.aggregation(AggregationBuilders.terms("content_keywords").field("content").size(3));
+        sourceBuilder.aggregation(AggregationBuilders.terms("content_keywords").field("content_nori").size(10));
 
         SearchRequest searchRequest = new SearchRequest();
         searchRequest.indices("diary-recommend-log");
@@ -57,39 +58,48 @@ public class ElasticService {
         SearchResponse searchResponse = client.search(searchRequest, RequestOptions.DEFAULT);
 
         ParsedStringTerms agg = searchResponse.getAggregations().get("content_keywords");
+        HashMap<String, Long> result = new HashMap<>();
         String key = null;
         for (Terms.Bucket bucket : agg.getBuckets()) {
-            key = bucket.getKeyAsString(); // get the key
-            long docCount = bucket.getDocCount(); // get the doc count
+            key = bucket.getKeyAsString();
+            long docCount = bucket.getDocCount();
             System.out.println(String.format("Key: %s, Doc Count: %d", key, docCount));
             System.out.println("key : " + key);
+            result.put(key, result.getOrDefault(key, docCount) + 1);
         }
 
+        sourceBuilder.aggregation(AggregationBuilders.terms("title_keywords").field("title_nori").size(10));
 
-//        TermsAggregationBuilder aggregation = AggregationBuilders.terms("content_keyword").field("content_nori").size(2);
-//
-//        SearchSourceBuilder sourceBuilder = new SearchSourceBuilder();
-//        sourceBuilder.aggregation(aggregation);
-//
-//        SearchRequest searchRequest = new SearchRequest();
-//        searchRequest.indices("diary-recommend-log");
-//        searchRequest.source(sourceBuilder);
-//
-//        SearchResponse response = client.search(searchRequest, RequestOptions.DEFAULT);
-//
-//        System.out.println("response : " + response);
-//
-//        Terms terms = response.getAggregations().get("content_keyword");
-//
-//        System.out.println("terms : " + terms);
-//
-//        String keyword = null;
-//        for (Terms.Bucket bucket : terms.getBuckets()) {
-//            keyword = (String)bucket.getKey();
-//            System.out.println("keyword : " + keyword);
-//        }
+        searchRequest = new SearchRequest();
+        searchRequest.indices("diary-recommend-log");
+        searchRequest.source(sourceBuilder);
 
-//        List<DiaryElastic> diaryElastics = elasticRepository.findAllByMemberId(153L);
+        searchResponse = client.search(searchRequest, RequestOptions.DEFAULT);
+
+        agg = searchResponse.getAggregations().get("title_keywords");
+
+        key = null;
+        for (Terms.Bucket bucket : agg.getBuckets()) {
+            key = bucket.getKeyAsString();
+            long docCount = bucket.getDocCount();
+            System.out.println(String.format("Key: %s, Doc Count: %d", key, docCount));
+            System.out.println("key : " + key);
+            result.put(key, result.getOrDefault(key, docCount) + 1);
+            System.out.println(result);
+        }
+
+        System.out.println(result);
+
+        Long maxValue = Collections.max(result.values());
+        for (String getKey : result.keySet()) {
+            if (maxValue.equals(result.get(getKey))) {
+                key = getKey;
+                break;
+            }
+        }
+
+        System.out.println("key : " + key);
+
         List<DiaryElastic> diaryElastics = elasticRepository.findByKeyword(key);
         return diaryElastics;
     }
