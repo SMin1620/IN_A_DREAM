@@ -49,7 +49,7 @@ public class TransactionService {
     public TransactionDto.MySellHistoryResponseDto mySellHistory(String memberEmail) {
         Member member = memberRepository.findByEmail(memberEmail).orElseThrow(() -> new BusinessLogicException(ExceptionCode.MEMBER_NOT_FOUND));
 
-        List<Transaction> transactions = transactionRepository.findAllBySeller(member.getId());
+        List<Transaction> transactions = transactionRepository.findAllBySeller(member);
 
         TransactionDto.MySellHistoryResponseDto mySellHistoryResponseDto = new TransactionDto.MySellHistoryResponseDto(member.getEmail(), transactions);
 
@@ -59,7 +59,7 @@ public class TransactionService {
     public TransactionDto.MyBuyHistoryResponseDto myBuyHistory(String memberEmail) {
         Member member = memberRepository.findByEmail(memberEmail).orElseThrow(() -> new BusinessLogicException(ExceptionCode.MEMBER_NOT_FOUND));
 
-        List<Transaction> transactions = transactionRepository.findAllByBuyer(member.getId());
+        List<Transaction> transactions = transactionRepository.findAllByBuyer(member);
 
         TransactionDto.MyBuyHistoryResponseDto myBuyHistoryResponseDto = new TransactionDto.MyBuyHistoryResponseDto(member.getEmail(), transactions);
 
