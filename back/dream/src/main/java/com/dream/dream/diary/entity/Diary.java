@@ -31,7 +31,7 @@ public class Diary {
     @Column(nullable = false)
     private String title;
 
-    @Column(nullable = false)
+    @Column(nullable = false, length = 100000)
     private String content;
 
     @Column(nullable = false)
@@ -65,6 +65,11 @@ public class Diary {
     @JoinColumn(nullable = false, name = "member_id")
     @BatchSize(size = 100)
     private Member member;
+
+//    @ManyToOne(optional = false)
+//    @JoinColumn(nullable = false, name = "member_id")
+//    @BatchSize(size = 100)
+//    private Member owner;
 
     @Enumerated(EnumType.STRING)
     private Emotion emotion;

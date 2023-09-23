@@ -20,11 +20,11 @@ public class DiaryDto {
     @AllArgsConstructor
     @Builder
     public static class DiaryCreateRequestDto {
-        @Schema(example = "./test.jpg")
+        @Schema(example = "test.jpg")
         private String image;
-        @Schema(example = "test title")
+        @Schema(example = "일기 제목")
         private String title;
-        @Schema(example = "test content")
+        @Schema(example = "일기 내용입니다. 나는 고래상어")
         private String content;
         @Schema
         private boolean open;
@@ -83,16 +83,17 @@ public class DiaryDto {
         private Long id;
         private String image;
         private String title;
-        private float positive;
-        private float neutral;
-        private float negative;
+        private String content;
+//        private float positive;
+//        private float neutral;
+//        private float negative;
         private int positivePoint;
         private int neutralPoint;
         private int negativePoint;
         private int like;
         private boolean open;
         private boolean sale;
-        @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+        @JsonFormat(pattern = "yyyy-MM-dd")
         private LocalDateTime createdAt;
         private Emotion emotion;
     }
@@ -111,16 +112,16 @@ public class DiaryDto {
         private String image;
         private String title;
         private String content;
-        private float positive;
-        private float neutral;
-        private float negative;
+//        private float positive;
+//        private float neutral;
+//        private float negative;
         private int positivePoint;
         private int neutralPoint;
         private int negativePoint;
         private int like;
         private boolean open;
         private boolean sale;
-        @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+        @JsonFormat(pattern = "yyyy-MM-dd")
         private LocalDateTime createdAt;
         private Emotion emotion;
         private MemberDto.Response member;
@@ -140,16 +141,16 @@ public class DiaryDto {
         private String image;
         private String title;
         private String content;
-        private float positive;
-        private float neutral;
-        private float negative;
+//        private float positive;
+//        private float neutral;
+//        private float negative;
         private int positivePoint;
         private int neutralPoint;
         private int negativePoint;
         private int likeCount;
         private boolean open;
         private boolean sale;
-        @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+        @JsonFormat(pattern = "yyyy-MM-dd")
         private LocalDateTime createdAt;
         private Emotion emotion;
         private MemberDto.Response member;

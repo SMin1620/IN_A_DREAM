@@ -36,7 +36,7 @@ public class JwtTokenProvider {
     @Value("Authorization")
     private String jwtHeader;
 
-    @Value("1209600")
+    @Value("${jwt.token.access-token-expiration-sec}")
     private long accessExpirationTime;
 
     private final long JWT_EXPIRATION_MS = 6000000 * 1;

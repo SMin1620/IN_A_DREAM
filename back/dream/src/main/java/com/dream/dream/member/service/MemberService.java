@@ -65,9 +65,9 @@ public class MemberService {
                 .password(passwordEncoder.encode(requestBody.getPassword()))
                 .nickname(requestBody.getNickname())
                 .gender(requestBody.getGender())
-                .positivePoint(temp)
-                .negativePoint(temp)
-                .neutralPoint(temp)
+                .positiveCoin(temp)
+                .negativeCoin(temp)
+                .neutralCoin(temp)
                 .birth(requestBody.getBirth())
                 .createAt(LocalDateTime.now())
                 .build();
