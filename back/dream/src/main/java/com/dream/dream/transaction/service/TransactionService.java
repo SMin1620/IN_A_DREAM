@@ -39,6 +39,9 @@ public class TransactionService {
         seller.setNeutralCoin(seller.getNeutralCoin() + tradeDiaryRequestDto.getNeutralPoint());
 
         Diary diary = diaryRepository.findById(tradeDiaryRequestDto.getDiary_id()).orElseThrow(() -> new BusinessLogicException(ExceptionCode.DIARY_NOT_FOUND));
+
+        diary.setOwner(buyer);
+
         Transaction transaction = Transaction.builder().diary(diary).positivePoint(tradeDiaryRequestDto.getPositivePoint()).neutralPoint(tradeDiaryRequestDto.getNeutralPoint()).negativePoint(tradeDiaryRequestDto.getNegativePoint()).buyer(buyer).seller(seller).build();
 
         transactionRepository.save(transaction);

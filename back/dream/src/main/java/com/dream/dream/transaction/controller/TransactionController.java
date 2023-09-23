@@ -6,6 +6,7 @@ import com.dream.dream.emotion.service.ExchangeService;
 import com.dream.dream.jwt.JwtTokenProvider;
 import com.dream.dream.transaction.dto.TransactionDto;
 import com.dream.dream.transaction.service.TransactionService;
+import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
@@ -29,6 +30,7 @@ public class TransactionController {
      * 일기 거래 api
      * response로 구매자의 남은 코인을 보냄
      */
+    @Operation(summary = "일기 거래")
     @PostMapping
     public BaseResponse tradeDiary(HttpServletRequest request, @RequestBody TransactionDto.TradeDiaryRequestDto requestBody){
         String token = jwtTokenProvider.resolveToken(request);
@@ -44,6 +46,12 @@ public class TransactionController {
         return new BaseResponse(HttpStatus.OK, "거래 성공", tradeDiaryResponseDto);
     }
 
+    /**
+     * 나의 판매 내역
+     * @param request
+     * @return
+     */
+    @Operation(summary = "나의 일기 판매 내역 조회")
     @GetMapping("/sell")
     public BaseResponse mySellHistory(HttpServletRequest request){
         String token = jwtTokenProvider.resolveToken(request);
@@ -57,9 +65,14 @@ public class TransactionController {
         TransactionDto.MySellHistoryResponseDto mySellHistoryResponseDto = transactionService.mySellHistory(memberEmail);
 
         return new BaseResponse(HttpStatus.OK, "나의 판매 기록 조회 성공", mySellHistoryResponseDto);
-
     }
 
+    /**
+     * 나의 구매 내역
+     * @param request
+     * @return
+     */
+    @Operation(summary = "나의 일기 구매 내역 조회")
     @GetMapping("/buy")
     public BaseResponse myBuyHistory(HttpServletRequest request){
         String token = jwtTokenProvider.resolveToken(request);
@@ -73,7 +86,6 @@ public class TransactionController {
         TransactionDto.MyBuyHistoryResponseDto myBuyHistoryResponseDto = transactionService.myBuyHistory(memberEmail);
 
         return new BaseResponse(HttpStatus.OK, "나의 구매 기록 조회 성공", myBuyHistoryResponseDto);
-
     }
 
 }
