@@ -2,6 +2,8 @@ package com.dream.dream.recommend.entity;
 
 import com.dream.dream.member.dto.MemberDto;
 import com.dream.dream.member.entity.Member;
+import com.dream.dream.recommend.dto.RecommendDto;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.Column;
 import jakarta.persistence.Id;
 import lombok.Builder;
@@ -11,6 +13,8 @@ import lombok.ToString;
 import org.springframework.data.elasticsearch.annotations.Document;
 import org.springframework.data.elasticsearch.annotations.Field;
 import org.springframework.data.elasticsearch.annotations.FieldType;
+
+import java.time.LocalDateTime;
 
 @Document(indexName = "diary-recommend-log")
 @ToString
@@ -51,16 +55,11 @@ public class DiaryElastic {
     private float negative;
 
     @Field(type = FieldType.Auto)
-    private int positivePoint;
-
-    @Field(type = FieldType.Auto)
-    private int neutralPoint;
-
-    @Field(type = FieldType.Auto)
-    private int negativePoint;
-
-    @Field(type = FieldType.Auto)
     private int likeCount;
+
+    @Field(type = FieldType.Auto, name = "created_at")
+    @JsonFormat(pattern = "yyyy-MM-dd")
+    private LocalDateTime createdAt;
 
     private Member member;
 }
