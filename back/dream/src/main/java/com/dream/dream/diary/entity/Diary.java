@@ -66,10 +66,10 @@ public class Diary {
     @BatchSize(size = 100)
     private Member member;
 
-//    @ManyToOne(optional = false)
-//    @JoinColumn(nullable = false, name = "member_id")
-//    @BatchSize(size = 100)
-//    private Member owner;
+    @ManyToOne(optional = false)
+    @JoinColumn(nullable = false, name = "owner_id")
+    @BatchSize(size = 100)
+    private Member owner;
 
     @Enumerated(EnumType.STRING)
     private Emotion emotion;

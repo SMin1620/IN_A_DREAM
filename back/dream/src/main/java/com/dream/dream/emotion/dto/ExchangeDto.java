@@ -13,7 +13,7 @@ public class ExchangeDto {
     @AllArgsConstructor
     @Builder
     public static class ExchangeRequestDto{
-        private int memberId;
+        private Long memberId;
 
         private Point send;
         private Point receive;
@@ -28,9 +28,9 @@ public class ExchangeDto {
     @AllArgsConstructor
     @Builder
     public static class ExchangeResponseDto{
-        private Long positivePoint;
-        private Long neutralPoint;
-        private Long negativePoint;
+        private int positivePoint;
+        private int neutralPoint;
+        private int negativePoint;
     }
 
     @Getter
@@ -39,10 +39,10 @@ public class ExchangeDto {
     @AllArgsConstructor
     @Builder
     public static class Point {
-        private Long positivePoint;
+        private int positivePoint;
 
-        private Long neutralPoint;
+        private int neutralPoint;
 
-        private Long negativePoint;
+        private int negativePoint;
     }
 }

@@ -36,9 +36,9 @@ public class Member {
     @Column(nullable = false)
     private LocalDateTime createAt;
 
-    private Long positiveCoin;
-    private Long negativeCoin;
-    private Long neutralCoin;
+    private int positiveCoin;
+    private int negativeCoin;
+    private int neutralCoin;
 
     // 리프레시 토큰
     private String refreshToken;

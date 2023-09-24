@@ -59,15 +59,14 @@ public class MemberService {
     }
 
     public Member memberRegister(MemberDto.MemberRegisterRequestDto requestBody) {
-        long temp = 0;
         Member member = Member.builder()
                 .email(requestBody.getEmail())
                 .password(passwordEncoder.encode(requestBody.getPassword()))
                 .nickname(requestBody.getNickname())
                 .gender(requestBody.getGender())
-                .positiveCoin(temp)
-                .negativeCoin(temp)
-                .neutralCoin(temp)
+                .positiveCoin(0)
+                .negativeCoin(0)
+                .neutralCoin(0)
                 .birth(requestBody.getBirth())
                 .createAt(LocalDateTime.now())
                 .build();
