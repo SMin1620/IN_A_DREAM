@@ -77,7 +77,7 @@ public class KafkaController {
         return deferredResult;
     }
 
-    @KafkaListener(topics = "diary", groupId = ConsumerConfig.GROUP_ID_CONFIG, containerFactory = "diaryListener")
+    @KafkaListener(topics = "test", groupId = ConsumerConfig.GROUP_ID_CONFIG, containerFactory = "diaryListener")
     public void listen(DiaryDto message){
 
         System.out.println(message);
