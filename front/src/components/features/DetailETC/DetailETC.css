@@ -1,3 +1,15 @@
 .detail-etc {
   display: flex;
+  align-items: center;
+}
+
+.etc-buy {
+  margin: 0 1rem;
+  background-color: #ff7c7c;
+  border: none;
+  width: 6vw;
+  height: 4vh;
+  font-size: 1.2vw;
+  color: white;
+  border-radius: 10px;
 }

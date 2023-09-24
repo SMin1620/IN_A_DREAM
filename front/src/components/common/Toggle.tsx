@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import S from "styled-components";
 
 interface TogglePorps {
+  onClick?: (event: React.MouseEvent<HTMLButtonElement>) => void;
   AbleColor: string;
   DisableColor: string;
   ToggleType: "sell" | "public";
@@ -43,11 +44,12 @@ const OffButton = S(Button)`
 `;
 
 const Toggle = ({
+  onClick,
+  setSell,
+  setIsPublic,
   AbleColor,
   DisableColor,
   ToggleType,
-  setSell,
-  setIsPublic,
   data1,
   data2,
 }: TogglePorps) => {
@@ -66,7 +68,7 @@ const Toggle = ({
     color: "white",
   };
 
-  const handleClick = () => {
+  const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
     const newStatus = !status;
     setStatus(newStatus);
 
@@ -75,6 +77,10 @@ const Toggle = ({
     }
     if (ToggleType === "public" && setIsPublic) {
       setIsPublic(newStatus);
+    }
+
+    if (onClick) {
+      onClick(event);
     }
   };
 
