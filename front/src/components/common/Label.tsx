@@ -3,24 +3,24 @@ import styled from "styled-components";
 import { LoginLabel } from "../../types/index";
 
 const StyledLabel = styled.label<LoginLabel>`
-  font-size: ${(props) => props.fontSize || "1rem"};
-  font-weight: ${(props) => props.fontWeight || "bold"};
-  margin-bottom: ${(props) => props.marginBottom || "2rem"};
+  font-size: ${(props) => props.fontsize || "1rem"};
+  font-weight: ${(props) => props.fontweight || "bold"};
+  margin-bottom: ${(props) => props.marginbottom || "2rem"};
 `;
 
 const Label: React.FC<LoginLabel> = ({
   htmlFor,
   children,
-  fontSize,
-  fontWeight,
-  marginBottom,
+  fontsize,
+  fontweight,
+  marginbottom,
 }) => {
   return (
     <StyledLabel
       htmlFor={htmlFor}
-      fontSize={fontSize}
-      fontWeight={fontWeight}
-      marginBottom={marginBottom}
+      fontsize={fontsize}
+      fontweight={fontweight}
+      marginbottom={marginbottom}
     >
       {children}
     </StyledLabel>
