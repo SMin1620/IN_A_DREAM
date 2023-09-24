@@ -76,7 +76,7 @@ function Frames({
             : "/gallery/item/" + e.object.name
         )
       )}
-      onPointerMissed={() => setLocation("/")}
+      onPointerMissed={() => setLocation("/gallery")}
     >
       {images.map(
         (props) => <Frame key={props.url} {...props} /> /* prettier-ignore */
@@ -85,7 +85,7 @@ function Frames({
   );
 }
 
-function Frame({ url, c = new THREE.Color(), ...props }) {
+function Frame({ url, title, nickname, c = new THREE.Color(), ...props }) {
   const image = useRef();
   const frame = useRef();
   const [, params] = useRoute("/gallery/item/:id");
@@ -99,14 +99,23 @@ function Frame({ url, c = new THREE.Color(), ...props }) {
   useFrame((state, dt) => {
     image.current.material.zoom =
       2 + Math.sin(rnd * 10000 + state.clock.elapsedTime / 3) / 2;
+    // easing.damp3(
+    //   image.current.scale,
+    //   [
+    //     0.85 * (!isActive && hovered ? 0.85 : 1),
+    //     0.9 * (!isActive && hovered ? 0.905 : 1),
+    //     1,
+    //   ],
+    //   0.1,
+    //   dt
+    // );
     easing.damp3(
       image.current.scale,
       [
-        0.85 * (!isActive && hovered ? 0.85 : 1),
-        0.9 * (!isActive && hovered ? 0.905 : 1),
-        1,
+        !isActive && hovered ? 1 : 1,
+        !isActive && hovered ? 1 : 1,
+        image.current.scale.z, // z 축 방향(깊이) 스케일은 원래대로 유지
       ],
-      0.1,
       dt
     );
     easing.dampC(
@@ -122,7 +131,8 @@ function Frame({ url, c = new THREE.Color(), ...props }) {
         name={name}
         onPointerOver={(e) => (e.stopPropagation(), hover(true))}
         onPointerOut={() => hover(false)}
-        scale={[1, GOLDENRATIO, 0.05]}
+        // scale={[1, GOLDENRATIO, 0.05]}
+        scale={[1, 1, 0.05]}
         position={[0, GOLDENRATIO / 2, 0]}
       >
         <boxGeometry />
@@ -168,7 +178,9 @@ function Frame({ url, c = new THREE.Color(), ...props }) {
           fontFamily: "OTWelcomeRA",
         }}
       >
-        안녕
+        {title}
+        <br />
+        {nickname}
       </Html>
       {/* </Text> */}
     </group>
