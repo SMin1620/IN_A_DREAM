@@ -6,7 +6,7 @@ export interface LogoImg {
   width?: string | number;
   height?: string | number;
   border?: string;
-  objectFit?: any;
+  objectfit?: any;
 }
 
 const StyledImg = S.img<LogoImg>`
@@ -14,7 +14,7 @@ const StyledImg = S.img<LogoImg>`
   width = ${(props) => props.width || "10rem"}
   height = ${(props) => props.height || "10rem"}
   border = ${(props) => props.border || "none"}
-  object-fit = ${(props) => props.objectFit || "cover"}
+  object-fit = ${(props) => props.objectfit || "cover"}
 `;
 
 const LogoImg: React.FC<LogoImg> = ({
@@ -22,7 +22,7 @@ const LogoImg: React.FC<LogoImg> = ({
   width,
   height,
   border,
-  objectFit,
+  objectfit,
 }) => {
   return (
     <StyledImg
@@ -30,7 +30,7 @@ const LogoImg: React.FC<LogoImg> = ({
       width={width}
       height={height}
       border={border}
-      objectFit={objectFit}
+      objectfit={objectfit}
     />
   );
 };
