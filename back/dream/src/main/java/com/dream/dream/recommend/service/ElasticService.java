@@ -19,6 +19,7 @@ import org.elasticsearch.search.aggregations.*;
 import org.elasticsearch.search.aggregations.bucket.terms.ParsedStringTerms;
 import org.elasticsearch.search.aggregations.bucket.terms.Terms;
 import org.elasticsearch.search.builder.SearchSourceBuilder;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -38,6 +39,9 @@ public class ElasticService {
     private final RestHighLevelClient client;
     private final MemberRepository memberRepository;
 
+    @Value(value = "${message.topic.recommendName}")
+    private String recommendTopic;
+
 
     /**
      * 사용자 맞춤 일기 추천
@@ -54,7 +58,7 @@ public class ElasticService {
         sourceBuilder.aggregation(AggregationBuilders.terms("content_keywords").field("content_nori").size(10));
 
         SearchRequest searchRequest = new SearchRequest();
-        searchRequest.indices("diary-recommend-log");
+        searchRequest.indices(recommendTopic);
         searchRequest.source(sourceBuilder);
 
         SearchResponse searchResponse = client.search(searchRequest, RequestOptions.DEFAULT);
@@ -73,7 +77,7 @@ public class ElasticService {
         sourceBuilder.aggregation(AggregationBuilders.terms("title_keywords").field("title_nori").size(10));
 
         searchRequest = new SearchRequest();
-        searchRequest.indices("diary-recommend-log");
+        searchRequest.indices(recommendTopic);
         searchRequest.source(sourceBuilder);
 
         searchResponse = client.search(searchRequest, RequestOptions.DEFAULT);
@@ -135,7 +139,7 @@ public class ElasticService {
         sourceBuilder.aggregation(AggregationBuilders.terms("content_keywords").field("content_nori").size(10));
 
         SearchRequest searchRequest = new SearchRequest();
-        searchRequest.indices("diary-recommend-log");
+        searchRequest.indices(recommendTopic);
         searchRequest.source(sourceBuilder);
 
         SearchResponse searchResponse = client.search(searchRequest, RequestOptions.DEFAULT);
@@ -154,7 +158,7 @@ public class ElasticService {
         sourceBuilder.aggregation(AggregationBuilders.terms("title_keywords").field("title_nori").size(10));
 
         searchRequest = new SearchRequest();
-        searchRequest.indices("diary-recommend-log");
+        searchRequest.indices(recommendTopic);
         searchRequest.source(sourceBuilder);
 
         searchResponse = client.search(searchRequest, RequestOptions.DEFAULT);
