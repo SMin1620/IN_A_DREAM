@@ -16,6 +16,7 @@ export interface DiaryInfo {
   emotion: string;
   // 맴버 나중에 타입바꿔주삼
   member: any;
+  owner: any;
 }
 
 export interface UserInfo {

@@ -5,6 +5,7 @@ import { loginUser } from "../api/services/authAPI"; // 경로는 실제 파일 
 import { setToken } from "../stores/reducers/LoginToken";
 
 import Swal from "sweetalert2";
+import axios from "axios";
 
 const useLogin = (onLoginSuccess: () => void) => {
   const [email, setEmail] = useState<string>("");
@@ -34,7 +35,7 @@ const useLogin = (onLoginSuccess: () => void) => {
         localStorage.setItem("refreshtoken", refreshtoken);
 
         // axios headers에 토큰 설정
-        // axios.defaults.headers.common["Authorization"] = token;
+        axios.defaults.headers.common["Authorization"] = token;
         // console.log("헤더스", response.headers);
         // console.log(axios.defaults.headers.common["Authorization"]);
         console.log("로그인에서 토큰확인!!!!!!!!!!!!!!!!!!");

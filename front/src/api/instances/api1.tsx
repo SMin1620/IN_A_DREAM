@@ -35,9 +35,35 @@ api1.interceptors.response.use(
   },
   async (error) => {
     // 에러 처리 로직을 추가합니다.
+    const originalRequest = error.config;
 
-    if (error.response.status === 401) {
-      console.log("4014014014014010410401에러에러에러에ㅓ레ㅓㅇ");
+    if (error.response.status === 401 && !originalRequest._retry) {
+      originalRequest._retry = true;
+      const refreshToken = localStorage.getItem("refreshtoken");
+      console.log("401에러감지감지");
+
+      try {
+        // refreshToken으로 새 accessToken 받아오는 API 호출
+        const res = await axios.post(
+          "/api/members/refresh",
+          {},
+          {
+            headers: { refreshToken: refreshToken },
+          }
+        );
+
+        // 새 accessToken 저장
+        localStorage.setItem("token", res.headers.Authorization);
+        localStorage.setItem("refreshtoken", res.headers.refreshToken);
+        console.log("리프레쉬도즈언!!");
+
+        // 실패한 요청 다시 보내기
+        return api1(originalRequest);
+      } catch (err) {
+        console.log(err);
+        console.log("리프레쉬실패임");
+        // 필요하다면 여기서 로그아웃 처리 등의 추가적인 작업 진행
+      }
     }
     return Promise.reject(error);
   }

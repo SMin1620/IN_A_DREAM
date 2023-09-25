@@ -27,6 +27,15 @@ const DetailETC: React.FC<OwnProps> = ({ diaryDetail, diaryId }) => {
     setOpen(diaryDetail?.open);
   }, [diaryDetail]);
 
+  console.log(sale, open);
+  console.log(
+    diaryDetail?.id,
+    diaryDetail?.owner.email,
+    diaryDetail?.positivePoint,
+    diaryDetail?.neutralPoint,
+    diaryDetail?.negativePoint
+  );
+
   return (
     <div className="detail-etc">
       {isLiked ? (
@@ -48,15 +57,15 @@ const DetailETC: React.FC<OwnProps> = ({ diaryDetail, diaryId }) => {
         !status ? (
           <>
             <button
-              // onClick={() =>
-              //   postBuyDiary(
-              //     diaryId,
-              //     sellerEmail,
-              //     diaryDetail?.positivePoint,
-              //     diaryDetail?.neutralPoint,
-              //     diaryDetail?.negativePoint
-              //   )
-              // }
+              onClick={() =>
+                postBuyDiary(
+                  diaryDetail?.id,
+                  diaryDetail?.owner.email,
+                  diaryDetail?.positivePoint,
+                  diaryDetail?.neutralPoint,
+                  diaryDetail?.negativePoint
+                )
+              }
               className="etc-buy"
             >
               구매

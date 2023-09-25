@@ -13,7 +13,7 @@ const useDetailDiaryETC = () => {
   };
 
   const postBuyDiary = async (
-    diaryId: string | undefined,
+    diaryId: number | undefined,
     sellerEmail: string | undefined,
     positivePoint: number | undefined,
     neutralPoint: number | undefined,
@@ -27,17 +27,11 @@ const useDetailDiaryETC = () => {
         neutralPoint,
         negativePoint
       );
-      if (positivePoint) {
-        // 내 소유 긍정포인트가 부족하면 예외처리
-      }
-      if (neutralPoint) {
-        // 내 소유 중립포인트가 부족하면 예외처리
-      }
-      if (negativePoint) {
-        // 내 소유 부정포인트가 부족하면 예외처리
-      }
+      console.log("거래성공>>>???");
+      console.log(response);
     } catch (error) {
       console.error(error);
+      console.log("머고");
     }
   };
 
