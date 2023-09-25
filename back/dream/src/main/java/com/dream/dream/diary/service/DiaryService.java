@@ -128,6 +128,7 @@ public class DiaryService {
                 .sale(requestBody.isSale())
                 .member(member)
                 .owner(member)
+                .createdAt(LocalDateTime.now().plusHours(9))
                 .build();
 
         if (number1 >= number2 && number1 >= number3) {
