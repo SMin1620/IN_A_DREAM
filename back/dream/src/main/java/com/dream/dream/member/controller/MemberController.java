@@ -1,6 +1,8 @@
 package com.dream.dream.member.controller;
 
 import com.dream.dream.common.BaseResponse;
+import com.dream.dream.exception.BusinessLogicException;
+import com.dream.dream.exception.ExceptionCode;
 import com.dream.dream.jwt.JwtTokenProvider;
 import com.dream.dream.member.dto.TokenDto;
 import com.dream.dream.member.entity.Member;
@@ -101,4 +103,25 @@ public class MemberController {
 
         return new BaseResponse(HttpStatus.OK, "로그인 성공", memberMapper.toResponse(member));
     }
+
+
+    /**
+     * 리프레시 토큰으로 엑세스 토큰 재발급
+     */
+    @Operation(summary = "엑세스 토큰 재발급")
+    @PostMapping("/refresh")
+    public BaseResponse refresh(
+            HttpServletRequest request,
+            HttpServletResponse response
+    ){
+        System.out.println("재발급 로직 시작");
+        try {
+            return new BaseResponse(HttpStatus.CREATED, "엑세스 토큰 재발급", memberService.refresh(request, response));
+        }catch (Exception e){
+            e.printStackTrace();
+            throw new BusinessLogicException(ExceptionCode.INVALID_REFRESH_TOKEN);
+        }
+
+    }
+
 }
