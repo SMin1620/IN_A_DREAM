@@ -30,5 +30,18 @@ public class LogService {
     }
 
 
-
+    /**
+     * 꿈 이릭 거래시, 거래 내역 로그 생성
+     */
+    public void transactionLog(Transaction transaction) {
+        RecommendDto.TransactionLog transactionLog = recommendMapper.recommendTransactionLogDto(transaction);
+        transactionLog.setTransactionId(transaction.getId());
+        transactionLog.setDiaryId(transaction.getDiary().getId());
+        transactionLog.setBuyerId(transaction.getBuyer().getId());
+        transactionLog.setSellerId(transaction.getSeller().getId());
+        transactionLog.setPoint(
+                transaction.getNegativePoint() + transaction.getNegativePoint() + transaction.getNeutralPoint()
+        );
+        kafkaProducerService.sendTransaction(transactionLog);
+    }
 }
