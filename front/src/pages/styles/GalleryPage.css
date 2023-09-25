@@ -1,3 +1,7 @@
 .gallery-wrapper {
+  width: calc(100% - 4rem);
+  margin-left: 4rem;
+}
+.gallery {
   height: 100vh;
 }

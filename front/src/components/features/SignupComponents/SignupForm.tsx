@@ -61,7 +61,7 @@ const SignupForm = () => {
         <Input
           width="85%"
           height="2.5rem"
-          marginBottom="0"
+          marginbottom="0"
           placeholder="Nickname"
           type="text"
           onChange={(e) => handleNickname(e)}
@@ -73,7 +73,7 @@ const SignupForm = () => {
         <Input
           width="85%"
           height="2.5rem"
-          marginBottom="0"
+          marginbottom="0"
           placeholder="Email"
           type="text"
           onChange={(e) => handleEmail(e)}
@@ -84,7 +84,7 @@ const SignupForm = () => {
       <Label>비밀번호</Label>
       <Input
         height="2.5rem"
-        marginBottom="1rem"
+        marginbottom="1rem"
         placeholder="Password"
         type="password"
         onChange={(e) => handlePassword(e)}
@@ -93,7 +93,7 @@ const SignupForm = () => {
       <Label>비밀번호확인</Label>
       <Input
         height="2.5rem"
-        marginBottom="1rem"
+        marginbottom="1rem"
         placeholder="Password"
         type="password"
         onChange={(e) => handleCheckPassword(e)}
@@ -102,7 +102,7 @@ const SignupForm = () => {
       <Label>생년월일</Label>
       <Input
         height="2.5rem"
-        marginBottom="1rem"
+        marginbottom="1rem"
         placeholder="Birthday"
         type="date"
         onChange={(e) => handleBirthday(e)}
