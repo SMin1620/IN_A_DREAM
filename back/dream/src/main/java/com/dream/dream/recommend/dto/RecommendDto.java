@@ -42,4 +42,18 @@ public class RecommendDto {
         private String gender;
     }
 
+
+    @Getter
+    @Setter
+    @NoArgsConstructor
+    @AllArgsConstructor
+    @Builder
+    public static class DiaryDetailLog {
+        private Long diaryId;
+        private String title;
+        private String content;
+        private String emotion;
+        private Long memberId;
+    }
+
 }
