@@ -1,5 +1,5 @@
-import React, { useEffect } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { useEffect } from "react";
+import { useParams } from "react-router-dom";
 import useDetailDiary from "../hooks/useDetailDiary";
 import "./styles/DreamDetailPage.css";
 import Navbar from "../components/features/NavbarComponents/Navbar";
@@ -9,17 +9,17 @@ import neutral from "../assets/coin/neutral.png";
 import postive from "../assets/coin/positive.png";
 import DetailETC from "../components/features/DetailETC/DetailETC";
 import { SERVER_URL } from "../constants";
-import useDetailDiaryETC from "../hooks/useDetailDiaryETC";
 
 const DreamDetailPage = () => {
-  const { id } = useParams();
+  const { id } = useParams<{ id: string }>();
+  const numberId = id ? parseInt(id) : undefined;
   const { getDiaryDetail, diaryDetail } = useDetailDiary();
 
   useEffect(() => {
-    getDiaryDetail(id);
-  }, [id]);
-
-  console.log(diaryDetail);
+    if (numberId !== undefined) {
+      getDiaryDetail(numberId);
+    }
+  }, [numberId]);
 
   return (
     <div className="diary-detail">
@@ -47,7 +47,9 @@ const DreamDetailPage = () => {
             </div>
 
             <div className="diary-detail-left-bottom-etc">
-              <DetailETC diaryDetail={diaryDetail} diaryId={id} />
+              {diaryDetail && numberId !== undefined && (
+                <DetailETC diaryDetail={diaryDetail} diaryId={numberId} />
+              )}
             </div>
           </div>
         </div>

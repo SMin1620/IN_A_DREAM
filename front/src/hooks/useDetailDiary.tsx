@@ -5,7 +5,7 @@ import { DiaryInfo } from "./../types/ApiType";
 
 const useDetailDiary = () => {
   const [diaryDetail, setDiaryDetail] = useState<DiaryInfo>();
-  const getDiaryDetail = async (diaryId: string | undefined) => {
+  const getDiaryDetail = async (diaryId: number) => {
     try {
       const response = await fetchDiaryDetail(diaryId);
       setDiaryDetail(response.data.data);
@@ -15,6 +15,7 @@ const useDetailDiary = () => {
   };
   return {
     getDiaryDetail,
+    setDiaryDetail,
     diaryDetail,
   };
 };

@@ -4,6 +4,10 @@
   font-family: Pretendard Variable;
 }
 
+.like-icon:hover {
+  cursor: pointer;
+}
+
 .like-count {
   font-size: 2vw;
   margin: 0 0.5vw;

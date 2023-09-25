@@ -15,7 +15,7 @@ export const fetchMyDiaries = (pageable: pageable) =>
   });
 
 // 일기 상세 조회
-export const fetchDiaryDetail = (diaryId: string | undefined) =>
+export const fetchDiaryDetail = (diaryId: number) =>
   api1.get(`/api/diary/${diaryId}`);
 
 // 일기 최종 생성 다이어리 데이터타입 나중에 어떤식으로해야할지 정해지면 따로정의해줘야할듯
@@ -29,8 +29,8 @@ export const createDiary = (diaryData: DiaryData) =>
   });
 
 // 일기 좋아요 + 취소
-export const toggleLikeDiary = (diaryId: string | undefined) =>
-  api1.post(`/api/diary/like`);
+export const toggleLikeDiary = (diaryId: number) =>
+  api1.post(`/api/diary/like`, { diaryId });
 
 // 다이어리 키워드 검색
 export const searchDiaries = (keyword: string, filter: string) =>
@@ -41,24 +41,20 @@ export const analyzeKeywordsInDiaryContent = (content: string) =>
   api1.post("/api/diary/keyword", { content });
 
 // 일기 공개 설정
-export const updateDiaryVisibility = (
-  diaryId: string | undefined,
-  isPublic: boolean | undefined
-) => api1.put(`api/diary/public`, { diaryId, isPublic });
+export const updateDiaryVisibility = (diaryId: number, open: boolean) =>
+  api1.put(`api/diary/open`, { diaryId, open });
 
 // 일기 판매 설정
-export const updateDiarySaleStatus = (
-  diaryId: string | undefined,
-  isSale: boolean | undefined
-) => api1.put("api/dairy/sale");
+export const updateDiarySaleStatus = (diaryId: number, sale: boolean) =>
+  api1.put("api/diary/sale", { diaryId, sale });
 
 // 일기 구매
 export const buyDiary = (
-  diaryId: number | undefined,
-  sellerEmail: string | undefined,
-  positivePoint: number | undefined,
-  neutralPoint: number | undefined,
-  negativePoint: number | undefined
+  diaryId: number,
+  sellerEmail: string,
+  positivePoint: number,
+  neutralPoint: number,
+  negativePoint: number
 ) =>
   api1.post("api/transaction", {
     diaryId,

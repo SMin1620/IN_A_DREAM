@@ -3,28 +3,36 @@ import FavoriteIcon from "@mui/icons-material/Favorite";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import { DiaryInfo } from "../../../types/ApiType";
 import useDetailDiaryETC from "./../../../hooks/useDetailDiaryETC";
+import useDetailDiary from "../../../hooks/useDetailDiary";
 import "./DetailETC.css";
 import Toggle from "../../common/Toggle";
 
 interface OwnProps {
-  diaryDetail: DiaryInfo | undefined;
-  diaryId: string | undefined;
+  diaryDetail: DiaryInfo;
+  diaryId: number;
 }
 
 const DetailETC: React.FC<OwnProps> = ({ diaryDetail, diaryId }) => {
-  const [sale, setSale] = useState<boolean | undefined>(diaryDetail?.sale);
-  const [open, setOpen] = useState<boolean | undefined>(diaryDetail?.open);
   const [status, setStatus] = useState<boolean>(false); // 페이지 접속한 유저정보로 대체
   const [isLiked, setIsLiked] = useState<boolean>(false);
-  const { postLiked, visibility, saleStatus, postBuyDiary } =
-    useDetailDiaryETC();
+  const {
+    postLiked,
+    visibility,
+    saleStatus,
+    postBuyDiary,
+    setLikeCount,
+    likeCount,
+    setOpen,
+    open,
+    setSale,
+    sale,
+  } = useDetailDiaryETC();
 
   useEffect(() => {
-    setSale(diaryDetail?.sale);
-    setOpen(diaryDetail?.open);
+    setSale(diaryDetail.sale);
+    setOpen(diaryDetail.open);
+    setLikeCount(diaryDetail.likeCount);
   }, [diaryDetail]);
-
-  console.log(sale, open);
 
   return (
     <div className="detail-etc">
@@ -38,9 +46,10 @@ const DetailETC: React.FC<OwnProps> = ({ diaryDetail, diaryId }) => {
         <FavoriteBorderIcon
           onClick={() => postLiked(diaryId)}
           style={{ fontSize: "2.5vw" }}
+          className="like-icon"
         />
       )}
-      <div className="like-count">{diaryDetail && diaryDetail?.likeCount}</div>
+      <div className="like-count">{likeCount}</div>
 
       {
         // 페이지 접속 유저에 따라 일기의 주인은 버튼들 안보여주기
@@ -49,11 +58,11 @@ const DetailETC: React.FC<OwnProps> = ({ diaryDetail, diaryId }) => {
             <button
               onClick={() => {
                 postBuyDiary(
-                  diaryDetail?.id,
-                  diaryDetail?.owner.email,
-                  diaryDetail?.positivePoint,
-                  diaryDetail?.neutralPoint,
-                  diaryDetail?.negativePoint
+                  diaryDetail.id,
+                  diaryDetail.owner.email,
+                  diaryDetail.positivePoint,
+                  diaryDetail.neutralPoint,
+                  diaryDetail.negativePoint
                 );
               }}
               className="etc-buy"
@@ -69,7 +78,9 @@ const DetailETC: React.FC<OwnProps> = ({ diaryDetail, diaryId }) => {
               data1="판  매"
               data2="보  관"
               onClick={() => {
-                saleStatus(diaryId, sale);
+                if (diaryId !== undefined && sale !== undefined) {
+                  saleStatus(diaryId, sale);
+                }
               }}
             />
 
@@ -81,7 +92,9 @@ const DetailETC: React.FC<OwnProps> = ({ diaryDetail, diaryId }) => {
               data1="공개"
               data2="비공개"
               onClick={() => {
-                visibility(diaryId, open);
+                if (diaryId !== undefined && open !== undefined) {
+                  visibility(diaryId, open);
+                }
               }}
             />
           </>
