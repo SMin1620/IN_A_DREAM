@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { buyDiary, toggleLikeDiary } from "../api/services/diaryAPI";
 import { updateDiaryVisibility } from "../api/services/diaryAPI";
 import { updateDiarySaleStatus } from "../api/services/diaryAPI";
+import Swal from "sweetalert2";
 
 const useDetailDiaryETC = () => {
   const postLiked = async (diaryId: string | undefined) => {
@@ -27,11 +28,14 @@ const useDetailDiaryETC = () => {
         neutralPoint,
         negativePoint
       );
-      console.log("거래성공>>>???");
-      console.log(response);
-    } catch (error) {
-      console.error(error);
-      console.log("머고");
+    } catch (error: any) {
+      if (error.response && error.response.data.message === "Coin Lack") {
+        Swal.fire({
+          icon: "error",
+          title: "Oops...",
+          text: "코인이 없어용",
+        });
+      }
     }
   };
 
