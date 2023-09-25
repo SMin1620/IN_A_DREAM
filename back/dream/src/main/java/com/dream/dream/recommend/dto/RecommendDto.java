@@ -43,6 +43,9 @@ public class RecommendDto {
     }
 
 
+    /**
+     * 일시 상세 조회 로그
+     */
     @Getter
     @Setter
     @NoArgsConstructor
@@ -54,6 +57,23 @@ public class RecommendDto {
         private String content;
         private String emotion;
         private Long memberId;
+    }
+
+
+    /**
+     * 거래 내역 로그
+     */
+    @Getter
+    @Setter
+    @NoArgsConstructor
+    @AllArgsConstructor
+    @Builder
+    public static class TransactionLog {
+        private Long transactionId;
+        private Long diaryId;
+        private Long buyerId;
+        private Long sellerId;
+        private int point;
     }
 
 }
