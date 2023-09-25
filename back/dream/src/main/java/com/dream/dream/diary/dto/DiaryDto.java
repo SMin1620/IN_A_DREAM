@@ -174,7 +174,7 @@ public class DiaryDto {
     @NoArgsConstructor
     @AllArgsConstructor
     @Builder
-    public class Entity {
+    public static class Entity {
         private String image;
         private String title;
         private String content;
