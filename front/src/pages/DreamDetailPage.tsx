@@ -9,6 +9,7 @@ import neutral from "../assets/coin/neutral.png";
 import postive from "../assets/coin/positive.png";
 import DetailETC from "../components/features/DetailETC/DetailETC";
 import { SERVER_URL } from "../constants";
+import useDetailDiaryETC from "../hooks/useDetailDiaryETC";
 
 const DreamDetailPage = () => {
   const { id } = useParams();
