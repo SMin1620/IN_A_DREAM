@@ -16,7 +16,7 @@ import org.springframework.data.elasticsearch.annotations.FieldType;
 
 import java.time.LocalDateTime;
 
-@Document(indexName = "diary-recommend-log")
+@Document(indexName = "mysql_diary")
 @ToString
 @Getter
 @Setter
@@ -32,6 +32,10 @@ public class DiaryElastic {
     @Field(type = FieldType.Auto, name = "member_id")
     @Column(name = "member_id")
     private Long memberId;
+
+    @Field(type = FieldType.Auto, name = "owner_id")
+    @Column(name = "owner_id")
+    private Long ownerId;
 
     @Field(type = FieldType.Auto)
     private String title;
