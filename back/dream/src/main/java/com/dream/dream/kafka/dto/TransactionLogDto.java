@@ -10,7 +10,7 @@ import lombok.*;
 @ToString
 public class TransactionLogDto {
 
-    private Long id;
+    private Long transactionId;
 
     private Long buyId;
 
