@@ -24,7 +24,6 @@ const MainFifth = () => {
           </div>
           <br />
           <br />
-          <br />
           <div className="main-fifth-gamsung-title">
             ● PURCHASE A DREAM DIARY
           </div>
@@ -46,17 +45,20 @@ const MainFifth = () => {
       </div>
       <div className="main-fifth-keyword-imgbox">
         <div className="main-fifth-gamsung-more">MORE</div>
-        <div className="HappyBox">
+        <div className="main-fifth-box">
           <img src={image10} alt="" />
           <span>HAPPY</span>
           <img src={image10} alt="" />
         </div>
-        <div className="SadBox">
+        <hr />
+        <div className="main-fifth-box">
           <span>SAD</span>
           <img src={image9} alt="" />
           <span>SAD</span>
         </div>
-        <div className="BalancedBox">
+        <hr />
+
+        <div className="main-fifth-box">
           <img src={image8} alt="" />
           <span>BALANCED</span>
           <img src={image8} alt="" />
