@@ -27,6 +27,10 @@ public class ExchangeService {
     public ExchangeDto.ExchangeResponseDto exchangeEmotion(String memberEmail, ExchangeDto.ExchangeRequestDto requestBody){
         Member member = memberRepository.findByEmail(memberEmail).orElseThrow(()->new BusinessLogicException(ExceptionCode.MEMBER_NOT_FOUND));
 
+        if(member.getPositiveCoin() - requestBody.getSend().getPositivePoint() < 0 || member.getNegativeCoin() - requestBody.getSend().getNegativePoint() < 0 || member.getNeutralCoin() - requestBody.getSend().getNeutralPoint() < 0){
+            throw (new BusinessLogicException(ExceptionCode.COIN_LACK));
+        }
+
         member.setPositiveCoin(member.getPositiveCoin() - requestBody.getSend().getPositivePoint());
         member.setNegativeCoin(member.getNegativeCoin() - requestBody.getSend().getNegativePoint());
         member.setNeutralCoin(member.getNeutralCoin() - requestBody.getSend().getNeutralPoint());
