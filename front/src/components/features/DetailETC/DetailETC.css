@@ -1,15 +1,37 @@
 .detail-etc {
   display: flex;
   align-items: center;
+  font-family: Pretendard Variable;
+}
+
+.like-count {
+  font-size: 2vw;
+  margin: 0 0.5vw;
+  font-weight: normal;
 }
 
 .etc-buy {
   margin: 0 1rem;
   background-color: #ff7c7c;
   border: none;
-  width: 6vw;
-  height: 4vh;
+  width: 7vw;
+  height: 5vh;
   font-size: 1.2vw;
   color: white;
   border-radius: 10px;
+  font-weight: bold;
+}
+
+@media (max-width: 1024px) {
+  .detail-etc {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .etc-buy {
+    margin: 1rem 0;
+    width: 80%;
+    border-radius: 15px;
+    font-size: 2.3vw;
+  }
 }
