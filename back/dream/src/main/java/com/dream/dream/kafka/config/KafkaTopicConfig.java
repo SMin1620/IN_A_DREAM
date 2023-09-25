@@ -48,7 +48,11 @@ public class KafkaTopicConfig {
      */
     @Value(value = "${message.topic.transactionName}")
     private String transactionTopic;
-    
+
+    /**
+     * 일기 정보 받는 topic
+     */
+    private String diaryResult = "diary_result";
 
     @Bean
     public KafkaAdmin kafkaAdmin() {
@@ -59,12 +63,12 @@ public class KafkaTopicConfig {
 
     @Bean
     public NewTopic newTopic() {
-        return new NewTopic(topicName, 3, (short) 3);
+        return new NewTopic(topicName, 1, (short) 1);
     }
 
     @Bean
     public NewTopic newTopic2() {
-        return new NewTopic(topicName2, 3, (short) 3);
+        return new NewTopic(topicName2, 1, (short) 1);
     }
 
     @Bean
@@ -91,4 +95,10 @@ public class KafkaTopicConfig {
     public NewTopic newTopic3(){
         return new NewTopic(topicName3, 1, (short) 1);
     }
+
+    @Bean
+    public NewTopic diaryResult(){
+        return new NewTopic(diaryResult, 1, (short) 1);
+    }
+
 }

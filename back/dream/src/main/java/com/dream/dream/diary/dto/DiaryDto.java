@@ -168,4 +168,18 @@ public class DiaryDto {
         private String content;
         private MemberDto.KafkaProduce member;
     }
+
+    @Getter
+    @Setter
+    @NoArgsConstructor
+    @AllArgsConstructor
+    @Builder
+    public class Entity {
+        private String image;
+        private String title;
+        private String content;
+        private boolean open;
+        private boolean sale;
+        private Long memberId;
+    }
 }
