@@ -59,4 +59,11 @@ export const buyDiary = (
   positivePoint: number | undefined,
   neutralPoint: number | undefined,
   negativePoint: number | undefined
-) => api1.post("api/transaction");
+) =>
+  api1.post("api/transaction", {
+    diaryId,
+    sellerEmail,
+    positivePoint,
+    neutralPoint,
+    negativePoint,
+  });
