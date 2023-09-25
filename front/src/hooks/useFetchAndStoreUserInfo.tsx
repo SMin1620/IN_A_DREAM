@@ -1,17 +1,20 @@
 import React, { useState } from "react";
 import { userInfo } from "../api/services/authAPI";
-import { useQuery } from "react-query";
 import { UserInfo } from "../types/ApiType";
+import { useDispatch } from "react-redux";
+import { setUserInfo } from "../stores/reducers/UserInfo";
 
 const useFetchAndStoreUserInfo = () => {
-  const [myInfo, setMyInfo] = useState<UserInfo>();
+  // const [myInfo, setMyInfo] = useState<UserInfo>();
+  const dispatch = useDispatch();
 
   console.log("내정보 불러오기");
 
   const getUserInfo = async () => {
     try {
       const response = await userInfo();
-      setMyInfo(response.data.data);
+      dispatch(setUserInfo(response.data.data));
+      // setMyInfo(response.data.data);
       console.log("요이따", response.data.data);
     } catch (err) {
       console.log("에러에에에에러러럴");
@@ -20,7 +23,7 @@ const useFetchAndStoreUserInfo = () => {
   };
   return {
     getUserInfo,
-    myInfo,
+    // myInfo,
   };
 };
 

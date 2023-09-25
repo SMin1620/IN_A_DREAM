@@ -7,7 +7,9 @@ import positive from "../../../assets/coin/positive.png";
 import neutral from "../../../assets/coin/neutral.png";
 import negative from "../../../assets/coin/negative.png";
 import useFetchAndStoreUserInfo from "../../../hooks/useFetchAndStoreUserInfo";
-import { UserInfo } from "../../../types/ApiType";
+
+import { RootState } from "../../../stores/stores";
+import { useSelector } from "react-redux";
 
 // import { useSelector } from "react-redux";
 // import { RootState } from "../../../types/ApiType";
@@ -30,24 +32,7 @@ const NavbarMyModal: React.FC<isModalOpen> = ({
   onClose,
 }) => {
   const [isOpen, setIsOpen] = useState(false);
-  const [userInfo, setUserInfo] = useState<UserInfo>();
-  const { getUserInfo, myInfo } = useFetchAndStoreUserInfo();
-
-  useEffect(() => {
-    getUserInfo();
-  }, []);
-
-  // const { data: response, isLoading, error } = useFetchAndStoreUserInfo();
-
-  // useEffect(() => {
-  //   if (isLoading) {
-  //     console.log("Loading...");
-  //   } else if (error) {
-  //     console.log("An error occurred: ", error);
-  //   } else if (response) {
-  //     console.log("내 정보 불러왔다.", response);
-  //   }
-  // }, [response, isLoading, error]);
+  const userInfo = useSelector((state: RootState) => state.userInfo.data);
 
   useEffect(() => {
     if (isNavbarModalOpen) {
@@ -70,15 +55,15 @@ const NavbarMyModal: React.FC<isModalOpen> = ({
       <div className="coin-box">
         <CoinComponent>
           <img src={positive} alt="positiveCoin" />
-          <span>323</span>
+          <span>{userInfo && userInfo.positiveCoin}</span>
         </CoinComponent>
         <CoinComponent>
           <img src={neutral} alt="neutralCoin" />
-          <span>423</span>
+          <span>{userInfo && userInfo.neutralCoin}</span>
         </CoinComponent>
         <CoinComponent>
           <img src={negative} alt="negativeCoin" />
-          <span>813</span>
+          <span>{userInfo && userInfo.negativeCoin}</span>
         </CoinComponent>
         <CoinComponent>
           <span>바로가기 &gt;&gt;</span>
