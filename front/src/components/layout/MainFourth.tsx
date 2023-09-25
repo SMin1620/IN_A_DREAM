@@ -50,28 +50,29 @@ const MainFourth = () => {
             width="100%"
             display="flex"
           >
-            {diaries.map((diary, index) => (
-              <div
-                key={index}
-                style={{
-                  display: "flex",
-                  justifyContent: "center",
-                  alignItems: "center",
-                }}
-              >
-                <img
+            {diaries &&
+              diaries.map((diary, index) => (
+                <div
+                  key={index}
                   style={{
-                    width: index % 2 === 0 ? "400px" : "300px",
-                    height: index % 2 === 0 ? "300px" : "400px",
-                    borderRadius: 40,
-                    margin: "40px",
+                    display: "flex",
+                    justifyContent: "center",
+                    alignItems: "center",
                   }}
-                  onClick={() => navigate(`/DreamDetail/${diary.id}`)}
-                  src={`${SERVER_URL}/${diary.image}`}
-                  alt="Diary"
-                />
-              </div>
-            ))}
+                >
+                  <img
+                    style={{
+                      width: index % 2 === 0 ? "400px" : "300px",
+                      height: index % 2 === 0 ? "300px" : "400px",
+                      borderRadius: 40,
+                      margin: "40px",
+                    }}
+                    onClick={() => navigate(`/DreamDetail/${diary.id}`)}
+                    src={`${SERVER_URL}/${diary.image}`}
+                    alt="Diary"
+                  />
+                </div>
+              ))}
           </SlideSpan>
         </div>
       </div>
