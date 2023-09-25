@@ -28,6 +28,13 @@ const useDetailDiaryETC = () => {
         neutralPoint,
         negativePoint
       );
+
+      Swal.fire({
+        icon: "success",
+        title: "성공",
+        text: "구매가 성공적으로 이루어졌습니다!",
+      });
+      console.log(response.data);
     } catch (error: any) {
       if (error.response && error.response.data.message === "Coin Lack") {
         Swal.fire({
