@@ -1,34 +1,34 @@
 export interface DiaryInfo {
+  content: string;
+  createdAt: string;
+  emotion: string;
   id: number;
   image: string;
+  likeCount: number;
+  member: UserInfo;
+  myLike: boolean;
+  negativePoint: number;
+  neutralPoint: number;
+  open: boolean;
+  owner: UserInfo;
+  positivePoint: number;
+  sale: boolean;
   title: string;
-  content: string;
   positive: number;
   neutral: number;
   negative: number;
-  positivePoint: number;
-  neutralPoint: number;
-  negativePoint: number;
-  likeCount: number;
-  open: boolean;
-  sale: boolean;
-  createdAt: string;
-  emotion: string;
-  // 맴버 나중에 타입바꿔주삼
-  member: any;
-  owner: any;
 }
 
 export interface UserInfo {
-  id: number;
-  email: string;
-  nickname: string;
   birth: string;
+  email: string;
   gender: string;
-  isWrite: number;
-  positiveCoin: number;
+  id: number;
+  isWrite: number; // 오늘 일기 작성 여부
   negativeCoin: number;
   neutralCoin: number;
+  nickname: string;
+  positiveCoin: number;
 }
 
 export interface pageable {
