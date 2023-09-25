@@ -3,6 +3,8 @@ import styled from "styled-components";
 import { useMyDiaries } from "../../../hooks/useMyDiary";
 import { DiaryInfo } from "../../../types/ApiType";
 import { padNumber } from "../../../hooks";
+import { SERVER_URL } from "../../../constants";
+
 interface DiaryDrrListProps {
   diaries: DiaryInfo[];
 }
@@ -70,9 +72,7 @@ const DiaryDrrList = ({ diaries }: DiaryDrrListProps) => {
             <div className="diary-drrlist-title">{diary.title}</div>
             <div className="diary-drrlist-img">
               {selectedDiaryId === diary.id && (
-                <Image
-                  src={`http://192.168.30.162:8080/${diary.image}`}
-                ></Image>
+                <Image src={`${SERVER_URL}/${diary.image}`}></Image>
               )}
             </div>
 
