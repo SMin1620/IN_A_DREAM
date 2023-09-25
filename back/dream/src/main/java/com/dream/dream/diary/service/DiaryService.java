@@ -4,12 +4,17 @@ import com.dream.dream.diary.dto.DiaryDto;
 import com.dream.dream.diary.entity.Diary;
 import com.dream.dream.diary.entity.Emotion;
 import com.dream.dream.diary.entity.Like;
+import com.dream.dream.diary.mapper.DiaryMapper;
 import com.dream.dream.diary.repository.DiaryRepository;
 import com.dream.dream.diary.repository.LikeRepository;
 import com.dream.dream.exception.BusinessLogicException;
 import com.dream.dream.exception.ExceptionCode;
+import com.dream.dream.kafka.service.KafkaProducerService;
 import com.dream.dream.member.entity.Member;
 import com.dream.dream.member.repository.MemberRepository;
+import com.dream.dream.recommend.dto.RecommendDto;
+import com.dream.dream.recommend.mapper.RecommendMapper;
+import com.dream.dream.recommend.service.LogService;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -42,6 +47,7 @@ public class DiaryService {
     private final DiaryRepository diaryRepository;
     private final MemberRepository memberRepository;
     private final LikeRepository likeRepository;
+    private final LogService logService;
 
 
     @Value("${app.fileupload.uploadDir}")
@@ -174,6 +180,10 @@ public class DiaryService {
      */
     public Diary getDiary(Long diaryId) {
         Diary diary = diaryRepository.findById(diaryId).orElseThrow(() -> new BusinessLogicException(ExceptionCode.DIARY_NOT_FOUND));
+
+        // 로그 생성
+        logService.diaryLog(diary);
+
         return diary;
     }
 
@@ -249,4 +259,7 @@ public class DiaryService {
         }
         return null;
     }
+
+
+
 }
