@@ -4,6 +4,7 @@ import "./CreateDreamDiaryForm.css";
 import useKarlo from "../../../hooks/useKarlo";
 import Swal from "sweetalert2";
 import useMakeDiary from "../../../hooks/useMakeDiary";
+import useGPT from "../../../hooks/useGPT";
 
 interface OwnProps {
   setDiaryImage: (value: boolean) => void;
@@ -21,6 +22,7 @@ const CreateDreamDiaryForm: React.FC<OwnProps> = ({
     setDiaryData,
     postDiary,
   } = useMakeDiary();
+
   const [clicked, setClicked] = useState<boolean>(false);
   const { imageUrl, fetchData } = useKarlo();
   const [sell, setSell] = useState<boolean>(false);
