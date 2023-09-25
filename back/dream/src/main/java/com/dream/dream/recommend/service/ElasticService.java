@@ -189,7 +189,7 @@ public class ElasticService {
 
             System.out.println("key : " + key);
 
-            List<DiaryElastic> diaryElastics = null;
+            List<DiaryElastic> diaryElastics = new ArrayList<>();
             for (DiaryElastic diary : elasticRepository.findByDairy(key)) {
 
                 Member member = memberRepository.findById(diary.getMemberId())
