@@ -25,6 +25,31 @@ public class KafkaTopicConfig {
     @Value(value = "${message.topic.diaryName}")
     private String topicName3;
 
+    /**
+     * 사용자 로그 데이터 기반 추천
+     */
+    @Value(value = "${message.topic.recommendName}")
+    private String recommendTopic;
+
+    /**
+     * 일별 사용자 통계
+     */
+    @Value(value = "${message.topic.statisticDailyName}")
+    private String statisticDailyTopic;
+
+    /**
+     * 월별 사용자 통계
+     */
+    @Value(value = "${message.topic.statisticMonthName}")
+    private String statisticMonthTopic;
+
+    /**
+     * 거래 내역 로그 이상탐지
+     */
+    @Value(value = "${message.topic.transactionName}")
+    private String transactionTopic;
+    
+
     @Bean
     public KafkaAdmin kafkaAdmin() {
         Map<String, Object> configs = new HashMap<>();
@@ -40,6 +65,26 @@ public class KafkaTopicConfig {
     @Bean
     public NewTopic newTopic2() {
         return new NewTopic(topicName2, 3, (short) 3);
+    }
+
+    @Bean
+    public NewTopic recommendTopic() {
+        return new NewTopic(recommendTopic, 1, (short) 1);
+    }
+
+    @Bean
+    public NewTopic statisticDailyTopic() {
+        return new NewTopic(statisticDailyTopic, 1, (short) 1);
+    }
+
+    @Bean
+    public NewTopic statisticMonthTopic() {
+        return new NewTopic(statisticMonthTopic, 1, (short) 1);
+    }
+
+    @Bean
+    public NewTopic transactionTopic() {
+        return new NewTopic(transactionTopic, 1, (short) 1);
     }
 
     @Bean

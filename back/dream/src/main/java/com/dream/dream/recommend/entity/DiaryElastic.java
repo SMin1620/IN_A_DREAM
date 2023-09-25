@@ -1,17 +1,25 @@
-package com.dream.dream.recommend.dto;
+package com.dream.dream.recommend.entity;
 
+import com.dream.dream.member.dto.MemberDto;
+import com.dream.dream.member.entity.Member;
+import com.dream.dream.recommend.dto.RecommendDto;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.Column;
 import jakarta.persistence.Id;
+import lombok.Builder;
 import lombok.Getter;
+import lombok.Setter;
 import lombok.ToString;
 import org.springframework.data.elasticsearch.annotations.Document;
 import org.springframework.data.elasticsearch.annotations.Field;
 import org.springframework.data.elasticsearch.annotations.FieldType;
-import org.springframework.stereotype.Service;
+
+import java.time.LocalDateTime;
 
 @Document(indexName = "diary-recommend-log")
 @ToString
 @Getter
+@Setter
 public class DiaryElastic {
 
     @Id
@@ -23,7 +31,7 @@ public class DiaryElastic {
 
     @Field(type = FieldType.Auto, name = "member_id")
     @Column(name = "member_id")
-    private int memberId;
+    private Long memberId;
 
     @Field(type = FieldType.Auto)
     private String title;
@@ -36,4 +44,22 @@ public class DiaryElastic {
 
     @Field(type = FieldType.Auto)
     private String emotion;
+
+    @Field(type = FieldType.Auto)
+    private float positive;
+
+    @Field(type = FieldType.Auto)
+    private float neutral;
+
+    @Field(type = FieldType.Auto)
+    private float negative;
+
+    @Field(type = FieldType.Auto)
+    private int likeCount;
+
+    @Field(type = FieldType.Auto, name = "created_at")
+    @JsonFormat(pattern = "yyyy-MM-dd")
+    private LocalDateTime createdAt;
+
+    private Member member;
 }

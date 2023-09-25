@@ -1,6 +1,11 @@
 package com.dream.dream.recommend.controller;
 
 import com.dream.dream.common.BaseResponse;
+import com.dream.dream.diary.entity.Diary;
+import com.dream.dream.exception.BusinessLogicException;
+import com.dream.dream.exception.ExceptionCode;
+import com.dream.dream.recommend.entity.DiaryElastic;
+import com.dream.dream.recommend.mapper.RecommendMapper;
 import com.dream.dream.recommend.service.ElasticService;
 import com.dream.dream.jwt.JwtTokenProvider;
 import com.dream.dream.member.entity.Member;
@@ -13,43 +18,67 @@ import org.springframework.http.HttpStatus;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.io.IOException;
 import java.nio.file.attribute.UserPrincipalNotFoundException;
+import java.util.List;
 
 @RestController
-@RequestMapping("/api/elastic")
+@RequestMapping("/api/recommend")
 @RequiredArgsConstructor
-@Tag(name = "엘라스틱서치 테스트")
+@Tag(name = "꿈 일기 추천")
 public class ElasticController {
 
     private final JwtTokenProvider jwtTokenProvider;
     private final MemberRepository memberRepository;
     private final ElasticService elasticService;
+    private final RecommendMapper recommendMapper;
 
-    @Operation(summary = "엘라스틱 테스트")
+
+    /**
+     * 사용자 로그 데이터 분석을 토대로 사용자 맞춤형 데이터 추천
+     */
+    @Operation(summary = "사용자 맞춤 꿈 일기 추천")
     @GetMapping
-    public BaseResponse listElasticDiary(
+    public BaseResponse listMemberDiary(
             HttpServletRequest request
     ) throws IOException {
-        //////////////////////// 토큰으로 인가된 사용자 정보 처리하는 로직
         String token = jwtTokenProvider.resolveToken(request);
         jwtTokenProvider.validateToken(token);
-
-        System.out.println("token >>> " + token);
 
         Authentication authentication = jwtTokenProvider.getAuthentication(token);
         UserDetails userDetails = (UserDetails) authentication.getPrincipal();
 
-        Member member = memberRepository.findByEmail(userDetails.getUsername()).get();
+        Member member = memberRepository.findByEmail(userDetails.getUsername())
+                .orElseThrow(() -> new BusinessLogicException(ExceptionCode.MEMBER_NOT_FOUND));
 
-        // 유저 예외처리 :: 예외처리 커스텀 필요
-        if (member == null) {
-            throw new UserPrincipalNotFoundException("유효한 사용자가 아닙니다.");
-        }
+        List<DiaryElastic> diaryElastics = elasticService.listRecommend(member.getId());
+        return new BaseResponse(HttpStatus.OK, "사용자 맞춤 꿈 목록 추천", recommendMapper.memberRecommendResponseDto(diaryElastics));
+    }
 
-        return new BaseResponse(HttpStatus.OK, "", elasticService.listRecommend(member.getId()));
+    /**
+     * 꿈 일기와 유사한 꿈 일기 추천
+     */
+    @Operation(summary = "해당 꿈과 비슷한 꿈 일기 추천")
+    @GetMapping("/{diaryId}")
+    public BaseResponse listDiary(
+            HttpServletRequest request,
+            @PathVariable("diaryId") Long diaryId
+    ) throws IOException {
+        String token = jwtTokenProvider.resolveToken(request);
+        jwtTokenProvider.validateToken(token);
+
+        Authentication authentication = jwtTokenProvider.getAuthentication(token);
+        UserDetails userDetails = (UserDetails) authentication.getPrincipal();
+
+        memberRepository.findByEmail(userDetails.getUsername())
+                .orElseThrow(() -> new BusinessLogicException(ExceptionCode.MEMBER_NOT_FOUND));
+
+        List<DiaryElastic> diaryElastics = elasticService.listDiary(diaryId);
+
+        return new BaseResponse(HttpStatus.OK, "이 꿈과 비슷한 꿈 목록 추천", recommendMapper.memberRecommendResponseDto(diaryElastics));
     }
 }

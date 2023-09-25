@@ -7,6 +7,7 @@ import com.dream.dream.member.dto.MemberDto;
 import com.dream.dream.member.dto.TokenDto;
 import com.dream.dream.member.entity.Member;
 import com.dream.dream.member.repository.MemberRepository;
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.redis.core.RedisTemplate;
@@ -91,4 +92,58 @@ public class MemberService {
         Member member = memberRepository.findByEmail(memberEmail).orElseThrow(() -> new BusinessLogicException(ExceptionCode.MEMBER_NOT_FOUND));
         return member;
     }
+
+
+    /**
+     * 리프레시 토큰으로 엑세스 토큰 재발급
+     */
+    /**
+     * 리프레시 토큰 발급
+     */
+    public TokenDto refresh(
+            HttpServletRequest request,
+            HttpServletResponse response
+    ){
+        // 1. Request Header 에서 JWT Token 추출
+        String token = jwtTokenProvider.resolveToken(request);
+
+        // 2.엑세스 토큰 유효성 검사
+//        if(token == null || !jwtTokenProvider.validateToken(token)){
+//            throw new IllegalArgumentException("엑세스 토큰이 잘못 됨");
+//        }
+
+        // 3. 엑세스 토큰에서 email 가져옴
+        String email = jwtTokenProvider.getUserEmail(token);
+
+        // 4. 레디스의 refresh token 을 가져온다.
+        String refresh = redisTemplate.opsForValue().get(email);
+
+        System.out.println("refresh token >>> "+ refresh);
+
+        // 5. 레디스의 리프레시 토큰과 요청 리프레시 토큰을 비교
+        String headerRefreshToken = jwtTokenProvider.resolveRefreshToken(request);
+        System.out.println("header refresh >>> " + headerRefreshToken);
+        if(headerRefreshToken == null || !jwtTokenProvider.validateToken(headerRefreshToken)){
+            throw new IllegalArgumentException("리프레시 토큰이 잘못 됨");
+        }
+
+        // 6. 엑세스 토큰 재발급 :: 리프레시 토큰은 재발급 하지 않을 것임.
+        Optional<Member> member = memberRepository.findByEmail(email);
+        Authentication authentication = jwtTokenProvider.getAuthenticationByUsername(member.get().getEmail());
+
+        String newAccessToken = jwtTokenProvider.createAccessToken(authentication);
+
+        // 7. 토큰 헤더에 담기
+        jwtTokenProvider.setHeaderRefreshToken(response, newAccessToken);
+        jwtTokenProvider.setHeaderRefreshToken(response, headerRefreshToken);
+
+        // 8. 토큰 생성
+        TokenDto tokenDto = TokenDto.builder()
+                .accessToken(newAccessToken)
+                .refreshToken(headerRefreshToken)
+                .memberId(member.get().getId())
+                .build();
+        return tokenDto;
+    }
+
 }
