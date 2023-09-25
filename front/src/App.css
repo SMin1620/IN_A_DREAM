@@ -143,3 +143,7 @@ div,
 [id] {
   border: 1px solid red;
 }
+
+button:hover {
+  cursor: pointer;
+}

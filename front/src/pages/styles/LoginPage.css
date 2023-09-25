@@ -9,13 +9,14 @@
   top: 50%;
   left: 30%;
   width: 580px;
-  height: 60%;
+  height: 64vh;
   padding: 40px 50px;
   transform: translate(-50%, -50%);
   background-color: white;
   box-shadow: 0 20px 25px 0 rgba(0, 0, 0, 0.07);
   z-index: 1;
   overflow: hidden;
+  display: flex;
 }
 
 .login-left-section {
@@ -24,6 +25,7 @@
   justify-content: center;
   align-items: center;
   transition: width 0.8s ease;
+  background-color: white;
 }
 
 .login-right-section {
@@ -53,7 +55,7 @@
 
 /* fadeIn 애니메이션 */
 .fadeIn {
-  animation: fadeIn 3s ease-in forwards;
+  animation: fadeIn 2s ease-in forwards;
 }
 
 @keyframes fadeIn {
