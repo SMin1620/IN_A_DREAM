@@ -38,12 +38,19 @@ const DetailETC: React.FC<OwnProps> = ({ diaryDetail, diaryId }) => {
 
   return (
     <div className="detail-etc">
-      {!isLiked ? (
-        <FavoriteIcon onClick={() => postLiked(diaryId)} />
+      {isLiked ? (
+        <FavoriteIcon
+          onClick={() => postLiked(diaryId)}
+          style={{ fontSize: "2.5vw" }}
+          className="like-icon"
+        />
       ) : (
-        <FavoriteBorderIcon onClick={() => postLiked(diaryId)} />
+        <FavoriteBorderIcon
+          onClick={() => postLiked(diaryId)}
+          style={{ fontSize: "2.5vw" }}
+        />
       )}
-      <div>{diaryDetail && diaryDetail?.likeCount}</div>
+      <div className="like-count">{diaryDetail && diaryDetail?.likeCount}</div>
 
       {
         // 페이지 접속 유저에 따라 일기의 주인은 버튼들 안보여주기

@@ -6,6 +6,11 @@ import "./styles/NavbarMyModal.css";
 import positive from "../../../assets/coin/positive.png";
 import neutral from "../../../assets/coin/neutral.png";
 import negative from "../../../assets/coin/negative.png";
+import useFetchAndStoreUserInfo from "../../../hooks/useFetchAndStoreUserInfo";
+import { UserInfo } from "../../../types/ApiType";
+
+// import { useSelector } from "react-redux";
+// import { RootState } from "../../../types/ApiType";
 
 interface CoinPropsComponent {}
 
@@ -25,6 +30,25 @@ const NavbarMyModal: React.FC<isModalOpen> = ({
   onClose,
 }) => {
   const [isOpen, setIsOpen] = useState(false);
+  const [userInfo, setUserInfo] = useState<UserInfo>();
+  const { getUserInfo, myInfo } = useFetchAndStoreUserInfo();
+
+  useEffect(() => {
+    getUserInfo();
+  }, []);
+
+  // const { data: response, isLoading, error } = useFetchAndStoreUserInfo();
+
+  // useEffect(() => {
+  //   if (isLoading) {
+  //     console.log("Loading...");
+  //   } else if (error) {
+  //     console.log("An error occurred: ", error);
+  //   } else if (response) {
+  //     console.log("내 정보 불러왔다.", response);
+  //   }
+  // }, [response, isLoading, error]);
+
   useEffect(() => {
     if (isNavbarModalOpen) {
       setIsOpen(true);
