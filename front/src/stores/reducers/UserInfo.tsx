@@ -16,12 +16,12 @@ const userInfoSlice = createSlice({
     setUserInfo(state, action) {
       state.data = action.payload;
     },
-    clearUserInfo(state) {
-      state.data = null;
-    },
+    // clearUserInfo(state) {
+    //   state.data = null;
+    // },
   },
 });
 
-export const { setUserInfo, clearUserInfo } = userInfoSlice.actions;
+export const { setUserInfo } = userInfoSlice.actions;
 
 export default userInfoSlice.reducer;
