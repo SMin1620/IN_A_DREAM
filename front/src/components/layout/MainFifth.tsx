@@ -4,6 +4,7 @@ import useKarlo from "../../hooks/useKarlo";
 import image10 from "../../assets/image/image10.png";
 import image9 from "../../assets/image/image9.png";
 import image8 from "../../assets/image/image8.png";
+import { Link } from "react-router-dom";
 
 const MainFifth = () => {
   return (
@@ -45,24 +46,31 @@ const MainFifth = () => {
       </div>
       <div className="main-fifth-keyword-imgbox">
         <div className="main-fifth-gamsung-more">MORE</div>
-        <div className="main-fifth-box">
+        {/* <div className="main-fifth-box"> */}
+        <Link to={`/gallery/positivePoint`} className="main-fifth-box">
           <img src={image10} alt="" />
           <span>HAPPY</span>
           <img src={image10} alt="" />
-        </div>
+        </Link>
+        {/* </div> */}
         <hr />
-        <div className="main-fifth-box">
+        <Link to={`/gallery/negativePoint`} className="main-fifth-box">
+          {/* <div className="main-fifth-box"> */}
           <span>SAD</span>
           <img src={image9} alt="" />
           <span>SAD</span>
-        </div>
-        <hr />
+        </Link>
 
-        <div className="main-fifth-box">
+        {/* </div> */}
+        <hr />
+        <Link to={`/gallery/neutralPoint`} className="main-fifth-box">
+          {/* <div className="main-fifth-box"> */}
           <img src={image8} alt="" />
           <span>BALANCED</span>
           <img src={image8} alt="" />
-        </div>
+        </Link>
+
+        {/* </div> */}
       </div>
     </div>
   );
