@@ -4,12 +4,17 @@ import com.dream.dream.diary.dto.DiaryDto;
 import com.dream.dream.diary.entity.Diary;
 import com.dream.dream.diary.entity.Emotion;
 import com.dream.dream.diary.entity.Like;
+import com.dream.dream.diary.mapper.DiaryMapper;
 import com.dream.dream.diary.repository.DiaryRepository;
 import com.dream.dream.diary.repository.LikeRepository;
 import com.dream.dream.exception.BusinessLogicException;
 import com.dream.dream.exception.ExceptionCode;
+import com.dream.dream.kafka.service.KafkaProducerService;
 import com.dream.dream.member.entity.Member;
 import com.dream.dream.member.repository.MemberRepository;
+import com.dream.dream.recommend.dto.RecommendDto;
+import com.dream.dream.recommend.mapper.RecommendMapper;
+import com.dream.dream.recommend.service.LogService;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -42,6 +47,7 @@ public class DiaryService {
     private final DiaryRepository diaryRepository;
     private final MemberRepository memberRepository;
     private final LikeRepository likeRepository;
+    private final LogService logService;
 
 
     @Value("${app.fileupload.uploadDir}")
@@ -174,6 +180,10 @@ public class DiaryService {
      */
     public Diary getDiary(Long diaryId) {
         Diary diary = diaryRepository.findById(diaryId).orElseThrow(() -> new BusinessLogicException(ExceptionCode.DIARY_NOT_FOUND));
+
+        // 로그 생성
+        logService.diaryLog(diary);
+
         return diary;
     }
 
@@ -250,76 +260,6 @@ public class DiaryService {
         return null;
     }
 
-    /**
-     * kafka 테스트용
-     */
-    @Transactional
-    public Diary createDiaryTest(DiaryDto.DiaryCreateRequestDto requestBody, String memberEmail){
-        Member member = memberRepository.findByEmail(memberEmail).orElseThrow(() -> new BusinessLogicException(ExceptionCode.MEMBER_NOT_FOUND));
-
-        // 이미지 저장 결로
-        File uploadDir = new File(uploadPath + File.separator + uploadFolder);
-        log.error(uploadDir.getAbsolutePath());
-        if (!uploadDir.exists()) {
-            boolean e = uploadDir.mkdirs();
-            String er = e ? "OK" : "NO";
-            log.error(er);
-        }
-
-        Path rollback = null;
-        String fileUrl = null;
-
-        try {
-            // 이미지 다운로드
-            URL url = new URL(requestBody.getImage());
-            UUID uuid = UUID.randomUUID();
-            String extension = "jpg";
-            String savingFileName = uuid + "." + extension;
-            Path outputPath = Path.of(uploadDir.getAbsolutePath(), savingFileName);
-            System.out.println(outputPath.toString());
-            fileUrl = uploadFolder + "/" + savingFileName;
-            System.out.println(fileUrl);
-            rollback = outputPath;
-            try (InputStream in = url.openStream();
-                 OutputStream out = Files.newOutputStream(outputPath, StandardOpenOption.CREATE)) {
-
-                byte[] buffer = new byte[1024];
-                int lengthRead;
-
-                while ((lengthRead = in.read(buffer)) > 0) {
-                    out.write(buffer, 0, lengthRead);
-                    out.flush();
-                }
-            }
-
-        } catch (IOException e) {
-            e.printStackTrace();
-            if (rollback != null) {
-                try {
-                    Files.deleteIfExists(rollback);
-                } catch (IOException ex) {
-                    throw new RuntimeException(ex);
-                }
-            }
-
-            throw new BusinessLogicException(ExceptionCode.FAILED_TO_UPDATE_FILE);
-        }
 
 
-        // 일기 내용 RDB에 저장
-        Diary diary = Diary.builder()
-                .image(fileUrl)
-                .title(requestBody.getTitle())
-                .content(requestBody.getContent())
-                .open(requestBody.isOpen())
-                .sale(requestBody.isSale())
-                .member(member)
-                .owner(member)
-                .createdAt(LocalDateTime.now().plusHours(9))
-                .build();
-
-//        diaryRepository.save(diary);
-
-        return diary;
-    }
 }

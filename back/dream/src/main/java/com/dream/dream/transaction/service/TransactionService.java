@@ -7,6 +7,7 @@ import com.dream.dream.exception.BusinessLogicException;
 import com.dream.dream.exception.ExceptionCode;
 import com.dream.dream.member.entity.Member;
 import com.dream.dream.member.repository.MemberRepository;
+import com.dream.dream.recommend.service.LogService;
 import com.dream.dream.transaction.dto.TransactionDto;
 import com.dream.dream.transaction.entity.Transaction;
 import com.dream.dream.transaction.repository.TransactionRepository;
@@ -26,6 +27,7 @@ public class TransactionService {
     private final TransactionRepository transactionRepository;
     private final MemberRepository memberRepository;
     private final DiaryRepository diaryRepository;
+    private final LogService logService;
 
     public TransactionDto.TradeDiaryResponseDto tradeDiary(String buyerEmail, TransactionDto.TradeDiaryRequestDto tradeDiaryRequestDto){
 
@@ -48,9 +50,19 @@ public class TransactionService {
 
         diary.setOwner(buyer);
 
-        Transaction transaction = Transaction.builder().diary(diary).positivePoint(tradeDiaryRequestDto.getPositivePoint()).neutralPoint(tradeDiaryRequestDto.getNeutralPoint()).negativePoint(tradeDiaryRequestDto.getNegativePoint()).buyer(buyer).seller(seller).build();
+        Transaction transaction = Transaction.builder()
+                .diary(diary)
+                .positivePoint(tradeDiaryRequestDto.getPositivePoint())
+                .neutralPoint(tradeDiaryRequestDto.getNeutralPoint())
+                .negativePoint(tradeDiaryRequestDto.getNegativePoint())
+                .buyer(buyer)
+                .seller(seller)
+                .build();
 
         transactionRepository.save(transaction);
+
+        // 거래 내역 로그 생성
+        logService.transactionLog(transaction);
 
         return new TransactionDto.TradeDiaryResponseDto(buyer.getPositiveCoin(), buyer.getNeutralCoin(), buyer.getNegativeCoin());
     }
