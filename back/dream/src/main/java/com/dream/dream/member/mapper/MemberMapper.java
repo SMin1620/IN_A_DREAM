@@ -10,4 +10,6 @@ public interface MemberMapper {
     MemberDto.MemberLoginResponseDto memberToResponseDto(Member member);
 
     MemberDto.Response toResponse(Member member);
+
+    MemberDto.KafkaProduce toKafkaProduce(Member member);
 }

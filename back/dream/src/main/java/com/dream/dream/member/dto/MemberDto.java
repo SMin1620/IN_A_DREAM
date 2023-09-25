@@ -78,7 +78,7 @@ public class MemberDto {
     @AllArgsConstructor
     @Builder
     public static class Response{
-        private long memberId;
+        private long id;
         private String email;
         private String nickname;
         private String birth;
@@ -87,5 +87,15 @@ public class MemberDto {
         private long positiveCoin;
         private long negativeCoin;
         private long neutralCoin;
+    }
+
+    @Getter
+    @Setter
+    @NoArgsConstructor
+    @AllArgsConstructor
+    @Builder
+    public static class KafkaProduce{
+        private long id;
+        private String email;
     }
 }

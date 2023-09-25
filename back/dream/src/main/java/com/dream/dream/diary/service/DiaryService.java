@@ -249,4 +249,77 @@ public class DiaryService {
         }
         return null;
     }
+
+    /**
+     * kafka 테스트용
+     */
+    @Transactional
+    public Diary createDiaryTest(DiaryDto.DiaryCreateRequestDto requestBody, String memberEmail){
+        Member member = memberRepository.findByEmail(memberEmail).orElseThrow(() -> new BusinessLogicException(ExceptionCode.MEMBER_NOT_FOUND));
+
+        // 이미지 저장 결로
+        File uploadDir = new File(uploadPath + File.separator + uploadFolder);
+        log.error(uploadDir.getAbsolutePath());
+        if (!uploadDir.exists()) {
+            boolean e = uploadDir.mkdirs();
+            String er = e ? "OK" : "NO";
+            log.error(er);
+        }
+
+        Path rollback = null;
+        String fileUrl = null;
+
+        try {
+            // 이미지 다운로드
+            URL url = new URL(requestBody.getImage());
+            UUID uuid = UUID.randomUUID();
+            String extension = "jpg";
+            String savingFileName = uuid + "." + extension;
+            Path outputPath = Path.of(uploadDir.getAbsolutePath(), savingFileName);
+            System.out.println(outputPath.toString());
+            fileUrl = uploadFolder + "/" + savingFileName;
+            System.out.println(fileUrl);
+            rollback = outputPath;
+            try (InputStream in = url.openStream();
+                 OutputStream out = Files.newOutputStream(outputPath, StandardOpenOption.CREATE)) {
+
+                byte[] buffer = new byte[1024];
+                int lengthRead;
+
+                while ((lengthRead = in.read(buffer)) > 0) {
+                    out.write(buffer, 0, lengthRead);
+                    out.flush();
+                }
+            }
+
+        } catch (IOException e) {
+            e.printStackTrace();
+            if (rollback != null) {
+                try {
+                    Files.deleteIfExists(rollback);
+                } catch (IOException ex) {
+                    throw new RuntimeException(ex);
+                }
+            }
+
+            throw new BusinessLogicException(ExceptionCode.FAILED_TO_UPDATE_FILE);
+        }
+
+
+        // 일기 내용 RDB에 저장
+        Diary diary = Diary.builder()
+                .image(fileUrl)
+                .title(requestBody.getTitle())
+                .content(requestBody.getContent())
+                .open(requestBody.isOpen())
+                .sale(requestBody.isSale())
+                .member(member)
+                .owner(member)
+                .createdAt(LocalDateTime.now().plusHours(9))
+                .build();
+
+//        diaryRepository.save(diary);
+
+        return diary;
+    }
 }

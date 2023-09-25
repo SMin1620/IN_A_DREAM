@@ -101,7 +101,7 @@ public class DiaryController {
     @GetMapping("/{diaryId}")
     public BaseResponse diaryDetail(@PathVariable Long diaryId) {
         Diary diary = diaryService.getDiary(diaryId);
-        return new BaseResponse(HttpStatus.OK, "일기 상세 조회 성공", diaryMapper.diaryToDetailResponseDto(diary));
+        return new BaseResponse(HttpStatus.OK, "일기 상세 조회 성공", diaryMapper.diaryToResponseDto(diary));
     }
 
     /**
