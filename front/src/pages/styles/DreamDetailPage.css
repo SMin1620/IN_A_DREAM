@@ -3,6 +3,7 @@
   height: 100vh;
   background-color: #f1e7d1;
   overflow-x: hidden;
+  font-family: omyu_pretty;
 }
 
 .diary-detail-main {
@@ -30,13 +31,14 @@
   width: 60%;
   height: 80%;
   object-fit: contain;
-  border: 1px solid black;
   border-radius: 10px;
   margin-bottom: 1rem;
 }
 
 .diary-detail-left-bottom {
   height: 40%;
+  display: flex;
+  flex-direction: column;
 }
 
 .diary-detail-right {
@@ -53,7 +55,7 @@
 }
 
 .diary-title {
-  font-size: 2.5vw;
+  font-size: 3vw;
 }
 
 .diary-member {
@@ -62,7 +64,7 @@
 
 .diary-writer {
   font-size: 2vw;
-  margin: 0 2rem;
+  margin: 0.2rem 2rem;
   padding: 0.5rem 1rem;
   background-color: #c3baa5;
   color: white;
@@ -73,7 +75,7 @@
 
 .diary-buyer {
   font-size: 2vw;
-  margin: 0 2rem;
+  margin: 0.2rem 2rem;
   background-color: #efbcae;
   padding: 0.5rem 1rem;
   color: white;
@@ -84,16 +86,25 @@
 .diary-detail-right-bottom {
   margin-top: 3rem;
   padding: 0 1rem;
+  font-size: 2.5vw;
+}
+
+.coin-wraper {
+  display: flex;
+  justify-content: space-around;
+}
+
+.coin-count-wraper {
+  display: flex;
+  justify-content: space-around;
 }
 
 .coin-wraper > img {
   width: 5vw;
   margin: 0 1vw;
-  background-color: black;
 }
 
-.coin-count-wraper > span {
-  margin: 0 2.2vw;
+.coin-count-wraper > p {
   font-size: 1.5vw;
 }
 
@@ -102,4 +113,48 @@
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+@media (max-width: 1024px) {
+  .diary-detail-main {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .diary-detail-left {
+    width: 100%;
+    height: 60vh;
+    flex-direction: row;
+    align-items: center;
+  }
+
+  .diary-detail-left-top {
+    flex-direction: row;
+    width: 70%;
+    margin: 0;
+  }
+
+  .diary-image {
+    margin: 0;
+    width: 80%;
+    height: 100%;
+  }
+
+  .diary-detail-left-bottom {
+    width: 30%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .diary-detail-right {
+    width: 100%;
+    height: 40vh;
+  }
+
+  .diary-detail-right-top {
+    margin: 0 10vw;
+  }
 }

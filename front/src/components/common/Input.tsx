@@ -15,6 +15,7 @@ const Input: React.FC<LoginInput> = ({
   value,
   type,
   onChange,
+  onKeyUp,
   backgroundcolor,
   height,
   width,
@@ -27,6 +28,7 @@ const Input: React.FC<LoginInput> = ({
       placeholder={placeholder}
       value={value}
       onChange={onChange}
+      onKeyUp={onKeyUp}
       backgroundcolor={backgroundcolor}
       height={height}
       width={width}
