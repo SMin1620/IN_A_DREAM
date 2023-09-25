@@ -21,6 +21,12 @@ const LoginForm: React.FC<LoginFormProps> = ({ onLoginSuccess }) => {
     navigate("/Signup");
   };
 
+  const handleLogin = (event: React.KeyboardEvent) => {
+    if (event.key === "Enter") {
+      postLogin();
+    }
+  };
+
   return (
     <div className="login-form-main">
       <div className="login-form-logo">
@@ -35,6 +41,7 @@ const LoginForm: React.FC<LoginFormProps> = ({ onLoginSuccess }) => {
         placeholder="Password"
         type="password"
         onChange={handlePasswordChange}
+        onKeyUp={handleLogin}
       />
       <br />
 

@@ -8,6 +8,7 @@ export interface LoginInput {
   placeholder?: string;
   value?: string | number;
   onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
+  onKeyUp?: (event: React.KeyboardEvent<HTMLInputElement>) => void;
   backgroundcolor?: string;
   height?: string;
   width?: string;

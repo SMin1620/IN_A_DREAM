@@ -41,13 +41,9 @@ const DreamDetailPage = () => {
               <img src={negative} alt="" />
             </div>
             <div className="coin-count-wraper">
-              {/* <span>{diaryDetail?.positivePoint}</span>
-              <span>{diaryDetail?.neutralPoint}</span>
-              <span>{diaryDetail?.negativePoint}</span> */}
-
-              <span>100</span>
-              <span>100</span>
-              <span>100</span>
+              <p>{diaryDetail?.positivePoint}</p>
+              <p>{diaryDetail?.neutralPoint}</p>
+              <p>{diaryDetail?.negativePoint}</p>
             </div>
 
             <div className="diary-detail-left-bottom-etc">
@@ -60,10 +56,19 @@ const DreamDetailPage = () => {
           <div className="diary-detail-right-top">
             <h1 className="diary-title">{diaryDetail?.title}</h1>
             <div className="diary-member">
-              <p className="diary-writer">{diaryDetail?.member.nickname}</p>{" "}
-              {/* 작성자 */}
-              <p className="diary-buyer">{diaryDetail?.member.nickname}</p>{" "}
-              {/* 소유자 */}
+              <div>
+                <p>작성자</p>
+                <p className="diary-writer">
+                  {diaryDetail?.member.nickname}
+                </p>{" "}
+              </div>
+
+              <div>
+                <p>소유자</p>
+                <p className="diary-buyer">
+                  {diaryDetail?.member.nickname}
+                </p>{" "}
+              </div>
             </div>
           </div>
           <div className="diary-detail-right-bottom">
