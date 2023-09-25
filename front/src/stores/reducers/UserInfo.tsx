@@ -1,12 +1,13 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { UserInfo } from "../../types/ApiType";
 
-const initialState = {
+interface UserInfoData {
+  data: UserInfo | null;
+}
+
+const initialState: UserInfoData = {
   data: null,
 };
-// interface UserInfoState {
-//   data: UserInfo;
-// }
 
 const userInfoSlice = createSlice({
   name: "userInfo",

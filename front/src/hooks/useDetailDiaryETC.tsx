@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { buyDiary, toggleLikeDiary } from "../api/services/diaryAPI";
 import { updateDiaryVisibility } from "../api/services/diaryAPI";
 import { updateDiarySaleStatus } from "../api/services/diaryAPI";
+import Swal from "sweetalert2";
 
 const useDetailDiaryETC = () => {
   const postLiked = async (diaryId: string | undefined) => {
@@ -13,7 +14,7 @@ const useDetailDiaryETC = () => {
   };
 
   const postBuyDiary = async (
-    diaryId: string | undefined,
+    diaryId: number | undefined,
     sellerEmail: string | undefined,
     positivePoint: number | undefined,
     neutralPoint: number | undefined,
@@ -27,17 +28,14 @@ const useDetailDiaryETC = () => {
         neutralPoint,
         negativePoint
       );
-      if (positivePoint) {
-        // 내 소유 긍정포인트가 부족하면 예외처리
+    } catch (error: any) {
+      if (error.response && error.response.data.message === "Coin Lack") {
+        Swal.fire({
+          icon: "error",
+          title: "Oops...",
+          text: "코인이 없어용",
+        });
       }
-      if (neutralPoint) {
-        // 내 소유 중립포인트가 부족하면 예외처리
-      }
-      if (negativePoint) {
-        // 내 소유 부정포인트가 부족하면 예외처리
-      }
-    } catch (error) {
-      console.error(error);
     }
   };
 

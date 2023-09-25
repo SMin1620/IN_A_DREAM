@@ -52,10 +52,18 @@ export const updateDiarySaleStatus = (
   isSale: boolean | undefined
 ) => api1.put("api/dairy/sale");
 
+// 일기 구매
 export const buyDiary = (
-  diaryId: string | undefined,
+  diaryId: number | undefined,
   sellerEmail: string | undefined,
   positivePoint: number | undefined,
   neutralPoint: number | undefined,
   negativePoint: number | undefined
-) => api1.post("api/transaction");
+) =>
+  api1.post("api/transaction", {
+    diaryId,
+    sellerEmail,
+    positivePoint,
+    neutralPoint,
+    negativePoint,
+  });
