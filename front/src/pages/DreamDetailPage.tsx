@@ -3,7 +3,6 @@ import { useNavigate, useParams } from "react-router-dom";
 import useDetailDiary from "../hooks/useDetailDiary";
 import "./styles/DreamDetailPage.css";
 import Navbar from "../components/features/NavbarComponents/Navbar";
-import DateBox from "../components/common/DateBox";
 import DateForm from "../components/common/DateForm";
 import negative from "../assets/coin/negative.png";
 import neutral from "../assets/coin/neutral.png";

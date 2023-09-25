@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import { DiaryInfo } from "../../../types/ApiType";
@@ -21,6 +21,13 @@ const DetailETC: React.FC<OwnProps> = ({ diaryDetail, diaryId }) => {
   const postBuy = () => {
     console.log("구매요청 보내기");
   };
+
+  useEffect(() => {
+    setSale(diaryDetail?.sale);
+    setOpen(diaryDetail?.open);
+  }, [diaryDetail]);
+
+  console.log(sale, open);
 
   return (
     <div className="detail-etc">
@@ -54,12 +61,11 @@ const DetailETC: React.FC<OwnProps> = ({ diaryDetail, diaryId }) => {
               AbleColor="#C3BAA5"
               DisableColor="#E9DEC6"
               ToggleType="sell"
-              setSell={setSale}
+              status={sale}
               data1="판  매"
               data2="보  관"
               onClick={() => {
                 saleStatus(diaryId, sale);
-                setSale(!sale);
               }}
             />
 
@@ -67,12 +73,11 @@ const DetailETC: React.FC<OwnProps> = ({ diaryDetail, diaryId }) => {
               AbleColor="#EFBCAE"
               DisableColor="#F6E0DA"
               ToggleType="public"
-              setIsPublic={setOpen}
+              status={open}
               data1="공개"
               data2="비공개"
               onClick={() => {
                 visibility(diaryId, open);
-                setOpen(!open);
               }}
             />
           </>
