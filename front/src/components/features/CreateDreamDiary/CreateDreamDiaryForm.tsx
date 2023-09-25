@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import Toggle from "../../common/Toggle";
 import "./CreateDreamDiaryForm.css";
 import useKarlo from "../../../hooks/useKarlo";
-import Label from "./../../common/Label";
 import Swal from "sweetalert2";
 import useMakeDiary from "../../../hooks/useMakeDiary";
 
@@ -75,28 +74,24 @@ const CreateDreamDiaryForm: React.FC<OwnProps> = ({
         />
         <div className="create-dream-diary-form-toggle-box">
           <div>
-            <div className="create-dream-diary-form-label-box">
-              {/* <Label marginBottom="0">판매</Label> */}
-              {/* <Label marginBottom="0">보관</Label> */}
-            </div>
+            <div className="create-dream-diary-form-label-box"></div>
             <Toggle
               AbleColor="#C3BAA5"
               DisableColor="#E9DEC6"
               ToggleType="sell"
+              status={sell}
               setSell={setSell}
               data1="판  매"
               data2="보  관"
             />
           </div>
           <div>
-            <div className="create-dream-diary-form-label-box">
-              {/* <Label marginBottom="0">공개</Label> */}
-              {/* <Label marginBottom="0">비공개</Label> */}
-            </div>
+            <div className="create-dream-diary-form-label-box"></div>
             <Toggle
               AbleColor="#EFBCAE"
               DisableColor="#F6E0DA"
               ToggleType="public"
+              status={isPublic}
               setIsPublic={setIsPublic}
               data1="공  개"
               data2="비공개"

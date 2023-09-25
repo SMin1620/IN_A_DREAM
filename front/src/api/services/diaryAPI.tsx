@@ -51,3 +51,11 @@ export const updateDiarySaleStatus = (
   diaryId: string | undefined,
   isSale: boolean | undefined
 ) => api1.put("api/dairy/sale");
+
+export const buyDiary = (
+  diaryId: string | undefined,
+  sellerEmail: string | undefined,
+  positivePoint: number | undefined,
+  neutralPoint: number | undefined,
+  negativePoint: number | undefined
+) => api1.post("api/transaction");

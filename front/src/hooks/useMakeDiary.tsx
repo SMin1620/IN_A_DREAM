@@ -30,6 +30,7 @@ const useMakeDiary = () => {
   };
 
   const postDiary = async (diaryData: DiaryData) => {
+    console.log(diaryData);
     try {
       const response = await createDiary(diaryData);
       navigate(`/DreamDetail/${response.data.data.id}`);

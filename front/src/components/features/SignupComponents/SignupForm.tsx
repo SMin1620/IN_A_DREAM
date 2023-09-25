@@ -104,7 +104,7 @@ const SignupForm = () => {
         height="2.5rem"
         marginbottom="1rem"
         placeholder="Birthday"
-        type="text"
+        type="date"
         onChange={(e) => handleBirthday(e)}
       />
 
