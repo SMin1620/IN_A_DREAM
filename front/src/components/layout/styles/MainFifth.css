@@ -66,6 +66,8 @@ hr {
   display: flex;
   align-items: flex-start;
   justify-content: center;
+  color: #c3baa5;
+  text-decoration: none;
 }
 .main-fifth-gamsung-title {
   font-weight: bolder;

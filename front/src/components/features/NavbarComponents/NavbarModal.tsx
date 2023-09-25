@@ -4,6 +4,7 @@ import Box from "../../common/Box";
 import { isModalOpen } from "../../../types/index";
 import { SlideSpan } from "../../common/SlideSpan";
 import SearchBar from "../SearchBarComponents/SearchBar";
+import { Link } from "react-router-dom";
 
 const NavbarModal: React.FC<isModalOpen> = ({ isNavbarModalOpen, onClose }) => {
   const [isOpen, setIsOpen] = useState(false);
@@ -30,7 +31,7 @@ const NavbarModal: React.FC<isModalOpen> = ({ isNavbarModalOpen, onClose }) => {
       top={15}
       textwrap="nowrap"
     >
-      <a className="navbar-gallery" href="/gallery">
+      <Link to={`/gallery/positivePoint`} className="navbar-gallery">
         <SlideSpan
           startposition={-100}
           endposition={100}
@@ -62,7 +63,7 @@ const NavbarModal: React.FC<isModalOpen> = ({ isNavbarModalOpen, onClose }) => {
           <span className="navbar-font5">GALLERY</span>
           <span>{"    "}</span>
         </SlideSpan>
-      </a>
+      </Link>
       <a className="navbar-shop" href="/DreamShop">
         <SlideSpan startposition={10} endposition={-120} speed={38} width="90%">
           <span className="navbar-font1">SHOP</span>

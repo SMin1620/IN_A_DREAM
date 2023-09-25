@@ -97,8 +97,9 @@ function Frame({ url, title, nickname, c = new THREE.Color(), ...props }) {
 
   useCursor(hovered);
   useFrame((state, dt) => {
-    image.current.material.zoom =
-      2 + Math.sin(rnd * 10000 + state.clock.elapsedTime / 3) / 2;
+    image.current.material.zoom = 1;
+    // image.current.material.zoom =
+    //   2 + Math.sin(rnd * 10000 + state.clock.elapsedTime / 3) / 2;
     // easing.damp3(
     //   image.current.scale,
     //   [

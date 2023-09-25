@@ -5,56 +5,19 @@ import { useAllDiary } from "../hooks/useAllDiary";
 import { DiaryInfo } from "../types/ApiType";
 import { SERVER_URL } from "../constants";
 import Navbar from "../components/features/NavbarComponents/Navbar";
-
-const pexel = (id: number) =>
-  `https://images.pexels.com/photos/${id}/pexels-photo-${id}.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260`;
-// const images = [
-//   // Front
-//   // { position: [0, 0, 1.5], rotation: [0, 0, 0], url: pexel(1103970) },
-//   // Back
-//   { position: [-0.8, 0, -0.6], rotation: [0, 0, 0], url: pexel(416430) },
-//   { position: [0.8, 0, -0.6], rotation: [0, 0, 0], url: pexel(310452) },
-//   // Left
-//   {
-//     position: [-1.75, 0, 0.25],
-//     rotation: [0, Math.PI / 2.5, 0],
-//     url: pexel(327482),
-//   },
-//   { position: [-2.15, 0, 1.5],
-//     rotation: [0, Math.PI / 2.5, 0],
-//     url: pexel(325185),
-//   },
-//   {
-//     position: [-2, 0, 2.75],
-//     rotation: [0, Math.PI / 2.5, 0],
-//     url: pexel(358574),
-//   },
-//   // Right
-//   {
-//     position: [1.75, 0, 0.25],
-//     rotation: [0, -Math.PI / 2.5, 0],
-//     url: pexel(227675),
-//   },
-//   {
-//     position: [2.15, 0, 1.5],
-//     rotation: [0, -Math.PI / 2.5, 0],
-//     url: pexel(911738),
-//   },
-//   {
-//     position: [2, 0, 2.75],
-//     rotation: [0, -Math.PI / 2.5, 0],
-//     url: pexel(1738986),
-//   },
-// ];
+// import { useLocation } from "react-router-dom";
+import { useParams } from "react-router-dom";
 
 const GalleryPage = () => {
   const [diaries, setDiaries] = useState<DiaryInfo[]>([]);
+  const { sortKey } = useParams<string>();
+  const validSortKey = sortKey || "";
 
   const {
     data: response,
     isLoading,
     error,
-  } = useAllDiary({ page: 0, size: 10 });
+  } = useAllDiary({ page: 0, size: 8, sort: ["likeCount", validSortKey] });
 
   const images =
     diaries.length > 1
@@ -74,12 +37,57 @@ const GalleryPage = () => {
             title: diaries[1].title,
             nickname: diaries[1].member.nickname,
           },
+          // Left
+          {
+            position: [-1.75, 0, 0.25],
+            rotation: [0, Math.PI / 2.5, 0],
+            url: SERVER_URL + "/" + diaries[2].image,
+            title: diaries[2].title,
+            nickname: diaries[2].member.nickname,
+          },
+          {
+            position: [-2.15, 0, 1.5],
+            rotation: [0, Math.PI / 2.5, 0],
+            url: SERVER_URL + "/" + diaries[3].image,
+            title: diaries[3].title,
+            nickname: diaries[3].member.nickname,
+          },
+          {
+            position: [-2, 0, 2.75],
+            rotation: [0, Math.PI / 2.5, 0],
+            url: SERVER_URL + "/" + diaries[4].image,
+            title: diaries[4].title,
+            nickname: diaries[4].member.nickname,
+          },
+          // Right
+          {
+            position: [1.75, 0, 0.25],
+            rotation: [0, -Math.PI / 2.5, 0],
+            url: SERVER_URL + "/" + diaries[5].image,
+            title: diaries[5].title,
+            nickname: diaries[5].member.nickname,
+          },
+          {
+            position: [2.15, 0, 1.5],
+            rotation: [0, -Math.PI / 2.5, 0],
+            url: SERVER_URL + "/" + diaries[6].image,
+            title: diaries[6].title,
+            nickname: diaries[6].member.nickname,
+          },
+          {
+            position: [2, 0, 2.75],
+            rotation: [0, -Math.PI / 2.5, 0],
+            url: SERVER_URL + "/" + diaries[7].image,
+            title: diaries[7].title,
+            nickname: diaries[7].member.nickname,
+          },
         ]
       : [];
 
   useEffect(() => {
     if (response && response.data && response.data.data) {
-      console.log(response.data.data);
+      // console.log(response);
+      // console.log(response.data.data);
       setDiaries(response.data.data);
     }
   }, [response]);
