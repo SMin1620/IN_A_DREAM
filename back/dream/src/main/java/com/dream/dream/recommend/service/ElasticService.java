@@ -50,7 +50,7 @@ public class ElasticService {
     public List<DiaryElastic> listRecommend(Long memberId) throws IOException {
 
 
-        TermQueryBuilder filter = QueryBuilders.termQuery("member_id", memberId);
+        TermQueryBuilder filter = QueryBuilders.termQuery("memberId", memberId);
         SearchSourceBuilder sourceBuilder = new SearchSourceBuilder();
         sourceBuilder.query(QueryBuilders.boolQuery().filter(filter));
         sourceBuilder.size(100);
@@ -131,7 +131,7 @@ public class ElasticService {
      * :: 해당 꿈과 비슷한 꿈 추천 -> index : mysql_diary
      */
     public List<DiaryElastic> listDiary(Long diaryId) throws IOException {
-        TermQueryBuilder filter = QueryBuilders.termQuery("diary_id", diaryId);
+        TermQueryBuilder filter = QueryBuilders.termQuery("diaryId", diaryId);
         SearchSourceBuilder sourceBuilder = new SearchSourceBuilder();
         sourceBuilder.query(QueryBuilders.boolQuery().filter(filter));
         sourceBuilder.size(100);
