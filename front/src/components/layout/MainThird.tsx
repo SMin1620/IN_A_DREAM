@@ -16,7 +16,6 @@ const MainThird = () => {
 
   useEffect(() => {
     if (response) {
-      console.log(response.data.data);
       setDiaries(response.data.data);
     }
   }, [response]);
