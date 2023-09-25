@@ -11,6 +11,7 @@ public enum ExceptionCode {
     MEMBER_NOT_FOUND(404, "Member Not Found"),
     SELLER_NOT_FOUND(404, "Seller Not Found"),
     BUYER_NOT_FOUND(404, "Buyer Not Found"),
+    COIN_LACK(409, "Coin Lack"),
 
     FAILED_TO_UPDATE_MEMBER(500, "Failed Update Member"),
     FAILED_TO_DELETE_MEMBER(500, "Failed Delete Member"),

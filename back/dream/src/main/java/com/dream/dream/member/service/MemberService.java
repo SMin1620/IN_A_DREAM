@@ -134,7 +134,7 @@ public class MemberService {
         String newAccessToken = jwtTokenProvider.createAccessToken(authentication);
 
         // 7. 토큰 헤더에 담기
-        jwtTokenProvider.setHeaderRefreshToken(response, newAccessToken);
+        jwtTokenProvider.setHeaderAccessToken(response, newAccessToken);
         jwtTokenProvider.setHeaderRefreshToken(response, headerRefreshToken);
 
         // 8. 토큰 생성
