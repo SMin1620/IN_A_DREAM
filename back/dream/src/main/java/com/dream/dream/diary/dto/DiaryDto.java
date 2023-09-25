@@ -157,6 +157,15 @@ public class DiaryDto {
         private MemberDto.Response member;
     }
 
-
-
+    @Getter
+    @Setter
+    @NoArgsConstructor
+    @AllArgsConstructor
+    @Builder
+    public static class KafkaProduce{
+        private Long id;
+        private String title;
+        private String content;
+        private MemberDto.KafkaProduce member;
+    }
 }

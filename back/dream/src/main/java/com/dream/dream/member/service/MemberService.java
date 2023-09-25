@@ -146,4 +146,8 @@ public class MemberService {
         return tokenDto;
     }
 
+    public long getMemberId(String email) {
+        Member member = memberRepository.findByEmail(email).orElseThrow(() -> new BusinessLogicException(ExceptionCode.MEMBER_NOT_FOUND));
+        return member.getId();
+    }
 }

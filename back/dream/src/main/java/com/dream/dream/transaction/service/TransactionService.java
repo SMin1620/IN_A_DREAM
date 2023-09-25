@@ -34,6 +34,10 @@ public class TransactionService {
         Member buyer = memberRepository.findByEmail(buyerEmail).orElseThrow(() -> new BusinessLogicException(ExceptionCode.BUYER_NOT_FOUND));
         Member seller = memberRepository.findByEmail(tradeDiaryRequestDto.getSellerEmail()).orElseThrow(() -> new BusinessLogicException(ExceptionCode.SELLER_NOT_FOUND));
 
+        if(buyer.getPositiveCoin() - tradeDiaryRequestDto.getPositivePoint()< 0 || buyer.getNegativeCoin() - tradeDiaryRequestDto.getNegativePoint()< 0 || buyer.getNeutralCoin() - tradeDiaryRequestDto.getNeutralPoint()< 0){
+            throw (new BusinessLogicException(ExceptionCode.COIN_LACK));
+        }
+
         buyer.setNegativeCoin(buyer.getNegativeCoin() - tradeDiaryRequestDto.getNegativePoint());
         buyer.setPositiveCoin(buyer.getPositiveCoin() - tradeDiaryRequestDto.getPositivePoint());
         buyer.setNeutralCoin(buyer.getNeutralCoin() - tradeDiaryRequestDto.getNeutralPoint());
