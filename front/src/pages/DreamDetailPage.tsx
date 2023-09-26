@@ -9,6 +9,8 @@ import neutral from "../assets/coin/neutral.png";
 import postive from "../assets/coin/positive.png";
 import DetailETC from "../components/features/DetailETC/DetailETC";
 import { SERVER_URL } from "../constants";
+import { padNumber } from "../hooks";
+
 import RecommendedDiary from "../components/features/RecommendedDiary/RecommendedDiary";
 
 const DreamDetailPage = () => {
@@ -36,16 +38,22 @@ const DreamDetailPage = () => {
             <DateForm />
           </div>
           <div className="diary-detail-left-bottom">
-            <div className="coin-wraper">
-              <img src={postive} alt="" />
-              <img src={neutral} alt="" />
-              <img src={negative} alt="" />
+            <div className="coin-wrapper">
+              <div className="diary-coin-box">
+                <img src={postive} alt="" />
+                <div>{padNumber(diaryDetail?.positivePoint)}</div>
+              </div>
+              <div className="diary-coin-box">
+                <img src={neutral} alt="" />
+                <div>{padNumber(diaryDetail?.neutralPoint)}</div>
+              </div>
+              <div className="diary-coin-box">
+                <img src={negative} alt="" />
+                <div>{padNumber(diaryDetail?.negativePoint)}</div>
+              </div>
             </div>
-            <div className="coin-count-wraper">
-              <p>{diaryDetail?.positivePoint}</p>
-              <p>{diaryDetail?.neutralPoint}</p>
-              <p>{diaryDetail?.negativePoint}</p>
-            </div>
+            {/* <div className="coin-count-wrapper"> */}
+            {/* </div> */}
 
             <div className="diary-detail-left-bottom-etc">
               {diaryDetail && numberId !== undefined && (
