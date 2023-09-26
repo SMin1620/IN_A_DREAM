@@ -18,7 +18,7 @@ public interface DiaryMapper {
     DiaryDto.DiaryListResponseDto toListResponseDto(Diary diary);
     List<DiaryDto.DiaryListResponseDto> toListResponseDtos(List<Diary> diaryList);
 
-    DiaryDto.SparkProduce toEntityDto(Diary diary);
+    DiaryDto.SparkProduce toSparkProduce(Diary diary);
 
     Diary sparkConsumeToDiary(DiaryDto.SparkConsume diary);
 

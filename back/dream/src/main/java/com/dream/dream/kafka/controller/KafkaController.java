@@ -7,7 +7,6 @@ import com.dream.dream.diary.entity.Diary;
 import com.dream.dream.diary.mapper.DiaryMapper;
 import com.dream.dream.diary.service.DiaryService;
 import com.dream.dream.jwt.JwtTokenProvider;
-import com.dream.dream.kafka.dto.LogDto;
 import com.dream.dream.kafka.dto.PointHistoryDto;
 import com.dream.dream.kafka.service.KafkaProducerService;
 import com.dream.dream.kafka.service.TestService;
@@ -23,8 +22,6 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.context.request.async.DeferredResult;
 
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-import java.time.temporal.ChronoUnit;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
@@ -34,13 +31,15 @@ import java.util.concurrent.ConcurrentHashMap;
 @RequiredArgsConstructor
 @RequestMapping("/kafka")
 public class KafkaController {
-    //
+
     private final KafkaProducerService kafkaProducerService;
     private final MemberService memberService;
     private final DiaryService diaryService;
     private final JwtTokenProvider jwtTokenProvider;
     private final DiaryMapper diaryMapper;
     private final TestService testService;
+
+    private final Map<Long, DeferredResult<BaseResponse>> deferredResults = new ConcurrentHashMap<>();
 
     @PostMapping("/diarytest")
     public DeferredResult<BaseResponse> getDiary(
@@ -54,22 +53,56 @@ public class KafkaController {
         return testService.diaryCreate(requestBody, memberEmail);
     }
 
-//    @KafkaListener(topics = "diary_result", groupId = ConsumerConfig.GROUP_ID_CONFIG, containerFactory = "diaryListener")
-//    public void listen(DiaryDto message) {
-//
-//        System.out.println(message);
+    @PostMapping("/diarytest2")
+    public DeferredResult<BaseResponse> getDiary2(
+            HttpServletRequest request,
+            @RequestBody DiaryDto.DiaryCreateRequestDto requestBody){
 
-//        StringTokenizer st = new StringTokenizer(message);
-//        int id = Integer.parseInt(st.nextToken());
-//        String diary = st.nextToken() + "이것은 받은 메세지";
+        DeferredResult<BaseResponse> deferredResult = new DeferredResult<>();
+
+        String token = jwtTokenProvider.resolveToken(request);
+        jwtTokenProvider.validateToken(token);
+        String memberEmail = jwtTokenProvider.getUserEmail(token);
+
+        long memberId = memberService.getMemberId(memberEmail);
+
+        this.deferredResults.put(memberId, deferredResult);
+
+        Diary diary = Diary.builder()
+                .image(requestBody.getImage())
+                .title(requestBody.getTitle())
+                .content(requestBody.getContent())
+                .open(requestBody.isOpen())
+                .sale(requestBody.isSale())
+                .build();
+
+        DiaryDto.SparkProduce sparkProduce = diaryMapper.toSparkProduce(diary);
+        sparkProduce.setMemberId(memberId);
+
+        kafkaProducerService.sendDiary(sparkProduce);
 
 
-//        if (this.deferredResults.containsKey(message.getMemberId())) {
-//            ResponseEntity responseEntity = new ResponseEntity(message, HttpStatus.OK);
-//            this.deferredResults.get(message.getMemberId()).setResult(responseEntity);
-//            this.deferredResults.remove(message.getMemberId());
-//        }
-//    }
+        return deferredResult;
+    }
+
+
+    @KafkaListener(topics = "spark_diary_result", groupId = ConsumerConfig.GROUP_ID_CONFIG, containerFactory = "diaryListener")
+    public void listen(DiaryDto.SparkConsume message) {
+
+        System.out.println(message);
+
+        Diary diary = diaryMapper.sparkConsumeToDiary(message);
+
+        System.out.println("####################################");
+        System.out.println(diary);
+        System.out.println("####################################");
+
+        if (this.deferredResults.containsKey(message.getMemberId())) {
+            BaseResponse baseResponse = new BaseResponse(HttpStatus.OK, "스파크 처리 완료", diaryMapper.diaryToResponseDto(diary));
+            this.deferredResults.get(message.getMemberId()).setResult(baseResponse);
+            this.deferredResults.remove(message.getMemberId());
+        }
+    }
 
 //    @PostMapping("/logtest")
 //    public DeferredResult<ResponseEntity> getLog(@RequestBody(required = false) LogDto diary){
