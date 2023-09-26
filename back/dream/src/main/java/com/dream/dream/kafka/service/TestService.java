@@ -119,6 +119,10 @@ public class TestService {
 
         kafkaTemplate.send(sparkDiaryTopic, kafkaProduce);
 
+        System.out.println("###########################deferredResult");
+        System.out.println(deferredResult.getResult());
+        System.out.println("#########################################");
+
         return (Diary) deferredResult.getResult();
     }
 
