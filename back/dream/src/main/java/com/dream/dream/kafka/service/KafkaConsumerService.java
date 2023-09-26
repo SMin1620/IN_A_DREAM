@@ -13,7 +13,7 @@ import java.io.IOException;
 @RequiredArgsConstructor
 public class KafkaConsumerService {
 
-    @KafkaListener(topics = "${message.topic.name}", groupId = ConsumerConfig.GROUP_ID_CONFIG, containerFactory = "logDtoListener")
+    @KafkaListener(topics = "${message.topic.sparkDiaryName}", groupId = ConsumerConfig.GROUP_ID_CONFIG, containerFactory = "logDtoListener")
 
     @Async
     public void consume(LogDto logDto) throws IOException {

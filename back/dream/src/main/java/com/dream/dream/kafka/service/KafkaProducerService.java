@@ -14,7 +14,7 @@ public class KafkaProducerService {
 
     private final KafkaTemplate<String, Object> kafkaTemplate;
 
-    @Value(value = "${message.topic.name}")
+    @Value(value = "${message.topic.sparkDiaryName}")
     private String topicName;
 
     @Value(value = "${message.topic.pointName}")
