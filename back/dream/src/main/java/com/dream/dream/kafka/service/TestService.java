@@ -41,7 +41,7 @@ public class TestService {
     private final DiaryRepository diaryRepository;
     private final DiaryMapper diaryMapper;
     private final KafkaTemplate<String, Object> kafkaTemplate;
-    private final Map<Long, DeferredResult<Diary>> deferredResults = new ConcurrentHashMap<>();
+    private final Map<Long, DeferredResult<BaseResponse>> deferredResults = new ConcurrentHashMap<>();
 
     @Value("${app.fileupload.uploadDir}")
     String uploadFolder;
@@ -53,7 +53,7 @@ public class TestService {
     String sparkDiaryTopic;
 
     @Transactional
-    public Diary diaryCreate(DiaryDto.DiaryCreateRequestDto requestBody, String memberEmail) {
+    public DeferredResult<BaseResponse> diaryCreate(DiaryDto.DiaryCreateRequestDto requestBody, String memberEmail) {
         Member member = memberRepository.findByEmail(memberEmail).orElseThrow(() -> new BusinessLogicException(ExceptionCode.MEMBER_NOT_FOUND));
 
         // 이미지 저장 결로
@@ -114,16 +114,12 @@ public class TestService {
 
         DiaryDto.SparkProduce kafkaProduce = diaryMapper.toEntityDto(diary);
         kafkaProduce.setMemberId(member.getId());
-        DeferredResult<Diary> deferredResult = new DeferredResult<>();
+        DeferredResult<BaseResponse> deferredResult = new DeferredResult<>();
         this.deferredResults.put(member.getId(), deferredResult);
 
         kafkaTemplate.send(sparkDiaryTopic, kafkaProduce);
 
-        System.out.println("###########################deferredResult");
-        System.out.println(deferredResult.getResult());
-        System.out.println("#########################################");
-
-        return (Diary) deferredResult.getResult();
+        return deferredResult;
     }
 
     @Transactional
@@ -139,8 +135,8 @@ public class TestService {
         System.out.println("####################################");
 
         if (this.deferredResults.containsKey(message.getMemberId())) {
-
-            this.deferredResults.get(message.getMemberId()).setResult(diary);
+            BaseResponse baseResponse = new BaseResponse(HttpStatus.OK, "스파크 처리 완료", diaryMapper.diaryToResponseDto(diary));
+            this.deferredResults.get(message.getMemberId()).setResult(baseResponse);
             this.deferredResults.remove(message.getMemberId());
         }
     }
