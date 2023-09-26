@@ -9,6 +9,7 @@ import neutral from "../assets/coin/neutral.png";
 import postive from "../assets/coin/positive.png";
 import DetailETC from "../components/features/DetailETC/DetailETC";
 import { SERVER_URL } from "../constants";
+import RecommendedDiary from "../components/features/RecommendedDiary/RecommendedDiary";
 
 const DreamDetailPage = () => {
   const { id } = useParams<{ id: string }>();
@@ -78,6 +79,7 @@ const DreamDetailPage = () => {
           </div>
         </div>
       </div>
+      {numberId !== undefined && <RecommendedDiary diaryId={numberId} />}
     </div>
   );
 };

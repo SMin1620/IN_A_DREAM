@@ -64,8 +64,11 @@ export const buyDiary = (
     negativePoint,
   });
 
-//일기 검색
+// 추천일기 조회
+export const recommendedDiaries = (diaryId: number) =>
+  api1.get(`/api/recommend/${diaryId}`);
 
+//일기 검색
 export const fetchDiaryWithKeyword = (keyword: string | undefined) =>
   api1.get(`/api/search`, {
     params: { keyword },
