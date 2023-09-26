@@ -43,7 +43,7 @@ public class KafkaLogDtoConsumerConfig {
     }
 
     @Bean
-    public ConsumerFactory<String, DiaryDto.SparkProduce> diaryConsumer() {
+    public ConsumerFactory<String, DiaryDto.SparkConsume> diaryConsumer() {
 
         Map<String, Object> configs = new HashMap<>();
         configs.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, bootstrapServers);
@@ -52,12 +52,12 @@ public class KafkaLogDtoConsumerConfig {
         return new DefaultKafkaConsumerFactory<>(
                 configs,
                 new StringDeserializer(),
-                new JsonDeserializer<>(DiaryDto.SparkProduce.class,false));
+                new JsonDeserializer<>(DiaryDto.SparkConsume.class,false));
     }
 
     @Bean
-    public ConcurrentKafkaListenerContainerFactory<String, DiaryDto.SparkProduce> diaryListener(){
-        ConcurrentKafkaListenerContainerFactory<String, DiaryDto.SparkProduce> factory = new ConcurrentKafkaListenerContainerFactory<>();
+    public ConcurrentKafkaListenerContainerFactory<String, DiaryDto.SparkConsume> diaryListener(){
+        ConcurrentKafkaListenerContainerFactory<String, DiaryDto.SparkConsume> factory = new ConcurrentKafkaListenerContainerFactory<>();
         factory.setConsumerFactory(diaryConsumer());
         return factory;
     }
