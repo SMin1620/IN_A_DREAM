@@ -4,6 +4,7 @@ import com.dream.dream.common.BaseResponse;
 import com.dream.dream.diary.entity.Diary;
 import com.dream.dream.exception.BusinessLogicException;
 import com.dream.dream.exception.ExceptionCode;
+import com.dream.dream.recommend.dto.RecommendDto;
 import com.dream.dream.recommend.entity.DiaryElastic;
 import com.dream.dream.recommend.mapper.RecommendMapper;
 import com.dream.dream.recommend.service.ElasticService;
@@ -55,8 +56,8 @@ public class ElasticController {
         Member member = memberRepository.findByEmail(userDetails.getUsername())
                 .orElseThrow(() -> new BusinessLogicException(ExceptionCode.MEMBER_NOT_FOUND));
 
-        List<DiaryElastic> diaryElastics = elasticService.listRecommend(member.getId());
-        return new BaseResponse(HttpStatus.OK, "사용자 맞춤 꿈 목록 추천", recommendMapper.memberRecommendResponseDto(diaryElastics));
+        List<RecommendDto.DiaryRecommendResponseDto> diaryElastics = elasticService.listRecommend(member.getId());
+        return new BaseResponse(HttpStatus.OK, "사용자 맞춤 꿈 목록 추천", diaryElastics);
     }
 
     /**
@@ -77,8 +78,8 @@ public class ElasticController {
         memberRepository.findByEmail(userDetails.getUsername())
                 .orElseThrow(() -> new BusinessLogicException(ExceptionCode.MEMBER_NOT_FOUND));
 
-        List<DiaryElastic> diaryElastics = elasticService.listDiary(diaryId);
+        List<RecommendDto.DiaryRecommendResponseDto> diaryElastics = elasticService.listDiary(diaryId);
 
-        return new BaseResponse(HttpStatus.OK, "이 꿈과 비슷한 꿈 목록 추천", recommendMapper.memberRecommendResponseDto(diaryElastics));
+        return new BaseResponse(HttpStatus.OK, "이 꿈과 비슷한 꿈 목록 추천", diaryElastics);
     }
 }

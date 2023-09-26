@@ -4,6 +4,7 @@ import com.dream.dream.exception.BusinessLogicException;
 import com.dream.dream.exception.ExceptionCode;
 import com.dream.dream.member.entity.Member;
 import com.dream.dream.member.repository.MemberRepository;
+import com.dream.dream.recommend.dto.RecommendDto;
 import com.dream.dream.recommend.entity.DiaryElastic;
 import com.dream.dream.recommend.mapper.RecommendMapper;
 import com.dream.dream.recommend.repository.ElasticRepository;
@@ -38,6 +39,7 @@ public class ElasticService {
     private final ElasticRepository elasticRepository;
     private final RestHighLevelClient client;
     private final MemberRepository memberRepository;
+    private final RecommendMapper recommendMapper;
 
     @Value(value = "${message.topic.recommendName}")
     private String recommendTopic;
@@ -47,7 +49,7 @@ public class ElasticService {
      * 사용자 맞춤 일기 추천
      * :: 사용자 로그 데이터 기반 -> index : log_recommend
      */
-    public List<DiaryElastic> listRecommend(Long memberId) throws IOException {
+    public List<RecommendDto.DiaryRecommendResponseDto> listRecommend(Long memberId) throws IOException {
 
 
         TermQueryBuilder filter = QueryBuilders.termQuery("memberId", memberId);
@@ -108,16 +110,32 @@ public class ElasticService {
 
             System.out.println("key : " + key);
 
-            List<DiaryElastic> diaryElastics = new ArrayList<>();
+            List<RecommendDto.DiaryRecommendResponseDto> diaries = new ArrayList<>();
             for (DiaryElastic diary : elasticRepository.findByDairy(key)) {
 
                 Member member = memberRepository.findById(diary.getMemberId())
                         .orElseThrow(() -> new BusinessLogicException(ExceptionCode.MEMBER_NOT_FOUND));
-                System.out.println("diary : " + diary.toString());
-                diary.setMember(member);
-                diaryElastics.add(diary);
+
+                diaries.add(RecommendDto.DiaryRecommendResponseDto.builder()
+                        .id(diary.getDiaryId())
+                        .title(diary.getTitle())
+                        .content(diary.getContent())
+                        .image(diary.getImage())
+                        .emotion(diary.getEmotion())
+                        .positive(diary.getPositive())
+                        .neutral(diary.getNeutral())
+                        .negative(diary.getNegative())
+                        .likeCount(diary.getLikeCount())
+                                .open(diary.isOpen())
+                        .createdAt(diary.getCreatedAt())
+                        .member(RecommendDto.DiaryRecommendMemberResponseDto.builder()
+                                .id(member.getId())
+                                .email(member.getEmail())
+                                .nickname(member.getNickname())
+                                .gender(member.getGender())
+                                .build()).build());
             }
-            return diaryElastics;
+            return diaries;
         }
 
         else {
@@ -130,7 +148,7 @@ public class ElasticService {
      * 꿈 일기 관련 추천
      * :: 해당 꿈과 비슷한 꿈 추천 -> index : mysql_diary
      */
-    public List<DiaryElastic> listDiary(Long diaryId) throws IOException {
+    public List<RecommendDto.DiaryRecommendResponseDto> listDiary(Long diaryId) throws IOException {
         TermQueryBuilder filter = QueryBuilders.termQuery("diaryId", diaryId);
         SearchSourceBuilder sourceBuilder = new SearchSourceBuilder();
         sourceBuilder.query(QueryBuilders.boolQuery().filter(filter));
@@ -189,16 +207,33 @@ public class ElasticService {
 
             System.out.println("key : " + key);
 
-            List<DiaryElastic> diaryElastics = new ArrayList<>();
+            List<RecommendDto.DiaryRecommendResponseDto> diaries = new ArrayList<>();
             for (DiaryElastic diary : elasticRepository.findByDairy(key)) {
 
                 Member member = memberRepository.findById(diary.getMemberId())
                         .orElseThrow(() -> new BusinessLogicException(ExceptionCode.MEMBER_NOT_FOUND));
-                diary.setMember(member);
-                diaryElastics.add(diary);
+
+                diaries.add(RecommendDto.DiaryRecommendResponseDto.builder()
+                        .id(diary.getDiaryId())
+                        .title(diary.getTitle())
+                        .content(diary.getContent())
+                        .image(diary.getImage())
+                        .emotion(diary.getEmotion())
+                        .positive(diary.getPositive())
+                        .neutral(diary.getNeutral())
+                        .negative(diary.getNegative())
+                        .likeCount(diary.getLikeCount())
+                        .open(diary.isOpen())
+                        .createdAt(diary.getCreatedAt())
+                        .member(RecommendDto.DiaryRecommendMemberResponseDto.builder()
+                                .id(member.getId())
+                                .email(member.getEmail())
+                                .nickname(member.getNickname())
+                                .gender(member.getGender())
+                                .build()).build());
             }
 
-            return diaryElastics;
+            return diaries;
         }
 
         else {
