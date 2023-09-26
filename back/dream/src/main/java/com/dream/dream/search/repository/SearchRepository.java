@@ -11,6 +11,6 @@ public interface SearchRepository extends ElasticsearchRepository<DiaryElastic, 
     /**
      * 검색
      */
-    @Query("{\"bool\": {\"should\": [{\"match\": {\"title_nori\" : \"?0\"}}, {\"match\": {\"content_nori\" : \"?0\"}}]}}")
+    @Query("{\"bool\": {\"should\": [{\"match\": {\"title_nori\" : \"?0\"}}, {\"match\": {\"content_nori\" : \"?0\"}}], \"filter\": [{\"term\": {\"open\":true}}]}}")
     List<DiaryElastic> findByDairy(String keyword);
 }
