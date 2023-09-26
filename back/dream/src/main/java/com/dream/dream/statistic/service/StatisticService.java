@@ -7,6 +7,8 @@ import org.elasticsearch.action.search.SearchRequest;
 import org.elasticsearch.action.search.SearchResponse;
 import org.elasticsearch.client.RequestOptions;
 import org.elasticsearch.client.RestHighLevelClient;
+import org.elasticsearch.index.query.QueryBuilders;
+import org.elasticsearch.index.query.TermQueryBuilder;
 import org.elasticsearch.search.aggregations.AggregationBuilders;
 import org.elasticsearch.search.aggregations.bucket.terms.ParsedStringTerms;
 import org.elasticsearch.search.aggregations.bucket.terms.Terms;
@@ -24,10 +26,14 @@ public class StatisticService {
     private final RestHighLevelClient client;
 
 
-    public List<StatisticDto> dailyStatistic() throws IOException {
+    public List<StatisticDto> dailyStatistic(String from, String to) throws IOException {
+
+        from = from.substring(0, 19);
+        to = to.substring(0, 19);
 
         SearchRequest searchRequest = new SearchRequest("mysql_daily_statistic");
         searchRequest.source().size(0);
+        searchRequest.source().query(QueryBuilders.rangeQuery("@timestamp").gte(from).lt(to));
         searchRequest.source().aggregation(AggregationBuilders.terms("keywords").field("keyword").size(20));
 
         SearchResponse searchResponse = client.search(searchRequest, RequestOptions.DEFAULT);
