@@ -1,5 +1,6 @@
 package com.dream.dream.diary.service;
 
+import com.dream.dream.common.BaseResponse;
 import com.dream.dream.diary.dto.DiaryDto;
 import com.dream.dream.diary.entity.Diary;
 import com.dream.dream.diary.entity.Emotion;
@@ -18,11 +19,16 @@ import com.dream.dream.recommend.service.LogService;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.kafka.clients.consumer.ConsumerConfig;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.http.HttpStatus;
+import org.springframework.kafka.annotation.KafkaListener;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 import org.springframework.util.FileCopyUtils;
+import org.springframework.web.context.request.async.DeferredResult;
 
 
 import java.io.File;
@@ -36,8 +42,10 @@ import java.nio.file.Path;
 import java.nio.file.StandardOpenOption;
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Map;
 import java.util.Random;
 import java.util.UUID;
+import java.util.concurrent.ConcurrentHashMap;
 
 @Service
 @Slf4j
@@ -48,7 +56,11 @@ public class DiaryService {
     private final MemberRepository memberRepository;
     private final LikeRepository likeRepository;
     private final LogService logService;
+    private final DiaryMapper diaryMapper;
 
+    private final KafkaProducerService kafkaProducerService;
+
+    private final Map<Long, DeferredResult<BaseResponse>> deferredResults = new ConcurrentHashMap<>();
 
     @Value("${app.fileupload.uploadDir}")
     String uploadFolder;
@@ -57,10 +69,11 @@ public class DiaryService {
     String uploadPath;
 
     /**
-     * 꿈 일기 생성 서비스
+     * 꿈 일기 생성 -> kafka를 통해 spark
      */
     @Transactional
-    public Diary diaryCreate(DiaryDto.DiaryCreateRequestDto requestBody, String memberEmail) {
+    @Async
+    public DeferredResult<BaseResponse> diaryCreate(DiaryDto.DiaryCreateRequestDto requestBody, String memberEmail) {
         Member member = memberRepository.findByEmail(memberEmail).orElseThrow(() -> new BusinessLogicException(ExceptionCode.MEMBER_NOT_FOUND));
 
         // 이미지 저장 결로
@@ -111,31 +124,42 @@ public class DiaryService {
             throw new BusinessLogicException(ExceptionCode.FAILED_TO_UPDATE_FILE);
         }
 
-        // 일기 감정 분석 더미 데이터 생성
-        Random random = new Random();
-
-        int number1 = random.nextInt(100); // 0부터 99까지의 난수 생성
-        int number2 = random.nextInt(100 - number1); // 0부터 (100 - number1)까지의 난수 생성
-        int number3 = 100 - number1 - number2; // 난수 3개의 합이 100이 되도록 계산
-
-
-        // 일기 내용 RDB에 저장
         Diary diary = Diary.builder()
                 .image(fileUrl)
                 .title(requestBody.getTitle())
                 .content(requestBody.getContent())
-                .positive(number1)
-                .neutral(number2)
-                .negative(number3)
-                .positivePoint(number1)
-                .neutralPoint(number2)
-                .negativePoint(number3)
                 .open(requestBody.isOpen())
                 .sale(requestBody.isSale())
-                .member(member)
-                .owner(member)
-                .createdAt(LocalDateTime.now().plusHours(9))
                 .build();
+
+        DiaryDto.SparkProduce kafkaProduce = diaryMapper.toSparkProduce(diary);
+        kafkaProduce.setMemberId(member.getId());
+        DeferredResult<BaseResponse> deferredResult = new DeferredResult<>();
+        this.deferredResults.put(member.getId(), deferredResult);
+        kafkaProducerService.sendDiary(kafkaProduce);
+
+        return deferredResult;
+    }
+
+    /**
+     * sprak -> kafka 메세지 consume
+     */
+    @Transactional
+    @KafkaListener(topics = "${message.topic.sparkListenerName}", groupId = ConsumerConfig.GROUP_ID_CONFIG, containerFactory = "diaryListener")
+    public void listen(DiaryDto.SparkConsume message) {
+
+        long memberId = message.getMemberId();
+        Member member = memberRepository.findById(memberId).orElseThrow(()->new BusinessLogicException(ExceptionCode.MEMBER_NOT_FOUND));
+
+        Diary diary = diaryMapper.sparkConsumeToDiary(message);
+
+        diary.setPositivePoint(Math.round(message.getPositive()));
+        diary.setNegativePoint(Math.round(message.getNegative()));
+        diary.setNeutralPoint(Math.round(message.getNeutral()));
+
+        int number1 = diary.getPositivePoint();
+        int number2 = diary.getNeutralPoint();
+        int number3 = diary.getNegativePoint();
 
         if (number1 >= number2 && number1 >= number3) {
             diary.setEmotion(Emotion.POSITIVE);
@@ -145,6 +169,9 @@ public class DiaryService {
             diary.setEmotion(Emotion.NEGATIVE);
         }
 
+        diary.setMember(member);
+        diary.setOwner(member);
+
         diaryRepository.save(diary);
 
         member.setPositiveCoin(member.getPositiveCoin() + number1);
@@ -153,7 +180,14 @@ public class DiaryService {
 
         memberRepository.save(member);
 
-        return diary;
+        if (this.deferredResults.containsKey(memberId)) {
+            BaseResponse baseResponse = new BaseResponse(HttpStatus.OK, "스파크 처리 완료", diaryMapper.diaryToResponseDto(diary));
+            this.deferredResults.get(memberId).setResult(baseResponse);
+            System.out.println("##########################-------------------------------");
+            System.out.println(deferredResults.get(memberId).getResult());
+            System.out.println("##########################-------------------------------");
+            this.deferredResults.remove(memberId);
+        }
     }
 
     /**
