@@ -2,6 +2,8 @@ package com.dream.dream.statistic.dto;
 
 import lombok.*;
 
+import java.time.LocalDateTime;
+
 
 public class StatisticDto {
 
@@ -25,6 +27,16 @@ public class StatisticDto {
         private Long memberId;
         private String emotion;
         private Long count;
+    }
+
+    @Getter
+    @Setter
+    @NoArgsConstructor
+    @AllArgsConstructor
+    @Builder
+    public static class strictDto {
+        private Long memberId;
+        private LocalDateTime registDate;
     }
 
 }
