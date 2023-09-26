@@ -51,6 +51,26 @@ public class DiaryController {
     }
 
     /**
+     * 꿈 일기 생성 컨트롤러 임시 사용
+     */
+    @Operation(summary = "일기 생성 임시 사용 (원래꺼 안되면 사용하세요)")
+    @PostMapping("/temp")
+    public BaseResponse diaryCreateTemp(
+            HttpServletRequest request,
+            @RequestBody DiaryDto.DiaryCreateRequestDto requestBody) {
+
+        String token = jwtTokenProvider.resolveToken(request);
+        jwtTokenProvider.validateToken(token);
+        String memberEmail = jwtTokenProvider.getUserEmail(token);
+
+        Diary diary = diaryService.diaryCreateTemp(requestBody, memberEmail);
+
+        DiaryDto.DiaryResponseDto diaryResponseDto = diaryMapper.diaryToResponseDto(diary);
+
+        return new BaseResponse(HttpStatus.OK, "굿", diaryResponseDto);
+    }
+
+    /**
      * 일기 목록 조회
      */
     @Operation(summary = "전체 일기 목록 조회")

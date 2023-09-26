@@ -190,6 +190,107 @@ public class DiaryService {
     }
 
     /**
+     * 꿈 일기 생성 서비스 임시사용
+     */
+    @Transactional
+    public Diary diaryCreateTemp(DiaryDto.DiaryCreateRequestDto requestBody, String memberEmail) {
+        Member member = memberRepository.findByEmail(memberEmail).orElseThrow(() -> new BusinessLogicException(ExceptionCode.MEMBER_NOT_FOUND));
+
+        // 이미지 저장 결로
+        File uploadDir = new File(uploadPath + File.separator + uploadFolder);
+        log.error(uploadDir.getAbsolutePath());
+        if (!uploadDir.exists()) {
+            boolean e = uploadDir.mkdirs();
+            String er = e ? "OK" : "NO";
+            log.error(er);
+        }
+
+        Path rollback = null;
+        String fileUrl = null;
+
+        try {
+            // 이미지 다운로드
+            URL url = new URL(requestBody.getImage());
+            UUID uuid = UUID.randomUUID();
+            String extension = "jpg";
+            String savingFileName = uuid + "." + extension;
+            Path outputPath = Path.of(uploadDir.getAbsolutePath(), savingFileName);
+            System.out.println(outputPath.toString());
+            fileUrl = uploadFolder + "/" + savingFileName;
+            System.out.println(fileUrl);
+            rollback = outputPath;
+            try (InputStream in = url.openStream();
+                 OutputStream out = Files.newOutputStream(outputPath, StandardOpenOption.CREATE)) {
+
+                byte[] buffer = new byte[1024];
+                int lengthRead;
+
+                while ((lengthRead = in.read(buffer)) > 0) {
+                    out.write(buffer, 0, lengthRead);
+                    out.flush();
+                }
+            }
+
+        } catch (IOException e) {
+            e.printStackTrace();
+            if (rollback != null) {
+                try {
+                    Files.deleteIfExists(rollback);
+                } catch (IOException ex) {
+                    throw new RuntimeException(ex);
+                }
+            }
+
+            throw new BusinessLogicException(ExceptionCode.FAILED_TO_UPDATE_FILE);
+        }
+
+        // 일기 감정 분석 더미 데이터 생성
+        Random random = new Random();
+
+        int number1 = random.nextInt(100); // 0부터 99까지의 난수 생성
+        int number2 = random.nextInt(100 - number1); // 0부터 (100 - number1)까지의 난수 생성
+        int number3 = 100 - number1 - number2; // 난수 3개의 합이 100이 되도록 계산
+
+
+        // 일기 내용 RDB에 저장
+        Diary diary = Diary.builder()
+                .image(fileUrl)
+                .title(requestBody.getTitle())
+                .content(requestBody.getContent())
+                .positive(number1)
+                .neutral(number2)
+                .negative(number3)
+                .positivePoint(number1)
+                .neutralPoint(number2)
+                .negativePoint(number3)
+                .open(requestBody.isOpen())
+                .sale(requestBody.isSale())
+                .member(member)
+                .owner(member)
+                .createdAt(LocalDateTime.now().plusHours(9))
+                .build();
+
+        if (number1 >= number2 && number1 >= number3) {
+            diary.setEmotion(Emotion.POSITIVE);
+        } else if (number2 >= number1 && number2 >= number3) {
+            diary.setEmotion(Emotion.NEUTRAL);
+        } else {
+            diary.setEmotion(Emotion.NEGATIVE);
+        }
+
+        diaryRepository.save(diary);
+
+        member.setPositiveCoin(member.getPositiveCoin() + number1);
+        member.setNeutralCoin(member.getNeutralCoin() + number2);
+        member.setNegativeCoin(member.getNegativeCoin() + number3);
+
+        memberRepository.save(member);
+
+        return diary;
+    }
+
+
+    /**
      * 일기 목록 조회
      */
     public Page<Diary> getDiaryList(Pageable pageable) {
