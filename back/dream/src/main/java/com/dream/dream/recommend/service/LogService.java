@@ -2,13 +2,17 @@ package com.dream.dream.recommend.service;
 
 import com.dream.dream.diary.entity.Diary;
 import com.dream.dream.kafka.service.KafkaProducerService;
+import com.dream.dream.member.entity.Member;
 import com.dream.dream.recommend.dto.RecommendDto;
 import com.dream.dream.recommend.mapper.RecommendMapper;
+import com.dream.dream.statistic.dto.StatisticDto;
 import com.dream.dream.transaction.entity.Transaction;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.time.LocalDateTime;
 
 @Service
 @RequiredArgsConstructor
@@ -43,5 +47,17 @@ public class LogService {
                 transaction.getNegativePoint() + transaction.getNegativePoint() + transaction.getNeutralPoint()
         );
         kafkaProducerService.sendTransaction(transactionLog);
+    }
+
+    /**
+     * 잔디 로그
+     */
+    public void strictLog(Member member) {
+
+        StatisticDto.strictDto strictDto = StatisticDto.strictDto.builder()
+                .memberId(member.getId())
+                .registDate(LocalDateTime.now())
+                .build();
+        kafkaProducerService.sendStrict(strictDto);
     }
 }

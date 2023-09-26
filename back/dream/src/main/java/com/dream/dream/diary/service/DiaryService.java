@@ -56,8 +56,7 @@ public class DiaryService {
     private final LikeRepository likeRepository;
     private final LogService logService;
     private final KafkaProducerService kafkaProducerService;
-
-    private final KafkaProducerService kafkaProducerService;
+    private final DiaryMapper diaryMapper;
 
     private final Map<Long, DeferredResult<BaseResponse>> deferredResults = new ConcurrentHashMap<>();
 
@@ -287,10 +286,7 @@ public class DiaryService {
 
         // 잔디 로그 생성
         System.out.println("=== 일기 생성 -> 잔디 깎아버렷 ===");
-        kafkaProducerService.sendStrict(StatisticDto.strictDto.builder()
-                .memberId(member.getId())
-                .registDate(LocalDateTime.now())
-                .build());
+        logService.strictLog(member);
 
         return diary;
     }
