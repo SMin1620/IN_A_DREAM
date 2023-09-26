@@ -4,11 +4,16 @@ import "./styles/CreateDreamDiaryPage.css";
 import CreateDreamDiaryForm from "../components/features/CreateDreamDiary/CreateDreamDiaryForm";
 import DateForm from "../components/common/DateForm";
 import { border } from "./../../node_modules/@mui/system/index.d";
+import useKarlo from "../hooks/useKarlo";
 
 const CreateDreamDiaryPage = () => {
   const [sell, setSell] = useState<boolean>(false);
   const [diaryImage, setDiaryImage] = useState<boolean>(false);
   const [imageUrl, setImageUrl] = useState<string | null>(null);
+
+  const { KarloimageUrl, fetchData, Karloloading } = useKarlo();
+  console.log(Karloloading);
+  console.log("KarloloadingKarloloadingKarloloading");
 
   return (
     <div className="create-dream-diary">
@@ -18,7 +23,13 @@ const CreateDreamDiaryPage = () => {
           className={`create-dream-diary-left ${diaryImage ? "on-diary" : ""}`}
         >
           <div className="create-dream-diary-left-top">
-            {imageUrl && <img src={imageUrl} alt="diagram" />}
+            {Karloloading ? (
+              <p>
+                로딩중입니다.로딩중입니다.로딩중입니다.로딩중입니다.로딩중입니다.로딩중입니다.로딩중입니다.로딩중입니다.
+              </p>
+            ) : (
+              imageUrl && <img src={imageUrl} alt="diagram" />
+            )}
           </div>
         </div>
 
@@ -29,6 +40,8 @@ const CreateDreamDiaryPage = () => {
           <CreateDreamDiaryForm
             setDiaryImage={setDiaryImage}
             setImageUrl={setImageUrl}
+            fetchData={fetchData}
+            KarloimageUrl={KarloimageUrl}
           />
         </div>
       </div>

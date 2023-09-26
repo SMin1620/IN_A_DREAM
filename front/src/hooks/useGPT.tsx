@@ -1,46 +1,49 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import axios from "axios";
 
-const useGPT = (prompt: string) => {
-  const [response, setResponse] = useState<string | null>(null);
-  const [loading, setLoading] = useState(false);
+const useGPT = () => {
+  const [GPTresponse, setGPTResponse] = useState<string | null>(null);
+  const [GPTloading, setGPTloading] = useState(false);
 
-  useEffect(() => {
-    const fetchData = async () => {
-      setLoading(true);
+  const fetchGPTData = async (content: string) => {
+    setGPTloading(true);
+    let responseContent = null;
 
-      try {
-        const apiUrl =
-          "https://api.openai.com/v1/engines/text-davinci-002/completions";
-        const apiKey = process.env.REACT_APP_GPT_KEY; // 여기에 본인의 OpenAI API 키를 입력하세요.
-        const maxTokens = 180; // 생성된 응답의 최대 길이
+    try {
+      const apiUrl = "https://api.openai.com/v1/chat/completions";
+      const apiKey = process.env.REACT_APP_GPT_KEY;
+      let requestBody;
 
-        let requestBody;
+      requestBody = {
+        model: "gpt-3.5-turbo",
+        messages: [
+          {
+            role: "system",
+            content: "다음 내용의 핵심 키워드만 뽑아서 영어 단어로 알려줘",
+          },
+          { role: "user", content: content },
+        ],
+        temperature: 0.7,
+      };
 
-        requestBody = {
-          prompt: `${prompt} Please summarize the previous information within 180 in English`,
-          max_tokens: maxTokens,
-        };
+      const headers = {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${apiKey}`,
+      };
 
-        const headers = {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${apiKey}`,
-        };
+      const response = await axios.post(apiUrl, requestBody, { headers });
+      responseContent = response.data.choices[0].message.content.trim();
+      setGPTResponse(responseContent);
+    } catch (error) {
+      console.error("Error fetching data:", error);
+    }
 
-        const response = await axios.post(apiUrl, requestBody, { headers });
+    setGPTloading(false);
 
-        setResponse(response.data.choices[0].text.trim());
-      } catch (error) {
-        console.error("Error fetching data:", error);
-      }
+    return responseContent;
+  };
 
-      setLoading(false);
-    };
-
-    fetchData();
-  }, [prompt]);
-
-  return { response, loading };
+  return { GPTresponse, GPTloading, fetchGPTData };
 };
 
 export default useGPT;

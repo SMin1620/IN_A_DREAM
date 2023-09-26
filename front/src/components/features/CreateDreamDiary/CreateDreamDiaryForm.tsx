@@ -9,11 +9,15 @@ import useGPT from "../../../hooks/useGPT";
 interface OwnProps {
   setDiaryImage: (value: boolean) => void;
   setImageUrl: (url: string | null) => void;
+  fetchData: (prompt: string) => Promise<string | null>;
+  KarloimageUrl: string | null;
 }
 
 const CreateDreamDiaryForm: React.FC<OwnProps> = ({
   setDiaryImage,
   setImageUrl,
+  fetchData,
+  KarloimageUrl,
 }: OwnProps) => {
   const {
     diaryData,
@@ -24,17 +28,25 @@ const CreateDreamDiaryForm: React.FC<OwnProps> = ({
   } = useMakeDiary();
 
   const [clicked, setClicked] = useState<boolean>(false);
-  const { imageUrl, fetchData } = useKarlo();
+  // const { KarloimageUrl, fetchData } = useKarlo();
   const [sell, setSell] = useState<boolean>(false);
   const [isPublic, setIsPublic] = useState<boolean>(false);
   const [post, setPost] = useState<boolean>(false);
 
-  const handleCreateImage = () => {
+  const { GPTresponse, GPTloading, fetchGPTData } = useGPT();
+
+  const handleCreateImage = async () => {
     // 로직처리 후 다이어리 이미지 넣어주기
+    console.log("클릭했음");
     if (diaryData.content && diaryData.title) {
-      fetchData(diaryData.content).then(setImageUrl);
-      setDiaryImage(true);
-      setClicked(true);
+      const gptResult = await fetchGPTData(diaryData.content);
+
+      if (gptResult !== null) {
+        const finalResponse = "Cute, animation, cartoon " + gptResult;
+        fetchData(finalResponse).then(setImageUrl);
+        setDiaryImage(true);
+        setClicked(true);
+      }
     } else if (!diaryData.title) {
       Swal.fire({
         icon: "error",
@@ -55,7 +67,7 @@ const CreateDreamDiaryForm: React.FC<OwnProps> = ({
       ...prev,
       sale: sell,
       open: isPublic,
-      image: imageUrl,
+      image: KarloimageUrl,
     }));
     setPost(true);
   };
