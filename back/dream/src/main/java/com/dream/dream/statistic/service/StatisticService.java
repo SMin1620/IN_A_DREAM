@@ -26,7 +26,10 @@ public class StatisticService {
     private final RestHighLevelClient client;
 
 
-    public List<StatisticDto> dailyStatistic(String from, String to) throws IOException {
+    /**
+     * 키워드 통계 비즈니스 로직
+     */
+    public List<StatisticDto.keywordDto> dailyStatistic(String from, String to) throws IOException {
 
         from = from.substring(0, 19);
         to = to.substring(0, 19);
@@ -40,12 +43,42 @@ public class StatisticService {
 
         ParsedStringTerms agg = searchResponse.getAggregations().get("keywords");
 
-        List<StatisticDto> statisticDtos = new ArrayList<>();
+        List<StatisticDto.keywordDto> statisticDtos = new ArrayList<>();
         for (Terms.Bucket bucket: agg.getBuckets()) {
             statisticDtos.add(
-                    StatisticDto.builder()
+                    StatisticDto.keywordDto.builder()
                             .count(bucket.getDocCount())
                             .keyword(bucket.getKeyAsString())
+                            .build()
+            );
+        }
+
+        return statisticDtos;
+    }
+
+    /**
+     * 감정통계 비즈니스 로직
+     */
+    public List<StatisticDto.emotionDto> emotionStatistic(String from, String to) throws IOException {
+
+        from = from.substring(0, 19);
+        to = to.substring(0, 19);
+
+        SearchRequest searchRequest = new SearchRequest("mysql_diary");
+        searchRequest.source().size(0);
+        searchRequest.source().query(QueryBuilders.rangeQuery("@timestamp").gte(from).lt(to));
+        searchRequest.source().aggregation(AggregationBuilders.terms("keywords").field("keyword").size(20));
+
+        SearchResponse searchResponse = client.search(searchRequest, RequestOptions.DEFAULT);
+
+        ParsedStringTerms agg = searchResponse.getAggregations().get("keywords");
+
+        List<StatisticDto.emotionDto> statisticDtos = new ArrayList<>();
+        for (Terms.Bucket bucket: agg.getBuckets()) {
+            statisticDtos.add(
+                    StatisticDto.emotionDto.builder()
+                            .count(bucket.getDocCount())
+                            .emotion(bucket.getKeyAsString())
                             .build()
             );
         }
