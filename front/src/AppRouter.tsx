@@ -28,7 +28,10 @@ function AppRouter() {
           <Route path="/Signup" element={<SignUpPage />}></Route>
           <Route path="/Mypage" element={<MyPage />}></Route>
           <Route path="/gallery/:sortKey" element={<GalleryPage />} />
-          <Route path="/SearchResult" element={<SearchResultPage />}></Route>
+          <Route
+            path="/SearchResult/:keyword"
+            element={<SearchResultPage />}
+          ></Route>
           <Route path="/DreamShop" element={<DreamShopPage />}></Route>
           <Route path="/DreamDetail/:id" element={<DreamDetailPage />}></Route>
         </Routes>
