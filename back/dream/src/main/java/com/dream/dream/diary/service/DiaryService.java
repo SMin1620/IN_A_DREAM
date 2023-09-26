@@ -58,8 +58,6 @@ public class DiaryService {
     private final KafkaProducerService kafkaProducerService;
     private final DiaryMapper diaryMapper;
 
-    private final KafkaProducerService kafkaProducerService;
-
     private final Map<Long, DeferredResult<BaseResponse>> deferredResults = new ConcurrentHashMap<>();
 
     @Value("${app.fileupload.uploadDir}")
