@@ -6,6 +6,7 @@ import com.dream.dream.exception.ExceptionCode;
 import com.dream.dream.jwt.JwtTokenProvider;
 import com.dream.dream.member.entity.Member;
 import com.dream.dream.member.repository.MemberRepository;
+import com.dream.dream.recommend.dto.RecommendDto;
 import com.dream.dream.recommend.entity.DiaryElastic;
 import com.dream.dream.recommend.mapper.RecommendMapper;
 import com.dream.dream.search.service.SearchService;
@@ -60,8 +61,8 @@ public class SearchController {
             throw new BusinessLogicException(ExceptionCode.MEMBER_NOT_FOUND);
         }
 
-        List<DiaryElastic> diaryElastics = searchService.searchDiary(member.getId(), keyword);
-        return new BaseResponse(HttpStatus.OK, "검색 목록", recommendMapper.memberRecommendResponseDto(diaryElastics));
+        List<RecommendDto.DiaryRecommendResponseDto> diaryElastics = searchService.searchDiary(member.getId(), keyword);
+        return new BaseResponse(HttpStatus.OK, "검색 목록", diaryElastics);
 
 
     }
