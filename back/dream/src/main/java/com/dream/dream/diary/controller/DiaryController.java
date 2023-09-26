@@ -86,9 +86,9 @@ public class DiaryController {
         Page<Diary> diaryPage = diaryService.getDiaryList(pageable);
         List<Diary> diaryList = diaryPage.getContent();
 
-//        diaryService.getMyLike(memberEmail, diaryList);
+        List<Boolean> likedList = diaryService.getMyLike(memberEmail, diaryList);
 
-        return new BaseResponse(HttpStatus.OK, "일기 목록 반환 성공", diaryMapper.toResponseDtos(diaryList));
+        return new BaseResponse(HttpStatus.OK, "일기 목록 반환 성공", diaryMapper.toResponseDtos(diaryList, likedList));
     }
 
     /**
@@ -105,8 +105,9 @@ public class DiaryController {
         String memberEmail = jwtTokenProvider.getUserEmail(token);
         Page<Diary> diaryPage = diaryService.getDiaryList(memberEmail, pageable);
         List<Diary> diaryList = diaryPage.getContent();
+        List<Boolean> likedList = diaryService.getMyLike(memberEmail, diaryList);
 
-        return new BaseResponse(HttpStatus.OK, "내 일기 목록 반환 성공", diaryMapper.toResponseDtos(diaryList));
+        return new BaseResponse(HttpStatus.OK, "내 일기 목록 반환 성공", diaryMapper.toResponseDtos(diaryList, likedList));
     }
 
     /**
@@ -116,6 +117,9 @@ public class DiaryController {
     @GetMapping("/{diaryId}")
     public BaseResponse diaryDetail(@PathVariable Long diaryId) {
         Diary diary = diaryService.getDiary(diaryId);
+
+        List<Boolean> likedList = diaryService.getMyLike(memberEmail, diaryList);
+
         return new BaseResponse(HttpStatus.OK, "일기 상세 조회 성공", diaryMapper.diaryToResponseDto(diary));
     }
 
