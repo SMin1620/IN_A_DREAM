@@ -1,18 +1,16 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { useDispatch } from "react-redux";
-import { useNavigate } from "react-router-dom";
-import { loginUser } from "../api/services/authAPI"; // 경로는 실제 파일 위치에 따라 변경해주세요
+import { loginUser } from "../api/services/authAPI";
 import { setToken } from "../stores/reducers/LoginToken";
-
+import useFectchAndStoreUserInfo from "../hooks/useFetchAndStoreUserInfo";
 import Swal from "sweetalert2";
 import axios from "axios";
 
 const useLogin = (onLoginSuccess: () => void) => {
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
+  const { getUserInfo } = useFectchAndStoreUserInfo();
   const dispatch = useDispatch();
-  const navigate = useNavigate();
-
   const handleEmailChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setEmail(e.target.value);
   };
@@ -44,6 +42,7 @@ const useLogin = (onLoginSuccess: () => void) => {
 
         // useUserInfo();
       }
+      await getUserInfo();
     } catch (error) {
       console.error(error);
 

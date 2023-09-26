@@ -9,11 +9,15 @@ import neutral from "../assets/coin/neutral.png";
 import postive from "../assets/coin/positive.png";
 import DetailETC from "../components/features/DetailETC/DetailETC";
 import { SERVER_URL } from "../constants";
+import { useSelector } from "react-redux";
 
 const DreamDetailPage = () => {
   const { id } = useParams<{ id: string }>();
   const numberId = id ? parseInt(id) : undefined;
   const { getDiaryDetail, diaryDetail } = useDetailDiary();
+
+  const userInfo = useSelector((state: any) => state);
+  console.log(userInfo, "uy");
 
   useEffect(() => {
     if (numberId !== undefined) {
