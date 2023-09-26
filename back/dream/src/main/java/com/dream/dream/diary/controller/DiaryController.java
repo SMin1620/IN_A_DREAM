@@ -188,7 +188,7 @@ public class DiaryController {
 
         String memberEmail = jwtTokenProvider.getUserEmail(token);
 
-        Member member = diaryService.reroll(memberEmail);
+        diaryService.reroll(memberEmail);
 
         return new BaseResponse(HttpStatus.OK, "reroll 성공");
     }
