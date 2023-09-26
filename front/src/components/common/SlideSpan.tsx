@@ -42,4 +42,8 @@ export const SlideSpan = S.span<SlideSpanProps>`
   background-color :${(props) => props.backgroundColor};
   padding :${(props) => props.padding};
   display :${(props) => props.display};
+  
+  &:hover {
+    color: #ff7a00;
+  }
 `;
