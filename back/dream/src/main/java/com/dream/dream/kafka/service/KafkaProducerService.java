@@ -47,6 +47,12 @@ public class KafkaProducerService {
     @Value(value = "${message.topic.transactionName}")
     private String transactionTopic;
 
+    /**
+     * 일기 스트릭 잔디
+     */
+    @Value(value = "${message.topic.strictName}")
+    private String strictTopic;
+
 
     @Async
     public void sendLogDto(Object message){
@@ -92,5 +98,12 @@ public class KafkaProducerService {
         System.out.println("############# 거래 내역 ##############");
         
         kafkaTemplate.send(transactionTopic, message);
+    }
+
+    @Async
+    public void sendStrict(Object message){
+        System.out.println("############# 잔디 깎기 ##############");
+
+        kafkaTemplate.send(strictTopic, message);
     }
 }

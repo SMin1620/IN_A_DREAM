@@ -50,6 +50,12 @@ public class KafkaTopicConfig {
     private String transactionTopic;
 
     /**
+     * 일기 스트릭 잔지 채우기
+     */
+    @Value(value = "${message.topic.strictName}")
+    private String strictTopic;
+
+    /**
      * 일기 정보 받는 topic
      */
     private String diaryResult = "diary_result";
@@ -89,6 +95,11 @@ public class KafkaTopicConfig {
     @Bean
     public NewTopic transactionTopic() {
         return new NewTopic(transactionTopic, 1, (short) 1);
+    }
+
+    @Bean
+    public NewTopic strictTopic() {
+        return new NewTopic(strictTopic, 1, (short) 1);
     }
 
     @Bean
