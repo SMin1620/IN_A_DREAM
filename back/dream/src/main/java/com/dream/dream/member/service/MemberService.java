@@ -154,7 +154,7 @@ public class MemberService {
     /**
      * reroll
      */
-    public Memebr reroll(String email) {
+    public Memeber reroll(String email) {
         Member member = memberRepository.findByEmail(email).orElseThrow(() -> new BusinessLogicException(ExceptionCode.MEMBER_NOT_FOUND));
         if(member.getPositiveCoin() < 5 || member.getNegativeCoin() < 5 || member.getNeutralCoin() < 5){
             throw new BusinessLogicException(ExceptionCode.COIN_LACK);
