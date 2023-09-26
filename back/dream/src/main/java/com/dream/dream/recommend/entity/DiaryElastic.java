@@ -20,6 +20,7 @@ import java.time.LocalDateTime;
 @ToString
 @Getter
 @Setter
+@Builder
 public class DiaryElastic {
 
     @Id
@@ -58,8 +59,12 @@ public class DiaryElastic {
     @Field(type = FieldType.Auto)
     private float negative;
 
+    @Field(type = FieldType.Auto, name = "like_count")
+    @Column(name = "like_count")
+    private Integer likeCount;
+
     @Field(type = FieldType.Auto)
-    private int likeCount;
+    private boolean open;
 
     @Field(type = FieldType.Auto, name = "created_at")
     @JsonFormat(pattern = "yyyy-MM-dd")

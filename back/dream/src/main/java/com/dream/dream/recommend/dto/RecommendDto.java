@@ -15,8 +15,7 @@ public class RecommendDto {
     @Builder
     public static class DiaryRecommendResponseDto {
 
-        private String id;
-        private Long diaryId;
+        private Long id;
         private String title;
         private String content;
         private String image;
@@ -25,6 +24,7 @@ public class RecommendDto {
         private float neutral;
         private float negative;
         private int likeCount;
+        private boolean open;
         @JsonFormat(pattern = "yyyy-MM-dd")
         private LocalDateTime createdAt;
         private DiaryRecommendMemberResponseDto member;
