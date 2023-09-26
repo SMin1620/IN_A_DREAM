@@ -86,7 +86,7 @@ public class DiaryController {
         Page<Diary> diaryPage = diaryService.getDiaryList(pageable);
         List<Diary> diaryList = diaryPage.getContent();
 
-        List<Boolean> likedList = diaryService.getMyLike(memberEmail, diaryList);
+        List<Boolean> likedList = diaryService.getMyLikes(memberEmail, diaryList);
 
         return new BaseResponse(HttpStatus.OK, "일기 목록 반환 성공", diaryMapper.toResponseDtos(diaryList, likedList));
     }
@@ -105,7 +105,7 @@ public class DiaryController {
         String memberEmail = jwtTokenProvider.getUserEmail(token);
         Page<Diary> diaryPage = diaryService.getDiaryList(memberEmail, pageable);
         List<Diary> diaryList = diaryPage.getContent();
-        List<Boolean> likedList = diaryService.getMyLike(memberEmail, diaryList);
+        List<Boolean> likedList = diaryService.getMyLikes(memberEmail, diaryList);
 
         return new BaseResponse(HttpStatus.OK, "내 일기 목록 반환 성공", diaryMapper.toResponseDtos(diaryList, likedList));
     }
@@ -115,12 +115,19 @@ public class DiaryController {
      */
     @Operation(summary = "일기 상세 조회")
     @GetMapping("/{diaryId}")
-    public BaseResponse diaryDetail(@PathVariable Long diaryId) {
+    public BaseResponse diaryDetail(
+            HttpServletRequest request,
+            @PathVariable Long diaryId) {
+        String token = jwtTokenProvider.resolveToken(request);
+        jwtTokenProvider.validateToken(token);
+
+        String memberEmail = jwtTokenProvider.getUserEmail(token);
+
         Diary diary = diaryService.getDiary(diaryId);
 
-        List<Boolean> likedList = diaryService.getMyLike(memberEmail, diaryList);
+        boolean liked = diaryService.getMyLike(memberEmail, diary);
 
-        return new BaseResponse(HttpStatus.OK, "일기 상세 조회 성공", diaryMapper.diaryToResponseDto(diary));
+        return new BaseResponse(HttpStatus.OK, "일기 상세 조회 성공", diaryMapper.diaryToResponseDto(diary, liked));
     }
 
     /**
@@ -139,8 +146,9 @@ public class DiaryController {
         String memberEmail = jwtTokenProvider.getUserEmail(token);
 
         Diary diary = diaryService.likeDiary(memberEmail, requestBody);
+        boolean liked = diaryService.getMyLike(memberEmail, diary);
 
-        return new BaseResponse(HttpStatus.OK, "좋아요 수정", diaryMapper.diaryToResponseDto(diary));
+        return new BaseResponse(HttpStatus.OK, "좋아요 수정", diaryMapper.diaryToResponseDto(diary, liked));
     }
 
     /**

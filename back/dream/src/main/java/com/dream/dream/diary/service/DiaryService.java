@@ -378,10 +378,9 @@ public class DiaryService {
     }
 
     /**
-     * 사용자의 좋아요 여부 반환
-     * @param diaryList
+     * 사용자의 좋아요 여부 반환 (여러개)
      */
-    public List<Boolean> getMyLike(String email, List<Diary> diaryList) {
+    public List<Boolean> getMyLikes(String email, List<Diary> diaryList) {
         Member member = memberRepository.findByEmail(email).orElseThrow(() -> new BusinessLogicException(ExceptionCode.MEMBER_NOT_FOUND));
 
         // 내가 좋아요한 일기의 Like 를 가져옴
@@ -393,5 +392,16 @@ public class DiaryService {
         return diaryList.stream().map(diary -> likedDiaries.contains(diary)).collect(Collectors.toList());
     }
 
+    /**
+     * 사용자의 좋아요 여부 반환(1개)
+     */
+    public boolean getMyLike(String email, Diary diary) {
+        Member member = memberRepository.findByEmail(email).orElseThrow(() -> new BusinessLogicException(ExceptionCode.MEMBER_NOT_FOUND));
+
+        // 내가 좋아요한 일기의 Like 를 가져옴
+        Like likes = likeRepository.findLikeByMemberAndDiary(member, diary).orElse(null);
+
+        return likes != null;
+    }
 
 }
