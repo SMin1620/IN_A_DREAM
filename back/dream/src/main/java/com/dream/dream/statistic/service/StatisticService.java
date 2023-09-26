@@ -31,8 +31,8 @@ public class StatisticService {
      */
     public List<StatisticDto.keywordDto> dailyStatistic(String from, String to) throws IOException {
 
-        from = from.substring(0, 19);
-        to = to.substring(0, 19);
+        from = from + "T00:00:00";
+        to = to + "T00:00:00";
 
         SearchRequest searchRequest = new SearchRequest("mysql_daily_statistic");
         searchRequest.source().size(0);
@@ -61,8 +61,8 @@ public class StatisticService {
      */
     public List<StatisticDto.emotionDto> emotionStatistic(String from, String to) throws IOException {
 
-        from = from.substring(0, 19);
-        to = to.substring(0, 19);
+        from = from + "T00:00:00";
+        to = to + "T00:00:00";
 
         SearchRequest searchRequest = new SearchRequest("mysql_diary");
         searchRequest.source().size(0);
