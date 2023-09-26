@@ -1,5 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { UserInfo } from "../../types/ApiType";
+import { persistReducer } from "redux-persist";
+import storage from "redux-persist/lib/storage";
 
 interface UserInfoData {
   data: UserInfo | null;
@@ -24,4 +26,9 @@ const userInfoSlice = createSlice({
 
 export const { setUserInfo } = userInfoSlice.actions;
 
-export default userInfoSlice.reducer;
+const persistConfig = {
+  key: "userInfo",
+  storage,
+};
+
+export default persistReducer(persistConfig, userInfoSlice.reducer);

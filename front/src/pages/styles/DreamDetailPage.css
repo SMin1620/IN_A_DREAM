@@ -157,4 +157,15 @@
   .diary-detail-right-top {
     margin: 0 10vw;
   }
+  .coin-wraper {
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+  }
+
+  .coin-count-wraper {
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+  }
 }

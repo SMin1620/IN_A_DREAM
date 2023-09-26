@@ -1,15 +1,26 @@
 // store.ts
-import { configureStore } from "@reduxjs/toolkit";
+import { configureStore, combineReducers } from "@reduxjs/toolkit";
+import { persistStore, persistReducer } from "redux-persist";
+import storage from "redux-persist/lib/storage"; // defaults
 import tokenReducer from "./reducers/LoginToken";
-import userInfo from "./reducers/UserInfo";
+import userInfoReducer from "./reducers/UserInfo";
 
-const store = configureStore({
-  reducer: {
-    token: tokenReducer,
-    userInfo: userInfo,
-  },
+const persistConfig = {
+  key: "root",
+  storage,
+  whitelist: ["token", "userInfo"],
+};
+
+const rootReducer = combineReducers({
+  token: tokenReducer,
+  userInfo: userInfoReducer,
 });
 
-export type RootState = ReturnType<typeof store.getState>;
+const persistedReducer = persistReducer(persistConfig, rootReducer);
 
-export default store;
+export const store = configureStore({
+  reducer: persistedReducer,
+});
+export const persistor = persistStore(store);
+export type RootState = ReturnType<typeof store.getState>;
+export default { store, persistor };
