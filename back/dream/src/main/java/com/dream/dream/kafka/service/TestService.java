@@ -17,6 +17,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.kafka.core.KafkaTemplate;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 import org.springframework.web.context.request.async.DeferredResult;
 
@@ -41,6 +42,7 @@ public class TestService {
     private final DiaryRepository diaryRepository;
     private final DiaryMapper diaryMapper;
     private final KafkaTemplate<String, Object> kafkaTemplate;
+    private final KafkaProducerService kafkaProducerService;
     private final Map<Long, DeferredResult<BaseResponse>> deferredResults = new ConcurrentHashMap<>();
 
     @Value("${app.fileupload.uploadDir}")
@@ -117,7 +119,7 @@ public class TestService {
         DeferredResult<BaseResponse> deferredResult = new DeferredResult<>();
         this.deferredResults.put(member.getId(), deferredResult);
 
-        kafkaTemplate.send(sparkDiaryTopic, kafkaProduce);
+        kafkaProducerService.sendDiary(kafkaProduce);
 
         return deferredResult;
     }

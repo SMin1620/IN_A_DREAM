@@ -15,7 +15,7 @@ public class KafkaProducerService {
     private final KafkaTemplate<String, Object> kafkaTemplate;
 
     @Value(value = "${message.topic.sparkDiaryName}")
-    private String topicName;
+    private String sparkDiaryTopic;
 
     @Value(value = "${message.topic.pointName}")
     private String topicName2;
@@ -49,8 +49,8 @@ public class KafkaProducerService {
 
 
     @Async
-    public void sendLogDto(Object message){
-        kafkaTemplate.send(topicName, message);
+    public void sendDiary(Object message){
+        kafkaTemplate.send(sparkDiaryTopic, message);
     }
 
     @Async
