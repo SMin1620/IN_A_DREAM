@@ -67,7 +67,7 @@ public class StatisticService {
         SearchRequest searchRequest = new SearchRequest("mysql_diary");
         searchRequest.source().size(0);
         searchRequest.source().query(QueryBuilders.rangeQuery("@timestamp").gte(from).lt(to));
-        searchRequest.source().aggregation(AggregationBuilders.terms("keywords").field("keyword").size(20));
+        searchRequest.source().aggregation(AggregationBuilders.terms("keywords").field("emotion").size(20));
 
         SearchResponse searchResponse = client.search(searchRequest, RequestOptions.DEFAULT);
 
