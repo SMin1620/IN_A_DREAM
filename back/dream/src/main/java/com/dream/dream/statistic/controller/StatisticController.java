@@ -17,6 +17,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.io.IOException;
@@ -35,7 +36,9 @@ public class StatisticController {
     @Operation(summary = "키워드 일별 통계")
     @GetMapping("/daily")
     public BaseResponse dilayStatistic(
-            HttpServletRequest request
+            HttpServletRequest request,
+            @RequestParam("from") String from,
+            @RequestParam("to") String to
     ) throws IOException {
         String token = jwtTokenProvider.resolveToken(request);
         jwtTokenProvider.validateToken(token);
@@ -46,6 +49,6 @@ public class StatisticController {
         Member member = memberRepository.findByEmail(userDetails.getUsername())
                 .orElseThrow(() -> new BusinessLogicException(ExceptionCode.MEMBER_NOT_FOUND));
 
-        return new BaseResponse(HttpStatus.OK, "일별 키워드 통계", statisticService.dailyStatistic());
+        return new BaseResponse(HttpStatus.OK, "일별 키워드 통계", statisticService.dailyStatistic(from, to));
     }
 }
