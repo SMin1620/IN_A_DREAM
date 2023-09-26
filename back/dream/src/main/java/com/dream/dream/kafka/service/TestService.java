@@ -29,9 +29,7 @@ import java.net.URL;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.StandardOpenOption;
-import java.time.LocalDateTime;
 import java.util.Map;
-import java.util.Random;
 import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
 
@@ -44,6 +42,7 @@ public class TestService {
     private final DiaryRepository diaryRepository;
     private final DiaryMapper diaryMapper;
     private final KafkaTemplate<String, Object> kafkaTemplate;
+    private final KafkaProducerService kafkaProducerService;
     private final Map<Long, DeferredResult<BaseResponse>> deferredResults = new ConcurrentHashMap<>();
 
     @Value("${app.fileupload.uploadDir}")
@@ -51,6 +50,9 @@ public class TestService {
 
     @Value("${app.fileupload.uploadPath}")
     String uploadPath;
+
+    @Value(value = "${message.topic.sparkDiaryName}")
+    String sparkDiaryTopic;
 
     @Transactional
     public DeferredResult<BaseResponse> diaryCreate(DiaryDto.DiaryCreateRequestDto requestBody, String memberEmail) {
@@ -112,30 +114,56 @@ public class TestService {
                 .sale(requestBody.isSale())
                 .build();
 
-        DiaryDto.Entity kafkaProduce = diaryMapper.toEntityDto(diary);
+        DiaryDto.SparkProduce kafkaProduce = diaryMapper.toSparkProduce(diary);
         kafkaProduce.setMemberId(member.getId());
         DeferredResult<BaseResponse> deferredResult = new DeferredResult<>();
         this.deferredResults.put(member.getId(), deferredResult);
 
-        kafkaTemplate.send("diary", kafkaProduce);
+        kafkaProducerService.sendDiary(kafkaProduce);
 
         return deferredResult;
     }
 
-    @Transactional
-    @KafkaListener(topics = "diary_result", groupId = ConsumerConfig.GROUP_ID_CONFIG, containerFactory = "diaryListener")
-    public void listen(DiaryDto.Entity message) {
-
-        System.out.println(message);
-
-        Diary diary = diaryMapper.dtoToDiary(message);
-
-        System.out.println(diary);
-
-        if (this.deferredResults.containsKey(message.getMemberId())) {
-            BaseResponse responseEntity = new BaseResponse(HttpStatus.OK,"받기 성공", diaryMapper.diaryToResponseDto(diary));
-            this.deferredResults.get(message.getMemberId()).setResult(responseEntity);
-            this.deferredResults.remove(message.getMemberId());
-        }
-    }
+//    @Transactional
+//    @KafkaListener(topics = "${message.topic.sparkListenerName}", groupId = ConsumerConfig.GROUP_ID_CONFIG, containerFactory = "diaryListener")
+//    public void listen(DiaryDto.SparkConsume message) {
+//
+//        System.out.println(message);
+//        long memberId = message.getMemberId();
+//        Member member = memberRepository.findById(memberId).orElseThrow(()->new BusinessLogicException(ExceptionCode.MEMBER_NOT_FOUND));
+//
+//        Diary diary = diaryMapper.sparkConsumeToDiary(message);
+//
+//        diary.setPositivePoint(Math.round(message.getPositive()));
+//        diary.setNegativePoint(Math.round(message.getNegative()));
+//        diary.setNeutralPoint(Math.round(message.getNeutral()));
+//
+//        int number1 = diary.getPositivePoint();
+//        int number2 = diary.getNeutralPoint();
+//        int number3 = diary.getNegativePoint();
+//
+//        if (number1 >= number2 && number1 >= number3) {
+//            diary.setEmotion(Emotion.POSITIVE);
+//        } else if (number2 >= number1 && number2 >= number3) {
+//            diary.setEmotion(Emotion.NEUTRAL);
+//        } else {
+//            diary.setEmotion(Emotion.NEGATIVE);
+//        }
+//
+//        diary.setMember(member);
+//        diary.setOwner(member);
+//
+//        System.out.println("####################################");
+//        System.out.println(diary);
+//        System.out.println("####################################");
+//
+//        if (this.deferredResults.containsKey(message.getMemberId())) {
+//            BaseResponse baseResponse = new BaseResponse(HttpStatus.OK, "스파크 처리 완료", diaryMapper.diaryToResponseDto(diary));
+//            this.deferredResults.get(message.getMemberId()).setResult(baseResponse);
+//            System.out.println("##########################-------------------------------");
+//            System.out.println(deferredResults.get(message.getMemberId()).getResult());
+//            System.out.println("##########################-------------------------------");
+//            this.deferredResults.remove(message.getMemberId());
+//        }
+//    }
 }

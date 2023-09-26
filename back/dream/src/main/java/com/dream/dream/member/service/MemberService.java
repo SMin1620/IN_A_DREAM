@@ -150,4 +150,19 @@ public class MemberService {
         Member member = memberRepository.findByEmail(email).orElseThrow(() -> new BusinessLogicException(ExceptionCode.MEMBER_NOT_FOUND));
         return member.getId();
     }
+
+    /**
+     * reroll
+     */
+    public Member reroll(String email) {
+        Member member = memberRepository.findByEmail(email).orElseThrow(() -> new BusinessLogicException(ExceptionCode.MEMBER_NOT_FOUND));
+        if(member.getPositiveCoin() < 5 || member.getNegativeCoin() < 5 || member.getNeutralCoin() < 5){
+            throw new BusinessLogicException(ExceptionCode.COIN_LACK);
+        }
+        member.setPositiveCoin(member.getPositiveCoin() - 5);
+        member.setNegativeCoin(member.getNegativeCoin() - 5);
+        member.setNeutralCoin(member.getNeutralCoin() - 5);
+
+        return member;
+    }
 }

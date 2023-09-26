@@ -17,6 +17,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.context.request.async.DeferredResult;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -38,17 +39,31 @@ public class DiaryController {
      */
     @Operation(summary = "일기 생성")
     @PostMapping()
-    public BaseResponse diaryCreate(
+    public DeferredResult<BaseResponse> diaryCreate(
             HttpServletRequest request,
             @RequestBody DiaryDto.DiaryCreateRequestDto requestBody) {
 
         String token = jwtTokenProvider.resolveToken(request);
-
         jwtTokenProvider.validateToken(token);
-
         String memberEmail = jwtTokenProvider.getUserEmail(token);
 
-        Diary diary = diaryService.diaryCreate(requestBody, memberEmail);
+        return diaryService.diaryCreate(requestBody, memberEmail);
+    }
+
+    /**
+     * 꿈 일기 생성 컨트롤러 임시 사용
+     */
+    @Operation(summary = "일기 생성 임시 사용 (원래꺼 안되면 사용하세요)")
+    @PostMapping("/temp")
+    public BaseResponse diaryCreateTemp(
+            HttpServletRequest request,
+            @RequestBody DiaryDto.DiaryCreateRequestDto requestBody) {
+
+        String token = jwtTokenProvider.resolveToken(request);
+        jwtTokenProvider.validateToken(token);
+        String memberEmail = jwtTokenProvider.getUserEmail(token);
+
+        Diary diary = diaryService.diaryCreateTemp(requestBody, memberEmail);
 
         DiaryDto.DiaryResponseDto diaryResponseDto = diaryMapper.diaryToResponseDto(diary);
 
@@ -71,9 +86,9 @@ public class DiaryController {
         Page<Diary> diaryPage = diaryService.getDiaryList(pageable);
         List<Diary> diaryList = diaryPage.getContent();
 
-//        diaryService.getMyLike(memberEmail, diaryList);
+        List<Boolean> likedList = diaryService.getMyLikes(memberEmail, diaryList);
 
-        return new BaseResponse(HttpStatus.OK, "일기 목록 반환 성공", diaryMapper.toResponseDtos(diaryList));
+        return new BaseResponse(HttpStatus.OK, "일기 목록 반환 성공", diaryMapper.toResponseDtos(diaryList, likedList));
     }
 
     /**
@@ -90,8 +105,9 @@ public class DiaryController {
         String memberEmail = jwtTokenProvider.getUserEmail(token);
         Page<Diary> diaryPage = diaryService.getDiaryList(memberEmail, pageable);
         List<Diary> diaryList = diaryPage.getContent();
+        List<Boolean> likedList = diaryService.getMyLikes(memberEmail, diaryList);
 
-        return new BaseResponse(HttpStatus.OK, "내 일기 목록 반환 성공", diaryMapper.toResponseDtos(diaryList));
+        return new BaseResponse(HttpStatus.OK, "내 일기 목록 반환 성공", diaryMapper.toResponseDtos(diaryList, likedList));
     }
 
     /**
@@ -99,9 +115,19 @@ public class DiaryController {
      */
     @Operation(summary = "일기 상세 조회")
     @GetMapping("/{diaryId}")
-    public BaseResponse diaryDetail(@PathVariable Long diaryId) {
+    public BaseResponse diaryDetail(
+            HttpServletRequest request,
+            @PathVariable Long diaryId) {
+        String token = jwtTokenProvider.resolveToken(request);
+        jwtTokenProvider.validateToken(token);
+
+        String memberEmail = jwtTokenProvider.getUserEmail(token);
+
         Diary diary = diaryService.getDiary(diaryId);
-        return new BaseResponse(HttpStatus.OK, "일기 상세 조회 성공", diaryMapper.diaryToResponseDto(diary));
+
+        boolean liked = diaryService.getMyLike(memberEmail, diary);
+
+        return new BaseResponse(HttpStatus.OK, "일기 상세 조회 성공", diaryMapper.diaryToResponseDto(diary, liked));
     }
 
     /**
@@ -120,8 +146,9 @@ public class DiaryController {
         String memberEmail = jwtTokenProvider.getUserEmail(token);
 
         Diary diary = diaryService.likeDiary(memberEmail, requestBody);
+        boolean liked = diaryService.getMyLike(memberEmail, diary);
 
-        return new BaseResponse(HttpStatus.OK, "좋아요 수정", diaryMapper.diaryToResponseDto(diary));
+        return new BaseResponse(HttpStatus.OK, "좋아요 수정", diaryMapper.diaryToResponseDto(diary, liked));
     }
 
     /**
@@ -159,5 +186,6 @@ public class DiaryController {
 
         return new BaseResponse(HttpStatus.OK, "거래 변경", diaryMapper.diaryToResponseDto(diary));
     }
+
 
 }

@@ -58,8 +58,7 @@ public class SecurityConfig {
         http.authorizeHttpRequests((req) -> req
                         .requestMatchers(mvcMatcherBuilder.pattern("/api/members/register")).permitAll()
                         .requestMatchers(mvcMatcherBuilder.pattern("/api/members/login")).permitAll()
-                        .requestMatchers(mvcMatcherBuilder.pattern("/api/members/email")).permitAll()
-                                .requestMatchers(mvcMatcherBuilder.pattern("/api/members/refresh")).permitAll()
+                        .requestMatchers(mvcMatcherBuilder.pattern("/api/members/email")).permitAll().requestMatchers(mvcMatcherBuilder.pattern("/api/members/refresh")).permitAll()
                         .requestMatchers(mvcMatcherBuilder.pattern("/api/members/nickname")).permitAll()
                         .requestMatchers(mvcMatcherBuilder.pattern( "/h2-console/**")).permitAll()
                         .requestMatchers(mvcMatcherBuilder.pattern( "/favicon.ico")).permitAll()
@@ -68,6 +67,7 @@ public class SecurityConfig {
                         .requestMatchers(mvcMatcherBuilder.pattern( "/swagger-resources/**")).permitAll()
                         .requestMatchers(mvcMatcherBuilder.pattern( "/v3/api-docs/**")).permitAll()
                         .requestMatchers(mvcMatcherBuilder.pattern( "/image/**")).permitAll()
+                                .requestMatchers(mvcMatcherBuilder.pattern("/api/diary")).permitAll()
                         .anyRequest().authenticated()
 //                        .anyRequest().permitAll()
                 )   // 다음 리퀘스트에 대한 사용권한 체크

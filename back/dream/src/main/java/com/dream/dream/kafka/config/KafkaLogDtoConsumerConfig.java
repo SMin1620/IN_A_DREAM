@@ -1,6 +1,7 @@
 package com.dream.dream.kafka.config;
 
-import com.dream.dream.kafka.dto.DiaryDto;
+
+import com.dream.dream.diary.dto.DiaryDto;
 import com.dream.dream.kafka.dto.LogDto;
 import org.apache.kafka.clients.consumer.ConsumerConfig;
 import org.apache.kafka.common.serialization.StringDeserializer;
@@ -42,7 +43,7 @@ public class KafkaLogDtoConsumerConfig {
     }
 
     @Bean
-    public ConsumerFactory<String, DiaryDto> diaryConsumer() {
+    public ConsumerFactory<String, DiaryDto.SparkConsume> diaryConsumer() {
 
         Map<String, Object> configs = new HashMap<>();
         configs.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, bootstrapServers);
@@ -51,12 +52,12 @@ public class KafkaLogDtoConsumerConfig {
         return new DefaultKafkaConsumerFactory<>(
                 configs,
                 new StringDeserializer(),
-                new JsonDeserializer<>(DiaryDto.class,false));
+                new JsonDeserializer<>(DiaryDto.SparkConsume.class,false));
     }
 
     @Bean
-    public ConcurrentKafkaListenerContainerFactory<String, DiaryDto> diaryListener(){
-        ConcurrentKafkaListenerContainerFactory<String, DiaryDto> factory = new ConcurrentKafkaListenerContainerFactory<>();
+    public ConcurrentKafkaListenerContainerFactory<String, DiaryDto.SparkConsume> diaryListener(){
+        ConcurrentKafkaListenerContainerFactory<String, DiaryDto.SparkConsume> factory = new ConcurrentKafkaListenerContainerFactory<>();
         factory.setConsumerFactory(diaryConsumer());
         return factory;
     }
