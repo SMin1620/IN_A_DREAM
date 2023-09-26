@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import CursorSizeContext from "../context/CursorSizeContext";
 import NavBar from "../components/features/NavbarComponents/Navbar";
 import MainPageIntro from "../components/layout/MainPageIntro";
 import MainStart from "../components/layout/MainStart";
@@ -7,10 +8,15 @@ import MainThird from "../components/layout/MainThird";
 import MainFourth from "../components/layout/MainFourth";
 import MainFifth from "../components/layout/MainFifth";
 import MainSixth from "../components/layout/MainSixth";
+import useMousePosition from "../hooks/useMousPosition";
+import "./styles/MainPage.css";
 
 const MainPage = () => {
   const [showIntro, setShowIntro] = useState(true);
   const [bgColor, setBgColor] = useState("black");
+  const [cursorSize, setCursorSize] = useState("3vw");
+
+  const { x, y } = useMousePosition();
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -47,15 +53,25 @@ const MainPage = () => {
       }}
     >
       <NavBar />
-      {/* 네브바 옆에 중앙정렬을 위해 마진레프트 네브바 만큼줬씀다 */}
-      <div style={{ marginLeft: "4rem" }}>
-        {showIntro ? <MainPageIntro /> : <MainStart />}
-        <MainSecond />
-        <MainThird />
-        <MainFourth />
-        <MainFifth />
-        <MainSixth />
-      </div>
+      <CursorSizeContext.Provider value={{ cursorSize, setCursorSize }}>
+        <div style={{ marginLeft: "4rem" }}>
+          {showIntro ? <MainPageIntro /> : <MainStart />}
+          <MainSecond />
+          <MainThird />
+          <MainFourth />
+          <MainFifth />
+          <MainSixth />
+          <div
+            className="mouse-cursor"
+            style={{
+              left: `${x}px`,
+              top: `${y}px`,
+              width: cursorSize,
+              height: cursorSize,
+            }}
+          />
+        </div>
+      </CursorSizeContext.Provider>
     </div>
   );
 };
