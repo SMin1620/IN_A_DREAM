@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import { DiaryInfo } from "../../../types/ApiType";
+import { useSelector } from "react-redux";
 import useDetailDiaryETC from "./../../../hooks/useDetailDiaryETC";
 import useDetailDiary from "../../../hooks/useDetailDiary";
 import "./DetailETC.css";
@@ -13,8 +14,8 @@ interface OwnProps {
 }
 
 const DetailETC: React.FC<OwnProps> = ({ diaryDetail, diaryId }) => {
-  const [status, setStatus] = useState<boolean>(false); // 페이지 접속한 유저정보로 대체
   const [isLiked, setIsLiked] = useState<boolean>(false);
+  const currentUser = useSelector((state: any) => state.userInfo.data);
   const {
     postLiked,
     visibility,
@@ -34,6 +35,8 @@ const DetailETC: React.FC<OwnProps> = ({ diaryDetail, diaryId }) => {
     setLikeCount(diaryDetail.likeCount);
   }, [diaryDetail]);
 
+  console.log(diaryDetail, "diaryDetail");
+
   return (
     <div className="detail-etc">
       {isLiked ? (
@@ -50,58 +53,57 @@ const DetailETC: React.FC<OwnProps> = ({ diaryDetail, diaryId }) => {
         />
       )}
       <div className="like-count">{likeCount}</div>
+      {diaryDetail.owner.id === currentUser.id ? (
+        <div></div>
+      ) : (
+        <button
+          onClick={() => {
+            postBuyDiary(
+              diaryDetail.id,
+              diaryDetail.owner.email,
+              diaryDetail.positivePoint,
+              diaryDetail.neutralPoint,
+              diaryDetail.negativePoint
+            );
+          }}
+          className="etc-buy"
+        >
+          구매
+        </button>
+      )}
+      {diaryDetail.owner.id === currentUser.id ? (
+        <>
+          <Toggle
+            AbleColor="#C3BAA5"
+            DisableColor="#E9DEC6"
+            ToggleType="sell"
+            status={sale}
+            data1="판  매"
+            data2="보  관"
+            onClick={() => {
+              if (diaryId !== undefined && sale !== undefined) {
+                saleStatus(diaryId, sale);
+              }
+            }}
+          />
 
-      {
-        // 페이지 접속 유저에 따라 일기의 주인은 버튼들 안보여주기
-        !status ? (
-          <>
-            <button
-              onClick={() => {
-                postBuyDiary(
-                  diaryDetail.id,
-                  diaryDetail.owner.email,
-                  diaryDetail.positivePoint,
-                  diaryDetail.neutralPoint,
-                  diaryDetail.negativePoint
-                );
-              }}
-              className="etc-buy"
-            >
-              구매
-            </button>
-
-            <Toggle
-              AbleColor="#C3BAA5"
-              DisableColor="#E9DEC6"
-              ToggleType="sell"
-              status={sale}
-              data1="판  매"
-              data2="보  관"
-              onClick={() => {
-                if (diaryId !== undefined && sale !== undefined) {
-                  saleStatus(diaryId, sale);
-                }
-              }}
-            />
-
-            <Toggle
-              AbleColor="#EFBCAE"
-              DisableColor="#F6E0DA"
-              ToggleType="public"
-              status={open}
-              data1="공개"
-              data2="비공개"
-              onClick={() => {
-                if (diaryId !== undefined && open !== undefined) {
-                  visibility(diaryId, open);
-                }
-              }}
-            />
-          </>
-        ) : (
-          <div></div>
-        )
-      }
+          <Toggle
+            AbleColor="#EFBCAE"
+            DisableColor="#F6E0DA"
+            ToggleType="public"
+            status={open}
+            data1="공개"
+            data2="비공개"
+            onClick={() => {
+              if (diaryId !== undefined && open !== undefined) {
+                visibility(diaryId, open);
+              }
+            }}
+          />
+        </>
+      ) : (
+        <div></div>
+      )}
     </div>
   );
 };
