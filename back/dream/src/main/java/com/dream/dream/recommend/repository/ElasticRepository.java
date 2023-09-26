@@ -26,6 +26,6 @@ public interface ElasticRepository extends ElasticsearchRepository<DiaryElastic,
     /**
      * 단어가 포함된 결과를 가져옴
      */
-    @Query("{\"bool\": {\"should\": [{\"match\": {\"content\" : \"?0\"}}, {\"match\": {\"title\" : \"?0\"}}]}}")
+    @Query("{\"bool\": {\"should\": [{\"match\": {\"content\" : \"?0\"}}, {\"match\": {\"title\" : \"?0\"}}, {\"match\": {\"title_nori\" : \"?0\"}}, {\"match\": {\"content_nori\" : \"?0\"}}]}}")
     List<DiaryElastic> findByDairy(String keyword);
 }
