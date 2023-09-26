@@ -3,6 +3,7 @@ package com.dream.dream.kafka.service;
 import com.dream.dream.common.BaseResponse;
 import com.dream.dream.diary.dto.DiaryDto;
 import com.dream.dream.diary.entity.Diary;
+import com.dream.dream.diary.entity.Emotion;
 import com.dream.dream.diary.mapper.DiaryMapper;
 import com.dream.dream.diary.repository.DiaryRepository;
 import com.dream.dream.exception.BusinessLogicException;
@@ -128,8 +129,29 @@ public class TestService {
     public void listen(DiaryDto.SparkConsume message) {
 
         System.out.println(message);
+        long memberId = message.getMemberId();
+        Member member = memberRepository.findById(memberId).orElseThrow(()->new BusinessLogicException(ExceptionCode.MEMBER_NOT_FOUND));
 
         Diary diary = diaryMapper.sparkConsumeToDiary(message);
+
+        diary.setPositivePoint(Math.round(message.getPositive()));
+        diary.setNegativePoint(Math.round(message.getNegative()));
+        diary.setNeutralPoint(Math.round(message.getNeutral()));
+
+        int number1 = diary.getPositivePoint();
+        int number2 = diary.getNeutralPoint();
+        int number3 = diary.getNegativePoint();
+
+        if (number1 >= number2 && number1 >= number3) {
+            diary.setEmotion(Emotion.POSITIVE);
+        } else if (number2 >= number1 && number2 >= number3) {
+            diary.setEmotion(Emotion.NEUTRAL);
+        } else {
+            diary.setEmotion(Emotion.NEGATIVE);
+        }
+
+        diary.setMember(member);
+        diary.setOwner(member);
 
         System.out.println("####################################");
         System.out.println(diary);
@@ -138,6 +160,9 @@ public class TestService {
         if (this.deferredResults.containsKey(message.getMemberId())) {
             BaseResponse baseResponse = new BaseResponse(HttpStatus.OK, "스파크 처리 완료", diaryMapper.diaryToResponseDto(diary));
             this.deferredResults.get(message.getMemberId()).setResult(baseResponse);
+            System.out.println("##########################-------------------------------");
+            System.out.println(deferredResults.get(message.getMemberId()).getResult());
+            System.out.println("##########################-------------------------------");
             this.deferredResults.remove(message.getMemberId());
         }
     }
