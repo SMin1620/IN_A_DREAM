@@ -16,9 +16,11 @@ interface ImageResponse {
 }
 
 const useKarlo = () => {
-  const [imageUrl, setImageUrl] = useState<string | null>(null);
+  const [KarloimageUrl, setKarloImageUrl] = useState<string | null>(null);
+  const [Karloloading, setKarloLoading] = useState(false);
 
   const fetchData = async (prompt: string): Promise<string | null> => {
+    setKarloLoading(true);
     try {
       const response = await axios.post<ImageResponse>(
         "https://api.kakaobrain.com/v2/inference/karlo/t2i",
@@ -32,16 +34,18 @@ const useKarlo = () => {
       );
 
       if (response.data.images && response.data.images[0]) {
-        setImageUrl(response.data.images[0].image);
+        setKarloImageUrl(response.data.images[0].image);
+        setKarloLoading(false);
         return response.data.images[0].image;
       }
     } catch (error) {
       console.error(error);
+      setKarloLoading(false);
     }
     return null;
   };
 
-  return { imageUrl, fetchData };
+  return { KarloimageUrl, fetchData, Karloloading };
 };
 
 export default useKarlo;
