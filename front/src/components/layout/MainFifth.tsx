@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import "./styles/MainFifth.css";
 import image10 from "../../assets/image/image10.png";
 import image9 from "../../assets/image/image9.png";
@@ -6,10 +6,20 @@ import image8 from "../../assets/image/image8.png";
 import image4 from "../../assets/image/image4.jpg";
 import image6 from "../../assets/image/image6.jpg";
 import image7 from "../../assets/image/image7.png";
+import CursorSizeContext from "../../context/CursorSizeContext";
 
 import { Link } from "react-router-dom";
 
 const MainFifth = () => {
+  const { setCursorSize } = useContext(CursorSizeContext);
+
+  const handleMouseEnter = () => {
+    setCursorSize("5vw");
+  };
+
+  const handleMouseLeave = () => {
+    setCursorSize("3vw");
+  };
   return (
     <div className="main-fifth-wrapper">
       <div className="main-fifth-title-box">
@@ -51,16 +61,31 @@ const MainFifth = () => {
         <div className="main-fifth-gamsung-more">MORE</div>
         {/* <div className="main-fifth-box"> */}
         <Link to={`/gallery/positivePoint`} className="main-fifth-box">
-          <img src={image7} alt="happyimg1" />
+          <img
+            src={image7}
+            alt="happyimg1"
+            onMouseEnter={handleMouseEnter}
+            onMouseLeave={handleMouseLeave}
+          />
           <span>HAPPY</span>
-          <img src={image6} alt="happyimg2" />
+          <img
+            src={image6}
+            alt="happyimg2"
+            onMouseEnter={handleMouseEnter}
+            onMouseLeave={handleMouseLeave}
+          />
         </Link>
         {/* </div> */}
         <hr />
         <Link to={`/gallery/negativePoint`} className="main-fifth-box">
           {/* <div className="main-fifth-box"> */}
           <span>SAD</span>
-          <img src={image9} alt="sadimg" />
+          <img
+            src={image9}
+            alt="sadimg"
+            onMouseEnter={handleMouseEnter}
+            onMouseLeave={handleMouseLeave}
+          />
           <span>SAD</span>
         </Link>
 
@@ -68,9 +93,19 @@ const MainFifth = () => {
         <hr />
         <Link to={`/gallery/neutralPoint`} className="main-fifth-box">
           {/* <div className="main-fifth-box"> */}
-          <img src={image4} alt="" />
+          <img
+            src={image4}
+            alt=""
+            onMouseEnter={handleMouseEnter}
+            onMouseLeave={handleMouseLeave}
+          />
           <span>BALANCED</span>
-          <img src={image8} alt="" />
+          <img
+            src={image8}
+            alt=""
+            onMouseEnter={handleMouseEnter}
+            onMouseLeave={handleMouseLeave}
+          />
         </Link>
 
         {/* </div> */}

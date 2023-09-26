@@ -1,10 +1,11 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import cloud from "../../../assets/image/cloud.png";
 import "./styles/Card.css";
 import DateBox from "../../common/DateBox";
 import { DiaryInfo } from "../../../types/ApiType";
 import useNavigateOnClick from "../../../hooks/useNavigateOnclick";
 import { SERVER_URL } from "../../../constants";
+import CursorSizeContext from "../../../context/CursorSizeContext";
 
 interface CardProps {
   diary: DiaryInfo;
@@ -13,7 +14,15 @@ interface CardProps {
 
 const Card: React.FC<CardProps> = (props) => {
   const [scrollY, setScrollY] = useState<number>(props.index * 10);
-  //   const [scrollY, setScrollY] = useState<number>(props.index);
+  const { setCursorSize } = useContext(CursorSizeContext);
+
+  const handleMouseEnter = () => {
+    setCursorSize("5vw");
+  };
+
+  const handleMouseLeave = () => {
+    setCursorSize("3vw");
+  };
 
   // 스크롤 이벤트 핸들러
   const handleScroll = () => {
@@ -45,6 +54,8 @@ const Card: React.FC<CardProps> = (props) => {
         alt="이미지"
         style={{ width: "20vw" }}
         onClick={useNavigateOnClick(`/DreamDetail/${props.diary.id}`)}
+        onMouseEnter={handleMouseEnter}
+        onMouseLeave={handleMouseLeave}
       />
       <div className="card-date">
         <DateBox>{props.diary.createdAt}</DateBox>
