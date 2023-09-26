@@ -12,6 +12,7 @@ import org.elasticsearch.index.query.TermQueryBuilder;
 import org.elasticsearch.search.aggregations.AggregationBuilders;
 import org.elasticsearch.search.aggregations.bucket.terms.ParsedStringTerms;
 import org.elasticsearch.search.aggregations.bucket.terms.Terms;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
@@ -25,6 +26,12 @@ public class StatisticService {
 
     private final RestHighLevelClient client;
 
+    @Value(value = "${message.topic.statisticDailyName}")
+    private String statisticDailyName;
+
+    @Value(value = "${message.topic.diaryName}")
+    private String diaryName;
+
 
     /**
      * 키워드 통계 비즈니스 로직
@@ -34,7 +41,7 @@ public class StatisticService {
         from = from + "T00:00:00";
         to = to + "T00:00:00";
 
-        SearchRequest searchRequest = new SearchRequest("mysql_daily_statistic");
+        SearchRequest searchRequest = new SearchRequest(statisticDailyName);
         searchRequest.source().size(0);
         searchRequest.source().query(QueryBuilders.rangeQuery("@timestamp").gte(from).lt(to));
         searchRequest.source().aggregation(AggregationBuilders.terms("keywords").field("keyword").size(20));
@@ -64,7 +71,7 @@ public class StatisticService {
         from = from + "T00:00:00";
         to = to + "T00:00:00";
 
-        SearchRequest searchRequest = new SearchRequest("mysql_diary");
+        SearchRequest searchRequest = new SearchRequest(diaryName);
         searchRequest.source().size(0);
         searchRequest.source().query(QueryBuilders.rangeQuery("@timestamp").gte(from).lt(to));
         searchRequest.source().aggregation(AggregationBuilders.terms("keywords").field("emotion").size(20));
