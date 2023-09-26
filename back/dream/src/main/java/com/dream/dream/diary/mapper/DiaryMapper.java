@@ -18,9 +18,8 @@ public interface DiaryMapper {
     DiaryDto.DiaryListResponseDto toListResponseDto(Diary diary);
     List<DiaryDto.DiaryListResponseDto> toListResponseDtos(List<Diary> diaryList);
 
-    DiaryDto.KafkaProduce toKafkaProduce(Diary diary);
+    DiaryDto.SparkProduce toEntityDto(Diary diary);
 
-    DiaryDto.Entity toEntityDto(Diary diary);
+    Diary dtoToDiary(DiaryDto.SparkConsume diary);
 
-    Diary dtoToDiary(DiaryDto.Entity diary);
 }

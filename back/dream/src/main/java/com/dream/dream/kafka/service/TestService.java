@@ -3,7 +3,6 @@ package com.dream.dream.kafka.service;
 import com.dream.dream.common.BaseResponse;
 import com.dream.dream.diary.dto.DiaryDto;
 import com.dream.dream.diary.entity.Diary;
-import com.dream.dream.diary.entity.Emotion;
 import com.dream.dream.diary.mapper.DiaryMapper;
 import com.dream.dream.diary.repository.DiaryRepository;
 import com.dream.dream.exception.BusinessLogicException;
@@ -29,9 +28,7 @@ import java.net.URL;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.StandardOpenOption;
-import java.time.LocalDateTime;
 import java.util.Map;
-import java.util.Random;
 import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
 
@@ -115,7 +112,7 @@ public class TestService {
                 .sale(requestBody.isSale())
                 .build();
 
-        DiaryDto.Entity kafkaProduce = diaryMapper.toEntityDto(diary);
+        DiaryDto.SparkProduce kafkaProduce = diaryMapper.toEntityDto(diary);
         kafkaProduce.setMemberId(member.getId());
         DeferredResult<BaseResponse> deferredResult = new DeferredResult<>();
         this.deferredResults.put(member.getId(), deferredResult);
@@ -127,7 +124,7 @@ public class TestService {
 
     @Transactional
     @KafkaListener(topics = "${message.topic.sparkListenerName}", groupId = ConsumerConfig.GROUP_ID_CONFIG, containerFactory = "diaryListener")
-    public void listen(DiaryDto.Entity message) {
+    public void listen(DiaryDto.SparkConsume message) {
 
         System.out.println(message);
 
