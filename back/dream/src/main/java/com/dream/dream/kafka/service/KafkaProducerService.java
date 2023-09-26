@@ -14,6 +14,9 @@ public class KafkaProducerService {
 
     private final KafkaTemplate<String, Object> kafkaTemplate;
 
+    /**
+     * 일기 데이터 받아서 spark에 보낼 topic
+     */
     @Value(value = "${message.topic.sparkDiaryName}")
     private String sparkDiaryTopic;
 

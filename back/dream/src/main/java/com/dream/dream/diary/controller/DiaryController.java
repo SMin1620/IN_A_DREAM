@@ -17,6 +17,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.context.request.async.DeferredResult;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -38,21 +39,15 @@ public class DiaryController {
      */
     @Operation(summary = "일기 생성")
     @PostMapping()
-    public BaseResponse diaryCreate(
+    public DeferredResult<BaseResponse> diaryCreate(
             HttpServletRequest request,
             @RequestBody DiaryDto.DiaryCreateRequestDto requestBody) {
 
         String token = jwtTokenProvider.resolveToken(request);
-
         jwtTokenProvider.validateToken(token);
-
         String memberEmail = jwtTokenProvider.getUserEmail(token);
 
-        Diary diary = diaryService.diaryCreate(requestBody, memberEmail);
-
-        DiaryDto.DiaryResponseDto diaryResponseDto = diaryMapper.diaryToResponseDto(diary);
-
-        return new BaseResponse(HttpStatus.OK, "굿", diaryResponseDto);
+        return diaryService.diaryCreate(requestBody, memberEmail);
     }
 
     /**

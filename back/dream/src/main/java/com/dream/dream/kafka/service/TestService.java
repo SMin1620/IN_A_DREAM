@@ -124,46 +124,46 @@ public class TestService {
         return deferredResult;
     }
 
-    @Transactional
-    @KafkaListener(topics = "${message.topic.sparkListenerName}", groupId = ConsumerConfig.GROUP_ID_CONFIG, containerFactory = "diaryListener")
-    public void listen(DiaryDto.SparkConsume message) {
-
-        System.out.println(message);
-        long memberId = message.getMemberId();
-        Member member = memberRepository.findById(memberId).orElseThrow(()->new BusinessLogicException(ExceptionCode.MEMBER_NOT_FOUND));
-
-        Diary diary = diaryMapper.sparkConsumeToDiary(message);
-
-        diary.setPositivePoint(Math.round(message.getPositive()));
-        diary.setNegativePoint(Math.round(message.getNegative()));
-        diary.setNeutralPoint(Math.round(message.getNeutral()));
-
-        int number1 = diary.getPositivePoint();
-        int number2 = diary.getNeutralPoint();
-        int number3 = diary.getNegativePoint();
-
-        if (number1 >= number2 && number1 >= number3) {
-            diary.setEmotion(Emotion.POSITIVE);
-        } else if (number2 >= number1 && number2 >= number3) {
-            diary.setEmotion(Emotion.NEUTRAL);
-        } else {
-            diary.setEmotion(Emotion.NEGATIVE);
-        }
-
-        diary.setMember(member);
-        diary.setOwner(member);
-
-        System.out.println("####################################");
-        System.out.println(diary);
-        System.out.println("####################################");
-
-        if (this.deferredResults.containsKey(message.getMemberId())) {
-            BaseResponse baseResponse = new BaseResponse(HttpStatus.OK, "스파크 처리 완료", diaryMapper.diaryToResponseDto(diary));
-            this.deferredResults.get(message.getMemberId()).setResult(baseResponse);
-            System.out.println("##########################-------------------------------");
-            System.out.println(deferredResults.get(message.getMemberId()).getResult());
-            System.out.println("##########################-------------------------------");
-            this.deferredResults.remove(message.getMemberId());
-        }
-    }
+//    @Transactional
+//    @KafkaListener(topics = "${message.topic.sparkListenerName}", groupId = ConsumerConfig.GROUP_ID_CONFIG, containerFactory = "diaryListener")
+//    public void listen(DiaryDto.SparkConsume message) {
+//
+//        System.out.println(message);
+//        long memberId = message.getMemberId();
+//        Member member = memberRepository.findById(memberId).orElseThrow(()->new BusinessLogicException(ExceptionCode.MEMBER_NOT_FOUND));
+//
+//        Diary diary = diaryMapper.sparkConsumeToDiary(message);
+//
+//        diary.setPositivePoint(Math.round(message.getPositive()));
+//        diary.setNegativePoint(Math.round(message.getNegative()));
+//        diary.setNeutralPoint(Math.round(message.getNeutral()));
+//
+//        int number1 = diary.getPositivePoint();
+//        int number2 = diary.getNeutralPoint();
+//        int number3 = diary.getNegativePoint();
+//
+//        if (number1 >= number2 && number1 >= number3) {
+//            diary.setEmotion(Emotion.POSITIVE);
+//        } else if (number2 >= number1 && number2 >= number3) {
+//            diary.setEmotion(Emotion.NEUTRAL);
+//        } else {
+//            diary.setEmotion(Emotion.NEGATIVE);
+//        }
+//
+//        diary.setMember(member);
+//        diary.setOwner(member);
+//
+//        System.out.println("####################################");
+//        System.out.println(diary);
+//        System.out.println("####################################");
+//
+//        if (this.deferredResults.containsKey(message.getMemberId())) {
+//            BaseResponse baseResponse = new BaseResponse(HttpStatus.OK, "스파크 처리 완료", diaryMapper.diaryToResponseDto(diary));
+//            this.deferredResults.get(message.getMemberId()).setResult(baseResponse);
+//            System.out.println("##########################-------------------------------");
+//            System.out.println(deferredResults.get(message.getMemberId()).getResult());
+//            System.out.println("##########################-------------------------------");
+//            this.deferredResults.remove(message.getMemberId());
+//        }
+//    }
 }
