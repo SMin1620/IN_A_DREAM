@@ -22,7 +22,8 @@
 
 hr {
   background: #c3baa5;
-  height: 1px;
+  height: 2px;
+  border: 0;
 }
 .main-fifth-gamsung-box {
   height: 25%;
@@ -59,7 +60,10 @@ hr {
 .main-fifth-keyword-imgbox img {
   border-radius: 10px;
   width: 200px;
-  height: 160px;
+  height: 150px;
+  object-fit: cover;
+  margin-left: 2%;
+  margin-right: 2%;
   /* margin-top: 10%; */
 }
 .main-fifth-box {

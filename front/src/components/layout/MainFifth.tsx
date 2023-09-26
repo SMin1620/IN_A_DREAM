@@ -1,9 +1,12 @@
 import React from "react";
 import "./styles/MainFifth.css";
-import useKarlo from "../../hooks/useKarlo";
 import image10 from "../../assets/image/image10.png";
 import image9 from "../../assets/image/image9.png";
 import image8 from "../../assets/image/image8.png";
+import image4 from "../../assets/image/image4.jpg";
+import image6 from "../../assets/image/image6.jpg";
+import image7 from "../../assets/image/image7.png";
+
 import { Link } from "react-router-dom";
 
 const MainFifth = () => {
@@ -48,16 +51,16 @@ const MainFifth = () => {
         <div className="main-fifth-gamsung-more">MORE</div>
         {/* <div className="main-fifth-box"> */}
         <Link to={`/gallery/positivePoint`} className="main-fifth-box">
-          <img src={image10} alt="" />
+          <img src={image7} alt="happyimg1" />
           <span>HAPPY</span>
-          <img src={image10} alt="" />
+          <img src={image6} alt="happyimg2" />
         </Link>
         {/* </div> */}
         <hr />
         <Link to={`/gallery/negativePoint`} className="main-fifth-box">
           {/* <div className="main-fifth-box"> */}
           <span>SAD</span>
-          <img src={image9} alt="" />
+          <img src={image9} alt="sadimg" />
           <span>SAD</span>
         </Link>
 
@@ -65,7 +68,7 @@ const MainFifth = () => {
         <hr />
         <Link to={`/gallery/neutralPoint`} className="main-fifth-box">
           {/* <div className="main-fifth-box"> */}
-          <img src={image8} alt="" />
+          <img src={image4} alt="" />
           <span>BALANCED</span>
           <img src={image8} alt="" />
         </Link>

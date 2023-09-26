@@ -33,8 +33,10 @@ const OverlayText = styled.span<OverlayProps>`
   opacity: ${(props) => (props.show ? "1" : "0")};
   transition: 0.5s ease-in-out;
   font-size: calc(10em + 1vw);
-  line-height: 0.8;
-  color: #e9e4d9;
+  line-height: 0.9;
+  color: #c3baa5;
+  font-family: "SBAggroB";
+  // font-weight: lighter;
   @media (max-width: 768px) {
     font-size: calc(5em + 1vw);
   }

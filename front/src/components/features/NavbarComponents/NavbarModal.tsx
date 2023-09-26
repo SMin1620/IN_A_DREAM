@@ -42,15 +42,15 @@ const NavbarModal: React.FC<isModalOpen> = ({ isNavbarModalOpen, onClose }) => {
           <span>{"   "}</span>
           <span className="navbar-font2">GALLERY</span>
           <span>{"    "}</span>
-          <span className="navbar-font2">GALLERY</span>
+          <span className="navbar-font6">GALLERY</span>
           <span>{"    "}</span>
-          <span className="navbar-font2">GALLERY</span>
+          <span className="navbar-font8">GALLERY</span>
           <span>{"    "}</span>
           <span className="navbar-font3">GALLERY</span>
           <span>{"    "}</span>
           <span className="navbar-font1">GALLERY</span>
           <span>{"   "}</span>
-          <span className="navbar-font4">GALLERY</span>
+          <span className="navbar-font5">GALLERY</span>
           <span>{"    "}</span>
           <span className="navbar-font4">GALLERY</span>
           <span>{"    "}</span>
@@ -58,15 +58,15 @@ const NavbarModal: React.FC<isModalOpen> = ({ isNavbarModalOpen, onClose }) => {
           <span>{"    "}</span>
           <span className="navbar-font2">GALLERY</span>
           <span>{"    "}</span>
-          <span className="navbar-font5">GALLERY</span>
+          <span className="navbar-font1">GALLERY</span>
           <span>{"    "}</span>
-          <span className="navbar-font5">GALLERY</span>
+          <span className="navbar-font4">GALLERY</span>
           <span>{"    "}</span>
         </SlideSpan>
       </Link>
       <a className="navbar-shop" href="/DreamShop">
         <SlideSpan startposition={10} endposition={-120} speed={38} width="90%">
-          <span className="navbar-font1">SHOP</span>
+          <span className="navbar-font6">SHOP</span>
           <span>{"   "}</span>
           <span className="navbar-font2">SHOP</span>
           <span>{"    "}</span>
@@ -74,24 +74,25 @@ const NavbarModal: React.FC<isModalOpen> = ({ isNavbarModalOpen, onClose }) => {
           <span>{"    "}</span>
           <span className="navbar-font4">SHOP</span>
           <span>{"    "}</span>
-          <span className="navbar-font3">SHOP</span>
-          <span>{"    "}</span>
-          <span className="navbar-font3">SHOP</span>
-          <span>{"    "}</span>
-          <span className="navbar-font5">SHOP</span>
-          <span>{"    "}</span>
-          <span className="navbar-font5">SHOP</span>
-          <span>{"    "}</span>
-          <span className="navbar-font5">SHOP</span>
-          <span>{"    "}</span>
           <span className="navbar-font5">SHOP</span>
           <span>{"    "}</span>
           <span className="navbar-font1">SHOP</span>
+          <span>{"    "}</span>
+          <span className="navbar-font7">SHOP</span>
+          <span>{"    "}</span>
+          <span className="navbar-font8">SHOP</span>
+          <span>{"    "}</span>
+          <span className="navbar-font2">SHOP</span>
+          <span>{"    "}</span>
+          <span className="navbar-font5">SHOP</span>
+          <span>{"    "}</span>
+          <span className="navbar-font7">SHOP</span>
           <span>{"   "}</span>
           <span className="navbar-font1">SHOP</span>
           <span>{"   "}</span>
         </SlideSpan>
       </a>
+
       <a className="navbar-diary" href="/createDreamDiary">
         <SlideSpan
           startposition={-100}
@@ -103,17 +104,17 @@ const NavbarModal: React.FC<isModalOpen> = ({ isNavbarModalOpen, onClose }) => {
           <span>{"    "}</span>
           <span className="navbar-font3">DIARY</span>
           <span>{"    "}</span>
-          <span className="navbar-font5">DIARY</span>
+          <span className="navbar-font2">DIARY</span>
           <span>{"    "}</span>
           <span className="navbar-font1">DIARY</span>
           <span>{"   "}</span>
-          <span className="navbar-font2">DIARY</span>
+          <span className="navbar-font7">DIARY</span>
           <span>{"    "}</span>
           <span className="navbar-font3">DIARY</span>
           <span>{"    "}</span>
           <span className="navbar-font1">DIARY</span>
           <span>{"   "}</span>
-          <span className="navbar-font5">DIARY</span>
+          <span className="navbar-font6">DIARY</span>
           <span>{"    "}</span>
           <span className="navbar-font2">DIARY</span>
           <span>{"    "}</span>
@@ -121,7 +122,7 @@ const NavbarModal: React.FC<isModalOpen> = ({ isNavbarModalOpen, onClose }) => {
           <span>{"    "}</span>
           <span className="navbar-font4">DIARY</span>
           <span>{"    "}</span>
-          <span className="navbar-font5">DIARY</span>
+          <span className="navbar-font8">DIARY</span>
           <span>{"    "}</span>
         </SlideSpan>
       </a>
@@ -129,11 +130,11 @@ const NavbarModal: React.FC<isModalOpen> = ({ isNavbarModalOpen, onClose }) => {
         <SlideSpan startposition={10} endposition={-120} speed={39} width="90%">
           <span className="navbar-font1">STATISTICS</span>
           <span>{"   "}</span>
-          <span className="navbar-font2">STATISTICS</span>
+          <span className="navbar-font7">STATISTICS</span>
           <span>{"    "}</span>
           <span className="navbar-font4">STATISTICS</span>
           <span>{"    "}</span>
-          <span className="navbar-font5">STATISTICS</span>
+          <span className="navbar-font3">STATISTICS</span>
           <span>{"    "}</span>
           <span className="navbar-font2">STATISTICS</span>
           <span>{"    "}</span>
@@ -141,7 +142,7 @@ const NavbarModal: React.FC<isModalOpen> = ({ isNavbarModalOpen, onClose }) => {
           <span>{"   "}</span>
           <span className="navbar-font2">STATISTICS</span>
           <span>{"    "}</span>
-          <span className="navbar-font3">STATISTICS</span>
+          <span className="navbar-font8">STATISTICS</span>
           <span>{"    "}</span>
           <span className="navbar-font4">STATISTICS</span>
           <span>{"    "}</span>

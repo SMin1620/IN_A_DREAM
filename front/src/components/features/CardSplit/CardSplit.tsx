@@ -24,27 +24,42 @@ const CardSplit = () => {
           transition: "all 0.5s",
         }}
       >
-        <ImgCard image="/CardSplit/image1.png" width="14vw" height="24vh" />
+        <ImgCard
+          image="/CardSplit/image9.jpg"
+          width="14vw"
+          height="24vh"
+          borderRadius={20}
+        />
       </div>
       <div
         style={{
           position: "absolute",
           top: isLoaded ? "10vh" : "35vh",
-          left: isLoaded ? "35vw" : "60vw",
+          left: isLoaded ? "30vw" : "60vw",
           transition: "all 0.5s",
         }}
       >
-        <ImgCard image="/CardSplit/image2.png" width="9vw" height="23vh" />
+        <ImgCard
+          image="/CardSplit/image13.jpg"
+          width="13vw"
+          height="20vh"
+          borderRadius={20}
+        />
       </div>
       <div
         style={{
           position: "absolute",
           top: isLoaded ? "5vh" : "50vh",
-          left: isLoaded ? "55vw" : "70vw",
+          left: isLoaded ? "60vw" : "70vw",
           transition: "all 0.5s",
         }}
       >
-        <ImgCard image="/CardSplit/image3.png" width="11vw" height="17vh" />
+        <ImgCard
+          image="/CardSplit/image11.jpg"
+          width="13vw"
+          height="21vh"
+          borderRadius={20}
+        />
       </div>
       <div
         style={{
@@ -54,17 +69,27 @@ const CardSplit = () => {
           transition: "all 0.5s",
         }}
       >
-        <ImgCard image="/CardSplit/image4.png" width="13vw" height="22vh" />
+        <ImgCard
+          image="/CardSplit/image12.jpg"
+          width="13vw"
+          height="22vh"
+          borderRadius={20}
+        />
       </div>
       <div
         style={{
           position: "absolute",
-          top: isLoaded ? "80vh" : "70vh",
+          top: isLoaded ? "70vh" : "70vh",
           left: isLoaded ? "80vw" : "50vw",
           transition: "all 0.5s",
         }}
       >
-        <ImgCard image="/CardSplit/image5.png" width="12vw" height="24vh" />
+        <ImgCard
+          image="/CardSplit/image14.jpg"
+          width="12vw"
+          height="28vh"
+          borderRadius={20}
+        />
       </div>
       <div
         style={{
@@ -74,7 +99,12 @@ const CardSplit = () => {
           transition: "all 0.5s",
         }}
       >
-        <ImgCard image="/CardSplit/image6.png" width="11vw" height="18vh" />
+        <ImgCard
+          image="/CardSplit/image6.png"
+          width="11vw"
+          height="18vh"
+          borderRadius={20}
+        />
       </div>
       <div
         style={{
@@ -84,17 +114,27 @@ const CardSplit = () => {
           transition: "all 0.5s",
         }}
       >
-        <ImgCard image="/CardSplit/image7.png" width="13vw" height="21vh" />
+        <ImgCard
+          image="/CardSplit/image10.jpg"
+          width="18vw"
+          height="28vh"
+          borderRadius={20}
+        />
       </div>
       <div
         style={{
           position: "absolute",
-          top: isLoaded ? "79vh" : "35vh",
+          top: isLoaded ? "70vh" : "35vh",
           left: isLoaded ? "12vw" : "40vw",
           transition: "all 0.5s",
         }}
       >
-        <ImgCard image="/CardSplit/image8.png" width="11vw" height="18vh" />
+        <ImgCard
+          image="/CardSplit/image15.jpg"
+          width="15vw"
+          height="26vh"
+          borderRadius={20}
+        />
       </div>
     </div>
   );
