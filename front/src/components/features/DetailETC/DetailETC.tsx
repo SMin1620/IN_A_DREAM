@@ -52,7 +52,9 @@ const DetailETC: React.FC<OwnProps> = ({ diaryDetail, diaryId }) => {
           className="like-icon"
         />
       )}
-      <div className="like-count">{likeCount}</div>
+
+      <span className="like-count">{likeCount}</span>
+
       {diaryDetail.owner.id === currentUser.id ? (
         <div></div>
       ) : (
@@ -71,7 +73,7 @@ const DetailETC: React.FC<OwnProps> = ({ diaryDetail, diaryId }) => {
               }}
               className="etc-buy"
             >
-              구매
+              구 매
             </button>
           ) : (
             <div></div>
