@@ -15,6 +15,7 @@ import com.dream.dream.member.repository.MemberRepository;
 import com.dream.dream.recommend.dto.RecommendDto;
 import com.dream.dream.recommend.mapper.RecommendMapper;
 import com.dream.dream.recommend.service.LogService;
+import com.dream.dream.statistic.dto.StatisticDto;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -48,6 +49,7 @@ public class DiaryService {
     private final MemberRepository memberRepository;
     private final LikeRepository likeRepository;
     private final LogService logService;
+    private final KafkaProducerService kafkaProducerService;
 
 
     @Value("${app.fileupload.uploadDir}")
@@ -152,6 +154,13 @@ public class DiaryService {
         member.setNegativeCoin(member.getNegativeCoin() + number3);
 
         memberRepository.save(member);
+
+        // 잔디 로그 생성
+        System.out.println("=== 일기 생성 -> 잔디 깎아버렷 ===");
+        kafkaProducerService.sendStrict(StatisticDto.strictDto.builder()
+                .memberId(member.getId())
+                .registDate(LocalDateTime.now())
+                .build());
 
         return diary;
     }
