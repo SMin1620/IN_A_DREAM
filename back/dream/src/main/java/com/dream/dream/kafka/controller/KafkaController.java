@@ -29,7 +29,7 @@ import java.util.concurrent.ConcurrentHashMap;
 //@CrossOrigin("*")
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/kafka")
+@RequestMapping("/api/kafka")
 public class KafkaController {
 
     private final KafkaProducerService kafkaProducerService;
