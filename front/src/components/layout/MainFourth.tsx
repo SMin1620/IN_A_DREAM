@@ -1,7 +1,6 @@
 import React, { useEffect, useState, useContext } from "react";
 import "./styles/MainFourth.css";
 import ImageSlide from "../features/ImgSlide/ImgSlide";
-import CursorSizeContext from "../../context/CursorSizeContext";
 
 import { SlideSpan } from "../common/SlideSpan";
 import { useAllDiary } from "../../hooks/useAllDiary";
@@ -16,15 +15,7 @@ const MainFourth = () => {
     isLoading,
     error,
   } = useAllDiary({ page: 0, size: 10 });
-  const { setCursorSize } = useContext(CursorSizeContext);
 
-  const handleMouseEnter = () => {
-    setCursorSize("5vw");
-  };
-
-  const handleMouseLeave = () => {
-    setCursorSize("3vw");
-  };
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -81,8 +72,6 @@ const MainFourth = () => {
                     onClick={() => navigate(`/DreamDetail/${diary.id}`)}
                     src={`${SERVER_URL}/${diary.image}`}
                     alt="Diary"
-                    onMouseEnter={handleMouseEnter}
-                    onMouseLeave={handleMouseLeave}
                   />
                 </div>
               ))}

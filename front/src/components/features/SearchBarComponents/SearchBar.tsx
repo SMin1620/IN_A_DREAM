@@ -3,6 +3,7 @@ import S from "styled-components";
 import { LoginInput, LoginButton } from "../../../types/index";
 import "./SearchBar.css";
 import { SlideSpan } from "../../common/SlideSpan";
+import { useNavigate } from "react-router-dom";
 
 export interface SearchBarInput extends LoginInput {
   color?: string;
@@ -13,9 +14,10 @@ export interface SearchBarButton extends LoginButton {}
 const SearchBar = () => {
   const [searchKeyword, setSearchKeyword] = useState("");
 
+  const navigate = useNavigate();
   const postSearch = () => {
     // API 요청
-    console.log(searchKeyword);
+    navigate(`/SearchResult/${searchKeyword}`);
   };
 
   return (

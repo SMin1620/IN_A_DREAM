@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import CursorSizeContext from "../context/CursorSizeContext";
 import NavBar from "../components/features/NavbarComponents/Navbar";
 import MainPageIntro from "../components/layout/MainPageIntro";
 import MainStart from "../components/layout/MainStart";
@@ -14,7 +13,6 @@ import "./styles/MainPage.css";
 const MainPage = () => {
   const [showIntro, setShowIntro] = useState(true);
   const [bgColor, setBgColor] = useState("black");
-  const [cursorSize, setCursorSize] = useState("3vw");
 
   const { x, y } = useMousePosition();
 
@@ -53,25 +51,21 @@ const MainPage = () => {
       }}
     >
       <NavBar />
-      <CursorSizeContext.Provider value={{ cursorSize, setCursorSize }}>
-        <div style={{ marginLeft: "4rem" }}>
-          {showIntro ? <MainPageIntro /> : <MainStart />}
-          <MainSecond />
-          <MainThird />
-          <MainFourth />
-          <MainFifth />
-          <MainSixth />
-          <div
-            className="mouse-cursor"
-            style={{
-              left: `${x}px`,
-              top: `${y}px`,
-              width: cursorSize,
-              height: cursorSize,
-            }}
-          />
-        </div>
-      </CursorSizeContext.Provider>
+      <div style={{ marginLeft: "4rem" }}>
+        {showIntro ? <MainPageIntro /> : <MainStart />}
+        <MainSecond />
+        <MainThird />
+        <MainFourth />
+        <MainFifth />
+        <MainSixth />
+        <div
+          className="mouse-cursor"
+          style={{
+            left: `${x}px`,
+            top: `${y}px`,
+          }}
+        />
+      </div>
     </div>
   );
 };
