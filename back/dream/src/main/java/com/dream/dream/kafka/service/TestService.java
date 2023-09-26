@@ -123,22 +123,22 @@ public class TestService {
         return deferredResult;
     }
 
-//    @Transactional
-//    @KafkaListener(topics = "${message.topic.sparkListenerName}", groupId = ConsumerConfig.GROUP_ID_CONFIG, containerFactory = "diaryListener")
-//    public void listen(DiaryDto.SparkConsume message) {
-//
-//        System.out.println(message);
-//
-//        Diary diary = diaryMapper.sparkConsumeToDiary(message);
-//
-//        System.out.println("####################################");
-//        System.out.println(diary);
-//        System.out.println("####################################");
-//
-//        if (this.deferredResults.containsKey(message.getMemberId())) {
-//            BaseResponse baseResponse = new BaseResponse(HttpStatus.OK, "스파크 처리 완료", diaryMapper.diaryToResponseDto(diary));
-//            this.deferredResults.get(message.getMemberId()).setResult(baseResponse);
-//            this.deferredResults.remove(message.getMemberId());
-//        }
-//    }
+    @Transactional
+    @KafkaListener(topics = "${message.topic.sparkListenerName}", groupId = ConsumerConfig.GROUP_ID_CONFIG, containerFactory = "diaryListener")
+    public void listen(DiaryDto.SparkConsume message) {
+
+        System.out.println(message);
+
+        Diary diary = diaryMapper.sparkConsumeToDiary(message);
+
+        System.out.println("####################################");
+        System.out.println(diary);
+        System.out.println("####################################");
+
+        if (this.deferredResults.containsKey(message.getMemberId())) {
+            BaseResponse baseResponse = new BaseResponse(HttpStatus.OK, "스파크 처리 완료", diaryMapper.diaryToResponseDto(diary));
+            this.deferredResults.get(message.getMemberId()).setResult(baseResponse);
+            this.deferredResults.remove(message.getMemberId());
+        }
+    }
 }
