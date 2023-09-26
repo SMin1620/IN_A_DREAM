@@ -38,8 +38,8 @@ const CardSplit = () => {
           top: isLoaded ? "20vh" : "30vh",
           left: isLoaded ? "10vw" : "50vw",
           transform: `translateX(${
-            scrollX <= 10 ? scrollX : "20"
-          }rem)  translateY(${scrollY <= 10 ? scrollY : "20"}rem`,
+            scrollX <= 10 ? scrollX : "10"
+          }rem)  translateY(${scrollY <= 10 ? scrollY : "10"}rem`,
           transition: "all 0.5s",
         }}
       >
@@ -57,8 +57,8 @@ const CardSplit = () => {
           left: isLoaded ? "30vw" : "60vw",
           transition: "all 0.5s",
           transform: `translateX(${
-            scrollX <= 10 ? scrollX : "20"
-          }rem)  translateY(${scrollY <= 10 ? scrollY : "20"}rem`,
+            scrollX <= 10 ? scrollX : "10"
+          }rem)  translateY(${scrollY <= 10 ? scrollY : "10"}rem`,
         }}
       >
         <ImgCard
@@ -75,8 +75,8 @@ const CardSplit = () => {
           left: isLoaded ? "60vw" : "70vw",
           transition: "all 0.5s",
           transform: `translateX(${
-            scrollX <= 10 ? -scrollX : "20"
-          }rem)  translateY(${scrollY <= 10 ? scrollY : "20"}rem`,
+            scrollX <= 10 ? -scrollX : "-10"
+          }rem)  translateY(${scrollY <= 10 ? scrollY : "10"}rem`,
         }}
       >
         <ImgCard
@@ -93,8 +93,8 @@ const CardSplit = () => {
           left: isLoaded ? "80vw" : "60vw",
           transition: "all 0.5s",
           transform: `translateX(${
-            scrollX <= 10 ? -scrollX * 1.5 : "20"
-          }rem)  translateY(${scrollY <= 10 ? scrollY * 2 : "20"}rem`,
+            scrollX <= 10 ? -scrollX * 1.5 : "-10"
+          }rem)  translateY(${scrollY <= 10 ? scrollY * 2 : "10"}rem`,
         }}
       >
         <ImgCard
@@ -111,8 +111,8 @@ const CardSplit = () => {
           left: isLoaded ? "80vw" : "50vw",
           transition: "all 0.5s",
           transform: `translateX(${
-            scrollX <= 10 ? -scrollX : "20"
-          }rem)  translateY(${scrollY <= 10 ? -scrollY * 2 : "20"}rem`,
+            scrollX <= 10 ? -scrollX : "-10"
+          }rem)  translateY(${scrollY <= 10 ? -scrollY * 2 : "-10"}rem`,
         }}
       >
         <ImgCard
@@ -129,8 +129,8 @@ const CardSplit = () => {
           left: isLoaded ? "63vw" : "40vw",
           transition: "all 0.5s",
           transform: `translateX(${
-            scrollX <= 10 ? -scrollX * 1.3 : "20"
-          }rem)  translateY(${scrollY <= 10 ? -scrollY * 1.8 : "20"}rem`,
+            scrollX <= 10 ? -scrollX * 1.3 : "-10"
+          }rem)  translateY(${scrollY <= 10 ? -scrollY * 1.8 : "-10"}rem`,
         }}
       >
         <ImgCard
@@ -147,8 +147,8 @@ const CardSplit = () => {
           left: isLoaded ? "30vw" : "30vw",
           transition: "all 0.5s",
           transform: `translateX(${
-            scrollX <= 10 ? scrollX * 1.3 : "20"
-          }rem)  translateY(${scrollY <= 10 ? -scrollY * 1.8 : "20"}rem`,
+            scrollX <= 10 ? scrollX * 1.3 : "2"
+          }rem)  translateY(${scrollY <= 10 ? -scrollY * 1.8 : "-2"}rem`,
         }}
       >
         <ImgCard
@@ -165,8 +165,8 @@ const CardSplit = () => {
           left: isLoaded ? "12vw" : "40vw",
           transition: "all 0.5s",
           transform: `translateX(${
-            scrollX <= 10 ? scrollX * 2 : "20"
-          }rem)  translateY(${scrollY <= 10 ? -scrollY * 1.8 : "20"}rem`,
+            scrollX <= 10 ? scrollX * 2 : "10"
+          }rem)  translateY(${scrollY <= 10 ? -scrollY * 1.8 : "-10"}rem`,
         }}
       >
         <ImgCard
