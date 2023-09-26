@@ -10,5 +10,5 @@ import lombok.*;
 public class StatisticDto {
     private Long memberId;
     private String keyword;
-    private int count;
+    private Long count;
 }

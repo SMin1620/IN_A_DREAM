@@ -26,7 +26,6 @@ public class StatisticService {
 
     public List<StatisticDto> dailyStatistic() throws IOException {
 
-        List<StatisticDto> statisticDtos = new ArrayList<>();
         SearchRequest searchRequest = new SearchRequest("mysql_daily_statistic");
         searchRequest.source().size(0);
         searchRequest.source().aggregation(AggregationBuilders.terms("keywords").field("keyword").size(20));
@@ -35,10 +34,16 @@ public class StatisticService {
 
         ParsedStringTerms agg = searchResponse.getAggregations().get("keywords");
 
+        List<StatisticDto> statisticDtos = new ArrayList<>();
         for (Terms.Bucket bucket: agg.getBuckets()) {
-            System.out.println("bucket : " + bucket.toString());
+            statisticDtos.add(
+                    StatisticDto.builder()
+                            .count(bucket.getDocCount())
+                            .keyword(bucket.getKeyAsString())
+                            .build()
+            );
         }
 
-        return null;
+        return statisticDtos;
     }
 }
