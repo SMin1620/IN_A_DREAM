@@ -135,6 +135,10 @@ public class DiaryService {
         this.deferredResults.put(member.getId(), deferredResult);
         kafkaProducerService.sendDiary(kafkaProduce);
 
+        // 잔디 로그 생성
+        System.out.println("=== 일기 생성 -> 잔디 깎아버렷 ===");
+        logService.strictLog(member);
+
         return deferredResult;
     }
 
@@ -283,10 +287,6 @@ public class DiaryService {
         member.setNegativeCoin(member.getNegativeCoin() + number3);
 
         memberRepository.save(member);
-
-        // 잔디 로그 생성
-        System.out.println("=== 일기 생성 -> 잔디 깎아버렷 ===");
-        logService.strictLog(member);
 
         return diary;
     }
