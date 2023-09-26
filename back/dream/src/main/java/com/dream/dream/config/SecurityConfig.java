@@ -68,7 +68,7 @@ public class SecurityConfig {
                         .requestMatchers(mvcMatcherBuilder.pattern( "/swagger-resources/**")).permitAll()
                         .requestMatchers(mvcMatcherBuilder.pattern( "/v3/api-docs/**")).permitAll()
                         .requestMatchers(mvcMatcherBuilder.pattern( "/image/**")).permitAll()
-                                .requestMatchers(mvcMatcherBuilder.pattern("/kafka/**")).permitAll()
+//                                .requestMatchers(mvcMatcherBuilder.pattern("/kafka/**")).permitAll()
                         .anyRequest().authenticated()
 //                        .anyRequest().permitAll()
                 )   // 다음 리퀘스트에 대한 사용권한 체크
