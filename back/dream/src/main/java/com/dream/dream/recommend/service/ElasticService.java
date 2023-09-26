@@ -44,6 +44,9 @@ public class ElasticService {
     @Value(value = "${message.topic.recommendName}")
     private String recommendTopic;
 
+    @Value(value = "${message.topic.diaryName}")
+    private String diaryTopic;
+
 
     /**
      * 사용자 맞춤 일기 추천
@@ -149,7 +152,7 @@ public class ElasticService {
      * :: 해당 꿈과 비슷한 꿈 추천 -> index : mysql_diary
      */
     public List<RecommendDto.DiaryRecommendResponseDto> listDiary(Long diaryId) throws IOException {
-        TermQueryBuilder filter = QueryBuilders.termQuery("diaryId", diaryId);
+        TermQueryBuilder filter = QueryBuilders.termQuery("diary_id", diaryId);
         SearchSourceBuilder sourceBuilder = new SearchSourceBuilder();
         sourceBuilder.query(QueryBuilders.boolQuery().filter(filter));
         sourceBuilder.size(100);
@@ -157,7 +160,7 @@ public class ElasticService {
         sourceBuilder.aggregation(AggregationBuilders.terms("content_keywords").field("content_nori").size(10));
 
         SearchRequest searchRequest = new SearchRequest();
-        searchRequest.indices(recommendTopic);
+        searchRequest.indices(diaryTopic);
         searchRequest.source(sourceBuilder);
 
         SearchResponse searchResponse = client.search(searchRequest, RequestOptions.DEFAULT);
@@ -176,7 +179,7 @@ public class ElasticService {
         sourceBuilder.aggregation(AggregationBuilders.terms("title_keywords").field("title_nori").size(10));
 
         searchRequest = new SearchRequest();
-        searchRequest.indices(recommendTopic);
+        searchRequest.indices(diaryTopic);
         searchRequest.source(sourceBuilder);
 
         searchResponse = client.search(searchRequest, RequestOptions.DEFAULT);
