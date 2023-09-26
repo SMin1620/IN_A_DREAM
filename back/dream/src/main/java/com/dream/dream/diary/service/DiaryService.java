@@ -72,7 +72,6 @@ public class DiaryService {
      * 꿈 일기 생성 -> kafka를 통해 spark
      */
     @Transactional
-    @Async
     public DeferredResult<BaseResponse> diaryCreate(DiaryDto.DiaryCreateRequestDto requestBody, String memberEmail) {
         Member member = memberRepository.findByEmail(memberEmail).orElseThrow(() -> new BusinessLogicException(ExceptionCode.MEMBER_NOT_FOUND));
 
