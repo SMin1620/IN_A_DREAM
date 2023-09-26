@@ -35,7 +35,7 @@ public class StatisticController {
 
     @Operation(summary = "키워드 일별 통계")
     @GetMapping("/daily")
-    public BaseResponse dilayStatistic(
+    public BaseResponse keywordStatistic(
             HttpServletRequest request,
             @RequestParam("from") String from,
             @RequestParam("to") String to
@@ -50,5 +50,24 @@ public class StatisticController {
                 .orElseThrow(() -> new BusinessLogicException(ExceptionCode.MEMBER_NOT_FOUND));
 
         return new BaseResponse(HttpStatus.OK, "일별 키워드 통계", statisticService.dailyStatistic(from, to));
+    }
+
+    @Operation(summary = "감정 통계")
+    @GetMapping("/emotion")
+    public BaseResponse emotionStatistic(
+            HttpServletRequest request,
+            @RequestParam("from") String from,
+            @RequestParam("to") String to
+    ) throws IOException {
+        String token = jwtTokenProvider.resolveToken(request);
+        jwtTokenProvider.validateToken(token);
+
+        Authentication authentication = jwtTokenProvider.getAuthentication(token);
+        UserDetails userDetails = (UserDetails) authentication.getPrincipal();
+
+        Member member = memberRepository.findByEmail(userDetails.getUsername())
+                .orElseThrow(() -> new BusinessLogicException(ExceptionCode.MEMBER_NOT_FOUND));
+
+        return new BaseResponse(HttpStatus.OK, "감정 통계", statisticService.emotionStatistic(from, to));
     }
 }
