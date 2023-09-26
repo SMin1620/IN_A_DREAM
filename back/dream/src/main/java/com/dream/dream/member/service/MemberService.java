@@ -163,6 +163,6 @@ public class MemberService {
         member.setNegativeCoin(member.getNegativeCoin() - 5);
         member.setNeutralCoin(member.getNeutralCoin() - 5);
 
-        return memeber;
+        return member;
     }
 }
