@@ -63,3 +63,7 @@ export const buyDiary = (
     neutralPoint,
     negativePoint,
   });
+
+// 추천일기 조회
+export const recommendedDiaries = (diaryId: number) =>
+  api1.get(`/api/recommend/${diaryId}`);
