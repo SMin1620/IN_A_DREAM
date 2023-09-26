@@ -56,20 +56,27 @@ const DetailETC: React.FC<OwnProps> = ({ diaryDetail, diaryId }) => {
       {diaryDetail.owner.id === currentUser.id ? (
         <div></div>
       ) : (
-        <button
-          onClick={() => {
-            postBuyDiary(
-              diaryDetail.id,
-              diaryDetail.owner.email,
-              diaryDetail.positivePoint,
-              diaryDetail.neutralPoint,
-              diaryDetail.negativePoint
-            );
-          }}
-          className="etc-buy"
-        >
-          구매
-        </button>
+        <>
+          {diaryDetail.sale ? (
+            <button
+              onClick={() => {
+                postBuyDiary(
+                  diaryDetail,
+                  diaryDetail.id,
+                  diaryDetail.owner.email,
+                  diaryDetail.positivePoint,
+                  diaryDetail.neutralPoint,
+                  diaryDetail.negativePoint
+                );
+              }}
+              className="etc-buy"
+            >
+              구매
+            </button>
+          ) : (
+            <div></div>
+          )}
+        </>
       )}
       {diaryDetail.owner.id === currentUser.id ? (
         <>
