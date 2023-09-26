@@ -9,6 +9,4 @@ import java.util.List;
 
 public interface StatisticRepository extends ElasticsearchRepository<DiaryElastic, String> {
 
-    @Query
-    List<Statistic> findByKeyword();
 }
