@@ -52,6 +52,9 @@ public class TestService {
     @Value("${app.fileupload.uploadPath}")
     String uploadPath;
 
+    @Value(value = "${message.topic.sparkDiaryName}")
+    String sparkDiaryTopic;
+
     @Transactional
     public DeferredResult<BaseResponse> diaryCreate(DiaryDto.DiaryCreateRequestDto requestBody, String memberEmail) {
         Member member = memberRepository.findByEmail(memberEmail).orElseThrow(() -> new BusinessLogicException(ExceptionCode.MEMBER_NOT_FOUND));
@@ -117,13 +120,13 @@ public class TestService {
         DeferredResult<BaseResponse> deferredResult = new DeferredResult<>();
         this.deferredResults.put(member.getId(), deferredResult);
 
-        kafkaTemplate.send("diary", kafkaProduce);
+        kafkaTemplate.send(sparkDiaryTopic, kafkaProduce);
 
         return deferredResult;
     }
 
     @Transactional
-    @KafkaListener(topics = "diary_result", groupId = ConsumerConfig.GROUP_ID_CONFIG, containerFactory = "diaryListener")
+    @KafkaListener(topics = "${message.topic.sparkListenerName}", groupId = ConsumerConfig.GROUP_ID_CONFIG, containerFactory = "diaryListener")
     public void listen(DiaryDto.Entity message) {
 
         System.out.println(message);

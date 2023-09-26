@@ -16,9 +16,6 @@ public class KafkaTopicConfig {
     @Value(value = "${spring.kafka.bootstrap-servers}")
     private String bootstrapServers;
 
-    @Value(value = "${message.topic.name}")
-    private String topicName;
-
     @Value(value = "${message.topic.pointName}")
     private String topicName2;
 
@@ -49,10 +46,17 @@ public class KafkaTopicConfig {
     @Value(value = "${message.topic.transactionName}")
     private String transactionTopic;
 
+
+    /**
+     * 일기 정보 보내는 topic
+     */
+    @Value(value = "${message.topic.sparkDiaryName}")
+    private String sparkDiary;
     /**
      * 일기 정보 받는 topic
      */
-    private String diaryResult = "diary_result";
+    @Value(value = "${message.topic.sparkListenerName}")
+    private String sparkDiaryResult;
 
     @Bean
     public KafkaAdmin kafkaAdmin() {
@@ -63,7 +67,7 @@ public class KafkaTopicConfig {
 
     @Bean
     public NewTopic newTopic() {
-        return new NewTopic(topicName, 1, (short) 1);
+        return new NewTopic(sparkDiary, 1, (short) 1);
     }
 
     @Bean
@@ -98,7 +102,7 @@ public class KafkaTopicConfig {
 
     @Bean
     public NewTopic diaryResult(){
-        return new NewTopic(diaryResult, 1, (short) 1);
+        return new NewTopic(sparkDiaryResult, 1, (short) 1);
     }
 
 }

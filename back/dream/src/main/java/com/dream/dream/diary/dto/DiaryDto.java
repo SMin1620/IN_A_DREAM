@@ -98,7 +98,7 @@ public class DiaryDto {
         private MemberDto.Response owner;
 
         // 내가 좋아요 했는지 여부
-        private boolean myLike;
+        private boolean liked;
     }
 
     /**
@@ -120,7 +120,7 @@ public class DiaryDto {
         private int positivePoint;
         private int neutralPoint;
         private int negativePoint;
-        private int like;
+        private int likeCount;
         private boolean open;
         private boolean sale;
         @JsonFormat(pattern = "yyyy-MM-dd")
@@ -148,7 +148,7 @@ public class DiaryDto {
         private int positivePoint;
         private int neutralPoint;
         private int negativePoint;
-        private int like;
+        private int likeCount;
         private boolean open;
         private boolean sale;
         @JsonFormat(pattern = "yyyy-MM-dd")
