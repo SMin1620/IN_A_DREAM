@@ -2,7 +2,6 @@ package com.dream.dream.diary.dto;
 
 import com.dream.dream.diary.entity.Emotion;
 import com.dream.dream.member.dto.MemberDto;
-import com.dream.dream.member.entity.Member;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.*;
@@ -98,7 +97,7 @@ public class DiaryDto {
         private MemberDto.Response owner;
 
         // 내가 좋아요 했는지 여부
-        private boolean myLike;
+        private boolean liked;
     }
 
     /**
@@ -120,7 +119,7 @@ public class DiaryDto {
         private int positivePoint;
         private int neutralPoint;
         private int negativePoint;
-        private int like;
+        private int likeCount;
         private boolean open;
         private boolean sale;
         @JsonFormat(pattern = "yyyy-MM-dd")
@@ -148,7 +147,7 @@ public class DiaryDto {
         private int positivePoint;
         private int neutralPoint;
         private int negativePoint;
-        private int like;
+        private int likeCount;
         private boolean open;
         private boolean sale;
         @JsonFormat(pattern = "yyyy-MM-dd")
@@ -157,29 +156,42 @@ public class DiaryDto {
         private MemberDto.Response member;
     }
 
+    /**
+     * kafka produce 용
+     */
     @Getter
     @Setter
     @NoArgsConstructor
     @AllArgsConstructor
     @Builder
-    public static class KafkaProduce{
-        private Long id;
-        private String title;
-        private String content;
-        private MemberDto.KafkaProduce member;
-    }
-
-    @Getter
-    @Setter
-    @NoArgsConstructor
-    @AllArgsConstructor
-    @Builder
-    public static class Entity {
+    @ToString
+    public static class SparkProduce {
         private String image;
         private String title;
         private String content;
         private boolean open;
         private boolean sale;
         private Long memberId;
+    }
+
+    /**
+     * kafka consume 용
+     */
+    @Getter
+    @Setter
+    @NoArgsConstructor
+    @AllArgsConstructor
+    @Builder
+    @ToString
+    public static class SparkConsume{
+        private String image;
+        private String title;
+        private String content;
+        private boolean open;
+        private boolean sale;
+        private Long memberId;
+        private float positive;
+        private float neutral;
+        private float negative;
     }
 }

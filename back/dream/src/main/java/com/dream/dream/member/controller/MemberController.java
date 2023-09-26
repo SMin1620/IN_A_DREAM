@@ -124,4 +124,22 @@ public class MemberController {
 
     }
 
+        /**
+     * 이미지 리롤
+     */
+    @Operation(summary = "이미지 리롤")
+    @GetMapping("/reroll")
+    public BaseResponse reroll(
+            HttpServletRequest request
+            ) {
+        String token = jwtTokenProvider.resolveToken(request);
+        jwtTokenProvider.validateToken(token);
+
+        String memberEmail = jwtTokenProvider.getUserEmail(token);
+
+        Member member = memberService.reroll(memberEmail);
+
+        return new BaseResponse(HttpStatus.OK, "reroll 성공", memberMapper.toResponse(member));
+    }
+
 }
