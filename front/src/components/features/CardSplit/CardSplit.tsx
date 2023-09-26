@@ -4,6 +4,22 @@ import ImgCard from "../../common/ImgCard";
 const CardSplit = () => {
   const [isLoaded, setIsLoaded] = useState(false);
 
+  const [scrollX, setScrollX] = useState<number>(0);
+  const [scrollY, setScrollY] = useState<number>(0);
+
+  const handleScroll = () => {
+    setScrollX(window.scrollY / 100);
+    setScrollY(window.scrollY / 100);
+  };
+
+  useEffect(() => {
+    window.addEventListener("scroll", handleScroll);
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
+
   useEffect(() => {
     const timer = setTimeout(() => {
       setIsLoaded(true);
@@ -21,6 +37,9 @@ const CardSplit = () => {
           position: "absolute",
           top: isLoaded ? "20vh" : "30vh",
           left: isLoaded ? "10vw" : "50vw",
+          transform: `translateX(${
+            scrollX <= 10 ? scrollX : "20"
+          }rem)  translateY(${scrollY <= 10 ? scrollY : "20"}rem`,
           transition: "all 0.5s",
         }}
       >
@@ -37,6 +56,9 @@ const CardSplit = () => {
           top: isLoaded ? "10vh" : "35vh",
           left: isLoaded ? "30vw" : "60vw",
           transition: "all 0.5s",
+          transform: `translateX(${
+            scrollX <= 10 ? scrollX : "20"
+          }rem)  translateY(${scrollY <= 10 ? scrollY : "20"}rem`,
         }}
       >
         <ImgCard
@@ -52,6 +74,9 @@ const CardSplit = () => {
           top: isLoaded ? "5vh" : "50vh",
           left: isLoaded ? "60vw" : "70vw",
           transition: "all 0.5s",
+          transform: `translateX(${
+            scrollX <= 10 ? -scrollX : "20"
+          }rem)  translateY(${scrollY <= 10 ? scrollY : "20"}rem`,
         }}
       >
         <ImgCard
@@ -67,6 +92,9 @@ const CardSplit = () => {
           top: isLoaded ? "20vh" : "65vh",
           left: isLoaded ? "80vw" : "60vw",
           transition: "all 0.5s",
+          transform: `translateX(${
+            scrollX <= 10 ? -scrollX * 1.5 : "20"
+          }rem)  translateY(${scrollY <= 10 ? scrollY * 2 : "20"}rem`,
         }}
       >
         <ImgCard
@@ -82,6 +110,9 @@ const CardSplit = () => {
           top: isLoaded ? "70vh" : "70vh",
           left: isLoaded ? "80vw" : "50vw",
           transition: "all 0.5s",
+          transform: `translateX(${
+            scrollX <= 10 ? -scrollX : "20"
+          }rem)  translateY(${scrollY <= 10 ? -scrollY * 2 : "20"}rem`,
         }}
       >
         <ImgCard
@@ -97,6 +128,9 @@ const CardSplit = () => {
           top: isLoaded ? "82vh" : "65vh",
           left: isLoaded ? "63vw" : "40vw",
           transition: "all 0.5s",
+          transform: `translateX(${
+            scrollX <= 10 ? -scrollX * 1.3 : "20"
+          }rem)  translateY(${scrollY <= 10 ? -scrollY * 1.8 : "20"}rem`,
         }}
       >
         <ImgCard
@@ -112,6 +146,9 @@ const CardSplit = () => {
           top: isLoaded ? "80vh" : "50vh",
           left: isLoaded ? "30vw" : "30vw",
           transition: "all 0.5s",
+          transform: `translateX(${
+            scrollX <= 10 ? scrollX * 1.3 : "20"
+          }rem)  translateY(${scrollY <= 10 ? -scrollY * 1.8 : "20"}rem`,
         }}
       >
         <ImgCard
@@ -127,6 +164,9 @@ const CardSplit = () => {
           top: isLoaded ? "70vh" : "35vh",
           left: isLoaded ? "12vw" : "40vw",
           transition: "all 0.5s",
+          transform: `translateX(${
+            scrollX <= 10 ? scrollX * 2 : "20"
+          }rem)  translateY(${scrollY <= 10 ? -scrollY * 1.8 : "20"}rem`,
         }}
       >
         <ImgCard
