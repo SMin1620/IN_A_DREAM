@@ -63,3 +63,10 @@ export const buyDiary = (
     neutralPoint,
     negativePoint,
   });
+
+//일기 검색
+
+export const fetchDiaryWithKeyword = (keyword: string | undefined) =>
+  api1.get(`/api/search`, {
+    params: { keyword },
+  });

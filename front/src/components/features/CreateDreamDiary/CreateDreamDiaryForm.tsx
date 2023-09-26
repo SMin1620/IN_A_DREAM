@@ -42,7 +42,9 @@ const CreateDreamDiaryForm: React.FC<OwnProps> = ({
       const gptResult = await fetchGPTData(diaryData.content);
 
       if (gptResult !== null) {
-        const finalResponse = "Cute, animation, cartoon " + gptResult;
+        const finalResponse =
+          "Cute, Pastel tone, Animation, Fantasy " + gptResult;
+        console.log(finalResponse);
         fetchData(finalResponse).then(setImageUrl);
         setDiaryImage(true);
         setClicked(true);
