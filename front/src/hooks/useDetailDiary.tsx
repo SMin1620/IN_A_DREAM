@@ -1,5 +1,4 @@
 import { useState } from "react";
-import { DiaryData } from "./useMakeDiary";
 import { fetchDiaryDetail } from "./../api/services/diaryAPI";
 import { DiaryInfo } from "./../types/ApiType";
 

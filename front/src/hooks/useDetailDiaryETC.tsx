@@ -1,13 +1,18 @@
-import React, { useState, useEffect } from "react";
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { buyDiary, toggleLikeDiary } from "../api/services/diaryAPI";
 import { updateDiaryVisibility } from "../api/services/diaryAPI";
 import { updateDiarySaleStatus } from "../api/services/diaryAPI";
 import Swal from "sweetalert2";
+import { DiaryInfo } from "./../types/ApiType";
+import useDetailDiary from "./useDetailDiary";
 
 const useDetailDiaryETC = () => {
   const [likeCount, setLikeCount] = useState<number>();
   const [sale, setSale] = useState<boolean>();
   const [open, setOpen] = useState<boolean>();
+  const { setDiaryDetail } = useDetailDiary();
+  const navigate = useNavigate();
 
   const postLiked = async (diaryId: number) => {
     try {
@@ -19,35 +24,44 @@ const useDetailDiaryETC = () => {
   };
 
   const postBuyDiary = async (
+    diaryDetail: DiaryInfo,
     diaryId: number,
     sellerEmail: string,
     positivePoint: number,
     neutralPoint: number,
     negativePoint: number
   ) => {
-    try {
-      const response = await buyDiary(
-        diaryId,
-        sellerEmail,
-        positivePoint,
-        neutralPoint,
-        negativePoint
-      );
+    if (diaryDetail.sale) {
+      try {
+        const response = await buyDiary(
+          diaryId,
+          sellerEmail,
+          positivePoint,
+          neutralPoint,
+          negativePoint
+        );
 
-      Swal.fire({
-        icon: "success",
-        title: "성공",
-        text: "구매가 성공적으로 이루어졌습니다!",
-      });
-      console.log(response.data);
-    } catch (error: any) {
-      if (error.response && error.response.data.message === "Coin Lack") {
         Swal.fire({
-          icon: "error",
-          title: "Oops...",
-          text: "코인이 없어용",
-        });
+          icon: "success",
+          title: "성공",
+          text: "구매가 성공적으로 이루어졌습니다!",
+        }).then(() => window.location.reload());
+      } catch (error: any) {
+        if (error.response && error.response.data.message === "Coin Lack") {
+          Swal.fire({
+            icon: "error",
+            title: "Oops...",
+            text: "코인이 없어용",
+          }).then(() => navigate("/main"));
+          // 코인 교환소로 가게 설정하기
+        }
       }
+    } else {
+      Swal.fire({
+        icon: "warning",
+        title: "구매할 수 없는 일기입니다!",
+        text: "정보가 변경되었습니다.",
+      }).then(() => window.location.reload());
     }
   };
 
