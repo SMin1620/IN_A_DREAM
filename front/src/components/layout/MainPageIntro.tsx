@@ -1,7 +1,7 @@
 import React from "react";
 import CardDeck from "../features/CardDeck/CardDeck";
 import styled from "styled-components";
-
+import { SlideSpan } from "../common/SlideSpan";
 const images = [
   "/card/background1.png",
   "/card/dff.png",
@@ -46,6 +46,8 @@ const MainPageIntroDiv = styled.div`
 const H1 = styled.h1`
   color: white;
   position: absolute;
+  display: flex;
+  white-space: nowrap;
 `;
 
 const CardDeckWrapper = styled.div`
@@ -56,7 +58,16 @@ const CardDeckWrapper = styled.div`
 const MainPageIntro = () => {
   return (
     <MainPageIntroDiv>
-      <H1>In A DREAM, In A DREAM, In A DREAM</H1>
+      <H1>
+        <SlideSpan startposition={-100} endposition={100} speed={8} width="90%">
+          <span className="navbar-font5">IN A DREAM</span>
+          <span>{"   "}</span>
+          <span className="navbar-font2">IN A DREAM</span>
+          <span>{"    "}</span>
+          <span className="navbar-font6">IN A DREAM</span>
+          <span>{"    "}</span>
+        </SlideSpan>
+      </H1>
       <CardDeckWrapper>
         <CardDeck
           images={images}

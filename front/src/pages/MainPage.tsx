@@ -46,9 +46,9 @@ const MainPage = () => {
         transition: "background-color 1.5s",
       }}
     >
-      <NavBar />
+      {!showIntro && <NavBar />}
       {/* 네브바 옆에 중앙정렬을 위해 마진레프트 네브바 만큼줬씀다 */}
-      <div style={{ marginLeft: "4rem" }}>
+      <div style={{ marginLeft: showIntro ? "0" : "4rem" }}>
         {showIntro ? <MainPageIntro /> : <MainStart />}
         <MainSecond />
         <MainThird />
