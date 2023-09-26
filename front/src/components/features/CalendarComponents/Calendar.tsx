@@ -15,7 +15,13 @@ const Calendar = () => {
   ).getDay();
 
   // Example user activity data
-  const [userActivity] = useState(["2023-09-01", "2023-09-02", "2023-09-05"]);
+  const [userActivity] = useState([
+    "2023-09-01",
+    "2023-09-02",
+    "2023-09-05",
+    "2023-09-07",
+    "2023-09-10",
+  ]);
 
   let daysArray = [];
 

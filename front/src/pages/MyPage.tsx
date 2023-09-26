@@ -24,6 +24,7 @@ const MyPage = () => {
 
   return (
     <div className="MyPage-main">
+      {/* <Calendar /> */}
       <Navbar></Navbar>
       <div className="mypage-top">
         <div className="mypage-top-calendar">{/* <Calendar /> */}캘린더 존</div>
