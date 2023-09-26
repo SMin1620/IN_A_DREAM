@@ -7,10 +7,15 @@ import MainThird from "../components/layout/MainThird";
 import MainFourth from "../components/layout/MainFourth";
 import MainFifth from "../components/layout/MainFifth";
 import MainSixth from "../components/layout/MainSixth";
+import { useMediaQuery } from "react-responsive";
 
 const MainPage = () => {
   const [showIntro, setShowIntro] = useState(true);
   const [bgColor, setBgColor] = useState("black");
+
+  const isMobileView = useMediaQuery({
+    query: "(max-width: 768px)",
+  });
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -48,7 +53,7 @@ const MainPage = () => {
     >
       {!showIntro && <NavBar />}
       {/* 네브바 옆에 중앙정렬을 위해 마진레프트 네브바 만큼줬씀다 */}
-      <div style={{ marginLeft: showIntro ? "0" : "4rem" }}>
+      <div style={{ marginLeft: !showIntro && !isMobileView ? "4rem" : "0" }}>
         {showIntro ? <MainPageIntro /> : <MainStart />}
         <MainSecond />
         <MainThird />
