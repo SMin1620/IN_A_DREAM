@@ -41,11 +41,9 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.StandardOpenOption;
 import java.time.LocalDateTime;
-import java.util.List;
-import java.util.Map;
-import java.util.Random;
-import java.util.UUID;
+import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.stream.Collectors;
 
 @Service
 @Slf4j
@@ -148,7 +146,7 @@ public class DiaryService {
     public void listen(DiaryDto.SparkConsume message) {
 
         long memberId = message.getMemberId();
-        Member member = memberRepository.findById(memberId).orElseThrow(()->new BusinessLogicException(ExceptionCode.MEMBER_NOT_FOUND));
+        Member member = memberRepository.findById(memberId).orElseThrow(() -> new BusinessLogicException(ExceptionCode.MEMBER_NOT_FOUND));
 
         Diary diary = diaryMapper.sparkConsumeToDiary(message);
 
@@ -380,21 +378,31 @@ public class DiaryService {
     }
 
     /**
-     * 사용자의 좋아요 여부 반환
-     * @param diaryList
+     * 사용자의 좋아요 여부 반환 (여러개)
      */
-    public List<Boolean> getMyLike(String email, List<Diary> diaryList) {
+    public List<Boolean> getMyLikes(String email, List<Diary> diaryList) {
         Member member = memberRepository.findByEmail(email).orElseThrow(() -> new BusinessLogicException(ExceptionCode.MEMBER_NOT_FOUND));
 
+        // 내가 좋아요한 일기의 Like 를 가져옴
+        List<Like> likes = likeRepository.findLikesByMemberAndDiaryIn(member, diaryList);
 
-        for(Diary diary : diaryList){
-            Like like = likeRepository.findLikeByMemberAndDiary(member, diary).orElse(null);
+        // Set 으로 변환
+        Set<Diary> likedDiaries = likes.stream().map(Like::getDiary).collect(Collectors.toSet());
 
-        }
-        return null;
+        return diaryList.stream().map(diary -> likedDiaries.contains(diary)).collect(Collectors.toList());
     }
 
+    /**
+     * 사용자의 좋아요 여부 반환(1개)
+     */
+    public boolean getMyLike(String email, Diary diary) {
+        Member member = memberRepository.findByEmail(email).orElseThrow(() -> new BusinessLogicException(ExceptionCode.MEMBER_NOT_FOUND));
 
+        // 내가 좋아요한 일기의 Like 를 가져옴
+        Like likes = likeRepository.findLikeByMemberAndDiary(member, diary).orElse(null);
+
+        return likes != null;
+    }
 
 
 
