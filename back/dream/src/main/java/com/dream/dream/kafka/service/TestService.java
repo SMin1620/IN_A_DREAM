@@ -41,7 +41,7 @@ public class TestService {
     private final DiaryRepository diaryRepository;
     private final DiaryMapper diaryMapper;
     private final KafkaTemplate<String, Object> kafkaTemplate;
-    private final Map<Long, DeferredResult<BaseResponse>> deferredResults = new ConcurrentHashMap<>();
+    private final Map<Long, DeferredResult<Diary>> deferredResults = new ConcurrentHashMap<>();
 
     @Value("${app.fileupload.uploadDir}")
     String uploadFolder;
@@ -53,7 +53,7 @@ public class TestService {
     String sparkDiaryTopic;
 
     @Transactional
-    public DeferredResult<BaseResponse> diaryCreate(DiaryDto.DiaryCreateRequestDto requestBody, String memberEmail) {
+    public Diary diaryCreate(DiaryDto.DiaryCreateRequestDto requestBody, String memberEmail) {
         Member member = memberRepository.findByEmail(memberEmail).orElseThrow(() -> new BusinessLogicException(ExceptionCode.MEMBER_NOT_FOUND));
 
         // 이미지 저장 결로
@@ -114,12 +114,12 @@ public class TestService {
 
         DiaryDto.SparkProduce kafkaProduce = diaryMapper.toEntityDto(diary);
         kafkaProduce.setMemberId(member.getId());
-        DeferredResult<BaseResponse> deferredResult = new DeferredResult<>();
+        DeferredResult<Diary> deferredResult = new DeferredResult<>();
         this.deferredResults.put(member.getId(), deferredResult);
 
         kafkaTemplate.send(sparkDiaryTopic, kafkaProduce);
 
-        return deferredResult;
+        return (Diary) deferredResult.getResult();
     }
 
     @Transactional
@@ -128,13 +128,15 @@ public class TestService {
 
         System.out.println(message);
 
-        Diary diary = diaryMapper.dtoToDiary(message);
+        Diary diary = diaryMapper.sparkConsumeToDiary(message);
 
+        System.out.println("####################################");
         System.out.println(diary);
+        System.out.println("####################################");
 
         if (this.deferredResults.containsKey(message.getMemberId())) {
-            BaseResponse responseEntity = new BaseResponse(HttpStatus.OK,"받기 성공", diaryMapper.diaryToResponseDto(diary));
-            this.deferredResults.get(message.getMemberId()).setResult(responseEntity);
+
+            this.deferredResults.get(message.getMemberId()).setResult(diary);
             this.deferredResults.remove(message.getMemberId());
         }
     }

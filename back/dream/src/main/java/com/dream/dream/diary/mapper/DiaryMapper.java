@@ -20,6 +20,6 @@ public interface DiaryMapper {
 
     DiaryDto.SparkProduce toEntityDto(Diary diary);
 
-    Diary dtoToDiary(DiaryDto.SparkConsume diary);
+    Diary sparkConsumeToDiary(DiaryDto.SparkConsume diary);
 
 }

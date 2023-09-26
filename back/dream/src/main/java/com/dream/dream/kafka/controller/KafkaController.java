@@ -43,7 +43,7 @@ public class KafkaController {
     private final TestService testService;
 
     @PostMapping("/diarytest")
-    public DeferredResult<BaseResponse> getDiary(
+    public BaseResponse getDiary(
             HttpServletRequest request,
             @RequestBody DiaryDto.DiaryCreateRequestDto requestBody) {
 
@@ -51,11 +51,11 @@ public class KafkaController {
         jwtTokenProvider.validateToken(token);
         String memberEmail = jwtTokenProvider.getUserEmail(token);
 
-        DeferredResult deferredResult = testService.diaryCreate(requestBody, memberEmail);
+        Diary diary = testService.diaryCreate(requestBody, memberEmail);
 
-        System.out.println(deferredResult.getResult());
+        System.out.println(diary);
 
-        return deferredResult;
+        return new BaseResponse(HttpStatus.OK, "스파크 스트리밍 처리 완료", diaryMapper.diaryToResponseDto(diary));
     }
 
 //    @KafkaListener(topics = "diary_result", groupId = ConsumerConfig.GROUP_ID_CONFIG, containerFactory = "diaryListener")
