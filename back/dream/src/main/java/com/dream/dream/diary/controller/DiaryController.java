@@ -181,7 +181,7 @@ public class DiaryController {
     @Operation(summary = "이미지 리롤")
     @GetMapping("/reroll")
     public BaseResponse reroll(
-            HttpServletRequest request,
+            HttpServletRequest request
             ) {
         String token = jwtTokenProvider.resolveToken(request);
         jwtTokenProvider.validateToken(token);
