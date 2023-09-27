@@ -10,7 +10,7 @@ import org.springframework.data.elasticsearch.annotations.Document;
 import org.springframework.data.elasticsearch.annotations.Field;
 import org.springframework.data.elasticsearch.annotations.FieldType;
 
-@Document(indexName = "mysql_daily_statistic")
+@Document(indexName = "log_strict")
 @ToString
 @Getter
 @Setter
@@ -25,5 +25,5 @@ public class Statistic {
     private Long memberId;
 
     @Field(type = FieldType.Auto)
-    private String keyword;
+    private String registDate;
 }
