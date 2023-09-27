@@ -46,4 +46,11 @@ export const SlideSpan = S.span<SlideSpanProps>`
   &:hover {
     color: #ff7a00;
   }
+
+  @media (max-width: 1024px) {
+    animation: ${(props) =>
+      slide(props.startposition * 0.5, props.endposition * 0.5)} ${(props) =>
+  props.speed || 15}s linear infinite;
+  }
+
 `;

@@ -4,6 +4,7 @@ import useRecomendDiary from "../../../hooks/useRecomendDiary";
 import { DiaryInfo } from "../../../types/ApiType";
 import { SERVER_URL } from "../../../constants";
 import { SlideSpan } from "../../common/SlideSpan";
+import { useNavigate } from "react-router-dom";
 
 interface OwnProps {
   diaryId: number;
@@ -11,14 +12,16 @@ interface OwnProps {
 
 const RecommendedDiary: React.FC<OwnProps> = ({ diaryId }) => {
   const { getSimilarDiary, recomendDiaryList } = useRecomendDiary();
+  const navigate = useNavigate();
 
   useEffect(() => {
-    console.log(diaryId);
-    console.log("실행됨");
     getSimilarDiary(diaryId);
   }, [diaryId]);
 
-  console.log(recomendDiaryList);
+  const handleNavigate = (diaryId: number) => {
+    navigate(`/DreamDetail/${diaryId}`);
+    window.location.reload();
+  };
 
   return recomendDiaryList ? (
     <>
@@ -27,11 +30,12 @@ const RecommendedDiary: React.FC<OwnProps> = ({ diaryId }) => {
         {recomendDiaryList.map((diary: DiaryInfo) => {
           return (
             <span key={diary.id} className="recommend-diary">
-              <SlideSpan startposition={1000} endposition={-1200} speed={30}>
+              <SlideSpan startposition={1200} endposition={-1200} speed={70}>
                 <img
                   src={`${SERVER_URL}/${diary.image}`}
                   alt="비슷한 일기들"
                   className="recommend-diary-image"
+                  onClick={() => handleNavigate(diary.id)}
                 />
                 <p>{diary.title}</p>
               </SlideSpan>

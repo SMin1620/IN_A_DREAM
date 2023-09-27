@@ -11,14 +11,14 @@
 
 .recommend-diary {
   display: flex;
-  width: 10rem;
-  height: 10rem;
+  width: 14rem;
+  height: 14rem;
   margin: 1vw;
 }
 
 .recommend-diary-image {
-  width: 10rem;
-  height: 10rem;
+  width: 14rem;
+  height: 14rem;
   object-fit: cover;
   border-radius: 10px;
   flex-wrap: nowrap;
