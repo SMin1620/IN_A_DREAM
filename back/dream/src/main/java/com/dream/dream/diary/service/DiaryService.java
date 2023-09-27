@@ -10,6 +10,7 @@ import com.dream.dream.diary.repository.DiaryRepository;
 import com.dream.dream.diary.repository.LikeRepository;
 import com.dream.dream.exception.BusinessLogicException;
 import com.dream.dream.exception.ExceptionCode;
+import com.dream.dream.jwt.UserDetailsServiceImpl;
 import com.dream.dream.kafka.service.KafkaProducerService;
 import com.dream.dream.member.entity.Member;
 import com.dream.dream.member.repository.MemberRepository;
@@ -30,6 +31,7 @@ import org.springframework.scheduling.annotation.Async;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 import org.springframework.util.FileCopyUtils;
 import org.springframework.web.context.request.async.DeferredResult;
@@ -60,8 +62,11 @@ public class DiaryService {
     private final LogService logService;
     private final KafkaProducerService kafkaProducerService;
     private final DiaryMapper diaryMapper;
+    private final UserDetailsServiceImpl userDetailsService;
+
 
     private final Map<Long, DeferredResult<BaseResponse>> deferredResults = new ConcurrentHashMap<>();
+
 
     @Value("${app.fileupload.uploadDir}")
     String uploadFolder;
@@ -154,6 +159,14 @@ public class DiaryService {
 
         long memberId = message.getMemberId();
         Member member = memberRepository.findById(memberId).orElseThrow(() -> new BusinessLogicException(ExceptionCode.MEMBER_NOT_FOUND));
+
+        // 인증 객체 생성
+        UserDetails userDetails = userDetailsService.loadUserByUsername(member.getEmail());
+
+        Authentication auth = new UsernamePasswordAuthenticationToken(member.getEmail(), "", userDetails.getAuthorities());
+
+        // Security Context 설정
+        SecurityContextHolder.getContext().setAuthentication(auth);
 
         Diary diary = diaryMapper.sparkConsumeToDiary(message);
 
