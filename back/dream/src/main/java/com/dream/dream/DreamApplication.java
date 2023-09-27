@@ -10,8 +10,7 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 
 //@EnableScheduling
 @EnableJpaAuditing
-@EnableAsync(mode = AdviceMode.PROXY, proxyTargetClass = false,
-		order = Ordered.HIGHEST_PRECEDENCE)
+@EnableAsync
 @SpringBootApplication
 public class DreamApplication {
 
