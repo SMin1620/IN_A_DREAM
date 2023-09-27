@@ -1,6 +1,8 @@
 package com.dream.dream.statistic.service;
 
 import com.dream.dream.statistic.dto.StatisticDto;
+import com.dream.dream.statistic.entity.Statistic;
+import com.dream.dream.statistic.repository.StatisticRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.elasticsearch.action.search.SearchRequest;
@@ -26,6 +28,7 @@ import java.util.List;
 public class StatisticService {
 
     private final RestHighLevelClient client;
+    private final StatisticRepository statisticRepository;
 
     @Value(value = "${message.topic.statisticDailyName}")
     private String statisticDailyName;
@@ -97,9 +100,11 @@ public class StatisticService {
     /**
      * 잔디잔디잔디
      */
-    public void strictStatistic(Long memberId) {
-        String currentDate = LocalDateTime.now().toString();
+    public List<Statistic> strictStatistic(Long memberId) {
+        String currentDate = LocalDateTime.now().toString().substring(0, 8) + "*";
 
-        System.out.println("currentDate : " + currentDate.substring(0, 8));
+        System.out.println("currentDate : " + currentDate);
+
+        return statisticRepository.findByStrict(memberId, currentDate);
     }
 }
