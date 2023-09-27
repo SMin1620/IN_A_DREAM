@@ -9,9 +9,14 @@ export const fetchKeywordStatistics = (fromDate: string, toDate: string) =>
     },
   });
 
-// 월별 전체 감정 통계
-export const fetchAllMonthlyEmotionStatistics = () =>
-  api1.get(`/api/statistics/emotion/all/month`);
+//  감정 통계
+export const fetchEmotionStatistics = (fromDate: string, toDate: string) =>
+  api1.get(`/api/statistic/emotion`, {
+    params: {
+      from: fromDate,
+      to: toDate,
+    },
+  });
 
 // 일별 전체 감정 통계
 export const fetchAllDailyEmotionStatistics = () =>
