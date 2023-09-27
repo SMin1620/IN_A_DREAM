@@ -12,6 +12,7 @@ import GalleryPage from "./pages/GalleryPage";
 import SearchResultPage from "./pages/SearchResultPage";
 import DreamShopPage from "./pages/DreamShopPage";
 import DreamDetailPage from "./pages/DreamDetailPage";
+import AllUserStatisticsPage from "./pages/AllUserStatisticsPage";
 
 function AppRouter() {
   return (
@@ -34,6 +35,10 @@ function AppRouter() {
           ></Route>
           <Route path="/DreamShop" element={<DreamShopPage />}></Route>
           <Route path="/DreamDetail/:id" element={<DreamDetailPage />}></Route>
+          <Route
+            path="/AllUserStatistics"
+            element={<AllUserStatisticsPage />}
+          ></Route>
         </Routes>
       </BrowserRouter>
     </div>
