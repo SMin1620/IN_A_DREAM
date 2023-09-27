@@ -2,37 +2,29 @@ import React from "react";
 import CardDeck from "../features/CardDeck/CardDeck";
 import styled from "styled-components";
 import { SlideSpan } from "../common/SlideSpan";
+
 const images = [
-  "/card/background1.png",
-  "/card/dff.png",
-  "/card/ggum3.jpg",
-  "/card/igi4_tam5_210723.jpg",
-  "/card/background1.png",
-  "/card/dff.png",
-  "/card/ggum3.jpg",
-  "/card/igi4_tam5_210723.jpg",
-  "/card/background1.png",
-  "/card/dff.png",
-  "/card/ggum3.jpg",
-  "/card/igi4_tam5_210723.jpg",
-  "/card/background1.png",
-  "/card/dff.png",
-  "/card/ggum3.jpg",
-  "/card/igi4_tam5_210723.jpg",
-  "/card/background1.png",
-  "/card/dff.png",
-  "/card/ggum3.jpg",
-  "/card/igi4_tam5_210723.jpg",
-  "/card/background1.png",
-  "/card/dff.png",
-  "/card/ggum3.jpg",
-  "/card/igi4_tam5_210723.jpg",
-  "/card/background1.png",
-  "/card/dff.png",
-  "/card/ggum3.jpg",
-  "/card/igi4_tam5_210723.jpg",
-  "/card/ggum3.jpg",
-  "/card/igi4_tam5_210723.jpg",
+  "/card/image1.jpg",
+  "/card/image2.jpg",
+  "/card/image3.jpg",
+  "/card/image4.jpg",
+  "/card/image5.jpg",
+  "/card/image6.jpg",
+  "/card/image7.jpg",
+  "/card/image8.jpg",
+  "/card/image9.jpg",
+  "/card/image10.jpg",
+  "/card/image11.jpg",
+  "/card/image12.jpg",
+  "/card/image13.jpg",
+  "/card/image14.jpg",
+  "/card/image15.jpg",
+  "/card/image16.jpg",
+  "/card/image17.jpg",
+  "/card/image18.jpg",
+  "/card/image19.jpg",
+  "/card/image20.jpg",
+  "/card/image21.png",
 ];
 
 const MainPageIntroDiv = styled.div`
@@ -72,9 +64,12 @@ const MainPageIntro = () => {
         <CardDeck
           images={images}
           imgCardProps={{
-            width: "8.1rem",
-            height: "8.6rem",
-            borderRadius: "10px",
+            // width: "8.1rem",
+            // height: "8.6rem",
+            // borderRadius: "10px",
+            width: "20rem",
+            height: "20rem",
+            borderRadius: "20px",
           }}
         />
       </CardDeckWrapper>

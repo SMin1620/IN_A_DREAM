@@ -20,8 +20,8 @@ const CardDeck: React.FC<CardDeckProps> = ({ images, imgCardProps }) => {
 
   const deckStyle: React.CSSProperties = {
     position: "relative",
-    width: "100px",
-    height: "100px",
+    width: "300px",
+    height: "300px",
   };
 
   return (
