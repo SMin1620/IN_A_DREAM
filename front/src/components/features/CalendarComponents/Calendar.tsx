@@ -1,7 +1,9 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import useStatistic from "../../../hooks/useStatistic";
 import "./Calendar.css";
 
 const Calendar = () => {
+  // 날짜정보 이용해서 달력만들기
   const date = new Date();
   const daysInMonth = new Date(
     date.getFullYear(),
@@ -14,14 +16,13 @@ const Calendar = () => {
     1
   ).getDay();
 
-  // Example user activity data
-  const [userActivity] = useState([
-    "2023-09-01",
-    "2023-09-02",
-    "2023-09-05",
-    "2023-09-07",
-    "2023-09-10",
-  ]);
+  useEffect(() => {
+    getStrict();
+  }, []);
+
+  const { getStrict, userActivity } = useStatistic();
+
+  console.log(userActivity);
 
   let daysArray = [];
 
@@ -33,6 +34,8 @@ const Calendar = () => {
     const dayString = `${date.getFullYear()}-${String(
       date.getMonth() + 1
     ).padStart(2, "0")}-${String(i).padStart(2, "0")}`;
+
+    // console.log(dayString);
     if (userActivity.includes(dayString)) {
       daysArray.push(
         <div

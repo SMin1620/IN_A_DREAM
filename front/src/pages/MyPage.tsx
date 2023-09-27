@@ -8,7 +8,7 @@ import { DiaryInfo } from "../types/ApiType";
 
 const MyPage = () => {
   const [MyDiaryData, setMyDiaryData] = useState<DiaryInfo[]>([]);
-
+  const date = new Date();
   const {
     data: response,
     isLoading,
@@ -24,10 +24,12 @@ const MyPage = () => {
 
   return (
     <div className="MyPage-main">
-      {/* <Calendar /> */}
       <Navbar></Navbar>
       <div className="mypage-top">
-        <div className="mypage-top-calendar">{/* <Calendar /> */}캘린더 존</div>
+        <div className="mypage-top-calendar">
+          <p>{date.getMonth() + 1} 월</p>
+          <Calendar />
+        </div>
         <div className="mypage-top-keyword">키워드 존</div>
         <div className="mypage-top-statistics">스태티스틱 존</div>
       </div>
