@@ -26,18 +26,18 @@ public class ExchangeService {
         if(requestBody.getKind().equals("positive")){
             if(member.getPositiveCoin() - coin < 0) throw new BusinessLogicException(ExceptionCode.COIN_LACK);
             member.setPositiveCoin(member.getPositiveCoin() + coin);
-            member.setNeutralCoin(member.getNegativeCoin() - coin);
-            member.setNegativeCoin(member.getNeutralCoin() - coin);
+            member.setNeutralCoin(member.getNeutralCoin() - coin);
+            member.setNegativeCoin(member.getNegativeCoin() - coin);
         } else if (requestBody.getKind().equals("negative")) {
             if(member.getNegativeCoin() - coin < 0) throw new BusinessLogicException(ExceptionCode.COIN_LACK);
             member.setPositiveCoin(member.getPositiveCoin() - coin);
-            member.setNeutralCoin(member.getNegativeCoin() + coin);
-            member.setNegativeCoin(member.getNeutralCoin() - coin);
+            member.setNeutralCoin(member.getNeutralCoin() + coin);
+            member.setNegativeCoin(member.getNegativeCoin() - coin);
         }else if (requestBody.getKind().equals("neutral")){
             if(member.getNeutralCoin() - coin < 0) throw new BusinessLogicException(ExceptionCode.COIN_LACK);
             member.setPositiveCoin(member.getPositiveCoin() - coin);
-            member.setNeutralCoin(member.getNegativeCoin() - coin);
-            member.setNegativeCoin(member.getNeutralCoin() + coin);
+            member.setNeutralCoin(member.getNeutralCoin() - coin);
+            member.setNegativeCoin(member.getNegativeCoin() + coin);
         }else{
             throw new BusinessLogicException(ExceptionCode.EMOTION_NOT_FOUND);
         }
