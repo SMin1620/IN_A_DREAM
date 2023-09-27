@@ -71,8 +71,7 @@ public class StatisticController {
     @Operation(summary = "잔디 깎기")
     @GetMapping("/strict/{memberId}")
     public BaseResponse strictStatistic(
-            HttpServletRequest request,
-            @PathVariable("memberId") Long memberId
+            HttpServletRequest request
     ) {
         String token = jwtTokenProvider.resolveToken(request);
         jwtTokenProvider.validateToken(token);
@@ -83,9 +82,6 @@ public class StatisticController {
         Member member = memberRepository.findByEmail(userDetails.getUsername())
                 .orElseThrow(() -> new BusinessLogicException(ExceptionCode.MEMBER_NOT_FOUND));
 
-        if (member.getId() != memberId) throw new BusinessLogicException(ExceptionCode.MEMBER_UNAUTHORIZED);
-        statisticService.strictStatistic(memberId);
-
-        return new BaseResponse(HttpStatus.OK, "잔디 조회", null);
+        return new BaseResponse(HttpStatus.OK, "잔디 조회", statisticService.strictStatistic(member.getId()));
     }
 }
