@@ -69,10 +69,11 @@ public class StatisticController {
     }
 
     @Operation(summary = "잔디 깎기")
-    @GetMapping("/strict/{memberId}")
+    @GetMapping("/strict}")
     public BaseResponse strictStatistic(
             HttpServletRequest request
     ) {
+        System.out.println("잔디 컨트롤러");
         String token = jwtTokenProvider.resolveToken(request);
         jwtTokenProvider.validateToken(token);
 
