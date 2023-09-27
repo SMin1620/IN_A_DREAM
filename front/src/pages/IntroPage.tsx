@@ -1,6 +1,6 @@
 import "./styles/IntroPage.css";
 import React, { useState, useEffect, useRef } from "react";
-import HoldOn from "../components/features/IntroPage/HoldOn";
+import HoldOn from "../components/features/IntroComponents/HoldOn";
 import styled, { createGlobalStyle, keyframes, css } from "styled-components";
 import bgImage from "../assets/background/blackBG.jpg";
 import moonImg from "../assets/image/moon.png";
@@ -216,7 +216,6 @@ const IntroPage: React.FC = () => {
     <div className="intro">
       <GlobalStyle />
       <BackGround>
-        <Overlay fade={fade} />
         <button className="skip" onClick={handleSkip}>
           {/* <div className="skip-wrapper"> */}
           <p>Skip</p>
@@ -274,6 +273,7 @@ const IntroPage: React.FC = () => {
           ></img>
         </div>
         <HoldOn />
+        <Overlay fade={fade} />
         <LandImg ref={ref7} />
         {/* <Castle /> */}
       </BackGround>

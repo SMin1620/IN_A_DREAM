@@ -13,6 +13,7 @@ import SearchResultPage from "./pages/SearchResultPage";
 import DreamShopPage from "./pages/DreamShopPage";
 import DreamDetailPage from "./pages/DreamDetailPage";
 import AllUserStatisticsPage from "./pages/AllUserStatisticsPage";
+import CloudPage from "./pages/CloudPage";
 
 function AppRouter() {
   return (
@@ -39,6 +40,8 @@ function AppRouter() {
             path="/AllUserStatistics"
             element={<AllUserStatisticsPage />}
           ></Route>
+          <Route path="/Gallery" element={<GalleryPage />}></Route>
+          <Route path="/Cloud" element={<CloudPage />}></Route>
         </Routes>
       </BrowserRouter>
     </div>
