@@ -30,7 +30,7 @@ const CreateDreamDiaryForm: React.FC<OwnProps> = ({
   const [clicked, setClicked] = useState<boolean>(false);
   // const { KarloimageUrl, fetchData } = useKarlo();
   const [sell, setSell] = useState<boolean>(false);
-  const [isPublic, setIsPublic] = useState<boolean>(false);
+  const [isPublic, setIsPublic] = useState<boolean>(true);
   const [post, setPost] = useState<boolean>(false);
 
   const { GPTresponse, GPTloading, fetchGPTData } = useGPT();
@@ -103,15 +103,19 @@ const CreateDreamDiaryForm: React.FC<OwnProps> = ({
           </div>
           <div>
             <div className="create-dream-diary-form-label-box"></div>
-            <Toggle
-              AbleColor="#EFBCAE"
-              DisableColor="#F6E0DA"
-              ToggleType="public"
-              status={isPublic}
-              setIsPublic={setIsPublic}
-              data1="공  개"
-              data2="비공개"
-            />
+            {!sell ? (
+              <Toggle
+                AbleColor="#EFBCAE"
+                DisableColor="#F6E0DA"
+                ToggleType="public"
+                status={isPublic}
+                setIsPublic={setIsPublic}
+                data1="공  개"
+                data2="비공개"
+              />
+            ) : (
+              <div></div>
+            )}
           </div>
         </div>
       </div>
