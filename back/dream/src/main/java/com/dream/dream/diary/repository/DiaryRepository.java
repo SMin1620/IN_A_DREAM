@@ -17,4 +17,6 @@ public interface DiaryRepository extends JpaRepository<Diary, Long> {
     @Query(value = "SELECT d FROM Diary d WHERE d.owner.email = :email")
     Page<Diary> findAllByOwnerEmail(String email, Pageable pageable);
 //    Page<Diary> findAllByMemberEmail(String email, Pageable pageable);
+
+    Page<Diary> findDiariesByOpenIsTrue(Pageable pageable);
 }

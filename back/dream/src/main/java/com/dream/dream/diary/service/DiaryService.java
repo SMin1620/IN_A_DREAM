@@ -296,7 +296,7 @@ public class DiaryService {
      * 일기 목록 조회
      */
     public Page<Diary> getDiaryList(Pageable pageable) {
-        return diaryRepository.findAll(pageable);
+        return diaryRepository.findDiariesByOpenIsTrue(pageable);
     }
 
     /**
