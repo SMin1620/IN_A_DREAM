@@ -27,9 +27,9 @@ public class Exchange {
     private Member member;
 
     @NotNull
-    private int positivePoint;
+    private int positiveCoin;
     @NotNull
-    private int neutralPoint;
+    private int neutralCoin;
     @NotNull
-    private int negativePoint;
+    private int negativeCoin;
 }

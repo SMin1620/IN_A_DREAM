@@ -13,10 +13,8 @@ public class ExchangeDto {
     @AllArgsConstructor
     @Builder
     public static class ExchangeRequestDto{
-        private Long memberId;
-
-        private Point send;
-        private Point receive;
+        String kind;
+        private int coin;
     }
 
     /**
@@ -28,9 +26,9 @@ public class ExchangeDto {
     @AllArgsConstructor
     @Builder
     public static class ExchangeResponseDto{
-        private int positivePoint;
-        private int neutralPoint;
-        private int negativePoint;
+        private int positiveCoin;
+        private int neutralCoin;
+        private int negativeCoin;
     }
 
     @Getter
@@ -39,10 +37,8 @@ public class ExchangeDto {
     @AllArgsConstructor
     @Builder
     public static class Point {
-        private int positivePoint;
-
-        private int neutralPoint;
-
-        private int negativePoint;
+        private int positiveCoin;
+        private int neutralCoin;
+        private int negativeCoin;
     }
 }
