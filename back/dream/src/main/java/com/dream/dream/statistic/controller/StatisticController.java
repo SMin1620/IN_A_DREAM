@@ -69,7 +69,7 @@ public class StatisticController {
     }
 
     @Operation(summary = "잔디 깎기")
-    @GetMapping("/strict}")
+    @GetMapping("/strict")
     public BaseResponse strictStatistic(
             HttpServletRequest request
     ) {
