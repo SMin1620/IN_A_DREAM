@@ -8,17 +8,21 @@ import com.dream.dream.exception.ExceptionCode;
 import com.dream.dream.member.entity.Member;
 import com.dream.dream.member.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 @Service
 @Transactional
 @RequiredArgsConstructor
+@Slf4j
 public class ExchangeService {
 
     private final MemberRepository memberRepository;
     private final ExchangeRepository exchangeRepository;
 
     public ExchangeDto.ExchangeResponseDto exchangeEmotion(String memberEmail, ExchangeDto.ExchangeRequestDto requestBody){
+        log.info("종류: " + requestBody.getKind() + "  ㅁㄴ차ㅓ몬차ㅣ몬차ㅣㅓ몬ㅊㅁㄴㅊ");
+        log.info("코인: " + requestBody.getCoin());
         Member member = memberRepository.findByEmail(memberEmail).orElseThrow(()->new BusinessLogicException(ExceptionCode.MEMBER_NOT_FOUND));
         int coin = requestBody.getCoin();
         if(requestBody.getKind().equals("positive")){
