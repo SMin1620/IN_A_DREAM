@@ -27,7 +27,9 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.scheduling.annotation.Async;
-import org.springframework.security.concurrent.DelegatingSecurityContextExecutor;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.util.FileCopyUtils;
 import org.springframework.web.context.request.async.DeferredResult;
@@ -45,8 +47,6 @@ import java.nio.file.StandardOpenOption;
 import java.time.LocalDateTime;
 import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.Executor;
-import java.util.concurrent.Executors;
 import java.util.stream.Collectors;
 
 @Service
@@ -68,8 +68,6 @@ public class DiaryService {
 
     @Value("${app.fileupload.uploadPath}")
     String uploadPath;
-    Executor executor = Executors.newCachedThreadPool();
-    Executor delegatingExecutor = new DelegatingSecurityContextExecutor(executor);
 
     /**
      * 꿈 일기 생성 -> kafka를 통해 spark
@@ -138,13 +136,7 @@ public class DiaryService {
         kafkaProduce.setMemberId(member.getId());
         DeferredResult<BaseResponse> deferredResult = new DeferredResult<>();
         this.deferredResults.put(member.getId(), deferredResult);
-        delegatingExecutor.execute(new Runnable() {
-            @Override
-            public void run() {
-                kafkaProducerService.sendDiary(kafkaProduce);
-            }
-        });
-
+        kafkaProducerService.sendDiary(kafkaProduce);
 
         // 잔디 로그 생성
         System.out.println("=== 일기 생성 -> 잔디 깎아버렷 ===");
@@ -162,6 +154,12 @@ public class DiaryService {
 
         long memberId = message.getMemberId();
         Member member = memberRepository.findById(memberId).orElseThrow(() -> new BusinessLogicException(ExceptionCode.MEMBER_NOT_FOUND));
+
+        // 인증 객체 생성
+        Authentication auth = new UsernamePasswordAuthenticationToken(member.getEmail(), null, null);
+
+        // Security Context 설정
+        SecurityContextHolder.getContext().setAuthentication(auth);
 
         Diary diary = diaryMapper.sparkConsumeToDiary(message);
 
