@@ -21,25 +21,23 @@ public class ExchangeService {
     private final ExchangeRepository exchangeRepository;
 
     public ExchangeDto.ExchangeResponseDto exchangeEmotion(String memberEmail, ExchangeDto.ExchangeRequestDto requestBody){
-        log.info("종류: " + requestBody.getKind() + "  ㅁㄴ차ㅓ몬차ㅣ몬차ㅣㅓ몬ㅊㅁㄴㅊ");
-        log.info("코인: " + requestBody.getCoin());
         Member member = memberRepository.findByEmail(memberEmail).orElseThrow(()->new BusinessLogicException(ExceptionCode.MEMBER_NOT_FOUND));
         int coin = requestBody.getCoin();
         if(requestBody.getKind().equals("positive")){
             if(member.getPositiveCoin() - coin < 0) throw new BusinessLogicException(ExceptionCode.COIN_LACK);
-            member.setPositiveCoin(member.getPositiveCoin() - coin);
-            member.setNeutralCoin(member.getNegativeCoin() + coin);
-            member.setNegativeCoin(member.getNeutralCoin() + coin);
-        } else if (requestBody.getKind().equals("negative")) {
-            if(member.getNegativeCoin() - coin < 0) throw new BusinessLogicException(ExceptionCode.COIN_LACK);
             member.setPositiveCoin(member.getPositiveCoin() + coin);
             member.setNeutralCoin(member.getNegativeCoin() - coin);
-            member.setNegativeCoin(member.getNeutralCoin() + coin);
-        }else if (requestBody.getKind().equals("neutral")){
-            if(member.getNeutralCoin() - coin < 0) throw new BusinessLogicException(ExceptionCode.COIN_LACK);
-            member.setPositiveCoin(member.getPositiveCoin() + coin);
+            member.setNegativeCoin(member.getNeutralCoin() - coin);
+        } else if (requestBody.getKind().equals("negative")) {
+            if(member.getNegativeCoin() - coin < 0) throw new BusinessLogicException(ExceptionCode.COIN_LACK);
+            member.setPositiveCoin(member.getPositiveCoin() - coin);
             member.setNeutralCoin(member.getNegativeCoin() + coin);
             member.setNegativeCoin(member.getNeutralCoin() - coin);
+        }else if (requestBody.getKind().equals("neutral")){
+            if(member.getNeutralCoin() - coin < 0) throw new BusinessLogicException(ExceptionCode.COIN_LACK);
+            member.setPositiveCoin(member.getPositiveCoin() - coin);
+            member.setNeutralCoin(member.getNegativeCoin() - coin);
+            member.setNegativeCoin(member.getNeutralCoin() + coin);
         }else{
             throw new BusinessLogicException(ExceptionCode.EMOTION_NOT_FOUND);
         }
