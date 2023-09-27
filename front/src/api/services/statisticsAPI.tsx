@@ -1,8 +1,13 @@
 import api1 from "../instances/api1";
 
-// 월별 전체 카테고리 통계
-export const fetchMonthlyCategoryStatistics = () =>
-  api1.get(`/api/statistics/category`);
+//  키워드 통계
+export const fetchKeywordStatistics = (fromDate: string, toDate: string) =>
+  api1.get(`/api/statistic/daily`, {
+    params: {
+      from: fromDate,
+      to: toDate,
+    },
+  });
 
 // 월별 전체 감정 통계
 export const fetchAllMonthlyEmotionStatistics = () =>

@@ -12,7 +12,7 @@ const MainThird = () => {
     data: response,
     isLoading,
     error,
-  } = useAllDiary({ page: 0, size: 6 });
+  } = useAllDiary({ page: 0, size: 9 });
 
   useEffect(() => {
     if (response) {
