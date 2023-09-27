@@ -160,6 +160,9 @@ public class DiaryService {
         long memberId = message.getMemberId();
         Member member = memberRepository.findById(memberId).orElseThrow(() -> new BusinessLogicException(ExceptionCode.MEMBER_NOT_FOUND));
 
+        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        System.out.println(principal);
+
         // 인증 객체 생성
         UserDetails userDetails = userDetailsService.loadUserByUsername(member.getEmail());
 
