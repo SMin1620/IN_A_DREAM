@@ -20,8 +20,7 @@ public class Statistic {
     @Id
     private String id;
 
-    @Field(type = FieldType.Auto, name = "memberId")
-    @Column(name = "memberId")
+    @Field(type = FieldType.Auto)
     private Long memberId;
 
     @Field(type = FieldType.Auto)
