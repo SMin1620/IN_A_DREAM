@@ -11,7 +11,6 @@ const useRecomendDiary = () => {
     try {
       const response = await recommendedDiaries(diaryId);
       setRecomendDiaryList(response.data.data);
-      console.log(response);
     } catch (error: any) {
       console.error(error);
     }
