@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import cloud from "../../../assets/image/cloud.png";
 import "./styles/Card.css";
 import DateBox from "../../common/DateBox";
@@ -13,7 +13,6 @@ interface CardProps {
 
 const Card: React.FC<CardProps> = (props) => {
   const [scrollY, setScrollY] = useState<number>(props.index * 10);
-  //   const [scrollY, setScrollY] = useState<number>(props.index);
 
   // 스크롤 이벤트 핸들러
   const handleScroll = () => {

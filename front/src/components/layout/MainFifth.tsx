@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import "./styles/MainFifth.css";
 import image10 from "../../assets/image/image10.png";
 import image9 from "../../assets/image/image9.png";

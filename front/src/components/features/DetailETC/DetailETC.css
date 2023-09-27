@@ -2,6 +2,7 @@
   display: flex;
   align-items: center;
   font-family: Pretendard Variable;
+  margin-top: 3%;
 }
 
 .like-icon:hover {
@@ -9,9 +10,10 @@
 }
 
 .like-count {
-  font-size: 2vw;
+  font-size: 1.5vw;
   margin: 0 0.5vw;
-  font-weight: normal;
+  font-weight: bold;
+  font-family: "Godo";
 }
 
 .etc-buy {
@@ -24,6 +26,7 @@
   color: white;
   border-radius: 10px;
   font-weight: bold;
+  font-family: Pretendard Variable;
 }
 
 @media (max-width: 1024px) {

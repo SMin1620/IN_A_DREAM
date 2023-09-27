@@ -1,0 +1,16 @@
+.mouse-cursor {
+  position: fixed;
+  transform: translate(-50%, -50%);
+  width: 3vw;
+  height: 3vw;
+  border-radius: 50%;
+  /* backdrop-filter: blur(3px); */
+  background-color: #c3baa5;
+  transition: all 0.02s;
+  z-index: 1000;
+  mix-blend-mode: difference;
+  pointer-events: none;
+  /* background-image: url("../../assets/logo/cursor.png");
+  background-size: contain;
+  background-repeat: no-repeat; */
+}

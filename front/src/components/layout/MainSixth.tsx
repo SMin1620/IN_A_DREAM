@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import SearchBar from "../features/SearchBarComponents/SearchBar";
 import "./styles/MainSixth.css";
 import cloud from "../../assets/image/cloud.png";
@@ -30,6 +30,7 @@ const ImageLeft = styled.img<ImgProps>`
 
 const MainSixth = () => {
   const [isHovered, setIsHovered] = useState(false);
+
   return (
     <div className="main-sixth-wrapper">
       <div className="main-sixth-box">

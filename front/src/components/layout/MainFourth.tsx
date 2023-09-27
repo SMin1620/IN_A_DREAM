@@ -1,6 +1,7 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import "./styles/MainFourth.css";
 import ImageSlide from "../features/ImgSlide/ImgSlide";
+
 import { SlideSpan } from "../common/SlideSpan";
 import { useAllDiary } from "../../hooks/useAllDiary";
 import { DiaryInfo } from "../../types/ApiType";
@@ -14,6 +15,7 @@ const MainFourth = () => {
     isLoading,
     error,
   } = useAllDiary({ page: 0, size: 10 });
+
   const navigate = useNavigate();
 
   useEffect(() => {

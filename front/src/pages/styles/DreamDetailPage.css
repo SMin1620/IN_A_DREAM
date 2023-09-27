@@ -3,7 +3,7 @@
   height: 100vh;
   background-color: #f1e7d1;
   overflow-x: hidden;
-  font-family: omyu_pretty;
+  /* font-family: Pretendard Variable; */
 }
 
 .diary-detail-main {
@@ -28,11 +28,11 @@
 }
 
 .diary-image {
-  width: 60%;
+  width: auto;
   height: 80%;
   object-fit: contain;
-  border-radius: 10px;
   margin-bottom: 1rem;
+  border-radius: 2.4rem;
 }
 
 .diary-detail-left-bottom {
@@ -45,6 +45,8 @@
   width: 50%;
   display: flex;
   flex-direction: column;
+  margin-right: 2%;
+  /* border: red solid 1px; */
 }
 
 .diary-detail-right-top {
@@ -55,7 +57,12 @@
 }
 
 .diary-title {
-  font-size: 3vw;
+  font-size: 2.2vw;
+  font-family: omyu_pretty;
+  text-align: left;
+  /* display: flex; */
+  /* align-items: center; */
+  width: 70%;
 }
 
 .diary-member {
@@ -63,48 +70,69 @@
 }
 
 .diary-writer {
-  font-size: 2vw;
-  margin: 0.2rem 2rem;
+  font-size: 1rem;
+  margin: 0.2rem 0.5rem;
   padding: 0.5rem 1rem;
   background-color: #c3baa5;
   color: white;
   border: none;
   border-radius: 10px;
   text-align: center;
+  /* font-weight: lighter; */
 }
 
 .diary-buyer {
-  font-size: 2vw;
-  margin: 0.2rem 2rem;
-  background-color: #efbcae;
+  font-size: 1rem;
+  margin: 0.2rem 0.5rem;
   padding: 0.5rem 1rem;
+  background-color: #efbcae;
   color: white;
   border: none;
   border-radius: 10px;
+  /* font-weight: lighter; */
 }
 
 .diary-detail-right-bottom {
   margin-top: 3rem;
   padding: 0 1rem;
-  font-size: 2.5vw;
+  font-size: 2vw;
+  font-weight: lighter;
+  font-family: omyu_pretty;
+  text-align: left;
 }
 
-.coin-wraper {
+.coin-wrapper {
   display: flex;
-  justify-content: space-around;
+  /* justify-content: space-around; */
+  justify-content: center;
 }
 
 .coin-count-wraper {
   display: flex;
+  /* justify-content: center; */
+
   justify-content: space-around;
 }
 
-.coin-wraper > img {
-  width: 5vw;
-  margin: 0 1vw;
+.diary-coin-box {
+  display: flex;
+  width: 20%;
+  align-content: center;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+.diary-coin-box img {
+  width: 3.5vw;
+  padding-bottom: 3%;
 }
 
-.coin-count-wraper > p {
+/* .coin-wrapper > img {
+  width: 4vw;
+  margin: 0 1vw;
+} */
+
+.coin-count-wrapper > p {
   font-size: 1.5vw;
 }
 
@@ -157,13 +185,13 @@
   .diary-detail-right-top {
     margin: 0 10vw;
   }
-  .coin-wraper {
+  .coin-wrapper {
     width: 100%;
     display: flex;
     justify-content: space-around;
   }
 
-  .coin-count-wraper {
+  .coin-count-wrapper {
     width: 100%;
     display: flex;
     justify-content: space-around;

@@ -6,8 +6,8 @@ interface ButtonProps {
 }
 
 const StyledDateButton = S.div<ButtonProps>`
-// height:6vh;
-height:auto;
+height:3vw;
+// height:auto;
 width:10vw;
 color:#BCBCBC;
 padding-top:3%;
