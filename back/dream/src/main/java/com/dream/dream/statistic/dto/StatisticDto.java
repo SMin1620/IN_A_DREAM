@@ -34,8 +34,18 @@ public class StatisticDto {
     @NoArgsConstructor
     @AllArgsConstructor
     @Builder
-    public static class strictDto {
-        private Long memberId;
+    public static class strictRequestDto {
+        private Long memberid;
+        private String registDate;
+    }
+
+    @Getter
+    @Setter
+    @NoArgsConstructor
+    @AllArgsConstructor
+    @Builder
+    public static class strictResponseDto {
+        private Long id;
         private String registDate;
     }
 
