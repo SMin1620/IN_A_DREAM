@@ -16,6 +16,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -91,5 +92,14 @@ public class StatisticService {
         }
 
         return statisticDtos;
+    }
+
+    /**
+     * 잔디잔디잔디
+     */
+    public void strictStatistic(Long memberId) {
+        String currentDate = LocalDateTime.now().toString();
+
+        System.out.println("currentDate : " + currentDate.substring(0, 8));
     }
 }

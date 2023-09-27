@@ -36,7 +36,7 @@ public class StatisticDto {
     @Builder
     public static class strictDto {
         private Long memberId;
-        private LocalDateTime registDate;
+        private String registDate;
     }
 
 }

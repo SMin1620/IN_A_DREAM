@@ -15,10 +15,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
 
@@ -69,5 +66,26 @@ public class StatisticController {
                 .orElseThrow(() -> new BusinessLogicException(ExceptionCode.MEMBER_NOT_FOUND));
 
         return new BaseResponse(HttpStatus.OK, "감정 통계", statisticService.emotionStatistic(from, to));
+    }
+
+    @Operation(summary = "잔디 깎기")
+    @GetMapping("/strict/{memberId}")
+    public BaseResponse strictStatistic(
+            HttpServletRequest request,
+            @PathVariable("memberId") Long memberId
+    ) {
+        String token = jwtTokenProvider.resolveToken(request);
+        jwtTokenProvider.validateToken(token);
+
+        Authentication authentication = jwtTokenProvider.getAuthentication(token);
+        UserDetails userDetails = (UserDetails) authentication.getPrincipal();
+
+        Member member = memberRepository.findByEmail(userDetails.getUsername())
+                .orElseThrow(() -> new BusinessLogicException(ExceptionCode.MEMBER_NOT_FOUND));
+
+        if (member.getId() != memberId) throw new BusinessLogicException(ExceptionCode.MEMBER_UNAUTHORIZED);
+        statisticService.strictStatistic(memberId);
+
+        return new BaseResponse(HttpStatus.OK, "잔디 조회", null);
     }
 }
