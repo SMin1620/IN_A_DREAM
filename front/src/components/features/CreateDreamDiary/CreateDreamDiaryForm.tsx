@@ -5,6 +5,7 @@ import useKarlo from "../../../hooks/useKarlo";
 import Swal from "sweetalert2";
 import useMakeDiary from "../../../hooks/useMakeDiary";
 import useGPT from "../../../hooks/useGPT";
+import useRerollCoin from "../../../hooks/useRerollCoin";
 
 interface OwnProps {
   setDiaryImage: (value: boolean) => void;
@@ -34,6 +35,8 @@ const CreateDreamDiaryForm: React.FC<OwnProps> = ({
   const [post, setPost] = useState<boolean>(false);
 
   const { GPTresponse, GPTloading, fetchGPTData } = useGPT();
+
+  const { rerollCoin } = useRerollCoin();
 
   const handleCreateImage = async () => {
     // 로직처리 후 다이어리 이미지 넣어주기
@@ -79,6 +82,27 @@ const CreateDreamDiaryForm: React.FC<OwnProps> = ({
       postDiary(diaryData);
     }
   }, [post]);
+
+  const showCoinDeductionAlert = () => {
+    Swal.fire({
+      title: "코인 차감",
+      text: "다시 생성 시 코인이 5개씩 차감됩니다. 계속하시겠습니까?",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonText: "네",
+      cancelButtonText: "아니오",
+    }).then(async (result) => {
+      if (result.isConfirmed) {
+        try {
+          await rerollCoin();
+          handleCreateImage();
+        } catch (error) {
+          console.error(error);
+          // 이미지 생성하지 않고 에러 처리
+        }
+      }
+    });
+  };
 
   return (
     <div className="create-dream-diary-form">
@@ -129,7 +153,7 @@ const CreateDreamDiaryForm: React.FC<OwnProps> = ({
           <div>
             <button
               className="create-diary-form-button"
-              onClick={handleCreateImage}
+              onClick={showCoinDeductionAlert}
             >
               다시생성
             </button>
