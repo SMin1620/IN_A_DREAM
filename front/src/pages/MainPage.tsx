@@ -69,7 +69,14 @@ const MainPage = () => {
             left: `${x}px`,
             top: `${y}px`,
           }}
-        />
+        ></div>
+        <div
+          className="mouse-image"
+          style={{
+            left: `${x}px`,
+            top: `${y}px`,
+          }}
+        ></div>
       </div>
     </div>
   );

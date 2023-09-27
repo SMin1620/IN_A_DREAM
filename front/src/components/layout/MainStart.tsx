@@ -14,7 +14,7 @@ const MainStartDiv = styled.div`
 
 const ResponsiveTypeAnimation = styled(TypeAnimation)`
   white-space: pre-line;
-  font-size: calc(1.5em + 1vw); // dynamic font size based on viewport width
+  font-size: calc(1.5em + 1vw);
   display: inline-block;
   color: white;
   font-family: "BMDOHYEON";
@@ -44,8 +44,8 @@ const OverlayText = styled.span<OverlayProps>`
 
 const CardWrapper = styled(motion.div)<OverlayProps>`
   position: absolute;
-  top: 50%;
-  left: 50%;
+  top: 46%;
+  left: 46%;
   transform: translate(-50%, -50%);
   z-index: 4;
   width: 100vw;
@@ -81,7 +81,7 @@ const MainStart = () => {
         wrapper="span"
         speed={50}
       />
-      <OverlayText show={showOverlayText}>
+      <OverlayText {...(showOverlayText ? { show: true } : {})}>
         IN
         <br />A<br />
         DREAM
