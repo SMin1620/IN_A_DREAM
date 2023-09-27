@@ -7,9 +7,8 @@ import org.springframework.data.elasticsearch.repository.ElasticsearchRepository
 
 import java.util.List;
 
-public interface StatisticRepository extends ElasticsearchRepository<DiaryElastic, String> {
+public interface StatisticRepository extends ElasticsearchRepository<Statistic, String> {
 
-    @Query("{\"bool\": {\"must\": [{ \"term\":{\"memberId\":\"?0\"}}, {\"wildcard\": {\"registDate\": {\"value\": \"?1\"}}}]}}")
+    @Query("{\"bool\": {\"must\": [{ \"term\":{\"memberId\": \"?0\"}}, {\"wildcard\": {\"registDate\": {\"value\": \"?1*\"}}}]}}")
     List<Statistic> findByStrict(Long memberId, String registDate);
-
 }

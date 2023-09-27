@@ -21,6 +21,7 @@ import java.io.IOException;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -100,11 +101,20 @@ public class StatisticService {
     /**
      * 잔디잔디잔디
      */
-    public List<Statistic> strictStatistic(Long memberId) {
-        String currentDate = LocalDateTime.now().toString().substring(0, 8) + "*";
+    public List<StatisticDto.strictResponseDto> strictStatistic(Long memberId) {
+        String currentDate = LocalDateTime.now().toString().substring(0, 7);
 
         System.out.println("currentDate : " + currentDate);
+        List<Statistic> statistics = statisticRepository.findByStrict(memberId, currentDate);
 
-        return statisticRepository.findByStrict(memberId, currentDate);
+        List<StatisticDto.strictResponseDto> strictDtos = new ArrayList<>();
+        for (Statistic statistic : statistics) {
+            strictDtos.add(StatisticDto.strictResponseDto.builder()
+                    .id(statistic.getMemberId())
+                    .registDate(statistic.getRegistDate())
+                    .build());
+        }
+
+        return strictDtos;
     }
 }
