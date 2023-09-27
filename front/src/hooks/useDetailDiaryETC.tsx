@@ -79,17 +79,25 @@ const useDetailDiaryETC = () => {
     }
   };
 
-  const saleStatus = async (diaryId: number, sale: boolean) => {
-    try {
-      const response = await updateDiarySaleStatus(diaryId, !sale);
-      setSale(response.data.data.sale);
+  const saleStatus = async (diaryId: number, sale: boolean, open: boolean) => {
+    if (open === false) {
       Swal.fire({
-        icon: "success",
-        title: "판매여부가 변경되었습니다!",
-        text: `판매여부가 ${!sale ? "판매" : "보관으"}로 변경되었습니다.`,
+        icon: "warning",
+        title: "변경이 불가능 합니다!",
+        text: "비공개 상태일 때는 판매여부를 판매로 설정할 수 없습니다!!",
       });
-    } catch (error) {
-      console.error(error);
+    } else {
+      try {
+        const response = await updateDiarySaleStatus(diaryId, !sale);
+        setSale(response.data.data.sale);
+        Swal.fire({
+          icon: "success",
+          title: "판매여부가 변경되었습니다!",
+          text: `판매여부가 ${!sale ? "판매" : "보관으"}로 변경되었습니다.`,
+        });
+      } catch (error) {
+        console.error(error);
+      }
     }
   };
   return {

@@ -90,8 +90,12 @@ const DetailETC: React.FC<OwnProps> = ({ diaryDetail, diaryId }) => {
             data1="판  매"
             data2="보  관"
             onClick={() => {
-              if (diaryId !== undefined && sale !== undefined) {
-                saleStatus(diaryId, sale);
+              if (
+                diaryId !== undefined &&
+                sale !== undefined &&
+                open !== undefined
+              ) {
+                saleStatus(diaryId, sale, open);
               }
             }}
           />
