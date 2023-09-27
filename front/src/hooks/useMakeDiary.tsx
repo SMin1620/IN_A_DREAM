@@ -33,6 +33,7 @@ const useMakeDiary = () => {
     console.log(diaryData);
     try {
       const response = await createDiary(diaryData);
+      console.log(response);
 
       navigate(`/DreamDetail/${response.data.data.id}`);
     } catch (error) {
