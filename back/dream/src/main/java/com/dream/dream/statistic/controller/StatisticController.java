@@ -68,6 +68,25 @@ public class StatisticController {
         return new BaseResponse(HttpStatus.OK, "감정 통계", statisticService.emotionStatistic(from, to));
     }
 
+    @Operation(summary = "사용자별 감정 통계")
+    @GetMapping("/emotion/me")
+    public BaseResponse emotionMyStatistic(
+            HttpServletRequest request,
+            @RequestParam("from") String from,
+            @RequestParam("to") String to
+    ) throws IOException {
+        String token = jwtTokenProvider.resolveToken(request);
+        jwtTokenProvider.validateToken(token);
+
+        Authentication authentication = jwtTokenProvider.getAuthentication(token);
+        UserDetails userDetails = (UserDetails) authentication.getPrincipal();
+
+        Member member = memberRepository.findByEmail(userDetails.getUsername())
+                .orElseThrow(() -> new BusinessLogicException(ExceptionCode.MEMBER_NOT_FOUND));
+
+        return new BaseResponse(HttpStatus.OK, "감정 통계", statisticService.emotionMyStatistic(member.getId(), from, to));
+    }
+
     @Operation(summary = "잔디 깎기")
     @GetMapping("/strict")
     public BaseResponse strictStatistic(

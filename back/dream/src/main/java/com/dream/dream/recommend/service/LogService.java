@@ -55,7 +55,7 @@ public class LogService {
     public void strictLog(Member member) {
 
         StatisticDto.strictRequestDto strictDto = StatisticDto.strictRequestDto.builder()
-                .memberid(member.getId())
+                .memberId(member.getId())
                 .registDate(LocalDateTime.now().toString().substring(0, 10))
                 .build();
         kafkaProducerService.sendStrict(strictDto);
