@@ -35,7 +35,7 @@ public class StatisticDto {
     @AllArgsConstructor
     @Builder
     public static class strictRequestDto {
-        private Long memberid;
+        private Long memberId;
         private String registDate;
     }
 
