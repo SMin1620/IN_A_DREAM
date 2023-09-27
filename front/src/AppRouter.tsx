@@ -9,6 +9,7 @@ import SearchBar from "./components/features/SearchBarComponents/SearchBar";
 import MyPage from "./pages/MyPage";
 import Navbar from "./components/features/NavbarComponents/Navbar";
 import GalleryPage from "./pages/GalleryPage";
+import CloudPage from "./pages/CloudPage";
 
 function AppRouter() {
   return (
@@ -25,6 +26,7 @@ function AppRouter() {
           <Route path="/Signup" element={<SignUpPage />}></Route>
           <Route path="/Mypage" element={<MyPage />}></Route>
           <Route path="/Gallery" element={<GalleryPage />}></Route>
+          <Route path="/Cloud" element={<CloudPage />}></Route>
         </Routes>
       </BrowserRouter>
     </div>

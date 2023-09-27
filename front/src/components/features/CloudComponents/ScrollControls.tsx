@@ -215,20 +215,26 @@ export function ScrollControls({
   return <context.Provider value={state}>{children}</context.Provider>;
 }
 
-const ScrollCanvas = React.forwardRef(({ children }, ref) => {
-  const group = React.useRef<THREE.Group>(null!);
-  const state = useScroll();
-  const { width, height } = useThree((state) => state.viewport);
-  useFrame(() => {
-    group.current.position.x = state.horizontal
-      ? -width * (state.pages - 1) * state.offset
-      : 0;
-    group.current.position.y = state.horizontal
-      ? 0
-      : height * (state.pages - 1) * state.offset;
-  });
-  return <group ref={mergeRefs([ref, group])}>{children}</group>;
-});
+interface ScrollCanvasProps {
+  children?: React.ReactNode;
+}
+
+const ScrollCanvas = React.forwardRef<unknown, ScrollCanvasProps>(
+  ({ children }, ref) => {
+    const group = React.useRef<THREE.Group>(null!);
+    const state = useScroll();
+    const { width, height } = useThree((state) => state.viewport);
+    useFrame(() => {
+      group.current.position.x = state.horizontal
+        ? -width * (state.pages - 1) * state.offset
+        : 0;
+      group.current.position.y = state.horizontal
+        ? 0
+        : height * (state.pages - 1) * state.offset;
+    });
+    return <group ref={mergeRefs([ref, group])}>{children}</group>;
+  },
+);
 
 const ScrollHtml = React.forwardRef(
   (
