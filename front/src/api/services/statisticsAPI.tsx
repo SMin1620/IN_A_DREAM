@@ -25,3 +25,6 @@ export const fetchAllDailyEmotionStatistics = () =>
 // 월별 개인 감정 통계
 export const fetchIndividualMonthlyEmotionStatistics = (memberId: number) =>
   api1.get(`api/statistics/emotion/${memberId}/month`);
+
+// 사용자 활동기록 통계
+export const fetchStaticStrict = () => api1.get("api/statistic/strict");
