@@ -73,6 +73,7 @@ public class StatisticController {
     public BaseResponse strictStatistic(
             HttpServletRequest request
     ) {
+        System.out.println("잔디 컨트롤러");
         String token = jwtTokenProvider.resolveToken(request);
         jwtTokenProvider.validateToken(token);
 
