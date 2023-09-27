@@ -39,7 +39,7 @@ public class DiaryController {
      */
     @Operation(summary = "일기 생성")
     @PostMapping()
-    public DeferredResult<BaseResponse> diaryCreate(
+    public BaseResponse diaryCreate(
             HttpServletRequest request,
             @RequestBody DiaryDto.DiaryCreateRequestDto requestBody) {
 
@@ -47,7 +47,7 @@ public class DiaryController {
         jwtTokenProvider.validateToken(token);
         String memberEmail = jwtTokenProvider.getUserEmail(token);
 
-        return diaryService.diaryCreate(requestBody, memberEmail);
+        return (BaseResponse) diaryService.diaryCreate(requestBody, memberEmail).getResult();
     }
 
     /**
