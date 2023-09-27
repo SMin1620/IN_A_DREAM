@@ -155,12 +155,6 @@ public class DiaryService {
         long memberId = message.getMemberId();
         Member member = memberRepository.findById(memberId).orElseThrow(() -> new BusinessLogicException(ExceptionCode.MEMBER_NOT_FOUND));
 
-        // 인증 객체 생성
-        Authentication auth = new UsernamePasswordAuthenticationToken(member.getEmail(), null, null);
-
-        // Security Context 설정
-        SecurityContextHolder.getContext().setAuthentication(auth);
-
         Diary diary = diaryMapper.sparkConsumeToDiary(message);
 
         diary.setPositivePoint(Math.round(message.getPositive()));
