@@ -9,6 +9,5 @@ export const exchangeEmotionTokens = (feeling: string, pay: number) =>
     kind: feeling,
     coin: pay,
   });
-//감정 토큰 리롤
-export const rerollEmotionImage = (memberId: number) =>
-  api1.post("/api/emotion/reroll", { memberId });
+//감정 토큰 리롤시 까짐
+export const rerollEmotionImage = () => api1.get("/api/members/reroll");

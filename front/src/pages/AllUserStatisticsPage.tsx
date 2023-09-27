@@ -19,7 +19,7 @@ const AllUserStatisticsPage = () => {
   const { exchangeTokens } = useExchangeCoin();
 
   const handleClick = () => {
-    exchangeTokens("neutral", 100); // 'happy'와 '10'은 예시입니다. 실제 필요한 값을 넣어주세요.
+    exchangeTokens("negative", 100); // 'happy'와 '10'은 예시입니다. 실제 필요한 값을 넣어주세요.
   };
 
   if (isLoading) return <div>Loading...</div>;
