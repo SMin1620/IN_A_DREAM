@@ -34,8 +34,8 @@ public class StatisticController {
     @GetMapping("/daily")
     public BaseResponse keywordStatistic(
             HttpServletRequest request,
-            @RequestParam("from") String from,
-            @RequestParam("to") String to
+            @RequestParam(value = "from", required = false) String from,
+            @RequestParam(value = "to", required = false) String to
     ) throws IOException {
         String token = jwtTokenProvider.resolveToken(request);
         jwtTokenProvider.validateToken(token);
@@ -53,8 +53,8 @@ public class StatisticController {
     @GetMapping("/daily/me")
     public BaseResponse keywordMyStatistic(
             HttpServletRequest request,
-            @RequestParam("from") String from,
-            @RequestParam("to") String to
+            @RequestParam(value = "from", required = false) String from,
+            @RequestParam(value = "to", required = false) String to
     ) throws IOException {
         String token = jwtTokenProvider.resolveToken(request);
         jwtTokenProvider.validateToken(token);
@@ -72,8 +72,8 @@ public class StatisticController {
     @GetMapping("/emotion")
     public BaseResponse emotionStatistic(
             HttpServletRequest request,
-            @RequestParam("from") String from,
-            @RequestParam("to") String to
+            @RequestParam(value = "from", required = false) String from,
+            @RequestParam(value = "to", required = false) String to
     ) throws IOException {
         String token = jwtTokenProvider.resolveToken(request);
         jwtTokenProvider.validateToken(token);
@@ -91,8 +91,8 @@ public class StatisticController {
     @GetMapping("/emotion/me")
     public BaseResponse emotionMyStatistic(
             HttpServletRequest request,
-            @RequestParam("from") String from,
-            @RequestParam("to") String to
+            @RequestParam(value = "from", required = false) String from,
+            @RequestParam(value = "to", required = false) String to
     ) throws IOException {
         String token = jwtTokenProvider.resolveToken(request);
         jwtTokenProvider.validateToken(token);
@@ -102,6 +102,8 @@ public class StatisticController {
 
         Member member = memberRepository.findByEmail(userDetails.getUsername())
                 .orElseThrow(() -> new BusinessLogicException(ExceptionCode.MEMBER_NOT_FOUND));
+
+        System.out.println("fron , to " + from + " " + to);
 
         return new BaseResponse(HttpStatus.OK, "사용자별 감정 통계", statisticService.emotionMyStatistic(member.getId(), from, to));
     }

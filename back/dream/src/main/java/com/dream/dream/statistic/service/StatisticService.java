@@ -51,7 +51,11 @@ public class StatisticService {
 
         SearchRequest searchRequest = new SearchRequest(statisticDailyName);
         searchRequest.source().size(0);
-        searchRequest.source().query(QueryBuilders.rangeQuery("@timestamp").gte(from).lt(to));
+
+        if (from.equals("nullT00:00:00") && to.equals("nullT00:00:00")) {
+            searchRequest.source().query(QueryBuilders.rangeQuery("@timestamp").gte(from).lt(to));
+        }
+//        searchRequest.source().query(QueryBuilders.rangeQuery("@timestamp").gte(from).lt(to));
         searchRequest.source().aggregation(AggregationBuilders.terms("keywords").field("keyword").size(20));
 
         SearchResponse searchResponse = client.search(searchRequest, RequestOptions.DEFAULT);
@@ -79,11 +83,24 @@ public class StatisticService {
         to = to + "T00:00:00";
 
         TermQueryBuilder filter = QueryBuilders.termQuery("memberId", memberId);
-        RangeQueryBuilder rangeFilter = QueryBuilders.rangeQuery("@timestamp").gte(from).lt(to);
 
-        BoolQueryBuilder boolQueryBuilder = QueryBuilders.boolQuery()
-                .must(filter)
-                .must(rangeFilter);
+        BoolQueryBuilder boolQueryBuilder = null;
+        if (from.equals("nullT00:00:00") && to.equals("nullT00:00:00")) {
+
+            boolQueryBuilder = QueryBuilders.boolQuery()
+                    .must(filter);
+        } else {
+            RangeQueryBuilder rangeFilter = QueryBuilders.rangeQuery("@timestamp").gte(from).lt(to);
+
+            boolQueryBuilder = QueryBuilders.boolQuery()
+                    .must(filter)
+                    .must(rangeFilter);
+        }
+//        RangeQueryBuilder rangeFilter = QueryBuilders.rangeQuery("@timestamp").gte(from).lt(to);
+//
+//        BoolQueryBuilder boolQueryBuilder = QueryBuilders.boolQuery()
+//                .must(filter)
+//                .must(rangeFilter);
 
         SearchSourceBuilder sourceBuilder = new SearchSourceBuilder();
         sourceBuilder.query(boolQueryBuilder);
@@ -118,9 +135,15 @@ public class StatisticService {
         from = from + "T00:00:00";
         to = to + "T00:00:00";
 
+        System.out.println("new from, to : " + from + " " + to);
+
         SearchRequest searchRequest = new SearchRequest(diaryName);
         searchRequest.source().size(0);
-        searchRequest.source().query(QueryBuilders.rangeQuery("@timestamp").gte(from).lt(to));
+
+        if (! from.equals("nullT00:00:00") && !to.equals("nullT00:00:00")) {
+            searchRequest.source().query(QueryBuilders.rangeQuery("@timestamp").gte(from).lt(to));
+        }
+
         searchRequest.source().aggregation(AggregationBuilders.terms("keywords").field("emotion").size(20));
 
         SearchResponse searchResponse = client.search(searchRequest, RequestOptions.DEFAULT);
@@ -143,16 +166,29 @@ public class StatisticService {
     /**
      * 나의 감정 기간 통계
      */
-    public Object emotionMyStatistic(Long memberId, String from, String to) throws IOException {
+    public List<StatisticDto.emotionDto> emotionMyStatistic(Long memberId, String from, String to) throws IOException {
         from = from + "T00:00:00";
         to = to + "T00:00:00";
 
         TermQueryBuilder filter = QueryBuilders.termQuery("member_id", memberId);
-        RangeQueryBuilder rangeFilter = QueryBuilders.rangeQuery("@timestamp").gte(from).lt(to);
 
-        BoolQueryBuilder boolQueryBuilder = QueryBuilders.boolQuery()
-                .must(filter)
-                .must(rangeFilter);
+        BoolQueryBuilder boolQueryBuilder = null;
+        RangeQueryBuilder rangeFilter = null;
+        if (from.equals("nullT00:00:00") && to.equals("nullT00:00:00")) {
+
+            boolQueryBuilder = QueryBuilders.boolQuery()
+                    .must(filter);
+        } else {
+            rangeFilter = QueryBuilders.rangeQuery("@timestamp").gte(from).lt(to);
+
+            boolQueryBuilder = QueryBuilders.boolQuery()
+                    .must(filter)
+                    .must(rangeFilter);
+        }
+
+//        boolQueryBuilder = QueryBuilders.boolQuery()
+//                .must(filter)
+//                .must(rangeFilter);
 
         SearchSourceBuilder sourceBuilder = new SearchSourceBuilder();
         sourceBuilder.query(boolQueryBuilder);
