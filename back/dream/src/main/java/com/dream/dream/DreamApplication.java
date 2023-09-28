@@ -9,7 +9,7 @@ import org.springframework.scheduling.annotation.EnableAsync;
 import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.security.core.context.SecurityContextHolder;
 
-//@EnableScheduling
+@EnableScheduling
 @EnableJpaAuditing
 @EnableAsync
 @SpringBootApplication
