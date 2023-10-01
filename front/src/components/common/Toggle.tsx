@@ -34,13 +34,13 @@ const Button = S.button`
 
 const OnButton = S(Button)`
   border-radius: 1rem 0 0 1rem;
-  margin-left: 1rem;
+  margin-left: 0.1rem;
   font-size:1rem;
 `;
 
 const OffButton = S(Button)`
   border-radius: 0 1rem 1rem 0;
-  margin-right: 1rem;
+  margin-right: 0.1rem;
   font-size:1rem;
 
 `;

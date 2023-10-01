@@ -61,7 +61,7 @@ hr {
 .main-fifth-keyword-imgbox img {
   border-radius: 10px;
   width: 200px;
-  height: 150px;
+  height: 15vw;
   object-fit: cover;
   margin-left: 2%;
   margin-right: 2%;
@@ -73,6 +73,7 @@ hr {
   justify-content: center;
   color: #c3baa5;
   text-decoration: none;
+  font-size: 15vw;
 }
 .main-fifth-gamsung-title {
   font-weight: bolder;
