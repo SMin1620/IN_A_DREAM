@@ -7,6 +7,7 @@ import { useMyDiaries } from "../hooks/useMyDiary";
 import { DiaryInfo } from "../types/ApiType";
 import useMousePosition from "../hooks/useMousPosition";
 import KeywordCloud from "../components/features/KeywordCloud/KeywordCloud";
+import Statics from "../components/features/Statics/Statics";
 
 const MyPage = () => {
   const [MyDiaryData, setMyDiaryData] = useState<DiaryInfo[]>([]);
@@ -31,42 +32,33 @@ const MyPage = () => {
 
   useEffect(() => {
     if (response) {
-      console.log(response.data.data);
-      setMyDiaryData(response.data.data); // Assuming response.data.data is of type DiaryInfo[]
+      setMyDiaryData(response.data.data);
     }
-  }, [response]); // Only run this effect when 'response' changes
+  }, [response]);
 
   return (
     <div className="MyPage-main">
       <Navbar></Navbar>
       <div className="mypage-top">
         <div className="mypage-top-calendar">
-          <p>{month} 월</p>
+          <p>{month} 월 STACK</p>
           <Calendar />
         </div>
-        <KeywordCloud startDate={today} endDate={nextDay} />
-        <div className="mypage-top-keyword">키워드 존</div>
-        <div className="mypage-top-statistics">스태티스틱 존</div>
+
+        <div className="mypage-top-keyword">
+          {/* 여기 수정해야함 */}
+          {/* <KeywordCloud startDate={today} endDate={nextDay} /> */}
+        </div>
+        <div className="mypage-top-statistics">
+          <p>STATISTICS</p>
+          <Statics />
+        </div>
       </div>
       <div className="mypage-bottom">
         <div className="mypage-bottom-diaryDrr">
           <DiaryDrrList diaries={MyDiaryData} />
         </div>
       </div>
-      <div
-        className="mouse-cursor"
-        style={{
-          left: `${x}px`,
-          top: `${y}px`,
-        }}
-      ></div>
-      <div
-        className="mouse-image"
-        style={{
-          left: `${x}px`,
-          top: `${y}px`,
-        }}
-      ></div>
     </div>
   );
 };
