@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import Box from "../../common/Box";
 import { isModalOpen } from "../../../types/index";
 import S from "styled-components";
@@ -34,6 +35,7 @@ const NavbarMyModal: React.FC<isModalOpen> = ({
 
   const userInfo = useSelector((state: RootState) => state.userInfo.data);
   const { getUserInfo } = useFetchAndStoreUserInfo();
+  const navigate = useNavigate();
 
   useEffect(() => {
     getUserInfo();
