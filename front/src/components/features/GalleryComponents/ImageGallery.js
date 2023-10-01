@@ -85,7 +85,14 @@ function Frames({
   );
 }
 
-function Frame({ url, title, nickname, c = new THREE.Color(), ...props }) {
+function Frame({
+  url,
+  title,
+  content,
+  nickname,
+  c = new THREE.Color(),
+  ...props
+}) {
   const image = useRef();
   const frame = useRef();
   const [, params] = useRoute("/gallery/item/:id");
@@ -168,7 +175,7 @@ function Frame({ url, title, nickname, c = new THREE.Color(), ...props }) {
         fontSize={0.025}
       > */}
       <Html
-        position={[0.55, GOLDENRATIO, 0]}
+        position={[0.55, 1.3, 0]}
         // onOcclude={set}
         style={{
           color: "white",
@@ -177,11 +184,53 @@ function Frame({ url, title, nickname, c = new THREE.Color(), ...props }) {
           bottom: "0",
           opacity: isActive ? 1 : 0,
           fontFamily: "OTWelcomeRA",
+          textAlign: "left",
+          fontSize: "1.5rem",
+          whiteSpace: "pre-wrap",
+          width: "180px",
+          overflowWrap: "break-word",
         }}
       >
         {title}
-        <br />
-        {nickname}
+      </Html>
+
+      <Html
+        position={[0.55, 1.2, 0]}
+        // onOcclude={set}
+        style={{
+          color: "white",
+          position: "relative",
+          right: "0",
+          bottom: "0",
+          opacity: isActive ? 1 : 0,
+          fontFamily: "OTWelcomeRA",
+          textAlign: "left",
+          fontWeight: "lighter",
+          whiteSpace: "pre-wrap",
+          width: "180px",
+          overflowWrap: "break-word",
+        }}
+      >
+        {content}
+      </Html>
+      <Html
+        position={[0.55, 0.32, 0]}
+        // onOcclude={set}
+        style={{
+          color: "white",
+          position: "relative",
+          right: "0",
+          bottom: "0",
+          opacity: isActive ? 1 : 0,
+          fontFamily: "OTWelcomeRA",
+          textAlign: "left",
+          fontWeight: "lighter",
+          whiteSpace: "pre-wrap",
+          width: "180px",
+          overflowWrap: "break-word",
+        }}
+      >
+        작성자 : {nickname}
       </Html>
       {/* </Text> */}
     </group>
