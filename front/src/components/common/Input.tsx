@@ -10,7 +10,7 @@ const StyledInput = S.input<LoginInput>`
   margin-bottom: ${(props) => props.marginbottom || "2rem"};
   padding-left: 3%;
   border-radius: 5px;
-  font-size: 1.5em;
+  font-size: 1rem;
 `;
 
 const Input: React.FC<LoginInput> = ({

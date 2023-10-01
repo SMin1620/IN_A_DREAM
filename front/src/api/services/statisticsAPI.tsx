@@ -22,9 +22,9 @@ export const fetchEmotionStatistics = (fromDate: string, toDate: string) =>
 export const fetchAllDailyEmotionStatistics = () =>
   api1.get(`/api/statistics/emotion/all/today`);
 
-// 월별 개인 감정 통계
-export const fetchIndividualMonthlyEmotionStatistics = (memberId: number) =>
-  api1.get(`api/statistics/emotion/${memberId}/month`);
+// 개인 감정 통계
+export const fetchIndividualEmotionStatistics = () =>
+  api1.get("api/statistic/emotion/me");
 
 // 사용자 활동기록 통계
 export const fetchStaticStrict = () => api1.get("api/statistic/strict");
