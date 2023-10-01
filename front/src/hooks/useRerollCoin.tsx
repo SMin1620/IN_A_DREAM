@@ -14,6 +14,8 @@ const useRerollCoin = () => {
         title: "코인없음",
         text: `우하하하 코인이 모잘라요. 우하하`,
       });
+
+      throw error;
     }
   };
   return { rerollCoin };
