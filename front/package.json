@@ -24,6 +24,8 @@
     "@types/three": "^0.155.1",
     "@use-gesture/react": "^10.3.0",
     "axios": "^1.5.0",
+    "chart.js": "^4.4.0",
+    "chartjs-chart-wordcloud": "^4.3.0",
     "d3-cloud": "^1.2.7",
     "echarts": "^5.4.3",
     "echarts-for-react": "^3.0.2",
