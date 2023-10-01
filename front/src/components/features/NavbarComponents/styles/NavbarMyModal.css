@@ -5,7 +5,11 @@
   align-content: center;
   justify-content: center;
   align-items: center;
+  cursor: pointer;
 }
 .coin-box img {
-  width: 40%;
+  width: 3.5rem;
+}
+.coin-box-count {
+  width: 3rem;
 }

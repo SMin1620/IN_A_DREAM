@@ -5,6 +5,7 @@ import neutral from "../../../assets/coin/neutral.png";
 import negative from "../../../assets/coin/negative.png";
 import Button from "../../common/Button2";
 import Input from "../../common/Input";
+import useExchangeCoin from "../../../hooks/useExchangeCoin";
 
 type CoinType = "positive" | "neutral" | "negative";
 
@@ -20,8 +21,11 @@ interface CoinInfo {
     imgSrc: string;
   };
 }
+interface ExchangeCoinProps {
+  closeModal: () => void;
+}
 
-const ExchangeCoin = () => {
+const ExchangeCoin: React.FC<ExchangeCoinProps> = ({ closeModal }) => {
   const [selectCoin, setSelectCoin] = useState<
     "positive" | "neutral" | "negative" | null
   >(null);
@@ -29,6 +33,11 @@ const ExchangeCoin = () => {
   const [coin, setCoin] = useState(0);
   const handleCoin = (e: React.ChangeEvent<HTMLInputElement>) => {
     setCoin(parseFloat(e.target.value));
+  };
+  const { exchangeTokens } = useExchangeCoin();
+  const handleExchangeCoin = () => {
+    exchangeTokens(selectCoin as CoinType, coin);
+    closeModal();
   };
 
   return (
@@ -89,6 +98,8 @@ const ExchangeCoin = () => {
             </div>
 
             <div className="exchange-change-coin">
+              <h1>개수를 입력하세요.</h1>
+
               <img
                 src={COIN_INFO[selectCoin].imgSrc}
                 alt={`${COIN_INFO[selectCoin].name}`}
@@ -96,7 +107,7 @@ const ExchangeCoin = () => {
               />
               <Input
                 type="number"
-                // placeholder="개수를 입력해주세요."
+                placeholder="0"
                 onChange={handleCoin}
                 width="8vw"
               ></Input>
@@ -110,7 +121,7 @@ const ExchangeCoin = () => {
                 width="6vw"
                 height="3vw"
                 borderradius="10px"
-                // onClick={() => setStep(2)}
+                onClick={handleExchangeCoin}
               >
                 교환하기
               </Button>
