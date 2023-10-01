@@ -28,6 +28,7 @@ const GalleryPage = () => {
             rotation: [0, 0, 0],
             url: SERVER_URL + "/" + diaries[0].image,
             title: diaries[0].title,
+            content: diaries[0].content,
             nickname: diaries[0].member.nickname,
           },
           {
@@ -35,6 +36,7 @@ const GalleryPage = () => {
             rotation: [0, 0, 0],
             url: SERVER_URL + "/" + diaries[1].image,
             title: diaries[1].title,
+            content: diaries[1].content,
             nickname: diaries[1].member.nickname,
           },
           // Left
@@ -43,6 +45,7 @@ const GalleryPage = () => {
             rotation: [0, Math.PI / 2.5, 0],
             url: SERVER_URL + "/" + diaries[2].image,
             title: diaries[2].title,
+            content: diaries[2].content,
             nickname: diaries[2].member.nickname,
           },
           {
@@ -50,6 +53,7 @@ const GalleryPage = () => {
             rotation: [0, Math.PI / 2.5, 0],
             url: SERVER_URL + "/" + diaries[3].image,
             title: diaries[3].title,
+            content: diaries[3].content,
             nickname: diaries[3].member.nickname,
           },
           {
@@ -57,6 +61,7 @@ const GalleryPage = () => {
             rotation: [0, Math.PI / 2.5, 0],
             url: SERVER_URL + "/" + diaries[4].image,
             title: diaries[4].title,
+            content: diaries[4].content,
             nickname: diaries[4].member.nickname,
           },
           // Right
@@ -65,6 +70,7 @@ const GalleryPage = () => {
             rotation: [0, -Math.PI / 2.5, 0],
             url: SERVER_URL + "/" + diaries[5].image,
             title: diaries[5].title,
+            content: diaries[5].content,
             nickname: diaries[5].member.nickname,
           },
           {
@@ -72,6 +78,7 @@ const GalleryPage = () => {
             rotation: [0, -Math.PI / 2.5, 0],
             url: SERVER_URL + "/" + diaries[6].image,
             title: diaries[6].title,
+            content: diaries[6].content,
             nickname: diaries[6].member.nickname,
           },
           {
@@ -79,6 +86,7 @@ const GalleryPage = () => {
             rotation: [0, -Math.PI / 2.5, 0],
             url: SERVER_URL + "/" + diaries[7].image,
             title: diaries[7].title,
+            content: diaries[7].content,
             nickname: diaries[7].member.nickname,
           },
         ]

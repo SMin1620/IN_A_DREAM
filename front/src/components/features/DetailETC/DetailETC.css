@@ -37,8 +37,7 @@
 
   .etc-buy {
     margin: 1rem 0;
-    width: 80%;
+    /* width: 100%; */
     border-radius: 15px;
-    font-size: 2.3vw;
   }
 }

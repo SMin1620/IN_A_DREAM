@@ -68,10 +68,11 @@ const MainFourth = () => {
                 >
                   <img
                     style={{
-                      width: index % 2 === 0 ? "400px" : "300px",
-                      height: index % 2 === 0 ? "300px" : "400px",
-                      borderRadius: 40,
+                      width: index % 2 === 0 ? "360px" : "300px",
+                      height: index % 2 === 0 ? "300px" : "340px",
+                      borderRadius: "40px",
                       margin: "40px",
+                      objectFit: "cover",
                     }}
                     onClick={() => navigate(`/DreamDetail/${diary.id}`)}
                     src={`${SERVER_URL}/${diary.image}`}

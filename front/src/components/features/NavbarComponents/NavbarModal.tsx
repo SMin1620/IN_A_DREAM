@@ -4,7 +4,6 @@ import Box from "../../common/Box";
 import { isModalOpen } from "../../../types/index";
 import { SlideSpan } from "../../common/SlideSpan";
 import SearchBar from "../SearchBarComponents/SearchBar";
-import { Link } from "react-router-dom";
 
 const NavbarModal: React.FC<isModalOpen> = ({ isNavbarModalOpen, onClose }) => {
   const [isOpen, setIsOpen] = useState(false);
@@ -31,39 +30,40 @@ const NavbarModal: React.FC<isModalOpen> = ({ isNavbarModalOpen, onClose }) => {
       top={15}
       textwrap="nowrap"
     >
-      <Link to={`/gallery/positivePoint`} className="navbar-gallery">
+      <a className="navbar-mypage" href="/mypage">
         <SlideSpan
           startposition={-100}
           endposition={100}
           speed={40}
           width="90%"
         >
-          <span className="navbar-font1">GALLERY</span>
+          <span className="navbar-font1">MYPAGE</span>
           <span>{"   "}</span>
-          <span className="navbar-font2">GALLERY</span>
+          <span className="navbar-font2">MYPAGE</span>
           <span>{"    "}</span>
-          <span className="navbar-font6">GALLERY</span>
+          <span className="navbar-font6">MYPAGE</span>
           <span>{"    "}</span>
-          <span className="navbar-font8">GALLERY</span>
+          <span className="navbar-font8">MYPAGE</span>
           <span>{"    "}</span>
-          <span className="navbar-font3">GALLERY</span>
+          <span className="navbar-font3">MYPAGE</span>
           <span>{"    "}</span>
-          <span className="navbar-font1">GALLERY</span>
+          <span className="navbar-font1">MYPAGE</span>
           <span>{"   "}</span>
-          <span className="navbar-font5">GALLERY</span>
+          <span className="navbar-font5">MYPAGE</span>
           <span>{"    "}</span>
-          <span className="navbar-font4">GALLERY</span>
+          <span className="navbar-font4">MYPAGE</span>
           <span>{"    "}</span>
-          <span className="navbar-font5">GALLERY</span>
+          <span className="navbar-font5">MYPAGE</span>
           <span>{"    "}</span>
-          <span className="navbar-font2">GALLERY</span>
+          <span className="navbar-font2">MYPAGE</span>
           <span>{"    "}</span>
-          <span className="navbar-font1">GALLERY</span>
+          <span className="navbar-font1">MYPAGE</span>
           <span>{"    "}</span>
-          <span className="navbar-font4">GALLERY</span>
+          <span className="navbar-font4">MYPAGE</span>
           <span>{"    "}</span>
         </SlideSpan>
-      </Link>
+      </a>
+
       <a className="navbar-shop" href="/DreamShop">
         <SlideSpan startposition={10} endposition={-120} speed={38} width="90%">
           <span className="navbar-font6">SHOP</span>

@@ -35,8 +35,6 @@ const DetailETC: React.FC<OwnProps> = ({ diaryDetail, diaryId }) => {
     setLikeCount(diaryDetail.likeCount);
   }, [diaryDetail]);
 
-  console.log(diaryDetail, "diaryDetail");
-
   return (
     <div className="detail-etc">
       {isLiked ? (

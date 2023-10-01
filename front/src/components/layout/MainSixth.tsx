@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState } from "react";
 import SearchBar from "../features/SearchBarComponents/SearchBar";
 import "./styles/MainSixth.css";
 import cloud from "../../assets/image/cloud.png";
@@ -7,9 +7,8 @@ import sleep2 from "../../assets/image/sleep2.png";
 import { styled } from "styled-components";
 
 interface ImgProps {
-  ishoverd: boolean;
+  $isHovered: boolean;
 }
-
 const ImageRight = styled.img<ImgProps>`
   position: relative;
   width: 15vw;
@@ -17,7 +16,7 @@ const ImageRight = styled.img<ImgProps>`
   left: 10%;
   transition: transform 0.3s ease-in-out;
   transform: ${(props) =>
-    props.ishoverd ? "rotate(-30deg)" : "rotate(-20deg)"};
+    props.$isHovered ? "rotate(-30deg)" : "rotate(-20deg)"};
 `;
 const ImageLeft = styled.img<ImgProps>`
   position: relative;
@@ -25,11 +24,12 @@ const ImageLeft = styled.img<ImgProps>`
   border-radius: 20px;
   right: 10%;
   transition: transform 0.3s ease-in-out;
-  transform: ${(props) => (props.ishoverd ? "rotate(30deg)" : "rotate(20deg)")};
+  transform: ${(props) =>
+    props.$isHovered ? "rotate(30deg)" : "rotate(20deg)"};
 `;
 
 const MainSixth = () => {
-  const [isHovered, setIsHovered] = useState(false);
+  const [isHovered, setIsHovered] = useState<boolean>(false);
 
   return (
     <div className="main-sixth-wrapper">
@@ -51,7 +51,7 @@ const MainSixth = () => {
             src={sleep1}
             alt=""
             // className="main-sixth-right-img-right"
-            ishoverd={isHovered}
+            $isHovered={isHovered}
           />
           <img
             src={cloud}
@@ -64,7 +64,7 @@ const MainSixth = () => {
             alt=""
             // style={{ width: "15rem" }}
             // className="main-sixth-right-img-left"
-            ishoverd={isHovered}
+            $isHovered={isHovered}
           />
         </div>
       </div>

@@ -69,7 +69,7 @@ const MainFifth = () => {
         <Link to={`/gallery/neutralPoint`} className="main-fifth-box">
           {/* <div className="main-fifth-box"> */}
           <img src={image4} alt="" />
-          <span>BALANCED</span>
+          <span>SOSO</span>
           <img src={image8} alt="" />
         </Link>
 
