@@ -30,6 +30,9 @@
 
 .create-dream-diary-left-top {
   height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .create-dream-diary-left-top > img {
@@ -51,7 +54,7 @@
 
 .create-dream-diary-date-box {
   /* width: 15vw; */
-  margin-left: auto;
+  /* margin-left: auto; */
   /* height: 3rem; */
   /* font-size: 2vw; */
   /* background-color: #0f006a; */
@@ -60,7 +63,7 @@
   /* border-radius: 10px; */
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-end;
   margin-bottom: 1rem;
 }
 
@@ -95,5 +98,9 @@
     width: 100%;
     height: 100%;
     object-fit: contain;
+  }
+
+  .create-dream-diary-date-box {
+    justify-content: center;
   }
 }

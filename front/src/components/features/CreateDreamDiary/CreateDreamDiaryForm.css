@@ -112,4 +112,13 @@
   .create-dream-diary-form-top > input {
     width: 40vw;
   }
+  .create-diary-form-button {
+    border-radius: 1srem;
+  }
+  .create-dream-diary-form-textarea {
+    font-size: 1.5rem;
+  }
+  .create-dream-diary-form-top > input {
+    font-size: 1.7rem;
+  }
 }
