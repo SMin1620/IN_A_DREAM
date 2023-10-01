@@ -15,6 +15,8 @@ body {
 }
 `;
 
+// imageGallery 페이지 참고
+
 const NUM_IMAGES = 50; // 원하는 이미지 개수
 const MAX_POSITION = 3; // 이미지가 배치될 수 있는 최대 위치
 const MAX_POSITION_WIDTH = 150;

@@ -1,6 +1,10 @@
-import { useEffect } from "react";
+import { useState, useEffect } from "react";
 import clImage from "../assets/background/CLcloud.jpg";
 import Cloud from "../components/features/CloudComponents/Cloud";
+import { useAllDiary } from "../hooks/useAllDiary";
+import { DiaryInfo } from "../types/ApiType";
+import { useParams } from "react-router-dom";
+import { SERVER_URL } from "../constants";
 
 interface CloudProps {
   children?: React.ReactNode;
@@ -30,6 +34,16 @@ function Overlay({ children }: CloudProps) {
 }
 
 function CloudPage() {
+  const [diaries, setDiaries] = useState<DiaryInfo[]>([]);
+  const { sortKey } = useParams<string>();
+  const validSortKey = sortKey || "";
+
+  const {
+    data: response,
+    isLoading,
+    error,
+  } = useAllDiary({ page: 0, size: 8, sort: ["likeCount", validSortKey] });
+
   useEffect(() => {
     // 페이지가 로드되면 뷰포트 중앙으로 스크롤
     const centerOfWidth =
@@ -38,6 +52,14 @@ function CloudPage() {
       document.documentElement.scrollHeight / 2 - window.innerHeight / 2;
     window.scrollTo(centerOfWidth, centerOfHeight);
   }, []);
+
+  useEffect(() => {
+    if (response && response.data && response.data.data) {
+      // console.log(response);
+      // console.log(response.data.data);
+      setDiaries(response.data.data);
+    }
+  }, [response]);
 
   return (
     <>
