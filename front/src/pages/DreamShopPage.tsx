@@ -2,25 +2,42 @@ import React, { useEffect, useState } from "react";
 
 import CardList from "../components/features/Card/CardList";
 import { DiaryInfo } from "../types/ApiType";
-import { useAllDiary } from "../hooks/useAllDiary";
+import { useAllDiary, useInfiniteAllDiary } from "../hooks/useAllDiary";
+import Navbar from "../components/features/NavbarComponents/Navbar";
+import useMousePosition from "../hooks/useMousPosition";
 
 const DreamShopPage = () => {
   const [diaries, setDiaries] = useState<DiaryInfo[]>([]);
-  const {
-    data: response,
-    isLoading,
-    error,
-  } = useAllDiary({ page: 0, size: 9 });
+  const { data, isLoading, error, fetchNextPage, hasNextPage } =
+    useInfiniteAllDiary({ page: diaries.length / 100, size: 100 });
 
   useEffect(() => {
-    if (response) {
-      setDiaries(response.data.data);
+    if (data && data.pages[data.pages.length - 1]) {
+      setDiaries((prevData) => [
+        ...prevData,
+        ...data.pages[data.pages.length - 1].data.data,
+      ]);
     }
-  }, [response]);
+  }, [data]);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      if (
+        window.innerHeight + document.documentElement.scrollTop !==
+          document.documentElement.offsetHeight ||
+        !hasNextPage
+      )
+        return;
+      fetchNextPage();
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, [fetchNextPage, hasNextPage]);
 
   return (
     <div>
-      DreamShopPage
+      <Navbar />
       <div>{diaries && <CardList diaries={diaries} />}</div>
     </div>
   );
