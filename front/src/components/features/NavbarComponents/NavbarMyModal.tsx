@@ -50,6 +50,8 @@ const NavbarMyModal: React.FC<isModalOpen> = ({
       }, 1000);
     }
   }, [isNavbarModalOpen]);
+
+  const closeModal = () => setIsModalOpen(false);
   return (
     <Box
       position="fixed"
@@ -59,19 +61,25 @@ const NavbarMyModal: React.FC<isModalOpen> = ({
       bottom={1}
       open={isOpen}
     >
-      {isModalOpen && <ExchangeCoin />}
+      {isModalOpen && <ExchangeCoin closeModal={closeModal} />}
       <div className="coin-box">
         <CoinComponent>
           <img src={positive} alt="positiveCoin" />
-          <span>{userInfo && userInfo.positiveCoin}</span>
+          <span className="coin-box-count">
+            {userInfo && userInfo.positiveCoin}
+          </span>
         </CoinComponent>
         <CoinComponent>
           <img src={neutral} alt="neutralCoin" />
-          <span>{userInfo && userInfo.neutralCoin}</span>
+          <span className="coin-box-count">
+            {userInfo && userInfo.neutralCoin}
+          </span>
         </CoinComponent>
         <CoinComponent>
           <img src={negative} alt="negativeCoin" />
-          <span>{userInfo && userInfo.negativeCoin}</span>
+          <span className="coin-box-count">
+            {userInfo && userInfo.negativeCoin}
+          </span>
         </CoinComponent>
         <CoinComponent>
           <span onClick={() => setIsModalOpen(true)}> 코인교환 &gt;&gt;</span>
