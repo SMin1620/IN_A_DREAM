@@ -1,0 +1,91 @@
+.exchange-wrapper {
+  position: fixed;
+  padding-top: 10%;
+  bottom: 400%;
+
+  /* right: 50%; */
+  /* left: calc(50% + 4rem); */
+  left: 50%;
+  /* transform: translate(-50%, -50%); */
+  width: 50vw;
+  height: 55vh;
+  background-color: black;
+  border: 0.4rem dashed #fff;
+  border-radius: 20px;
+  z-index: 50;
+  padding: 20px;
+  color: #fff;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.exchange-wrapper h1 {
+  font-size: 1.6vw;
+  padding-top: 8%;
+}
+.exchange-coin-box {
+  display: flex;
+  justify-content: space-evenly;
+  padding-top: 5%;
+  padding-bottom: 10%;
+}
+
+.exchange-button {
+  position: absolute;
+  bottom: 5%;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.exchange-coin {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.exchange-coin-selected {
+  border: #fff dashed 0.25rem;
+  border-radius: 50%;
+  width: 6vw;
+  height: 6vw;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  margin-bottom: 15%;
+}
+.exchange-coin-nonselected {
+  display: flex;
+  width: 6vw;
+  height: 6vw;
+  align-items: center;
+  justify-content: center;
+  opacity: 0.3;
+  flex-direction: column;
+  margin-bottom: 15%;
+}
+
+.exchange-result {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+}
+.exchange-rest-coin {
+  display: flex;
+  align-items: center;
+  height: 10vw;
+}
+.exchange-rest-coin p {
+  width: 3vw;
+  font-size: 1.6vw;
+}
+
+.exchange-change-coin {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-evenly;
+  height: 18vw;
+}

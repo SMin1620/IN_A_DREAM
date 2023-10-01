@@ -8,6 +8,8 @@ const StyledInput = S.input<LoginInput>`
   width: ${(props) => props.width || "99%"};
   border: ${(props) => props.border || "1px solid black"};
   margin-bottom: ${(props) => props.marginbottom || "2rem"};
+  border-radius: 5px;
+  font-size: 1.5em;
 `;
 
 const Input: React.FC<LoginInput> = ({
