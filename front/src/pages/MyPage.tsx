@@ -5,10 +5,24 @@ import "./styles/Mypage.css";
 import DiaryDrrList from "../components/features/DiaryDrrList/DiaryDrrList";
 import { useMyDiaries } from "../hooks/useMyDiary";
 import { DiaryInfo } from "../types/ApiType";
+import useMousePosition from "../hooks/useMousPosition";
+import KeywordCloud from "../components/features/KeywordCloud/KeywordCloud";
 
 const MyPage = () => {
   const [MyDiaryData, setMyDiaryData] = useState<DiaryInfo[]>([]);
-  const date = new Date();
+  const { x, y } = useMousePosition();
+
+  let now = new Date();
+  let year = now.getFullYear();
+  let month = ("0" + (now.getMonth() + 1)).slice(-2);
+  let day = ("0" + now.getDate()).slice(-2);
+  let today = year + "-" + month + "-" + day;
+
+  let tomorrow = new Date(now.setDate(now.getDate() + 1));
+  let tomorrowYear = tomorrow.getFullYear();
+  let tomorrowMonth = ("0" + (tomorrow.getMonth() + 1)).slice(-2);
+  let tomorrowDay = ("0" + tomorrow.getDate()).slice(-2);
+  let nextDay = tomorrowYear + "-" + tomorrowMonth + "-" + tomorrowDay;
   const {
     data: response,
     isLoading,
@@ -27,9 +41,10 @@ const MyPage = () => {
       <Navbar></Navbar>
       <div className="mypage-top">
         <div className="mypage-top-calendar">
-          <p>{date.getMonth() + 1} 월</p>
+          <p>{month} 월</p>
           <Calendar />
         </div>
+        <KeywordCloud startDate={today} endDate={nextDay} />
         <div className="mypage-top-keyword">키워드 존</div>
         <div className="mypage-top-statistics">스태티스틱 존</div>
       </div>
@@ -38,6 +53,20 @@ const MyPage = () => {
           <DiaryDrrList diaries={MyDiaryData} />
         </div>
       </div>
+      <div
+        className="mouse-cursor"
+        style={{
+          left: `${x}px`,
+          top: `${y}px`,
+        }}
+      ></div>
+      <div
+        className="mouse-image"
+        style={{
+          left: `${x}px`,
+          top: `${y}px`,
+        }}
+      ></div>
     </div>
   );
 };

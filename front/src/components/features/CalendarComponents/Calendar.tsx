@@ -21,9 +21,6 @@ const Calendar = () => {
   }, []);
 
   const { getStrict, userActivity } = useStatistic();
-
-  console.log(userActivity);
-
   let daysArray = [];
 
   for (let i = 0; i < startDayOfMonth; i++) {
@@ -35,7 +32,6 @@ const Calendar = () => {
       date.getMonth() + 1
     ).padStart(2, "0")}-${String(i).padStart(2, "0")}`;
 
-    // console.log(dayString);
     if (userActivity.includes(dayString)) {
       daysArray.push(
         <div

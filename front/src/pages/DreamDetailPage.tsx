@@ -12,11 +12,13 @@ import { SERVER_URL } from "../constants";
 import { padNumber } from "../hooks";
 
 import RecommendedDiary from "../components/features/RecommendedDiary/RecommendedDiary";
+import useMousePosition from "../hooks/useMousPosition";
 
 const DreamDetailPage = () => {
   const { id } = useParams<{ id: string }>();
   const numberId = id ? parseInt(id) : undefined;
   const { getDiaryDetail, diaryDetail } = useDetailDiary();
+  const { x, y } = useMousePosition();
 
   useEffect(() => {
     if (numberId !== undefined) {
@@ -88,6 +90,20 @@ const DreamDetailPage = () => {
         </div>
       </div>
       {numberId !== undefined && <RecommendedDiary diaryId={numberId} />}
+      <div
+        className="mouse-cursor"
+        style={{
+          left: `${x}px`,
+          top: `${y}px`,
+        }}
+      ></div>
+      <div
+        className="mouse-image"
+        style={{
+          left: `${x}px`,
+          top: `${y}px`,
+        }}
+      ></div>
     </div>
   );
 };

@@ -1,10 +1,11 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import Navbar from "../components/features/NavbarComponents/Navbar";
 import "./styles/CreateDreamDiaryPage.css";
 import CreateDreamDiaryForm from "../components/features/CreateDreamDiary/CreateDreamDiaryForm";
 import DateForm from "../components/common/DateForm";
 import { border } from "./../../node_modules/@mui/system/index.d";
 import useKarlo from "../hooks/useKarlo";
+import useMousePosition from "../hooks/useMousPosition";
 
 const CreateDreamDiaryPage = () => {
   const [sell, setSell] = useState<boolean>(false);
@@ -12,6 +13,7 @@ const CreateDreamDiaryPage = () => {
   const [imageUrl, setImageUrl] = useState<string | null>(null);
 
   const { KarloimageUrl, fetchData, Karloloading } = useKarlo();
+  const { x, y } = useMousePosition();
   console.log(Karloloading);
   console.log("KarloloadingKarloloadingKarloloading");
 
@@ -45,6 +47,20 @@ const CreateDreamDiaryPage = () => {
           />
         </div>
       </div>
+      <div
+        className="mouse-cursor"
+        style={{
+          left: `${x}px`,
+          top: `${y}px`,
+        }}
+      ></div>
+      <div
+        className="mouse-image"
+        style={{
+          left: `${x}px`,
+          top: `${y}px`,
+        }}
+      ></div>
     </div>
   );
 };
