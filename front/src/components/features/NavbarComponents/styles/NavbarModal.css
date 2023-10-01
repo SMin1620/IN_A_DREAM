@@ -1,4 +1,4 @@
-.navbar-gallery {
+.navbar-mypage {
   display: flex;
   position: absolute;
   top: 5%;
@@ -61,7 +61,7 @@
 
 .navbar-font1 {
   font-family: PartialSansKR-Regular;
-  font-size: 3.4rem;
+  font-size: 3.2rem;
   margin-right: 2%;
 }
 
