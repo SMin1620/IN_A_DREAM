@@ -10,6 +10,9 @@ const StyledButton = S.button<LoginButton>`
   margin: ${(props) => props.margin};
   color: ${(props) => props.color || "white"};
   border-radius: ${(props) => props.borderradius};
+  font-family:"Pretendard Variable";
+  font-weight:bold;
+  font-size: 1.2rem;
 
   &:hover {
     cursor: pointer;
@@ -31,6 +34,7 @@ const Button2: React.FC<LoginButton> = ({
   margin,
   backgroundcolor,
   color,
+  borderradius,
 }) => {
   return (
     <StyledButton
@@ -41,6 +45,7 @@ const Button2: React.FC<LoginButton> = ({
       margin={margin}
       backgroundcolor={backgroundcolor}
       color={color}
+      borderradius={borderradius}
     >
       {children}
     </StyledButton>

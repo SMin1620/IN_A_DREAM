@@ -11,9 +11,7 @@ import useFetchAndStoreUserInfo from "../../../hooks/useFetchAndStoreUserInfo";
 
 import { RootState } from "../../../stores/stores";
 import { useSelector } from "react-redux";
-
-// import { useSelector } from "react-redux";
-// import { RootState } from "../../../types/ApiType";
+import ExchangeCoin from "../ExchageCoin/ExchangeCoin";
 
 interface CoinPropsComponent {}
 
@@ -33,6 +31,8 @@ const NavbarMyModal: React.FC<isModalOpen> = ({
   onClose,
 }) => {
   const [isOpen, setIsOpen] = useState(false);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
   const userInfo = useSelector((state: RootState) => state.userInfo.data);
   const { getUserInfo } = useFetchAndStoreUserInfo();
   const navigate = useNavigate();
@@ -59,6 +59,7 @@ const NavbarMyModal: React.FC<isModalOpen> = ({
       bottom={1}
       open={isOpen}
     >
+      {isModalOpen && <ExchangeCoin />}
       <div className="coin-box">
         <CoinComponent>
           <img src={positive} alt="positiveCoin" />
@@ -73,8 +74,7 @@ const NavbarMyModal: React.FC<isModalOpen> = ({
           <span>{userInfo && userInfo.negativeCoin}</span>
         </CoinComponent>
         <CoinComponent>
-          <span onClick={() => navigate("/Mypage")}>바로가기 &gt;&gt;</span>
-          {/* <img src={gotomy} alt="gotomy" /> */}
+          <span onClick={() => setIsModalOpen(true)}> 코인교환 &gt;&gt;</span>
         </CoinComponent>
       </div>
     </Box>
