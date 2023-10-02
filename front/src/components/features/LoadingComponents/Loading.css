@@ -1,0 +1,15 @@
+@keyframes spin {
+  100% {
+    transform: rotate(360deg);
+  }
+}
+.loading-wrapper {
+  display: inline-block;
+  width: 10vw;
+  height: 10vw;
+  border: 2vw solid #c2ac79;
+  border-color: #c2ac79 transparent transparent;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  margin-top: 20%;
+}

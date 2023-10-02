@@ -10,7 +10,7 @@ interface CircleGraphProps {
   data: PieData[];
 }
 
-const COLORS = ["#0088FE", "#00C49F", "#FFBB28"];
+const COLORS = ["#FF8080", "#BDBDBD", "#9180FF"];
 
 const CircleGraph: React.FC<CircleGraphProps> = ({ data }) => {
   return (
@@ -20,15 +20,15 @@ const CircleGraph: React.FC<CircleGraphProps> = ({ data }) => {
         isAnimationActive={false}
         data={data}
         cx="50%"
-        cy="50%"
-        outerRadius={80}
+        cy="40%"
+        outerRadius={100}
         fill="#8884d8"
       >
         {data.map((entry, index) => (
           <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
         ))}
 
-        <LabelList dataKey="name" position="inside" />
+        <LabelList dataKey="name" position="outside" />
       </Pie>
     </PieChart>
   );

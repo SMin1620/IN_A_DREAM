@@ -1,10 +1,10 @@
 .MainFourth {
-  height: 100vh;
+  height: 140vh;
   color: black;
 }
 
 .FourthTitleBox {
-  height: 20%;
+  height: 10%;
 }
 .SeeMoreButtonBox {
   height: 5%;
@@ -14,15 +14,18 @@
 }
 .StatisticsKeyword {
   width: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .StatisticsBox {
-  height: 30%;
+  height: 50%;
   display: flex;
 }
 
 .MovigImgBox {
-  height: 45%;
+  height: 35%;
 }
 
 .MovingImgs {

@@ -1,6 +1,5 @@
 import React from "react";
 import WordCloud from "react-d3-cloud";
-
 import { useKeywordStatistics } from "../../../hooks/useKeywordStatistics";
 
 interface Item {
@@ -18,7 +17,7 @@ const KeywordCloud: React.FC<KeywordCloudProps> = ({ startDate, endDate }) => {
   const data = response.data?.data?.data;
 
   const transformData = (data: Item[]) =>
-    data?.map(({ keyword, count }) => ({ text: keyword, value: count * 200 }));
+    data?.map(({ keyword, count }) => ({ text: keyword, value: count * 100 }));
 
   const words = transformData(data);
 
@@ -27,8 +26,22 @@ const KeywordCloud: React.FC<KeywordCloudProps> = ({ startDate, endDate }) => {
   }
 
   return (
-    <div style={{ backgroundColor: "#eee" }}>
-      <WordCloud data={words} />
+    <div
+      style={{
+        backgroundColor: "#eee",
+        width: "70%",
+        height: "70%",
+        overflow: "hidden",
+        borderRadius: "20px",
+      }}
+    >
+      <WordCloud
+        data={words}
+        font="Times"
+        fontWeight="bold"
+        spiral="rectangular"
+        padding={10}
+      />
     </div>
   );
 };

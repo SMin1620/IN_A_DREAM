@@ -157,7 +157,6 @@
   }
 
   .diary-detail-left-top {
-    flex-direction: row;
     width: 70%;
     margin: 0;
   }
