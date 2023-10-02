@@ -105,3 +105,64 @@
   font-size: 3.5rem;
   font-family: "KOTRA_BOLD-Bold";
 }
+
+@media (max-width: 768px) {
+  /* .navbar-mypage { */
+  /* top: 15%; */
+  /* } */
+  .navbar-shop {
+    top: 15%;
+  }
+  .navbar-diary {
+    top: 25%;
+  }
+  .navbar-statistics {
+    top: 35%;
+  }
+
+  .navbar-font1 {
+    font-size: 1.5rem;
+  }
+  .navbar-font2 {
+    font-size: 2rem;
+  }
+  .navbar-font3 {
+    font-size: 2rem;
+  }
+  .navbar-font4 {
+    font-size: 1.7rem;
+  }
+  .navbar-font5 {
+    font-size: 2rem;
+  }
+  .navbar-font6 {
+    font-size: 2rem;
+  }
+  .navbar-font7 {
+    font-size: 1.6rem;
+  }
+  .navbar-font8 {
+    font-size: 2rem;
+  }
+  .navbar-body-search {
+    height: 15%;
+  }
+  .navbar-body-search .search-main {
+    height: 3rem;
+  }
+  .navbar-body-search .search-main input {
+    font-size: 0.8rem;
+  }
+  .coin-box {
+    position: absolute;
+    top: 20%;
+    width: 100%;
+    height: 30%;
+    justify-content: space-evenly;
+  }
+  .coin-box img {
+    width: 3rem;
+    height: 3rem;
+    margin: 5%;
+  }
+}
