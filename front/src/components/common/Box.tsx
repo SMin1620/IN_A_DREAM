@@ -11,6 +11,7 @@ interface BoxPropsComponents {
   children?: React.ReactNode;
   textwrap?: string;
   open?: boolean;
+  isMobile?: boolean;
 }
 
 const StyledBox = S.div<BoxPropsComponents>`
@@ -23,7 +24,12 @@ const StyledBox = S.div<BoxPropsComponents>`
   height: ${(props) => props.height}%;
   text-wrap: ${(props) => props.textwrap};
 
-  transform: translateX(${(props) => (props.open ? "0" : "-100%")});
+  // 모바일
+  transform: ${(props) =>
+    props.isMobile
+      ? `translateY(${props.open ? "-10%" : "-100%"})`
+      : `translateX(${props.open ? "0" : "-100%"})`};
+
   transition: transform 1s ease-in-out;
 
   font-size: 1rem;

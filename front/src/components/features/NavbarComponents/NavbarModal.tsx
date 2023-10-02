@@ -4,9 +4,34 @@ import Box from "../../common/Box";
 import { isModalOpen } from "../../../types/index";
 import { SlideSpan } from "../../common/SlideSpan";
 import SearchBar from "../SearchBarComponents/SearchBar";
+import { useMediaQuery } from "react-responsive";
+import positive from "../../../assets/coin/positive.png";
+import neutral from "../../../assets/coin/neutral.png";
+import negative from "../../../assets/coin/negative.png";
+import useFetchAndStoreUserInfo from "../../../hooks/useFetchAndStoreUserInfo";
+import S from "styled-components";
+import { RootState } from "../../../stores/stores";
+
+import { useSelector } from "react-redux";
+import ExchangeCoin from "../ExchageCoin/ExchangeCoin";
+
+const CoinComponent = S.div`
+  width:20%;
+  height:100%/;
+  // background-color:#fff;
+  margin-left:1rem;
+  display:flex;
+  align-items: center;
+  justify-content: center;
+  font-size:1rem
+`;
 
 const NavbarModal: React.FC<isModalOpen> = ({ isNavbarModalOpen, onClose }) => {
   const [isOpen, setIsOpen] = useState(false);
+  const isMobileView = useMediaQuery({
+    query: "(max-width:768px)",
+  });
+  const closeModal = () => setIsModalOpen(false);
 
   useEffect(() => {
     if (isNavbarModalOpen) {
@@ -17,8 +42,8 @@ const NavbarModal: React.FC<isModalOpen> = ({ isNavbarModalOpen, onClose }) => {
       }, 1000);
     }
   }, [isNavbarModalOpen]);
-
-  // 박스 닫힐 때 애니메이션 클래스 추가
+  const userInfo = useSelector((state: RootState) => state.userInfo.data);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   return (
     <Box
@@ -29,6 +54,7 @@ const NavbarModal: React.FC<isModalOpen> = ({ isNavbarModalOpen, onClose }) => {
       // left={0}
       top={15}
       textwrap="nowrap"
+      isMobile={isMobileView}
     >
       <a className="navbar-mypage" href="/mypage">
         <SlideSpan
@@ -126,7 +152,7 @@ const NavbarModal: React.FC<isModalOpen> = ({ isNavbarModalOpen, onClose }) => {
           <span>{"    "}</span>
         </SlideSpan>
       </a>
-      <div className="navbar-statistics">
+      <a className="navbar-statistics" href="/AllUserStatistics">
         <SlideSpan startposition={10} endposition={-120} speed={39} width="90%">
           <span className="navbar-font1">STATISTICS</span>
           <span>{"   "}</span>
@@ -151,7 +177,39 @@ const NavbarModal: React.FC<isModalOpen> = ({ isNavbarModalOpen, onClose }) => {
           <span className="navbar-font4">STATISTICS</span>
           <span>{"    "}</span>
         </SlideSpan>
-      </div>
+      </a>
+
+      {isMobileView ? (
+        <div>
+          <div className="coin-box">
+            <CoinComponent>
+              <img src={positive} alt="positiveCoin" />
+              <span className="coin-box-count">
+                {userInfo && userInfo.positiveCoin}
+              </span>
+            </CoinComponent>
+            <CoinComponent>
+              <img src={neutral} alt="neutralCoin" />
+              <span className="coin-box-count">
+                {userInfo && userInfo.neutralCoin}
+              </span>
+            </CoinComponent>
+            <CoinComponent>
+              <img src={negative} alt="negativeCoin" />
+              <span className="coin-box-count">
+                {userInfo && userInfo.negativeCoin}
+              </span>
+            </CoinComponent>
+          </div>
+          {isModalOpen && <ExchangeCoin closeModal={closeModal} />}
+
+          <CoinComponent>
+            <span onClick={() => setIsModalOpen(true)}> 코인교환 &gt;&gt;</span>
+          </CoinComponent>
+        </div>
+      ) : (
+        ""
+      )}
 
       <div className="navbar-body-search">
         <SearchBar />

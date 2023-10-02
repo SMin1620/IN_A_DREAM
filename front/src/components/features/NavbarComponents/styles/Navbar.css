@@ -11,6 +11,10 @@
 
 .hamburger-menu {
   display: none;
+  background: url("../../../../assets/logo/cursor.png") no-repeat center center; /* 'no-repeat' added */
+  background-size: contain;
+  width: 30px; /* Adjust the width of the button */
+  height: 30px;
 }
 
 @media screen and (max-width: 768px) {
