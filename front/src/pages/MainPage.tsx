@@ -66,25 +66,6 @@ const MainPage = () => {
         <MainFourth />
         <MainFifth />
         <MainSixth />
-        {/* {!isMobileView && (
-          <>
-            <div
-              className="mouse-cursor"
-              style={{
-                left: `${x}px`,
-                top: `${y}px`,
-              }}
-            ></div>
-            <div
-              className="mouse-image"
-              style={{
-                left: `${x}px`,
-                top: `${y}px`,
-              }}
-            ></div>
-          </>
-        )} */}
-        {/* {!isMobileView && <MouseCursor />} */}
       </div>
     </div>
   );

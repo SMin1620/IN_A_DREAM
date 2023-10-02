@@ -81,7 +81,7 @@ hr {
   /* font-weight: normal; */
 }
 .main-fifth-gamsung-more {
-  font-size: 10vw;
+  font-size: 4rem;
   color: #363636;
   font-family: "SBAggroB";
   font-weight: 800;
@@ -116,6 +116,9 @@ hr {
 @media (max-width: 768px) {
   .main-fifth-gamsung-right {
     font-size: 0.8rem;
+  }
+  .main-fifth-gamsung-more {
+    font-size: 2rem;
   }
   /* .main-fifth-gamsung-content {
     font-size: 0.7rem;

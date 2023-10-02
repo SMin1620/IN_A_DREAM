@@ -17,6 +17,7 @@ const useExchangeCoin = () => {
         title: "코인교환 성공",
         text: `${COIN_INFO[feeling]}으로 ${pay}개 교환을 성공했습니다.`,
       });
+      console.log(response);
     } catch (error: any) {
       if (error.message === "Request failed with status code 409") {
         Swal.fire({

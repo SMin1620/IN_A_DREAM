@@ -11,7 +11,7 @@ interface BoxPropsComponents {
   children?: React.ReactNode;
   textwrap?: string;
   open?: boolean;
-  isMobile?: boolean;
+  ismobile?: boolean;
 }
 
 const StyledBox = S.div<BoxPropsComponents>`
@@ -20,13 +20,13 @@ const StyledBox = S.div<BoxPropsComponents>`
   bottom: ${(props) => props.bottom}%;
   left: ${(props) => (props.open ? "0" : "-80")}%;
 
-  width: ${(props) => (props.isMobile ? "100" : props.width)}%;
+  width: ${(props) => (props.ismobile ? "100" : props.width)}%;
   height: ${(props) => props.height}%;
   text-wrap: ${(props) => props.textwrap};
 
   // 모바일
   transform: ${(props) =>
-    props.isMobile
+    props.ismobile
       ? `translateY(${props.open ? "-10%" : "-100%"})`
       : `translateX(${props.open ? "0" : "-100%"})`};
 
@@ -40,8 +40,11 @@ const StyledBox = S.div<BoxPropsComponents>`
   z-index: 5;
   `;
 
-const Box = (props: BoxPropsComponents) => {
-  return <StyledBox {...props}>{props.children}</StyledBox>;
+const Box = ({ ismobile, ...otherProps }: BoxPropsComponents) => {
+  return (
+    <StyledBox ismobile={ismobile} {...otherProps}>
+      {otherProps.children}
+    </StyledBox>
+  );
 };
-
 export default Box;

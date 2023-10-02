@@ -15,6 +15,25 @@ import { RootState } from "../../../stores/stores";
 import { useSelector } from "react-redux";
 import ExchangeCoin from "../ExchageCoin/ExchangeCoin";
 
+const COIN_INFO: CoinInfo = {
+  positive: { name: "해피코인", imgSrc: positive },
+  neutral: { name: "쏘쏘코인", imgSrc: neutral },
+  negative: { name: "새드코인", imgSrc: negative },
+};
+
+interface CoinInfo {
+  [key: string]: {
+    name: string;
+    imgSrc: string;
+  };
+}
+interface UserInfo {
+  positiveCoin?: number;
+  neutralCoin?: number;
+  negativeCoin?: number;
+  // Add other possible properties here...
+}
+
 const CoinComponent = S.div`
   width:20%;
   height:100%/;
@@ -54,7 +73,7 @@ const NavbarModal: React.FC<isModalOpen> = ({ isNavbarModalOpen, onClose }) => {
       // left={0}
       top={15}
       textwrap="nowrap"
-      isMobile={isMobileView}
+      ismobile={isMobileView}
     >
       <a className="navbar-mypage" href="/mypage">
         <SlideSpan
@@ -182,24 +201,14 @@ const NavbarModal: React.FC<isModalOpen> = ({ isNavbarModalOpen, onClose }) => {
       {isMobileView ? (
         <div>
           <div className="coin-box">
-            <CoinComponent>
-              <img src={positive} alt="positiveCoin" />
-              <span className="coin-box-count">
-                {userInfo && userInfo.positiveCoin}
-              </span>
-            </CoinComponent>
-            <CoinComponent>
-              <img src={neutral} alt="neutralCoin" />
-              <span className="coin-box-count">
-                {userInfo && userInfo.neutralCoin}
-              </span>
-            </CoinComponent>
-            <CoinComponent>
-              <img src={negative} alt="negativeCoin" />
-              <span className="coin-box-count">
-                {userInfo && userInfo.negativeCoin}
-              </span>
-            </CoinComponent>
+            {Object.keys(COIN_INFO).map((key) => (
+              <CoinComponent>
+                <img src={COIN_INFO[key].imgSrc} alt={`${key} Coin`} />
+                <span className="coin-box-count">
+                  {userInfo && userInfo[(key + "Coin") as keyof UserInfo]}
+                </span>
+              </CoinComponent>
+            ))}
           </div>
           {isModalOpen && <ExchangeCoin closeModal={closeModal} />}
 
