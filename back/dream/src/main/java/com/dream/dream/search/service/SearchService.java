@@ -22,7 +22,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.io.IOException;
+import java.text.Normalizer;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 import java.util.regex.Matcher;
@@ -124,6 +126,9 @@ public class SearchService {
 
         List<RecommendDto.DiaryRecommendResponseDto> diaries = new ArrayList<>();
         System.out.println("newKeyword >>>" + newKeyword);
+
+        newKeyword = Normalizer.normalize(newKeyword, Normalizer.Form.NFC);
+
         for (DiaryElastic diary : searchRepository.findByDairy(newKeyword)) {
 
             System.out.println("쿼리 시작");
