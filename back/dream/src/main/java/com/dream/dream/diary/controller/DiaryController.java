@@ -88,7 +88,7 @@ public class DiaryController {
 
         List<Boolean> likedList = diaryService.getMyLikes(memberEmail, diaryList);
 
-        return new BaseResponse(HttpStatus.OK, "일기 목록 반환 성공", diaryMapper.toResponseDtos(diaryList, likedList));
+        return new BaseResponse(HttpStatus.OK, "일기 목록 반환 성공", diaryMapper.toListResponseDto(diaryMapper.toResponseDtos(diaryList, likedList), diaryPage.getTotalPages()));
     }
 
     /**
@@ -107,7 +107,7 @@ public class DiaryController {
         List<Diary> diaryList = diaryPage.getContent();
         List<Boolean> likedList = diaryService.getMyLikes(memberEmail, diaryList);
 
-        return new BaseResponse(HttpStatus.OK, "내 일기 목록 반환 성공", diaryMapper.toResponseDtos(diaryList, likedList));
+        return new BaseResponse(HttpStatus.OK, "내 일기 목록 반환 성공", diaryMapper.toListResponseDto(diaryMapper.toResponseDtos(diaryList, likedList), diaryPage.getTotalPages()));
     }
 
     /**
