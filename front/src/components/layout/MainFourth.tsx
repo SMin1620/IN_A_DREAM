@@ -27,18 +27,38 @@ const MainFourth = () => {
   }, [response]);
 
   return (
-    <div className="MainFourth">
-      <div className="FourthTitleBox">
-        <h1>COME SEE OUR USERS</h1>
-        <h1>DREAM STATISCTICS</h1>
+    <div className="main-fourth-wrapper ">
+      <div className="main-fourth-title-box">
+        <h1 className="title1">COME SEE OUR USERS'</h1>
+        <h1 className="title2">DREAM STATISCTICS</h1>
       </div>
 
       <div className="SeeMoreButtonBox">
-        <h1>You CAN SEE MORE STATISTICS</h1>
+        <h1
+          className="SeeMoreButton"
+          onClick={() => navigate("/alluserstatistics")}
+        >
+          YOU CAN SEE MORE STATISTICS
+        </h1>
       </div>
 
       <div className="StatisticsBox">
-        <div className="StatisticsNum">통계 숫자 들어갈곳</div>
+        <div className="StatisticsNum">
+          <div className="MyStatistics">
+            <div className="MyStatistics-written">총 내가 쓴 일기 개수:1개</div>
+            <div className="MyStatistics-transaction">
+              내가 거래한 일기 개수:1개
+            </div>
+          </div>
+          <div className="AllUserStatistics">
+            <div className="AllUserStatistics-written">
+              모든 유저가 쓴 일 기 개수 : {diaries[0].id}개
+            </div>
+            <div className="AllUserStatistics-transaction">
+              모든 유저가 거래한 일기 개수:100개
+            </div>
+          </div>
+        </div>
         <div className="StatisticsKeyword">
           <KeywordCloud startDate="2023-08-26" endDate="2023-12-31" />
         </div>
