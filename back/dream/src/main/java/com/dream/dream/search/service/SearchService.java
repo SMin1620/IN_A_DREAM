@@ -48,7 +48,31 @@ public class SearchService {
     /**
      * 한글 오타 교정 검증 로직
      */
-    public String getBestSuggestion(SearchResponse searchResponse, String originalText) {
+    private String getBestSuggestion(String originalText) throws IOException {
+
+        // Create a new SearchSourceBuilder instance.
+        SearchSourceBuilder sourceBuilder = new SearchSourceBuilder();
+
+        // Create a new SuggestionBuilder instance.
+        SuggestBuilder suggestBuilder = new SuggestBuilder();
+
+        // Add the suggestion to the builder.
+        suggestBuilder.addSuggestion("combined-suggestion",
+                SuggestBuilders.termSuggestion("combined_title_content.spell")
+                        .text(originalText));
+
+        // Add the suggestion builder to the search source builder.
+        sourceBuilder.suggest(suggestBuilder);
+
+        // Create a new SearchRequest and set the index.
+        SearchRequest searchRequest = new SearchRequest("mysql_diary");
+        searchRequest.requestCache(false); // Disable request cache
+        searchRequest.source(sourceBuilder);
+
+        ////// 한글 오타교정
+        // 한글 오타교정
+        SearchResponse searchResponse = client.search(searchRequest, RequestOptions.DEFAULT);
+
 
         // Get the suggest result from the response.
         Suggest suggest = searchResponse.getSuggest();
@@ -94,43 +118,13 @@ public class SearchService {
 
         isEnglish = m.find();
         if (isEnglish) keyword = engToKor(keyword);
-        else {
 
-            // Create a new SearchSourceBuilder instance.
-            SearchSourceBuilder sourceBuilder = new SearchSourceBuilder();
-
-            // Create a new SuggestionBuilder instance.
-            SuggestBuilder suggestBuilder = new SuggestBuilder();
-
-            // Add the suggestion to the builder.
-            suggestBuilder.addSuggestion("combined-suggestion",
-                    SuggestBuilders.termSuggestion("combined_title_content.spell")
-                            .text(keyword)
-                            .stringDistance(JARO_WINKLER));
-
-            // Add the suggestion builder to the search source builder.
-            sourceBuilder.suggest(suggestBuilder);
-
-            // Create a new SearchRequest and set the index.
-            SearchRequest searchRequest = new SearchRequest("mysql_diary");
-            searchRequest.requestCache(false); // Disable request cache
-            searchRequest.source(sourceBuilder);
-
-            System.out.println("searchRequest >>> " + searchRequest);
-
-            ////// 한글 오타교정
-            // 한글 오타교정
-            SearchResponse searchResponse = client.search(searchRequest, RequestOptions.DEFAULT);
-            keyword = getBestSuggestion(searchResponse, keyword);
-            System.out.println("한글 오타 교정 >>> " + keyword);  // Print out the best suggestion.
-
-        }
-
-        System.out.println("한/영 교정된 단어 >>> " + keyword);
+        String newKeyword = getBestSuggestion(keyword);
+        System.out.println("한/영 교정된 단어 >>> " + newKeyword);
 
         List<RecommendDto.DiaryRecommendResponseDto> diaries = new ArrayList<>();
-        System.out.println("newKeyword >>>" + keyword);
-        for (DiaryElastic diary : searchRepository.findByDairy(keyword)) {
+        System.out.println("newKeyword >>>" + newKeyword);
+        for (DiaryElastic diary : searchRepository.findByDairy(newKeyword)) {
 
             System.out.println("쿼리 시작");
 
