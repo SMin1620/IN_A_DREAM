@@ -9,13 +9,27 @@ import com.dream.dream.recommend.entity.DiaryElastic;
 import com.dream.dream.search.repository.SearchRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.elasticsearch.action.search.SearchRequest;
+import org.elasticsearch.action.search.SearchResponse;
+import org.elasticsearch.client.RequestOptions;
+import org.elasticsearch.client.RestHighLevelClient;
+import org.elasticsearch.search.builder.SearchSourceBuilder;
+import org.elasticsearch.search.suggest.Suggest;
+import org.elasticsearch.search.suggest.SuggestBuilder;
+import org.elasticsearch.search.suggest.SuggestBuilders;
+import org.elasticsearch.search.suggest.term.TermSuggestion;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import java.util.stream.Collectors;
+
+import static org.elasticsearch.search.suggest.term.TermSuggestionBuilder.StringDistanceImpl.JARO_WINKLER;
 
 @Service
 @RequiredArgsConstructor
@@ -28,12 +42,51 @@ public class SearchService {
 
     private final SearchRepository searchRepository;
     private final MemberRepository memberRepository;
+    private final RestHighLevelClient client;
+
+
+    /**
+     * 한글 오타 교정 검증 로직
+     */
+    public String getBestSuggestion(SearchResponse searchResponse, String originalText) {
+
+        // Get the suggest result from the response.
+        Suggest suggest = searchResponse.getSuggest();
+
+        // Get the 'combined-suggestion' result.
+        TermSuggestion termSuggestion = suggest.getSuggestion("combined-suggestion");
+
+        // If there are no suggestions, return the original text.
+        if (termSuggestion.getEntries().isEmpty()) {
+            return originalText;
+        }
+
+        // Get the first suggestion entry (since we only made one suggestion request).
+        TermSuggestion.Entry firstEntry = termSuggestion.getEntries().get(0);
+
+        // If there are no options for this entry, return the original text.
+        if (firstEntry.getOptions().isEmpty()) {
+            return originalText;
+        }
+
+        // Sort the options by score in descending order and get the highest scoring option.
+        TermSuggestion.Entry.Option bestOption = firstEntry.getOptions().stream()
+                .max(Comparator.comparingDouble(TermSuggestion.Entry.Option::getScore))
+                .orElse(null);
+
+
+        // Return the text of the best option.
+        System.out.println("originalText >>> " + originalText + " " + bestOption.getText());
+        return bestOption == null ? originalText : bestOption.getText().string();
+
+    }
+
 
 
     /**
      * 꿈 검색
      */
-    public List<RecommendDto.DiaryRecommendResponseDto> searchDiary(Long memberId, String keyword) {
+    public List<RecommendDto.DiaryRecommendResponseDto> searchDiary(Long memberId, String keyword) throws IOException {
 
         boolean isEnglish = true;
         Pattern p = Pattern.compile("[a-zA-Z0-9]");
@@ -41,11 +94,47 @@ public class SearchService {
 
         isEnglish = m.find();
         if (isEnglish) keyword = engToKor(keyword);
+        else {
+
+            // Create a new SearchSourceBuilder instance.
+            SearchSourceBuilder sourceBuilder = new SearchSourceBuilder();
+
+            // Create a new SuggestionBuilder instance.
+            SuggestBuilder suggestBuilder = new SuggestBuilder();
+
+            // Add the suggestion to the builder.
+            suggestBuilder.addSuggestion("combined-suggestion",
+                    SuggestBuilders.termSuggestion("combined_title_content.spell")
+                            .text(keyword)
+                            .stringDistance(JARO_WINKLER));
+
+            // Add the suggestion builder to the search source builder.
+            sourceBuilder.suggest(suggestBuilder);
+
+            // Create a new SearchRequest and set the index.
+            SearchRequest searchRequest = new SearchRequest("mysql_diary");
+            searchRequest.requestCache(false); // Disable request cache
+            searchRequest.source(sourceBuilder);
+
+            System.out.println("searchRequest >>> " + searchRequest);
+
+            ////// 한글 오타교정
+            // 한글 오타교정
+            SearchResponse searchResponse = client.search(searchRequest, RequestOptions.DEFAULT);
+            keyword = getBestSuggestion(searchResponse, keyword);
+            System.out.println("한글 오타 교정 >>> " + keyword);  // Print out the best suggestion.
+
+        }
 
         System.out.println("한/영 교정된 단어 >>> " + keyword);
 
         List<RecommendDto.DiaryRecommendResponseDto> diaries = new ArrayList<>();
+        System.out.println("newKeyword >>>" + keyword);
         for (DiaryElastic diary : searchRepository.findByDairy(keyword)) {
+
+            System.out.println("쿼리 시작");
+
+            System.out.println("search diary >>> " + diary.toString());
 
             Member member = memberRepository.findById(diary.getMemberId())
                     .orElseThrow(() -> new BusinessLogicException(ExceptionCode.MEMBER_NOT_FOUND));
