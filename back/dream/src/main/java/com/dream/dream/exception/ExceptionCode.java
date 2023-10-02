@@ -6,6 +6,7 @@ public enum ExceptionCode {
 
     INVALID_REFRESH_TOKEN(400,"Invalid Refresh Token"),
     INVALID_ACCESS_TOKEN(401,"Invalid Access Token"),
+    EXPIRED_TIME_TOKEN(401,"Invalid Access Token"),
     MEMBER_UNAUTHORIZED(403,"Member Unauthorized"),
     EMAIL_NOT_FOUND(404, "Email Not Found"),
     MEMBER_NOT_FOUND(404, "Member Not Found"),
