@@ -55,3 +55,12 @@
   justify-content: flex-start;
   padding-left: 1%;
 }
+
+@media (max-width: 1024px) {
+  .card-nickname {
+    font-size: 0.5rem;
+  }
+  .card-title {
+    font-size: 0.8rem;
+  }
+}
