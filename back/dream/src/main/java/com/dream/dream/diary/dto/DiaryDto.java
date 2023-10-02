@@ -112,6 +112,7 @@ public class DiaryDto {
     @ToString
     public static class DiaryListResponseDto {
         private long totalPage;
+        private long currPage;
         private List<DiaryResponseDto> diaryList;
     }
 
