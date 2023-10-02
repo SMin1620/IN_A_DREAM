@@ -13,14 +13,20 @@ import { useRoute, useLocation } from "wouter";
 import { easing } from "maath";
 import getUuid from "uuid-by-string";
 
+const GalleryName = {
+  neutralPoint: "SOSO GALLERY",
+  positivePoint: "HAPPY GALLERY",
+  negativePoint: "SAD GALLERY",
+};
+
 const GOLDENRATIO = 1.61803398875;
 
-export const ImageGallery = ({ images }) => (
+export const ImageGallery = ({ images, sortKey }) => (
   <Canvas dpr={[1, 1.5]} camera={{ fov: 70, position: [0, 2, 15] }}>
     <color attach="background" args={["#191920"]} />
     <fog attach="fog" args={["#191920", 0, 15]} />
     <group position={[0, -0.5, 0]}>
-      <Frames images={images} />
+      <Frames images={images} sortKey={sortKey} />
       <mesh rotation={[-Math.PI / 2, 0, 0]}>
         <planeGeometry args={[50, 50]} />
         <MeshReflectorMaterial
@@ -43,12 +49,13 @@ export const ImageGallery = ({ images }) => (
 
 function Frames({
   images,
+  sortKey,
   q = new THREE.Quaternion(),
   p = new THREE.Vector3(),
 }) {
   const ref = useRef();
   const clicked = useRef();
-  const [, params] = useRoute("/gallery/item/:id");
+  const [, params] = useRoute(`/gallery/${sortKey}/item/:id`);
   const [, setLocation] = useLocation();
   useEffect(() => {
     clicked.current = ref.current.getObjectByName(params?.id);
@@ -72,12 +79,27 @@ function Frames({
         e.stopPropagation(),
         setLocation(
           clicked.current === e.object
-            ? "/gallery"
-            : "/gallery/item/" + e.object.name
+            ? `/gallery/${sortKey}`
+            : `/gallery/${sortKey}/item/` + e.object.name
         )
       )}
-      onPointerMissed={() => setLocation("/gallery")}
+      onPointerMissed={() => setLocation(`/gallery/${sortKey}`)}
     >
+      <Html
+        position={[-1, 3.3, 0]}
+        style={{
+          color: "#C3BAA5",
+          fontFamily: "GoryeongStrawberry",
+          fontSize: "2.2rem",
+          whiteSpace: "pre-wrap",
+          width: "auto",
+          overflowWrap: "break-word",
+          pointerEvents: "none",
+        }}
+      >
+        {GalleryName[sortKey]}
+        {/* {sortKey} */}
+      </Html>
       {images.map(
         (props) => <Frame key={props.url} {...props} /> /* prettier-ignore */
       )}
@@ -95,7 +117,7 @@ function Frame({
 }) {
   const image = useRef();
   const frame = useRef();
-  const [, params] = useRoute("/gallery/item/:id");
+  const [, params] = useRoute("/gallery/:sortKey/item/:id");
   const [hovered, hover] = useState(false);
   const [rnd] = useState(() => Math.random());
   const name = getUuid(url);
@@ -186,16 +208,20 @@ function Frame({
           fontFamily: "OTWelcomeRA",
           textAlign: "left",
           fontSize: "1.5rem",
-          whiteSpace: "pre-wrap",
+          whiteSpace: "nowrap",
+          overflow: "hidden",
+          textOverflow: "ellipsis",
           width: "180px",
           overflowWrap: "break-word",
+          lineHeight: "2rem",
+          pointerEvents: "none",
         }}
       >
         {title}
       </Html>
 
       <Html
-        position={[0.55, 1.2, 0]}
+        position={[0.55, 1.1, 0]}
         // onOcclude={set}
         style={{
           color: "white",
@@ -209,6 +235,7 @@ function Frame({
           whiteSpace: "pre-wrap",
           width: "180px",
           overflowWrap: "break-word",
+          pointerEvents: "none",
         }}
       >
         {content}
@@ -228,6 +255,7 @@ function Frame({
           whiteSpace: "pre-wrap",
           width: "180px",
           overflowWrap: "break-word",
+          pointerEvents: "none",
         }}
       >
         작성자 : {nickname}

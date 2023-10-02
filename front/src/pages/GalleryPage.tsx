@@ -104,7 +104,7 @@ const GalleryPage = () => {
     <div className="gallery-wrapper">
       <Navbar />
       <div className="gallery" id="gallery">
-        {images && <ImageGallery images={images} />}
+        {images && <ImageGallery images={images} sortKey={validSortKey} />}
       </div>
     </div>
   );
