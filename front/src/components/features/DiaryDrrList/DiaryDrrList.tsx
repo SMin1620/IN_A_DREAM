@@ -4,6 +4,7 @@ import { useMyDiaries } from "../../../hooks/useMyDiary";
 import { DiaryInfo } from "../../../types/ApiType";
 import { padNumber } from "../../../hooks";
 import { SERVER_URL } from "../../../constants";
+import { useNavigate } from "react-router-dom";
 
 interface DiaryDrrListProps {
   diaries: DiaryInfo[];
@@ -42,6 +43,8 @@ const DiaryDrrList = ({ diaries }: DiaryDrrListProps) => {
 
   const colors = ["#E9E4D9", "#EFBCAE", "#FF7C7C"];
 
+  const navigate = useNavigate();
+
   const getColor = (emotion: string) => {
     if (emotion === "POSITIVE") {
       return colors[2];
@@ -72,7 +75,10 @@ const DiaryDrrList = ({ diaries }: DiaryDrrListProps) => {
             <div className="diary-drrlist-title">{diary.title}</div>
             <div className="diary-drrlist-img">
               {selectedDiaryId === diary.id && (
-                <Image src={`${SERVER_URL}/${diary.image}`}></Image>
+                <Image
+                  src={`${SERVER_URL}/${diary.image}`}
+                  onClick={() => navigate(`/DreamDetail/${diary.id}`)}
+                ></Image>
               )}
             </div>
 

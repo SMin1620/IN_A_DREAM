@@ -1,7 +1,7 @@
 .exchange-wrapper {
-  position: fixed;
+  position: relative;
   padding-top: 10%;
-  bottom: 400%;
+  bottom: 1400%;
 
   /* right: 50%; */
   /* left: calc(50% + 4rem); */
@@ -19,6 +19,10 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
+}
+.exchange-wrapper img {
+  width: 5vw;
+  height: 5vw;
 }
 .exchange-wrapper h1 {
   font-size: 1.6vw;
@@ -80,12 +84,52 @@
 .exchange-rest-coin p {
   width: 3vw;
   font-size: 1.6vw;
+  padding-left: 10%;
 }
-
 .exchange-change-coin {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: space-evenly;
   height: 18vw;
+}
+
+@media (max-width: 768px) {
+  .exchange-wrapper {
+    width: 100%;
+    left: 0;
+    top: 0;
+  }
+  .exchange-wrapper h1 {
+    font-size: 1rem;
+  }
+
+  .exchange-coin-selected {
+    border: #fff dashed 0.25rem;
+    border-radius: 50%;
+    width: 4rem;
+    height: 4rem;
+  }
+  .exchange-coin-nonselected {
+    display: flex;
+    width: 4rem;
+    height: 4rem;
+  }
+  .exchange-wrapper img {
+    width: 3.3rem;
+    height: 3.3rem;
+  }
+  .exchange-rest-coin {
+    height: 22vw;
+  }
+  .exchange-rest-coin p {
+    font-size: 1rem;
+    padding-left: 10%;
+  }
+  .exchange-change-coin h1 {
+    padding-bottom: 0.5rem;
+  }
+  .exchange-change-coin img {
+    margin-bottom: 0.5rem;
+  }
 }

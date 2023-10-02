@@ -15,12 +15,10 @@ const Navbar = () => {
   return (
     <div className="navbar-wrapper">
       {isMobileView ? (
-        <button
+        <div
           className="hamburger-menu"
           onClick={() => setIsNavbarModalOpen(!isNavbarModalOpen)}
-        >
-          &#9776; {/* Unicode for hamburger icon */}
-        </button>
+        ></div>
       ) : (
         <NavbarBody
           setIsNavbarModalOpen={setIsNavbarModalOpen}
