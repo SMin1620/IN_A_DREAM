@@ -93,10 +93,10 @@ const GalleryPage = () => {
       : [];
 
   useEffect(() => {
-    if (response && response.data && response.data.data) {
+    if (response && response.data && response.data.data.diaryList) {
       // console.log(response);
       // console.log(response.data.data);
-      setDiaries(response.data.data);
+      setDiaries(response.data.data.diaryList);
     }
   }, [response]);
 
