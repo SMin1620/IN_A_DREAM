@@ -46,7 +46,7 @@ const CardSplit = () => {
         <ImgCard
           image="/CardSplit/image9.jpg"
           width="14vw"
-          height="24vh"
+          height="10vw"
           borderRadius={20}
         />
       </div>
@@ -64,7 +64,7 @@ const CardSplit = () => {
         <ImgCard
           image="/CardSplit/image13.jpg"
           width="13vw"
-          height="20vh"
+          height="11vw"
           borderRadius={20}
         />
       </div>
@@ -82,7 +82,7 @@ const CardSplit = () => {
         <ImgCard
           image="/CardSplit/image11.jpg"
           width="13vw"
-          height="21vh"
+          height="10vw"
           borderRadius={20}
         />
       </div>
@@ -99,8 +99,8 @@ const CardSplit = () => {
       >
         <ImgCard
           image="/CardSplit/image12.jpg"
-          width="13vw"
-          height="22vh"
+          width="14vw"
+          height="11vw"
           borderRadius={20}
         />
       </div>
@@ -118,7 +118,7 @@ const CardSplit = () => {
         <ImgCard
           image="/CardSplit/image14.jpg"
           width="12vw"
-          height="28vh"
+          height="18vw"
           borderRadius={20}
         />
       </div>
@@ -136,7 +136,7 @@ const CardSplit = () => {
         <ImgCard
           image="/CardSplit/image6.png"
           width="11vw"
-          height="18vh"
+          height="8vw"
           borderRadius={20}
         />
       </div>
@@ -154,7 +154,7 @@ const CardSplit = () => {
         <ImgCard
           image="/CardSplit/image10.jpg"
           width="18vw"
-          height="28vh"
+          height="12vw"
           borderRadius={20}
         />
       </div>
@@ -172,7 +172,7 @@ const CardSplit = () => {
         <ImgCard
           image="/CardSplit/image15.jpg"
           width="15vw"
-          height="26vh"
+          height="13vw"
           borderRadius={20}
         />
       </div>

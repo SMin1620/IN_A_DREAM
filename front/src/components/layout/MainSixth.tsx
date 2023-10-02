@@ -70,7 +70,6 @@ const MainSixth = () => {
       </div>
       <div className="main-sixth-searchbar">
         <SearchBar />
-        {/* <h1>검색바 넣으면될듯</h1> */}
       </div>
     </div>
   );
