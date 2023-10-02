@@ -7,12 +7,21 @@ export const useAllDiary = (pageable: pageable) => {
   return useQuery(["diaries", pageable], () => fetchAllDiaries(pageable));
 };
 
-export const useInfiniteAllDiary = (pageable: pageable) => {
+export const useInfiniteDiary = (pageable: pageable) => {
   return useInfiniteQuery(
-    ["diaries", pageable],
+    ["infiniteDiaries", pageable],
     ({ pageParam = 0 }) => fetchAllDiaries({ ...pageable, page: pageParam }),
     {
-      getNextPageParam: (lastPage, allPages) => allPages.length,
+      getNextPageParam: (lastPage) => {
+        // 현재 페이지가 마지막 페이지보다 작으면 다음 페이지 번호를 반환
+        if (lastPage.data.data.currPage + 1 < lastPage.data.data.totalPage) {
+          return lastPage.data.data.currPage + 1;
+        }
+        //  첫 번째 페이지로 돌아감
+        else {
+          return 0;
+        }
+      },
     }
   );
 };
