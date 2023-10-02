@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useContext } from "react";
+import React, { useEffect, useState, useContext, memo } from "react";
 import "./styles/MainFourth.css";
 import ImageSlide from "../features/ImgSlide/ImgSlide";
 
@@ -31,15 +31,14 @@ const MainFourth = () => {
       <div className="main-fourth-title-box">
         <h1 className="title1">COME SEE OUR USERS'</h1>
         <h1 className="title2">DREAM STATISCTICS</h1>
-      </div>
-
-      <div className="SeeMoreButtonBox">
-        <h1
-          className="SeeMoreButton"
-          onClick={() => navigate("/alluserstatistics")}
-        >
-          YOU CAN SEE MORE STATISTICS
-        </h1>
+        <div className="SeeMoreButtonBox">
+          <h2
+            className="main-fourth-title-more"
+            onClick={() => navigate("/alluserstatistics")}
+          >
+            YOU CAN SEE MORE STATISTICS
+          </h2>
+        </div>
       </div>
 
       <div className="StatisticsBox">
@@ -107,4 +106,4 @@ const MainFourth = () => {
   );
 };
 
-export default MainFourth;
+export default memo(MainFourth);

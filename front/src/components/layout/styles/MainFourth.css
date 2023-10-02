@@ -4,7 +4,7 @@
 }
 
 .main-fourth-title-box {
-  height: 10%;
+  height: 25%;
   text-align: left;
   padding-left: 3%;
 }
@@ -28,14 +28,22 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  padding: 5%;
 }
 
 .SeeMoreButton {
-  background-color: white;
+  background-color: #fff;
   font-size: 2.2rem;
-  font-weight: normal;
-  /* font-family: "SBAggroB"; */
+  /* font-weight: normal; */
+  font-family: "LotteMartHappy";
   padding: 1%;
+}
+
+.main-fourth-title-more {
+  font-family: "LotteMartHappy";
+  padding: 1%;
+  background-color: #fff;
+  font-size: 2rem;
 }
 
 .StatisticsNum {
@@ -76,7 +84,7 @@
 }
 
 @media (max-width: 1200px) {
-  .main-fourth-title-box h1 {
+  .main-fourth-title-box .title1 {
     font-size: 3rem;
   }
   .SeeMoreButton {
@@ -84,10 +92,16 @@
   }
 }
 @media (max-width: 1024px) {
-  .main-fourth-title-box h1 {
-    font-size: 2rem;
+  .main-fourth-title-box .title1 {
+    font-size: 1.5rem;
+  }
+  .main-fourth-title-box .title2 {
+    font-size: 1.3rem;
   }
   .SeeMoreButton {
     font-size: 1.3rem;
+  }
+  .main-fourth-title-more {
+    font-size: 1rem;
   }
 }

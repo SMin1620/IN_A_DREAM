@@ -1,6 +1,7 @@
-import React from "react";
+import React, { useCallback, memo } from "react";
 import WordCloud from "react-d3-cloud";
 import { useKeywordStatistics } from "../../../hooks/useKeywordStatistics";
+import "./KeywordCloud.css";
 
 interface Item {
   keyword: string;
@@ -14,36 +15,47 @@ interface KeywordCloudProps {
 
 const KeywordCloud: React.FC<KeywordCloudProps> = ({ startDate, endDate }) => {
   const response = useKeywordStatistics(startDate, endDate);
+
+  const fontSize = useCallback(
+    (word: { value: number }) => Math.log2(word.value) * 5,
+    []
+  );
+
+  if (!response.data) {
+    return <div>Loading...</div>;
+  }
+
   const data = response.data?.data?.data;
+
+  // console.log("wordcloud 동작");
 
   const transformData = (data: Item[]) =>
     data?.map(({ keyword, count }) => ({ text: keyword, value: count * 100 }));
-
-  const words = transformData(data);
 
   if (!data) {
     return <div>Loading...</div>;
   }
 
+  const words = transformData(data);
+  // const fontSize = useCallback(
+  //   (word: { value: number }) => Math.log2(word.value) * 5,
+  //   []
+  // );
+
   return (
-    <div
-      style={{
-        backgroundColor: "#eee",
-        width: "70%",
-        height: "70%",
-        overflow: "hidden",
-        borderRadius: "20px",
-      }}
-    >
+    <div className="keyword-cloud-wrapper">
       <WordCloud
         data={words}
-        font="Times"
+        fontSize={fontSize}
+        // fontSize={(word) => Math.log2(word.value) * 5}
+        rotate={() => 0}
+        font="BMDOHYEON"
         fontWeight="bold"
-        spiral="rectangular"
+        spiral="archimedean" // 중심에 있는 단어가 중요함
         padding={10}
       />
     </div>
   );
 };
 
-export default KeywordCloud;
+export default memo(KeywordCloud);
