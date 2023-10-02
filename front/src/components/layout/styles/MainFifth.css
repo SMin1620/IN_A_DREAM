@@ -100,6 +100,9 @@ hr {
   }
 }
 @media (max-width: 1024px) {
+  .main-fifth-gamsung-box {
+    height: 18%;
+  }
   .main-fifth-gamsung-right {
     font-size: 1rem;
   }
@@ -109,4 +112,15 @@ hr {
   .main-fifth-gamsung-title {
     font-size: 0.7rem;
   }
+}
+@media (max-width: 768px) {
+  .main-fifth-gamsung-right {
+    font-size: 0.8rem;
+  }
+  /* .main-fifth-gamsung-content {
+    font-size: 0.7rem;
+  }
+  .main-fifth-gamsung-title {
+    font-size: 0.7rem;
+  } */
 }

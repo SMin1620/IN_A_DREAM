@@ -4,7 +4,7 @@
 }
 
 .main-fourth-title-box {
-  height: 25%;
+  /* height: 25%; */
   text-align: left;
   padding-left: 3%;
 }
@@ -47,13 +47,17 @@
 }
 
 .StatisticsNum {
-  width: 50%;
+  width: 55%;
   display: flex;
+  margin-left: 5%;
+  /* height: auto; */
 }
 
 .MyStatistics,
 .AllUserStatistics {
   width: 50%;
+  display: flex;
+  flex-direction: column;
 }
 
 .MyStatistics-written,
@@ -64,14 +68,15 @@
 }
 
 .StatisticsKeyword {
-  width: 45%;
+  width: 35%;
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
 .StatisticsBox {
-  height: 50%;
+  margin-top: 1rem;
+  height: 30%;
   display: flex;
 }
 
@@ -81,6 +86,20 @@
 
 .MovingImgs {
   height: 100%;
+}
+
+.StatisticsNum h1 {
+  font-size: 2.7rem;
+  text-align: left;
+  font-style: italic;
+  font-family: "GoryeongStrawberry";
+  letter-spacing: 3px;
+}
+.StatisticsNum h2 {
+  font-size: 1.4rem;
+  text-align: left;
+  font-weight: normal;
+  padding-top: 5%;
 }
 
 @media (max-width: 1200px) {
@@ -103,5 +122,37 @@
   }
   .main-fourth-title-more {
     font-size: 1rem;
+  }
+  .StatisticsNum h1 {
+    font-size: 1.3rem;
+    letter-spacing: 1px;
+  }
+  .StatisticsNum h2 {
+    font-size: 1rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .StatisticsBox {
+    justify-content: space-around;
+  }
+  .StatisticsKeyword {
+    width: 60%;
+  }
+  .StatisticsNum {
+    flex-direction: column;
+    width: 30%;
+  }
+  .StatisticsNum h1 {
+    font-size: 0.8rem;
+    letter-spacing: 1px;
+  }
+  .StatisticsNum h2 {
+    font-size: 0.3rem;
+  }
+  .MyStatistics,
+  .AllUserStatistics {
+    width: 80%;
+    height: 50%;
   }
 }

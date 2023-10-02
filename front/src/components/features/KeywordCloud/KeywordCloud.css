@@ -9,8 +9,8 @@
 @media (max-width: 768px) {
   .keyword-cloud-wrapper {
     background-color: #eee;
-    width: 40vw;
-    height: 35vw;
+    width: 50vw;
+    height: 50vw;
     overflow: hidden;
     border-radius: 20px;
   }

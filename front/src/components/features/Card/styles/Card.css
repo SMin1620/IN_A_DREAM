@@ -63,4 +63,13 @@
   .card-title {
     font-size: 0.8rem;
   }
+  .card-wrapper img {
+    border-radius: 10px;
+  }
+}
+@media (max-width: 768px) {
+  .card-nickname {
+    font-size: 0.2rem;
+    width: 8vw;
+  }
 }

@@ -27,8 +27,6 @@ const KeywordCloud: React.FC<KeywordCloudProps> = ({ startDate, endDate }) => {
 
   const data = response.data?.data?.data;
 
-  // console.log("wordcloud 동작");
-
   const transformData = (data: Item[]) =>
     data?.map(({ keyword, count }) => ({ text: keyword, value: count * 100 }));
 
@@ -37,10 +35,6 @@ const KeywordCloud: React.FC<KeywordCloudProps> = ({ startDate, endDate }) => {
   }
 
   const words = transformData(data);
-  // const fontSize = useCallback(
-  //   (word: { value: number }) => Math.log2(word.value) * 5,
-  //   []
-  // );
 
   return (
     <div className="keyword-cloud-wrapper">
@@ -53,6 +47,9 @@ const KeywordCloud: React.FC<KeywordCloudProps> = ({ startDate, endDate }) => {
         fontWeight="bold"
         spiral="archimedean" // 중심에 있는 단어가 중요함
         padding={10}
+        onWordClick={(event, d) => {
+          console.log(`onWordClick: ${d.text} ${d.value}`);
+        }}
       />
     </div>
   );

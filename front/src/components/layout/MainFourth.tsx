@@ -44,17 +44,39 @@ const MainFourth = () => {
       <div className="StatisticsBox">
         <div className="StatisticsNum">
           <div className="MyStatistics">
-            <div className="MyStatistics-written">총 내가 쓴 일기 개수:1개</div>
+            <div className="MyStatistics-written">
+              {/* 총 내가 쓴 일기 개수 */}
+              <h1>1</h1>
+              <h2>
+                MY DREAM DIARY <br />
+                ENTRIES PENNED
+              </h2>
+            </div>
             <div className="MyStatistics-transaction">
-              내가 거래한 일기 개수:1개
+              {/* >내가 거래한 일기 개수 */}
+              <h1>1</h1>
+              <h2>
+                MY DREAM DIARY <br />
+                ENTRIES TRADED
+              </h2>
             </div>
           </div>
           <div className="AllUserStatistics">
             <div className="AllUserStatistics-written">
-              모든 유저가 쓴 일 기 개수 : {diaries[0]?.id}개
+              {/* 모든 유저가 쓴 일기 개수 */}
+              <h1>{diaries[0]?.id}</h1>
+              <h2>
+                EVERY DREAM DIARY <br />
+                EVER WRITTEN
+              </h2>
             </div>
             <div className="AllUserStatistics-transaction">
-              모든 유저가 거래한 일기 개수:100개
+              {/* 모든 유저가 거래한 일기 개수 */}
+              <h1>5,486,209,356</h1>
+              <h2>
+                EVERY DREAM DIARY <br />
+                TRADED SO FAR
+              </h2>
             </div>
           </div>
         </div>

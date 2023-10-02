@@ -20,11 +20,14 @@ justify-content: center;
 align-items: center;
 font-size: 1.2vw;
 text-shadow: 1px 1px 1px black;
+
 @media (max-width: 1024px) {
-width:15vw;
-
+width:14vw;
+font-size: 0.3rem;
 }
-
+@media (max-width: 768px) {
+  width:16vw;
+  }
 `;
 
 const DateBox = (props: ButtonProps) => {
