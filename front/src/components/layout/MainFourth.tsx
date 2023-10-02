@@ -22,7 +22,7 @@ const MainFourth = () => {
 
   useEffect(() => {
     if (response) {
-      setDiaries(response.data.data.diaryList);
+      setDiaries(response.data?.data?.diaryList);
     }
   }, [response]);
 
