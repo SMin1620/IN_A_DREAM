@@ -1,4 +1,4 @@
-.mouse-cursor {
+/* .mouse-cursor {
   position: fixed;
   transform: translate(-50%, -50%);
   width: 3vw;
@@ -23,4 +23,8 @@
   background-size: contain;
   background-repeat: no-repeat;
   z-index: 1001;
+} */
+
+* {
+  cursor: url("../../assets/logo/cursor2.png") 1 1, auto;
 }

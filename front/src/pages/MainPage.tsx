@@ -8,7 +8,9 @@ import MainFourth from "../components/layout/MainFourth";
 import MainFifth from "../components/layout/MainFifth";
 import MainSixth from "../components/layout/MainSixth";
 import { useMediaQuery } from "react-responsive";
-import useMousePosition from "../hooks/useMousPosition";
+// import useMousePosition from "../hooks/useMousPosition";
+// import MouseCursor from "../components/features/MouseCursor/MouseCursor";
+
 import "./styles/MainPage.css";
 
 const MainPage = () => {
@@ -19,7 +21,7 @@ const MainPage = () => {
     query: "(max-width: 768px)",
   });
 
-  const { x, y } = useMousePosition();
+  // const { x, y } = useMousePosition();
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -64,7 +66,7 @@ const MainPage = () => {
         <MainFourth />
         <MainFifth />
         <MainSixth />
-        {!isMobileView && (
+        {/* {!isMobileView && (
           <>
             <div
               className="mouse-cursor"
@@ -81,7 +83,8 @@ const MainPage = () => {
               }}
             ></div>
           </>
-        )}
+        )} */}
+        {/* {!isMobileView && <MouseCursor />} */}
       </div>
     </div>
   );

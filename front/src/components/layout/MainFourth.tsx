@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useContext } from "react";
+import React, { useEffect, useState, useContext, memo } from "react";
 import "./styles/MainFourth.css";
 import ImageSlide from "../features/ImgSlide/ImgSlide";
 
@@ -31,15 +31,14 @@ const MainFourth = () => {
       <div className="main-fourth-title-box">
         <h1 className="title1">COME SEE OUR USERS'</h1>
         <h1 className="title2">DREAM STATISCTICS</h1>
-      </div>
-
-      <div className="SeeMoreButtonBox">
-        <h1
-          className="SeeMoreButton"
-          onClick={() => navigate("/alluserstatistics")}
-        >
-          YOU CAN SEE MORE STATISTICS
-        </h1>
+        <div className="SeeMoreButtonBox">
+          <h2
+            className="main-fourth-title-more"
+            onClick={() => navigate("/alluserstatistics")}
+          >
+            YOU CAN SEE MORE STATISTICS
+          </h2>
+        </div>
       </div>
 
       <div className="StatisticsBox">
@@ -52,7 +51,7 @@ const MainFourth = () => {
           </div>
           <div className="AllUserStatistics">
             <div className="AllUserStatistics-written">
-              모든 유저가 쓴 일 기 개수 : {diaries[0].id}개
+              모든 유저가 쓴 일 기 개수 : {diaries[0]?.id}개
             </div>
             <div className="AllUserStatistics-transaction">
               모든 유저가 거래한 일기 개수:100개
@@ -107,4 +106,4 @@ const MainFourth = () => {
   );
 };
 
-export default MainFourth;
+export default memo(MainFourth);
