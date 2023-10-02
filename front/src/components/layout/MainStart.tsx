@@ -24,13 +24,13 @@ const ResponsiveTypeAnimation = styled(TypeAnimation)`
 `;
 
 interface OverlayProps {
-  show?: boolean;
+  $show?: boolean;
 }
 
 const OverlayText = styled.span<OverlayProps>`
   position: absolute;
-  z-index: ${(props) => (props.show ? "2" : "-1")};
-  opacity: ${(props) => (props.show ? "1" : "0")};
+  z-index: ${(props) => (props.$show ? "2" : "-1")};
+  opacity: ${(props) => (props.$show ? "1" : "0")};
   transition: 0.5s ease-in-out;
   font-size: calc(10em + 1vw);
   line-height: 0.9;
@@ -81,7 +81,7 @@ const MainStart = () => {
         wrapper="span"
         speed={50}
       />
-      <OverlayText {...(showOverlayText ? { show: true } : {})}>
+      <OverlayText {...(showOverlayText ? { $show: true } : {})}>
         IN
         <br />A<br />
         DREAM

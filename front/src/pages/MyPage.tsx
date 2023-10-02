@@ -32,7 +32,7 @@ const MyPage = () => {
 
   useEffect(() => {
     if (response) {
-      setMyDiaryData(response.data.data);
+      setMyDiaryData(response.data.data.diaryList);
     }
   }, [response]);
 

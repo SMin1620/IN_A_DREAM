@@ -1,19 +1,62 @@
-.MainFourth {
+.main-fourth-wrapper {
   height: 140vh;
   color: black;
 }
 
-.FourthTitleBox {
+.main-fourth-title-box {
   height: 10%;
+  text-align: left;
+  padding-left: 3%;
+}
+
+.main-fourth-title-box h1 {
+  font-size: 4rem;
+  font-style: italic;
+  font-weight: bolder;
+  font-family: "SBAggroB";
+}
+
+.title1 {
+  color: #646464;
+}
+
+.title2 {
+  color: #ff7c7c;
 }
 .SeeMoreButtonBox {
-  height: 5%;
+  height: 10%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
+
+.SeeMoreButton {
+  background-color: white;
+  font-size: 2.2rem;
+  font-weight: normal;
+  /* font-family: "SBAggroB"; */
+  padding: 1%;
+}
+
 .StatisticsNum {
   width: 50%;
+  display: flex;
 }
-.StatisticsKeyword {
+
+.MyStatistics,
+.AllUserStatistics {
   width: 50%;
+}
+
+.MyStatistics-written,
+.MyStatistics-transaction,
+.AllUserStatistics-written,
+.AllUserStatistics-transaction {
+  height: 50%;
+}
+
+.StatisticsKeyword {
+  width: 45%;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -30,4 +73,21 @@
 
 .MovingImgs {
   height: 100%;
+}
+
+@media (max-width: 1200px) {
+  .main-fourth-title-box h1 {
+    font-size: 3rem;
+  }
+  .SeeMoreButton {
+    font-size: 1.9rem;
+  }
+}
+@media (max-width: 1024px) {
+  .main-fourth-title-box h1 {
+    font-size: 2rem;
+  }
+  .SeeMoreButton {
+    font-size: 1.3rem;
+  }
 }
