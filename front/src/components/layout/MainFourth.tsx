@@ -40,7 +40,7 @@ const MainFourth = () => {
       <div className="StatisticsBox">
         <div className="StatisticsNum">통계 숫자 들어갈곳</div>
         <div className="StatisticsKeyword">
-          <KeywordCloud startDate="2023-08-26" endDate="2023-09-27" />
+          <KeywordCloud startDate="2023-08-26" endDate="2023-12-31" />
         </div>
       </div>
 
