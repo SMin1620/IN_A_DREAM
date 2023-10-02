@@ -32,6 +32,6 @@ public interface DiaryMapper {
 
     Diary sparkConsumeToDiary(DiaryDto.SparkConsume diary);
 
-    DiaryDto.DiaryListResponseDto toListResponseDto(List<DiaryDto.DiaryResponseDto> diaryList, long totalPage);
+    DiaryDto.DiaryListResponseDto toListResponseDto(List<DiaryDto.DiaryResponseDto> diaryList, long totalPage, long currPage);
 
 }
