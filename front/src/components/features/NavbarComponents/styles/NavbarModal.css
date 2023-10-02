@@ -10,7 +10,32 @@
   align-items: center;
   text-decoration-line: none;
   color: #646464;
-  /* height: 20%; */
+}
+.navbar-exchange {
+  top: 55%;
+  display: flex;
+  position: absolute;
+  left: 15%;
+  width: 80%;
+  justify-content: center;
+  overflow: hidden;
+  flex-wrap: nowrap;
+  align-items: center;
+  text-decoration-line: none;
+  color: #646464;
+}
+.navbar-main {
+  top: 5%;
+  display: flex;
+  position: absolute;
+  left: 15%;
+  width: 80%;
+  justify-content: center;
+  overflow: hidden;
+  flex-wrap: nowrap;
+  align-items: center;
+  text-decoration-line: none;
+  color: #646464;
 }
 
 .navbar-shop {
@@ -107,17 +132,17 @@
 }
 
 @media (max-width: 768px) {
-  /* .navbar-mypage { */
-  /* top: 15%; */
-  /* } */
-  .navbar-shop {
+  .navbar-mypage {
     top: 15%;
   }
-  .navbar-diary {
+  .navbar-shop {
     top: 25%;
   }
-  .navbar-statistics {
+  .navbar-diary {
     top: 35%;
+  }
+  .navbar-statistics {
+    top: 45%;
   }
 
   .navbar-font1 {

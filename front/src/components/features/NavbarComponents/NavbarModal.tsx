@@ -203,9 +203,70 @@ const NavbarModal: React.FC<isModalOpen> = ({ isNavbarModalOpen, onClose }) => {
           </div>
           {isModalOpen && <ExchangeCoin closeModal={closeModal} />}
 
-          <CoinComponent>
-            <span onClick={() => setIsModalOpen(true)}> 코인교환 &gt;&gt;</span>
-          </CoinComponent>
+          <span onClick={() => setIsModalOpen(true)}>
+            <div className="navbar-exchange">
+              <SlideSpan
+                startposition={-100}
+                endposition={100}
+                speed={40}
+                width="90%"
+              >
+                <span className="navbar-font2">EXCHANGE</span>
+                <span>{"   "}</span>
+                <span className="navbar-font4">EXCHANGE</span>
+                <span>{"    "}</span>
+                <span className="navbar-font5">EXCHANGE</span>
+                <span>{"    "}</span>
+                <span className="navbar-font3">EXCHANGE</span>
+                <span>{"    "}</span>
+                <span className="navbar-font1">EXCHANGE</span>
+                <span>{"    "}</span>
+                <span className="navbar-font8">EXCHANGE</span>
+                <span>{"   "}</span>
+                <span className="navbar-font7">EXCHANGE</span>
+                <span>{"    "}</span>
+                <span className="navbar-font6">EXCHANGE</span>
+                <span>{"    "}</span>
+                <span className="navbar-font3">EXCHANGE</span>
+                <span>{"    "}</span>
+                <span className="navbar-font2">EXCHANGE</span>
+                <span>{"   "}</span>
+                <span className="navbar-font1">EXCHANGE</span>
+                <span>{"    "}</span>
+              </SlideSpan>
+            </div>
+          </span>
+          <a className="navbar-main" href="/main">
+            <SlideSpan
+              startposition={10}
+              endposition={-120}
+              speed={39}
+              width="90%"
+            >
+              <span className="navbar-font3">MAIN</span>
+              <span>{"   "}</span>
+              <span className="navbar-font1">MAIN</span>
+              <span>{"    "}</span>
+              <span className="navbar-font7">MAIN</span>
+              <span>{"    "}</span>
+              <span className="navbar-font6">MAIN</span>
+              <span>{"    "}</span>
+              <span className="navbar-font5">MAIN</span>
+              <span>{"    "}</span>
+              <span className="navbar-font2">MAIN</span>
+              <span>{"   "}</span>
+              <span className="navbar-font4">MAIN</span>
+              <span>{"    "}</span>
+              <span className="navbar-font6">MAIN</span>
+              <span>{"    "}</span>
+              <span className="navbar-font8">MAIN</span>
+              <span>{"    "}</span>
+              <span className="navbar-font1">MAIN</span>
+              <span>{"   "}</span>
+              <span className="navbar-font2">MAIN</span>
+              <span>{"    "}</span>
+            </SlideSpan>
+          </a>
         </div>
       ) : (
         ""

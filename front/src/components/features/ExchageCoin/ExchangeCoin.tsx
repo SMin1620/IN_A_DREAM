@@ -58,7 +58,6 @@ const ExchangeCoin: React.FC<ExchangeCoinProps> = ({ closeModal }) => {
                   <img
                     src={COIN_INFO[key].imgSrc}
                     alt={`${key} Coin`}
-                    style={{ width: "5vw", height: "5vw" }}
                     onClick={() => setSelectCoin(key as CoinType)}
                   />
                 </div>
@@ -69,8 +68,8 @@ const ExchangeCoin: React.FC<ExchangeCoinProps> = ({ closeModal }) => {
             <div className="exchange-button">
               <Button
                 backgroundcolor="#B4A88F"
-                width="5vw"
-                height="3vw"
+                width="4rem"
+                height="3rem"
                 borderradius="10px"
                 onClick={() => setStep(2)}
               >
@@ -87,11 +86,7 @@ const ExchangeCoin: React.FC<ExchangeCoinProps> = ({ closeModal }) => {
                 .filter((key) => key !== selectCoin)
                 .map((key) => (
                   <div key={key} className="exchange-rest-coin">
-                    <img
-                      src={COIN_INFO[key].imgSrc}
-                      alt={`${key} Coin`}
-                      style={{ width: "5vw", height: "5vw" }}
-                    />
+                    <img src={COIN_INFO[key].imgSrc} alt={`${key} Coin`} />
                     <p>{coin}</p>
                   </div>
                 ))}
@@ -103,7 +98,6 @@ const ExchangeCoin: React.FC<ExchangeCoinProps> = ({ closeModal }) => {
               <img
                 src={COIN_INFO[selectCoin].imgSrc}
                 alt={`${COIN_INFO[selectCoin].name}`}
-                style={{ width: "5vw", height: "5vw" }}
               />
               <Input
                 type="number"
@@ -118,8 +112,8 @@ const ExchangeCoin: React.FC<ExchangeCoinProps> = ({ closeModal }) => {
             <div className="exchange-button">
               <Button
                 backgroundcolor="#B4A88F"
-                width="6vw"
-                height="3vw"
+                width="6rem"
+                height="3rem"
                 borderradius="10px"
                 onClick={handleExchangeCoin}
               >

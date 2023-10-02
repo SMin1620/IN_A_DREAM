@@ -20,7 +20,7 @@ const StyledBox = S.div<BoxPropsComponents>`
   bottom: ${(props) => props.bottom}%;
   left: ${(props) => (props.open ? "0" : "-80")}%;
 
-  width: ${(props) => props.width}%;
+  width: ${(props) => (props.isMobile ? "100" : props.width)}%;
   height: ${(props) => props.height}%;
   text-wrap: ${(props) => props.textwrap};
 
