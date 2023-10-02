@@ -52,7 +52,7 @@ const MainFourth = () => {
           </div>
           <div className="AllUserStatistics">
             <div className="AllUserStatistics-written">
-              모든 유저가 쓴 일 기 개수 : {diaries[0].id}개
+              모든 유저가 쓴 일 기 개수 : {diaries[0]?.id}개
             </div>
             <div className="AllUserStatistics-transaction">
               모든 유저가 거래한 일기 개수:100개

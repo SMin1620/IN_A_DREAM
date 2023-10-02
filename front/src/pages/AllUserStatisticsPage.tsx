@@ -16,20 +16,21 @@ const AllUserStatisticsPage = () => {
     value: item.count,
   }));
 
-  const { exchangeTokens } = useExchangeCoin();
-
-  const handleClick = () => {
-    exchangeTokens("negative", 100); // 'happy'와 '10'은 예시입니다. 실제 필요한 값을 넣어주세요.
-  };
-
   if (isLoading) return <div>Loading...</div>;
   if (isError || !response) return <div>Error occurred</div>;
   return (
     <div>
       <div>CircleGraph</div>
-      <button onClick={handleClick}>버튼</button>
       <div>
         <CircleGraph data={chartData} />
+        <iframe
+          title="vimeo-player"
+          src="https://player.vimeo.com/video/870217449?h=4e51cf5daf"
+          width="640"
+          height="360"
+          frameBorder="0"
+          allowFullScreen
+        ></iframe>
       </div>
     </div>
   );
