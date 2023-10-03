@@ -32,7 +32,11 @@ const DreamDetailPage = () => {
           <div className="diary-detail-left-top">
             <img
               className="diary-image"
-              src={`${SERVER_URL}/${diaryDetail?.image}`}
+              src={
+                diaryDetail?.image
+                  ? `${SERVER_URL}/${diaryDetail.image}`
+                  : "fallbackImageUrl"
+              }
               alt="일기일기"
             />
             <DateForm />

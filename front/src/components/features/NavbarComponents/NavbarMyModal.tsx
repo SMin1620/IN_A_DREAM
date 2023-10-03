@@ -13,6 +13,18 @@ import { RootState } from "../../../stores/stores";
 import { useSelector } from "react-redux";
 import ExchangeCoin from "../ExchageCoin/ExchangeCoin";
 
+const COIN_INFO: CoinInfo = {
+  positive: { name: "해피코인", imgSrc: positive },
+  neutral: { name: "쏘쏘코인", imgSrc: neutral },
+  negative: { name: "새드코인", imgSrc: negative },
+};
+
+interface CoinInfo {
+  [key: string]: {
+    name: string;
+    imgSrc: string;
+  };
+}
 interface CoinPropsComponent {}
 
 const CoinComponent = S.div<CoinPropsComponent>`
@@ -26,6 +38,13 @@ const CoinComponent = S.div<CoinPropsComponent>`
   font-size:1.2rem
 `;
 
+interface UserInfo {
+  positiveCoin?: number;
+  neutralCoin?: number;
+  negativeCoin?: number;
+  // Add other possible properties here...
+}
+
 const NavbarMyModal: React.FC<isModalOpen> = ({
   isNavbarModalOpen,
   onClose,
@@ -33,9 +52,11 @@ const NavbarMyModal: React.FC<isModalOpen> = ({
   const [isOpen, setIsOpen] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
 
-  const userInfo = useSelector((state: RootState) => state.userInfo.data);
+  const userInfo = useSelector(
+    (state: RootState) => state.userInfo.data as UserInfo
+  );
+
   const { getUserInfo } = useFetchAndStoreUserInfo();
-  const navigate = useNavigate();
 
   useEffect(() => {
     getUserInfo();
@@ -63,24 +84,14 @@ const NavbarMyModal: React.FC<isModalOpen> = ({
     >
       {isModalOpen && <ExchangeCoin closeModal={closeModal} />}
       <div className="coin-box">
-        <CoinComponent>
-          <img src={positive} alt="positiveCoin" />
-          <span className="coin-box-count">
-            {userInfo && userInfo.positiveCoin}
-          </span>
-        </CoinComponent>
-        <CoinComponent>
-          <img src={neutral} alt="neutralCoin" />
-          <span className="coin-box-count">
-            {userInfo && userInfo.neutralCoin}
-          </span>
-        </CoinComponent>
-        <CoinComponent>
-          <img src={negative} alt="negativeCoin" />
-          <span className="coin-box-count">
-            {userInfo && userInfo.negativeCoin}
-          </span>
-        </CoinComponent>
+        {Object.keys(COIN_INFO).map((key) => (
+          <CoinComponent key={key}>
+            <img src={COIN_INFO[key].imgSrc} alt={`${key} Coin`} />
+            <span className="coin-box-count">
+              {userInfo && userInfo[(key + "Coin") as keyof UserInfo]}
+            </span>
+          </CoinComponent>
+        ))}
         <CoinComponent>
           <span onClick={() => setIsModalOpen(true)}> 코인교환 &gt;&gt;</span>
         </CoinComponent>

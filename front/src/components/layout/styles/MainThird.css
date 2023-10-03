@@ -29,3 +29,8 @@
   font-weight: lighter;
   font-family: "SBAggroB";
 }
+@media (max-width: 1024px) {
+  .main-third-wrapper h5 {
+    font-size: 0.8rem;
+  }
+}

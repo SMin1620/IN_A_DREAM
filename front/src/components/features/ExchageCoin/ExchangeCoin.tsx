@@ -6,6 +6,7 @@ import negative from "../../../assets/coin/negative.png";
 import Button from "../../common/Button2";
 import Input from "../../common/Input";
 import useExchangeCoin from "../../../hooks/useExchangeCoin";
+import useFetchAndStoreUserInfo from "../../../hooks/useFetchAndStoreUserInfo";
 
 type CoinType = "positive" | "neutral" | "negative";
 
@@ -35,11 +36,12 @@ const ExchangeCoin: React.FC<ExchangeCoinProps> = ({ closeModal }) => {
     setCoin(parseFloat(e.target.value));
   };
   const { exchangeTokens } = useExchangeCoin();
-  const handleExchangeCoin = () => {
-    exchangeTokens(selectCoin as CoinType, coin);
+  const { getUserInfo } = useFetchAndStoreUserInfo();
+  const handleExchangeCoin = async () => {
+    await exchangeTokens(selectCoin as CoinType, coin);
+    await getUserInfo();
     closeModal();
   };
-
   return (
     <div className="exchange-wrapper">
       {step === 1 ? (
@@ -61,6 +63,7 @@ const ExchangeCoin: React.FC<ExchangeCoinProps> = ({ closeModal }) => {
                     onClick={() => setSelectCoin(key as CoinType)}
                   />
                 </div>
+                <span>{COIN_INFO[key].name}</span>
               </div>
             ))}
           </div>

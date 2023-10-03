@@ -10,38 +10,47 @@ interface BoxPropsComponents {
   height: number;
   children?: React.ReactNode;
   textwrap?: string;
-  open?: boolean;
-  isMobile?: boolean;
 }
 
-const StyledBox = S.div<BoxPropsComponents>`
-  position: ${(props) => props.position};
-  top: ${(props) => props.top}%;
-  bottom: ${(props) => props.bottom}%;
-  left: ${(props) => (props.open ? "0" : "-80")}%;
+interface StyledBoxProps extends BoxPropsComponents {
+  open?: boolean;
+  ismobile?: boolean;
+}
 
-  width: ${(props) => (props.isMobile ? "100" : props.width)}%;
-  height: ${(props) => props.height}%;
-  text-wrap: ${(props) => props.textwrap};
+const StyledBox = S.div.withConfig({
+  shouldForwardProp: (prop) => !["ismobile", "open"].includes(prop),
+})<StyledBoxProps>`
+position: ${(props) => props.position};
+top: ${(props) => props.top}%;
+bottom: ${(props) => props.bottom}%;
+left: ${(props) => (props.open ? "0" : "-80")}%;
 
-  // 모바일
-  transform: ${(props) =>
-    props.isMobile
-      ? `translateY(${props.open ? "-10%" : "-100%"})`
-      : `translateX(${props.open ? "0" : "-100%"})`};
+width: ${(props) => (props.ismobile ? "100" : props.width)}%;
+height: ${(props) => props.height}%;
+text-wrap:${(props) => props.textwrap};
 
-  transition: transform 1s ease-in-out;
+// 모바일
+transform:${(props) =>
+  props.ismobile
+    ? `translateY(${props.open ? "-10%" : "-100%"})`
+    : `translateX(${props.open ? "0" : "-100%"})`};
 
-  font-size: 1rem;
-  background-color: #C3BAA5;
-  border-radius: 40px;
-  border: none;
-  color: #646464;
-  z-index: 5;
-  `;
+transition : transform 1s ease-in-out;
 
-const Box = (props: BoxPropsComponents) => {
-  return <StyledBox {...props}>{props.children}</StyledBox>;
+font-size :1rem ;
+background-color:#C3BAA5 ;
+border-radius :40px ;
+border:none ;
+color:#646464 ;
+z-index :5 ;
+
+`;
+
+const Box = ({ ismobile, open, ...otherProps }: StyledBoxProps) => {
+  return (
+    <StyledBox ismobile={ismobile} open={open} {...otherProps}>
+      {otherProps.children}
+    </StyledBox>
+  );
 };
-
 export default Box;

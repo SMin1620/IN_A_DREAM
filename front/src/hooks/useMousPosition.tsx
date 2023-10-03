@@ -1,4 +1,3 @@
-// useMousePosition.ts
 import { useState, useEffect } from "react";
 
 interface Position {

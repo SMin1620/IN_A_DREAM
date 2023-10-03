@@ -17,7 +17,8 @@ const MainThird = () => {
 
   useEffect(() => {
     if (response) {
-      setDiaries(response.data.data.diaryList);
+      console.log(response);
+      setDiaries(response.data?.data?.diaryList);
     }
   }, [response]);
 

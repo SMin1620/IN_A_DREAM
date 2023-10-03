@@ -1,3 +1,12 @@
+.loading {
+  filter: blur(3px);
+  clip-path: inset(0);
+}
+.loaded {
+  filter: blur(0px);
+  transition: filter 0.5s linear;
+}
+
 .create-dream-diary {
   /* width: calc(100% - 4rem); */
   height: 100vh;

@@ -1,0 +1,17 @@
+.keyword-cloud-wrapper {
+  background-color: #eee;
+  width: 30vw;
+  height: 25vw;
+  overflow: hidden;
+  border-radius: 20px;
+}
+
+@media (max-width: 768px) {
+  .keyword-cloud-wrapper {
+    background-color: #eee;
+    width: 50vw;
+    height: 50vw;
+    overflow: hidden;
+    border-radius: 20px;
+  }
+}
