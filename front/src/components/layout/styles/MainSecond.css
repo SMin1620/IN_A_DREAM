@@ -3,10 +3,12 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  margin-bottom: 10%;
 }
 
 .VideoBox {
-  width: 80%;
-  height: 70%;
-  background-color: white;
+  width: 70%;
+  height: 80%;
+  background-color: black;
+  transition: transform 0.5s ease-out;
 }
