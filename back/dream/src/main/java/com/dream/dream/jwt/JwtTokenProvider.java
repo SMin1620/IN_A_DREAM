@@ -166,10 +166,10 @@ public class JwtTokenProvider {
             Jwts.parser().setSigningKey(secretKey).parseClaimsJws(token);
             return true;
         }catch(ExpiredJwtException e){
-            e.printStackTrace();
-            throw new BusinessLogicException(ExceptionCode.EXPIRED_TIME_TOKEN);
+            return false;
         }catch(JwtException e){
-            throw new BusinessLogicException(ExceptionCode.INVALID_ACCESS_TOKEN);
+            e.printStackTrace();
+            return false;
         }
     }
 
