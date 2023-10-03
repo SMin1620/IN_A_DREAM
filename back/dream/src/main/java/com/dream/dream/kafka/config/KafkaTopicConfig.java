@@ -64,6 +64,12 @@ public class KafkaTopicConfig {
     @Value(value = "${message.topic.sparkListenerName}")
     private String sparkDiaryResult;
 
+    /**
+     * 일기 판매 on의 통계 topic
+     */
+    @Value(value = "${message.topic.sparkDiaryStatisticName}")
+    private String sparkDiaryStatisticTopic;
+
     @Bean
     public KafkaAdmin kafkaAdmin() {
         Map<String, Object> configs = new HashMap<>();
@@ -116,4 +122,8 @@ public class KafkaTopicConfig {
         return new NewTopic(sparkDiaryResult, 1, (short) 1);
     }
 
+    @Bean
+    public NewTopic sparkDiaryStatisticTopic(){
+        return new NewTopic(sparkDiaryStatisticTopic, 1, (short) 1);
+    }
 }
