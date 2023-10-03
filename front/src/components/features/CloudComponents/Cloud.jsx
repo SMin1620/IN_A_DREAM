@@ -6,7 +6,6 @@ import { a } from "@react-spring/three";
 import { useDrag, useWheel } from "@use-gesture/react";
 import { createGlobalStyle } from "styled-components";
 import { useTexture, Plane } from "@react-three/drei";
-import imgB from "../../../assets/background/background1.png";
 
 const GlobalStyle = createGlobalStyle`
 body {
@@ -18,11 +17,11 @@ body {
 // imageGallery 페이지 참고
 
 const NUM_IMAGES = 50; // 원하는 이미지 개수
-const MAX_POSITION = 3; // 이미지가 배치될 수 있는 최대 위치
+const MAX_POSITION = 3; // 이미지가 배치될 수 있는 최대 z위치
 const MAX_POSITION_WIDTH = 150;
 const MAX_POSITION_HEIGHT = 80;
 
-export default function Cloud() {
+export default function Cloud({ images }) {
   const [dragStyle, setDrag] = useSpring(() => ({ x: 0, y: 0 }));
   const [scrollStyle, setScroll] = useSpring(() => ({ x: 0, y: 0 }));
 
@@ -61,8 +60,9 @@ export default function Cloud() {
         />
 
         <ambientLight intensity={0.5} />
-        <ImageTexture position={[0, 0, -2]} />
-        <ImageTexture position={[5, 5, 0]} />
+        {images.map((image, idx) => (
+          <ImageTexture key={idx} position={image.position} url={image.url} />
+        ))}
         <Suspense fallback={null}>
           {Array.from({ length: NUM_IMAGES }).map((_, index) => (
             <RandomClouds key={index} />
@@ -80,20 +80,33 @@ function DraggableCameraControls({ dragStyle, scrollStyle }) {
     const scale = 50;
     camera.position.x = -(dragStyle.x.get() - scrollStyle.x.get()) / scale;
     camera.position.y = (dragStyle.y.get() - scrollStyle.y.get()) / scale;
+
+    // console.log(
+    //   `Camera Position: x=${camera.position.x}, y=${camera.position.y}, z=${camera.position.z}`,
+    // );
   });
 
   return null;
 }
 
 function ImageTexture(props) {
-  const texture = useTexture(imgB);
+  const texture = useTexture(props.url);
+  // const texture = new THREE.TextureLoader().load(props.url);
   const ref = useRef();
   // Hold state for hovered and clicked events
   const [hovered, hover] = useState(false);
   const [clicked, click] = useState(false);
+  const [position, setPosition] = useState(() => {
+    const randomX = (Math.random() - 0.5) * MAX_POSITION_WIDTH;
+    const randomY = (Math.random() - 0.5) * MAX_POSITION_HEIGHT;
+    const randomZ = (Math.random() - 0.5) * 2 * MAX_POSITION;
+    return [randomX, randomY, randomZ];
+  });
 
-  const [x, y, z] = props.position || [0, 0, 0];
-  const hoveredZ = 4;
+  // const [x, y, z] = props.position || [0, 0, 0];
+  const [x, y, z] = position;
+
+  const hoveredZ = 3.01;
 
   const springProps = useSpring({
     scale: clicked ? [1.5, 1.5, 1.5] : [1, 1, 1],
@@ -106,7 +119,7 @@ function ImageTexture(props) {
       {...springProps}
       ref={ref}
       onClick={(event) => click(!clicked)}
-      onPointerOver={(event) => (event.stopPropagation(), hover(true))}
+      onPointerOver={(event) => hover(true)}
       onPointerOut={(event) => hover(false)}
     >
       <Plane args={[5, 5]} material-map={texture} />
@@ -119,7 +132,7 @@ function RandomClouds() {
   // 랜덤한 위치 및 크기 생성
   const randomX = (Math.random() - 0.5) * MAX_POSITION_WIDTH;
   const randomY = (Math.random() - 0.5) * MAX_POSITION_HEIGHT;
-  const randomZ = -Math.random() * 2 * MAX_POSITION;
+  const randomZ = -Math.random() * MAX_POSITION + 0.9;
   const randomScale = 0.5 + Math.random() * 1.5; // 0.5에서 2 사이의 랜덤한 크기
 
   return (

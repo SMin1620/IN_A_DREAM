@@ -18,15 +18,14 @@ const MainPage = () => {
   const isMobileView = useMediaQuery({
     query: "(max-width: 768px)",
   });
-
   const { x, y } = useMousePosition();
 
   useEffect(() => {
     const timer = setTimeout(() => {
       setShowIntro(false);
-    }, 6000);
+    }, 6000); // After 5 seconds
 
-    return () => clearTimeout(timer);
+    return () => clearTimeout(timer); // Clean up on unmount
   }, []);
 
   useEffect(() => {
@@ -64,24 +63,20 @@ const MainPage = () => {
         <MainFourth />
         <MainFifth />
         <MainSixth />
-        {!isMobileView && (
-          <>
-            <div
-              className="mouse-cursor"
-              style={{
-                left: `${x}px`,
-                top: `${y}px`,
-              }}
-            ></div>
-            <div
-              className="mouse-image"
-              style={{
-                left: `${x}px`,
-                top: `${y}px`,
-              }}
-            ></div>
-          </>
-        )}
+        <div
+          className="mouse-cursor"
+          style={{
+            left: `${x}px`,
+            top: `${y}px`,
+          }}
+        ></div>
+        <div
+          className="mouse-image"
+          style={{
+            left: `${x}px`,
+            top: `${y}px`,
+          }}
+        ></div>
       </div>
     </div>
   );
