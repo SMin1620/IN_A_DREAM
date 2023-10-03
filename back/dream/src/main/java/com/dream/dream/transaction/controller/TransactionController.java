@@ -127,7 +127,7 @@ public class TransactionController {
 
         TransactionDto.AllTransactionCountResponseDto allTransactionCountResponseDto = transactionService.allTransactionCount(memberEmail);
 
-        return new BaseResponse(HttpStatus.OK, "나의 일기 개수 조회 성공", allTransactionCountResponseDto);
+        return new BaseResponse(HttpStatus.OK, "전체 거래 횟수 조회 성공", allTransactionCountResponseDto);
     }
 
 }
