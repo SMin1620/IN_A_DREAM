@@ -8,6 +8,7 @@ public class RelationDto {
     @NoArgsConstructor
     @AllArgsConstructor
     @Builder
+    @ToString
     public static class Statistic {
         private float avgNegativeWhenTrue;
         private float avgPositiveWhenTrue;

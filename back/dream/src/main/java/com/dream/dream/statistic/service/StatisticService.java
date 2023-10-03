@@ -246,6 +246,9 @@ public class StatisticService {
     @KafkaListener(topics = "${message.topic.sparkDiaryStatisticName}", groupId = ConsumerConfig.GROUP_ID_CONFIG, containerFactory = "diaryRelationListener")
     public void diaryRelation(RelationDto.Statistic statisticDto){
 
+        System.out.println("#####################################################");
+        System.out.println(statisticDto);
+
         Relation relation = Relation.builder()
                 .avgPositiveWhenTrue(statisticDto.getAvgPositiveWhenTrue())
                 .avgNegativeWhenTrue(statisticDto.getAvgNegativeWhenTrue())
