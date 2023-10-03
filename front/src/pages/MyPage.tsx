@@ -50,7 +50,7 @@ const MyPage = () => {
           <KeywordCloud
             startDate="2023-08-26"
             endDate="2023-12-31"
-            myDate={true}
+            mydate={true}
           />
         </div>
         <div className="mypage-top-statistics">

@@ -89,7 +89,7 @@ const MainFourth = () => {
           <KeywordCloud
             startDate="2023-08-26"
             endDate="2023-12-31"
-            myDate={false}
+            mydate={false}
           />
         </div>
       </div>
