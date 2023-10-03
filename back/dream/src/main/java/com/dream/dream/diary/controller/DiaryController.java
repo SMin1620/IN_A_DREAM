@@ -201,10 +201,9 @@ public class DiaryController {
      * 내가 쓴 일기 개수 조회
      */
     @Operation(summary = "내가 쓴 일기 개수 조회")
-    @PutMapping("/myDiaryCount")
+    @GetMapping("/myDiaryCount")
     public BaseResponse myDiaryCount(
-            HttpServletRequest request,
-            @RequestBody DiaryDto.saleDto requestBody) {
+            HttpServletRequest request) {
         String token = jwtTokenProvider.resolveToken(request);
         jwtTokenProvider.validateToken(token);
 
