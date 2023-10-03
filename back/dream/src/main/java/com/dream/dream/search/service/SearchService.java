@@ -23,10 +23,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.io.IOException;
 import java.text.Normalizer;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.List;
+import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
@@ -51,6 +48,15 @@ public class SearchService {
      * 한글 오타 교정 검증 로직
      */
     private String getBestSuggestion(String originalText) throws IOException {
+
+        originalText = Normalizer.normalize(originalText, Normalizer.Form.NFD);
+        System.out.println("len > " + originalText + " " + originalText.length());
+        for (int i = 0; i < originalText.length(); i++) {
+            System.out.println(originalText.charAt(i));
+            String c = String.valueOf(originalText.charAt(i));
+            System.out.println(c.length());
+            if (Normalizer.normalize(c, Normalizer.Form.NFD).equals("ㄺ")) System.out.println("발견");
+        }
 
         // Create a new SearchSourceBuilder instance.
         SearchSourceBuilder sourceBuilder = new SearchSourceBuilder();
@@ -121,15 +127,20 @@ public class SearchService {
         isEnglish = m.find();
         if (isEnglish) keyword = engToKor(keyword);
 
-        String newKeyword = getBestSuggestion(keyword);
-        System.out.println("한/영 교정된 단어 >>> " + newKeyword);
+        System.out.println("기존 키워드 >>> " + keyword);
+        System.out.println("한/영 교정된 단어 >>> " + keyword);
+
+        if (searchRepository.findByDairy(keyword).isEmpty()) {
+            keyword = getBestSuggestion(keyword);
+            keyword = Normalizer.normalize(keyword, Normalizer.Form.NFC);
+        }
+
+//        String newKeyword = getBestSuggestion(keyword);
+
 
         List<RecommendDto.DiaryRecommendResponseDto> diaries = new ArrayList<>();
-        System.out.println("newKeyword >>>" + newKeyword);
 
-        newKeyword = Normalizer.normalize(newKeyword, Normalizer.Form.NFC);
-
-        for (DiaryElastic diary : searchRepository.findByDairy(newKeyword)) {
+        for (DiaryElastic diary : searchRepository.findByDairy(keyword)) {
 
             System.out.println("쿼리 시작");
 
