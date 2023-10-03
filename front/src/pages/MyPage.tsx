@@ -41,16 +41,20 @@ const MyPage = () => {
       <Navbar></Navbar>
       <div className="mypage-top">
         <div className="mypage-top-calendar">
-          <p>{month} 월 STACK</p>
+          <p className="mypage-statistics-title">{month} 월 STACK</p>
           <Calendar />
         </div>
 
         <div className="mypage-top-keyword">
-          {/* 여기 수정해야함 */}
-          {/* <KeywordCloud startDate={today} endDate={nextDay} /> */}
+          <p className="mypage-statistics-title">KEYWORD</p>
+          <KeywordCloud
+            startDate="2023-08-26"
+            endDate="2023-12-31"
+            myDate={true}
+          />
         </div>
         <div className="mypage-top-statistics">
-          <p>STATISTICS</p>
+          <p className="mypage-statistics-title">STATISTICS</p>
           <Statics />
         </div>
       </div>

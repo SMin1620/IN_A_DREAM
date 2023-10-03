@@ -1,7 +1,10 @@
-import React, { useCallback, memo } from "react";
+import React, { useCallback, memo, useState, useEffect } from "react";
 import WordCloud from "react-d3-cloud";
-import { useKeywordStatistics } from "../../../hooks/useKeywordStatistics";
-import "./KeywordCloud.css";
+import {
+  useKeywordStatistics,
+  useMyKeywordStatistics,
+} from "../../../hooks/useKeywordStatistics";
+import S from "styled-components";
 
 interface Item {
   keyword: string;
@@ -11,10 +14,29 @@ interface Item {
 interface KeywordCloudProps {
   startDate: string;
   endDate: string;
+  myDate: boolean;
 }
 
-const KeywordCloud: React.FC<KeywordCloudProps> = ({ startDate, endDate }) => {
+const KeywordCloudWrapper = S.div<{ myDate?: boolean }>`
+  background-color: #eee;
+  width: ${(props) => (props.myDate ? "20vw" : "30vw")};
+  height: ${(props) => (props.myDate ? "15vw" : "25vw")};
+  overflow: hidden;
+  border-radius: 20px;
+
+  @media (max-width: 768px) {
+    width: ${(props) => (props.myDate ? "30vw" : "50vw")};
+    height: ${(props) => (props.myDate ? "30vw" : "50vw")};
+  }
+`;
+
+const KeywordCloud: React.FC<KeywordCloudProps> = ({
+  startDate,
+  endDate,
+  myDate,
+}) => {
   const response = useKeywordStatistics(startDate, endDate);
+  const myResponse = useMyKeywordStatistics();
 
   const fontSize = useCallback(
     (word: { value: number }) => Math.log2(word.value) * 5,
@@ -23,21 +45,26 @@ const KeywordCloud: React.FC<KeywordCloudProps> = ({ startDate, endDate }) => {
 
   if (!response.data) {
     return <div>Loading...</div>;
+  } else if (!myResponse.data) {
+    return <div>Loading...</div>;
   }
 
   const data = response.data?.data?.data;
+  const myData = myResponse.data?.data?.data;
 
   const transformData = (data: Item[]) =>
     data?.map(({ keyword, count }) => ({ text: keyword, value: count * 100 }));
 
   if (!data) {
     return <div>Loading...</div>;
+  } else if (!myData) {
+    return <div>Loading...</div>;
   }
 
-  const words = transformData(data);
+  const words = transformData(myDate ? myData : data);
 
   return (
-    <div className="keyword-cloud-wrapper">
+    <KeywordCloudWrapper myDate={myDate}>
       <WordCloud
         data={words}
         fontSize={fontSize}
@@ -51,7 +78,7 @@ const KeywordCloud: React.FC<KeywordCloudProps> = ({ startDate, endDate }) => {
           console.log(`onWordClick: ${d.text} ${d.value}`);
         }}
       />
-    </div>
+    </KeywordCloudWrapper>
   );
 };
 
