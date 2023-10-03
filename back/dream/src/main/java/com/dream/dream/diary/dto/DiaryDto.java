@@ -183,4 +183,18 @@ public class DiaryDto {
         private float neutral;
         private float negative;
     }
+
+    /**
+     * 내 일기 개수 조회 responseDto
+     */
+    @Getter
+    @Setter
+    @NoArgsConstructor
+    @AllArgsConstructor
+    @Builder
+    @ToString
+    public static class MyDiaryCountResponseDto{
+        private Long count;
+    }
+
 }

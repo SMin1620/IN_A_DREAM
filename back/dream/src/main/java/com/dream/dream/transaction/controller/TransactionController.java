@@ -88,4 +88,46 @@ public class TransactionController {
         return new BaseResponse(HttpStatus.OK, "나의 구매 기록 조회 성공", myBuyHistoryResponseDto);
     }
 
+    /**
+     * 나의 거래 횟수 조회
+     * @param request
+     * @return
+     */
+    @Operation(summary = "나의 거래 횟수 조회")
+    @GetMapping("/myTransactionCount")
+    public BaseResponse myTransactionCount(HttpServletRequest request){
+        String token = jwtTokenProvider.resolveToken(request);
+        jwtTokenProvider.validateToken(token);
+
+        Authentication authentication = jwtTokenProvider.getAuthentication(token);
+        UserDetails userDetails = (UserDetails) authentication.getPrincipal();
+
+        String memberEmail = userDetails.getUsername();
+
+        TransactionDto.MyTransactionCountResponseDto myTransactionCountResponseDto = transactionService.myTransactionCount(memberEmail);
+
+        return new BaseResponse(HttpStatus.OK, "나의 일기 개수 조회 성공", myTransactionCountResponseDto);
+    }
+
+    /**
+     * 전체 거래 횟수 조회
+     * @param request
+     * @return
+     */
+    @Operation(summary = "전체 거래 횟수 조회")
+    @GetMapping("/allTransactionCount")
+    public BaseResponse allTransactionCount(HttpServletRequest request){
+        String token = jwtTokenProvider.resolveToken(request);
+        jwtTokenProvider.validateToken(token);
+
+        Authentication authentication = jwtTokenProvider.getAuthentication(token);
+        UserDetails userDetails = (UserDetails) authentication.getPrincipal();
+
+        String memberEmail = userDetails.getUsername();
+
+        TransactionDto.AllTransactionCountResponseDto allTransactionCountResponseDto = transactionService.allTransactionCount(memberEmail);
+
+        return new BaseResponse(HttpStatus.OK, "전체 거래 횟수 조회 성공", allTransactionCountResponseDto);
+    }
+
 }

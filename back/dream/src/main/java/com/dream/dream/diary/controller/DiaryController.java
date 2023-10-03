@@ -5,6 +5,8 @@ import com.dream.dream.diary.dto.DiaryDto;
 import com.dream.dream.diary.entity.Diary;
 import com.dream.dream.diary.mapper.DiaryMapper;
 import com.dream.dream.diary.service.DiaryService;
+import com.dream.dream.exception.BusinessLogicException;
+import com.dream.dream.exception.ExceptionCode;
 import com.dream.dream.jwt.JwtTokenProvider;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -44,7 +46,12 @@ public class DiaryController {
             @RequestBody DiaryDto.DiaryCreateRequestDto requestBody) {
 
         String token = jwtTokenProvider.resolveToken(request);
-        jwtTokenProvider.validateToken(token);
+
+        if(!jwtTokenProvider.validateToken(token)){
+            throw new BusinessLogicException(ExceptionCode.INVALID_ACCESS_TOKEN);
+        }
+
+
         String memberEmail = jwtTokenProvider.getUserEmail(token);
 
         return diaryService.diaryCreate(requestBody, memberEmail);
@@ -79,7 +86,10 @@ public class DiaryController {
             HttpServletRequest request,
             @PageableDefault(size = 3, sort = "id", direction = Sort.Direction.DESC) Pageable pageable) {
         String token = jwtTokenProvider.resolveToken(request);
-        jwtTokenProvider.validateToken(token);
+
+        if(!jwtTokenProvider.validateToken(token)){
+            throw new BusinessLogicException(ExceptionCode.INVALID_ACCESS_TOKEN);
+        }
 
         String memberEmail = jwtTokenProvider.getUserEmail(token);
 
@@ -187,5 +197,21 @@ public class DiaryController {
         return new BaseResponse(HttpStatus.OK, "거래 변경", diaryMapper.diaryToResponseDto(diary));
     }
 
+    /**
+     * 내가 쓴 일기 개수 조회
+     */
+    @Operation(summary = "내가 쓴 일기 개수 조회")
+    @GetMapping("/myDiaryCount")
+    public BaseResponse myDiaryCount(
+            HttpServletRequest request) {
+        String token = jwtTokenProvider.resolveToken(request);
+        jwtTokenProvider.validateToken(token);
+
+        String email = jwtTokenProvider.getUserEmail(token);
+
+        DiaryDto.MyDiaryCountResponseDto myDiaryCountResponseDto = diaryService.myDiaryCount(email);
+
+        return new BaseResponse(HttpStatus.OK, "내가 쓴 일기 개수 조회 성공", myDiaryCountResponseDto);
+    }
 
 }

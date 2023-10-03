@@ -210,6 +210,7 @@ public class DiaryService {
         }
     }
 
+
     /**
      * 꿈 일기 생성 서비스 임시사용
      */
@@ -428,5 +429,12 @@ public class DiaryService {
     }
 
 
+    public DiaryDto.MyDiaryCountResponseDto myDiaryCount(String email) {
+        Member member = memberRepository.findByEmail(email).orElseThrow(() -> new BusinessLogicException(ExceptionCode.MEMBER_NOT_FOUND));
 
+        Long count = diaryRepository.countByMember(member);
+
+        DiaryDto.MyDiaryCountResponseDto myDiaryCountResponseDto = DiaryDto.MyDiaryCountResponseDto.builder().count(count).build();
+        return myDiaryCountResponseDto;
+    }
 }

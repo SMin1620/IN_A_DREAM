@@ -49,4 +49,5 @@ public class StatisticDto {
         private String registDate;
     }
 
+
 }

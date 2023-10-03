@@ -1,10 +1,14 @@
 package com.dream.dream.statistic.service;
 
+import com.dream.dream.statistic.dto.RelationDto;
 import com.dream.dream.statistic.dto.StatisticDto;
+import com.dream.dream.statistic.entity.Relation;
 import com.dream.dream.statistic.entity.Statistic;
+import com.dream.dream.statistic.repository.RelationRepository;
 import com.dream.dream.statistic.repository.StatisticRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.kafka.clients.consumer.ConsumerConfig;
 import org.elasticsearch.action.search.SearchRequest;
 import org.elasticsearch.action.search.SearchResponse;
 import org.elasticsearch.client.RequestOptions;
@@ -18,6 +22,7 @@ import org.elasticsearch.search.aggregations.bucket.terms.ParsedStringTerms;
 import org.elasticsearch.search.aggregations.bucket.terms.Terms;
 import org.elasticsearch.search.builder.SearchSourceBuilder;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
@@ -33,6 +38,7 @@ public class StatisticService {
 
     private final RestHighLevelClient client;
     private final StatisticRepository statisticRepository;
+    private final RelationRepository relationRepository;
 
     @Value(value = "${message.topic.statisticDailyName}")
     private String statisticDailyName;
@@ -234,5 +240,38 @@ public class StatisticService {
         }
 
         return strictDtos;
+    }
+
+
+    @KafkaListener(topics = "${message.topic.sparkDiaryStatisticName}", groupId = ConsumerConfig.GROUP_ID_CONFIG, containerFactory = "diaryRelationListener")
+    public void diaryRelation(RelationDto.Statistic statisticDto){
+
+        System.out.println("#####################################################");
+        System.out.println(statisticDto);
+
+        Relation relation = Relation.builder()
+                .avgPositiveWhenTrue(statisticDto.getAvgPositiveWhenTrue())
+                .avgNegativeWhenTrue(statisticDto.getAvgNegativeWhenTrue())
+                .avgNeutralWhenTrue(statisticDto.getAvgNeutralWhenTrue())
+                .avgPositiveWhenFalse(statisticDto.getAvgPositiveWhenFalse())
+                .avgNegativeWhenFalse(statisticDto.getAvgNegativeWhenFalse())
+                .avgNeutralWhenFalse(statisticDto.getAvgNeutralWhenFalse())
+                .build();
+
+        relationRepository.save(relation);
+    }
+
+    public RelationDto.StatisticResponseDto relation() {
+        Relation relation = relationRepository.getRelation();
+
+        RelationDto.StatisticResponseDto statisticResponseDto = RelationDto.StatisticResponseDto.builder().
+                avgPositiveWhenTrue(relation().getAvgPositiveWhenTrue()).
+                avgPositiveWhenFalse(relation().getAvgPositiveWhenFalse()).
+                avgNeutralWhenFalse(relation().getAvgNeutralWhenFalse()).
+                avgNegativeWhenFalse(relation().getAvgNegativeWhenFalse()).
+                avgNegativeWhenTrue(relation.getAvgNegativeWhenTrue()).
+                avgNeutralWhenTrue(relation.getAvgNeutralWhenTrue()).build();
+
+        return statisticResponseDto;
     }
 }
