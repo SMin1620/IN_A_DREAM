@@ -262,7 +262,7 @@ public class StatisticService {
     }
 
     public RelationDto.StatisticResponseDto relation() {
-        Relation relation = relationRepository.findTop1OrderByCreatedAtDesc();
+        Relation relation = relationRepository.findTopByOrderByIdDesc();
 
         RelationDto.StatisticResponseDto statisticResponseDto = RelationDto.StatisticResponseDto.builder().
                 avgPositiveWhenTrue(relation().getAvgPositiveWhenTrue()).
