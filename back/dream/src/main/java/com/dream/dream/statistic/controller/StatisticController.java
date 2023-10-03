@@ -6,6 +6,7 @@ import com.dream.dream.exception.ExceptionCode;
 import com.dream.dream.jwt.JwtTokenProvider;
 import com.dream.dream.member.entity.Member;
 import com.dream.dream.member.repository.MemberRepository;
+import com.dream.dream.statistic.dto.RelationDto;
 import com.dream.dream.statistic.service.StatisticService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -124,5 +125,26 @@ public class StatisticController {
                 .orElseThrow(() -> new BusinessLogicException(ExceptionCode.MEMBER_NOT_FOUND));
 
         return new BaseResponse(HttpStatus.OK, "잔디 조회", statisticService.strictStatistic(member.getId()));
+    }
+
+    /**
+     * 감정 코인과 sale의 상관관계
+     * @param request
+     * @return
+     */
+    @Operation(summary = "감정 코인과 sale의 상관관계")
+    @GetMapping("/relation")
+    public BaseResponse relation(
+            HttpServletRequest request
+    ) {
+        String token = jwtTokenProvider.resolveToken(request);
+        jwtTokenProvider.validateToken(token);
+
+        Authentication authentication = jwtTokenProvider.getAuthentication(token);
+        UserDetails userDetails = (UserDetails) authentication.getPrincipal();
+
+        RelationDto.StatisticResponseDto statisticResponseDto = statisticService.relation();
+
+        return new BaseResponse(HttpStatus.OK, "감정 코인과 sale의 상관관계 조회", statisticResponseDto);
     }
 }

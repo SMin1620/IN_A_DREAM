@@ -260,4 +260,18 @@ public class StatisticService {
 
         relationRepository.save(relation);
     }
+
+    public RelationDto.StatisticResponseDto relation() {
+        Relation relation = relationRepository.findTop1ByOrderByCreatedAtDesc();
+
+        RelationDto.StatisticResponseDto statisticResponseDto = RelationDto.StatisticResponseDto.builder().
+                avgPositiveWhenTrue(relation().getAvgPositiveWhenTrue()).
+                avgPositiveWhenFalse(relation().getAvgPositiveWhenFalse()).
+                avgNeutralWhenFalse(relation().getAvgNeutralWhenFalse()).
+                avgNegativeWhenFalse(relation().getAvgNegativeWhenFalse()).
+                avgNegativeWhenTrue(relation.getAvgNegativeWhenTrue()).
+                avgNeutralWhenTrue(relation.getAvgNeutralWhenTrue()).build();
+
+        return statisticResponseDto;
+    }
 }
