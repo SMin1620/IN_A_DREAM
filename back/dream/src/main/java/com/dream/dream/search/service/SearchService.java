@@ -135,8 +135,6 @@ public class SearchService {
             keyword = Normalizer.normalize(keyword, Normalizer.Form.NFC);
         }
 
-//        String newKeyword = getBestSuggestion(keyword);
-
 
         List<RecommendDto.DiaryRecommendResponseDto> diaries = new ArrayList<>();
 
@@ -166,7 +164,8 @@ public class SearchService {
                             .email(member.getEmail())
                             .nickname(member.getNickname())
                             .gender(member.getGender())
-                            .build()).build());
+                            .build())
+                    .correctKeyword(keyword).build());
         }
 
         if (diaries.isEmpty()) throw new BusinessLogicException(ExceptionCode.DIARY_NOT_FOUND);
