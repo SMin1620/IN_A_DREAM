@@ -137,12 +137,6 @@ public class StatisticController {
     public BaseResponse relation(
             HttpServletRequest request
     ) {
-        String token = jwtTokenProvider.resolveToken(request);
-        jwtTokenProvider.validateToken(token);
-
-        Authentication authentication = jwtTokenProvider.getAuthentication(token);
-        UserDetails userDetails = (UserDetails) authentication.getPrincipal();
-
         RelationDto.StatisticResponseDto statisticResponseDto = statisticService.relation();
 
         return new BaseResponse(HttpStatus.OK, "감정 코인과 sale의 상관관계 조회", statisticResponseDto);
