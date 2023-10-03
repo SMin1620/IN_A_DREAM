@@ -86,7 +86,11 @@ const MainFourth = () => {
           </div>
         </div>
         <div className="StatisticsKeyword">
-          <KeywordCloud startDate="2023-08-26" endDate="2023-12-31" />
+          <KeywordCloud
+            startDate="2023-08-26"
+            endDate="2023-12-31"
+            myDate={false}
+          />
         </div>
       </div>
 

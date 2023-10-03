@@ -20,6 +20,7 @@ const useStatistic = () => {
 
   const getStrict = async () => {
     const response = await fetchStaticStrict();
+    console.log(response);
     if (response) {
       response.data.data.map((data: Ownprops) =>
         setUserActivity((prev: string[]) => [...prev, data.registDate])

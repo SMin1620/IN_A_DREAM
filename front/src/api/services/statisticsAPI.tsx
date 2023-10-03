@@ -26,5 +26,9 @@ export const fetchAllDailyEmotionStatistics = () =>
 export const fetchIndividualEmotionStatistics = () =>
   api1.get("api/statistic/emotion/me");
 
+// 개인 키워드 통계
+export const fetchIndividualKeywordStatistics = () =>
+  api1.get("api/statistic/daily/me");
+
 // 사용자 활동기록 통계
 export const fetchStaticStrict = () => api1.get("api/statistic/strict");

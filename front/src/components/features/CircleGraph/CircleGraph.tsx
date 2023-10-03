@@ -1,5 +1,5 @@
 import React from "react";
-import { PieChart, Pie, Cell, LabelList } from "recharts";
+import { PieChart, Pie, Cell, LabelList, ResponsiveContainer } from "recharts";
 
 interface PieData {
   name: string;
@@ -10,27 +10,36 @@ interface CircleGraphProps {
   data: PieData[];
 }
 
-const COLORS = ["#FF8080", "#BDBDBD", "#9180FF"];
+const COLORS = ["#9180FF", "#FF8080", "#BDBDBD"];
 
 const CircleGraph: React.FC<CircleGraphProps> = ({ data }) => {
   return (
-    <PieChart width={400} height={400}>
-      <Pie
-        dataKey="value"
-        isAnimationActive={false}
-        data={data}
-        cx="50%"
-        cy="40%"
-        outerRadius={100}
-        fill="#8884d8"
-      >
-        {data.map((entry, index) => (
-          <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
-        ))}
+    <ResponsiveContainer width="99%" height="99%">
+      <PieChart>
+        <Pie
+          dataKey="value"
+          isAnimationActive={false}
+          data={data}
+          cy="30%"
+          outerRadius="50%"
+          fill="#8884d8"
+        >
+          {data.map((entry, index) => (
+            <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
+          ))}
 
-        <LabelList dataKey="name" position="outside" />
-      </Pie>
-    </PieChart>
+          <LabelList
+            dataKey="name"
+            position="outside"
+            fontSize="1.2rem"
+            fontFamily="omyu_pretty"
+            offset={10}
+            fill="black"
+            stroke="#646464"
+          />
+        </Pie>
+      </PieChart>
+    </ResponsiveContainer>
   );
 };
 

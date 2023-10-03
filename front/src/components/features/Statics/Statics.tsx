@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import CircleGraph from "../CircleGraph/CircleGraph";
 import useStatistic from "../../../hooks/useStatistic";
+import "./Statics.css";
 
 const Statics = () => {
   const { getStatics, userStatics } = useStatistic();
@@ -9,13 +10,8 @@ const Statics = () => {
     getStatics();
   }, []);
 
-  console.log(userStatics);
-  console.log(userStatics[0]);
-  console.log(userStatics[1]);
-  console.log(userStatics[2]);
-
   return (
-    <div>
+    <div className="statistic">
       <CircleGraph
         data={[
           { name: userStatics[1]?.emotion, value: userStatics[1]?.count },
