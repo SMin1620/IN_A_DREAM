@@ -28,6 +28,7 @@ public class RecommendDto {
         @JsonFormat(pattern = "yyyy-MM-dd")
         private LocalDateTime createdAt;
         private DiaryRecommendMemberResponseDto member;
+        private String correctKeyword;
     }
 
     @Getter
