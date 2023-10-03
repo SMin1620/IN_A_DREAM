@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from "react";
+import { useState, useRef, useEffect, forwardRef, HTMLAttributes } from "react";
 import { useNavigate } from "react-router-dom"; // react-router-dom을 사용한다고 가정
 import styled, { keyframes, css } from "styled-components";
 import castleImg from "../../../assets/image/castle.png";
@@ -90,7 +90,7 @@ const Overlay = styled.div<CastleProps>`
       : "none"};
 `;
 
-const HoldOn: React.FC = () => {
+const HoldOn = forwardRef<HTMLDivElement>((props, ref) => {
   const [scale, setScale] = useState(1);
   const navigate = useNavigate();
   const [fade, setFade] = useState(false);
@@ -151,7 +151,7 @@ const HoldOn: React.FC = () => {
   };
 
   return (
-    <div className="preloader">
+    <div ref={ref} className="preloader">
       <Overlay fade={fade} />
       <PreloaderBtn
         ref={btnRef}
@@ -166,6 +166,6 @@ const HoldOn: React.FC = () => {
       <Castle ref={imageRef} fade={fade} />
     </div>
   );
-};
+});
 
 export default HoldOn;

@@ -26,9 +26,9 @@ const MainPage = () => {
   useEffect(() => {
     const timer = setTimeout(() => {
       setShowIntro(false);
-    }, 6000);
+    }, 6000); // After 5 seconds
 
-    return () => clearTimeout(timer);
+    return () => clearTimeout(timer); // Clean up on unmount
   }, []);
 
   useEffect(() => {

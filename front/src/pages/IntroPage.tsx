@@ -22,6 +22,17 @@ const backWhiteAnimation = keyframes`
   }
 `;
 
+const landAnimation = keyframes`
+  from {
+    opacity: 1;
+    left: 53%;
+  }
+  to {
+    opacity: 0;
+    left: 48%;
+  }
+`;
+
 // styled-component 정의는 컴포넌트 외부에 위치해야 합니다.
 const BackGround = styled.div`
   background-image: url(${bgImage});
@@ -68,7 +79,11 @@ const Moon = styled.img.attrs({
   position: relative;
 `;
 
-const LandImg = styled.div`
+type ShowProps = {
+  show: boolean;
+};
+
+const LandImg = styled.div<ShowProps>`
   background-image: url(${landingImg});
   background-size: cover;
   height: 10vh;
@@ -79,6 +94,12 @@ const LandImg = styled.div`
   left: 53%;
   opacity: 0;
   transition: 5s;
+  animation: ${(props) =>
+    props.show
+      ? css`
+          ${landAnimation} 3s ease-out forwards
+        `
+      : "none"};
 `;
 
 const GlobalStyle = createGlobalStyle`
@@ -118,6 +139,8 @@ const IntroPage: React.FC = () => {
   const ref6 = useRef<HTMLDivElement>(null);
   const ref7 = useRef<HTMLDivElement>(null);
 
+  const holdOnRef = useRef<HTMLDivElement>(null);
+
   const divRefs = [ref1, ref2, ref3, ref4, ref5, ref6, ref7];
 
   const imageRef = useRef<HTMLImageElement | null>(null);
@@ -125,6 +148,8 @@ const IntroPage: React.FC = () => {
   const navigate = useNavigate();
 
   const [fade, setFade] = useState(false);
+
+  const [showLandImg, setShowLandImg] = useState(false);
 
   const handleSkip = () => {
     setFade(true);
@@ -136,6 +161,19 @@ const IntroPage: React.FC = () => {
   };
 
   useEffect(() => {
+    const handleMouseDown = () => {
+      setShowLandImg(true);
+    };
+    const handleMouseUp = () => {
+      setShowLandImg(false);
+    };
+
+    const holdOnElement = holdOnRef.current;
+    if (holdOnElement) {
+      holdOnElement.addEventListener("mousedown", handleMouseDown);
+      holdOnElement.addEventListener("mouseup", handleMouseUp);
+    }
+
     const observerCallback = (entries: IntersectionObserverEntry[]) => {
       entries.forEach((entry) => {
         // 타입 단언을 사용하여 오류를 수정합니다.
@@ -209,6 +247,10 @@ const IntroPage: React.FC = () => {
         if (divRef.current) observer.unobserve(divRef.current);
       });
       window.removeEventListener("scroll", handleScroll);
+      if (holdOnElement) {
+        holdOnElement.removeEventListener("mousedown", handleMouseDown);
+        holdOnElement.removeEventListener("mouseup", handleMouseUp);
+      }
     };
   }, []); // useEffect 안에 빈 dependency array를 넣어주어 컴포넌트가 마운트될 때만 이벤트 리스너가 등록되게 합니다.
 
@@ -272,9 +314,9 @@ const IntroPage: React.FC = () => {
             alt="down arrow icon"
           ></img>
         </div>
-        <HoldOn />
+        <HoldOn ref={holdOnRef} />
         <Overlay fade={fade} />
-        <LandImg ref={ref7} />
+        <LandImg show={showLandImg} ref={ref7} />
         {/* <Castle /> */}
       </BackGround>
     </div>
