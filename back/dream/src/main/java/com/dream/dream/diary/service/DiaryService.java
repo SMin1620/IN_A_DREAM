@@ -429,5 +429,12 @@ public class DiaryService {
     }
 
 
+    public DiaryDto.MyDiaryCountResponseDto myDiaryCount(String email) {
+        Member member = memberRepository.findByEmail(email).orElseThrow(() -> new BusinessLogicException(ExceptionCode.MEMBER_NOT_FOUND));
 
+        Long count = diaryRepository.countByMember(member);
+
+        DiaryDto.MyDiaryCountResponseDto myDiaryCountResponseDto = DiaryDto.MyDiaryCountResponseDto.builder().count(count).build();
+        return myDiaryCountResponseDto;
+    }
 }

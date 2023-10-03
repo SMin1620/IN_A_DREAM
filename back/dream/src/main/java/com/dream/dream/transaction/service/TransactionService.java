@@ -86,4 +86,23 @@ public class TransactionService {
 
         return myBuyHistoryResponseDto;
     }
+
+
+    public TransactionDto.MyTransactionCountResponseDto myTransactionCount(String memberEmail) {
+        Member member = memberRepository.findByEmail(memberEmail).orElseThrow(() -> new BusinessLogicException(ExceptionCode.MEMBER_NOT_FOUND));
+
+        Long sellCount = transactionRepository.countBySeller(member);
+
+        Long buyCount = transactionRepository.countByBuyer(member);
+
+        TransactionDto.MyTransactionCountResponseDto myTransactionCountResponseDto = TransactionDto.MyTransactionCountResponseDto.builder().count(sellCount + buyCount).build();
+        return myTransactionCountResponseDto;
+    }
+
+    public TransactionDto.AllTransactionCountResponseDto allTransactionCount(String memberEmail) {
+        Long count = transactionRepository.count();
+
+        TransactionDto.AllTransactionCountResponseDto allTransactionCountResponseDto = TransactionDto.AllTransactionCountResponseDto.builder().count(count).build();
+        return allTransactionCountResponseDto;
+    }
 }

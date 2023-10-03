@@ -1,6 +1,7 @@
 package com.dream.dream.diary.repository;
 
 import com.dream.dream.diary.entity.Diary;
+import com.dream.dream.member.entity.Member;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -19,4 +20,6 @@ public interface DiaryRepository extends JpaRepository<Diary, Long> {
 //    Page<Diary> findAllByMemberEmail(String email, Pageable pageable);
 
     Page<Diary> findDiariesByOpenIsTrue(Pageable pageable);
+
+    Long countByMember(Member member);
 }

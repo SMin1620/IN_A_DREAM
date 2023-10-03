@@ -197,5 +197,22 @@ public class DiaryController {
         return new BaseResponse(HttpStatus.OK, "거래 변경", diaryMapper.diaryToResponseDto(diary));
     }
 
+    /**
+     * 내가 쓴 일기 개수 조회
+     */
+    @Operation(summary = "내가 쓴 일기 개수 조회")
+    @PutMapping("/myDiaryCount")
+    public BaseResponse myDiaryCount(
+            HttpServletRequest request,
+            @RequestBody DiaryDto.saleDto requestBody) {
+        String token = jwtTokenProvider.resolveToken(request);
+        jwtTokenProvider.validateToken(token);
+
+        String email = jwtTokenProvider.getUserEmail(token);
+
+        DiaryDto.MyDiaryCountResponseDto myDiaryCountResponseDto = diaryService.myDiaryCount(email);
+
+        return new BaseResponse(HttpStatus.OK, "내가 쓴 일기 개수 조회 성공", myDiaryCountResponseDto);
+    }
 
 }

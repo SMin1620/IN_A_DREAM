@@ -48,8 +48,27 @@ public class TransactionDto {
     @AllArgsConstructor
     @Builder
     public static class MyBuyHistoryResponseDto{
-        private String sellerEmail;
+        private String buyerEmail;
         private List<Transaction> transactionList;
     }
+
+    @Getter
+    @Setter
+    @NoArgsConstructor
+    @AllArgsConstructor
+    @Builder
+    public static class MyTransactionCountResponseDto{
+        private Long count;
+    }
+
+    @Getter
+    @Setter
+    @NoArgsConstructor
+    @AllArgsConstructor
+    @Builder
+    public static class AllTransactionCountResponseDto{
+        private Long count;
+    }
+
 
 }
