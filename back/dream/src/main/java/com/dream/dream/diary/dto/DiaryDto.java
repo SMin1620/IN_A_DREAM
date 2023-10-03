@@ -194,4 +194,22 @@ public class DiaryDto {
         private float neutral;
         private float negative;
     }
+
+    /**
+     * 판매 여부와 코인의 상관 관계 kafka consume 용
+     */
+    @Getter
+    @Setter
+    @NoArgsConstructor
+    @AllArgsConstructor
+    @Builder
+    @ToString
+    public static class StatisticsSparkConsume{
+        private float avgNegativeWhenTrue;
+        private float avgPositiveWhenTrue;
+        private float avgNeutralWhenTrue;
+        private float avgNegativeWhenFalse;
+        private float avgPositiveWhenFalse;
+        private float avgNeutralWhenFalse;
+    }
 }

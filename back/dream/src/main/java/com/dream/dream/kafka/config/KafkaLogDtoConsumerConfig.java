@@ -56,9 +56,29 @@ public class KafkaLogDtoConsumerConfig {
     }
 
     @Bean
+    public ConsumerFactory<String, DiaryDto.StatisticsSparkConsume> statisticsConsumer() {
+
+        Map<String, Object> configs = new HashMap<>();
+        configs.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, bootstrapServers);
+        configs.put(ConsumerConfig.GROUP_ID_CONFIG, "loggroup");
+
+        return new DefaultKafkaConsumerFactory<>(
+                configs,
+                new StringDeserializer(),
+                new JsonDeserializer<>(DiaryDto.StatisticsSparkConsume.class,false));
+    }
+
+    @Bean
     public ConcurrentKafkaListenerContainerFactory<String, DiaryDto.SparkConsume> diaryListener(){
         ConcurrentKafkaListenerContainerFactory<String, DiaryDto.SparkConsume> factory = new ConcurrentKafkaListenerContainerFactory<>();
         factory.setConsumerFactory(diaryConsumer());
+        return factory;
+    }
+
+    @Bean
+    public ConcurrentKafkaListenerContainerFactory<String, DiaryDto.StatisticsSparkConsume> statisticsListener(){
+        ConcurrentKafkaListenerContainerFactory<String, DiaryDto.StatisticsSparkConsume> factory = new ConcurrentKafkaListenerContainerFactory<>();
+        factory.setConsumerFactory(statisticsConsumer());
         return factory;
     }
 }

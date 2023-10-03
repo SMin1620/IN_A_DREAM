@@ -210,6 +210,12 @@ public class DiaryService {
         }
     }
 
+    @Transactional
+    @KafkaListener(topics = "${message.topic.listenStatistics}", groupId = ConsumerConfig.GROUP_ID_CONFIG, containerFactory = "statisticsListener")
+    public void listen_statistics(DiaryDto.StatisticsSparkConsume message) {
+
+    }
+
     /**
      * 꿈 일기 생성 서비스 임시사용
      */
