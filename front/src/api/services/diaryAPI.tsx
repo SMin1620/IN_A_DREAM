@@ -73,3 +73,14 @@ export const fetchDiaryWithKeyword = (keyword: string | undefined) =>
   api1.get(`/api/search`, {
     params: { keyword },
   });
+
+// 내 거래 횟수 조회
+export const fetchMyTransactionCount = () =>
+  api1.get(`/api/transaction/myTransactionCount`);
+
+// 전체 거래 횟수 조회
+export const fetchAllTransactionCount = () =>
+  api1.get(`/api/transaction/allTransactionCount`);
+
+// 내가 쓴 일기 갯수 조회
+export const fetchMyDiaryCount = () => api1.get(`/api/diary/myDiaryCount`);

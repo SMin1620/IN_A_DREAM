@@ -10,6 +10,8 @@ import { SERVER_URL } from "../../constants";
 
 import KeywordCloud from "../features/KeywordCloud/KeywordCloud";
 
+import useFourthpageStatistics from "../../hooks/useFourthpageStatistics";
+
 const MainFourth = () => {
   const [diaries, setDiaries] = useState<DiaryInfo[]>([]);
   const {
@@ -17,6 +19,9 @@ const MainFourth = () => {
     isLoading,
     error,
   } = useAllDiary({ page: 0, size: 10 });
+
+  const { myTransactionCount, allTransactionCount, myDiaryCount } =
+    useFourthpageStatistics();
 
   const navigate = useNavigate();
 
@@ -46,7 +51,7 @@ const MainFourth = () => {
           <div className="MyStatistics">
             <div className="MyStatistics-written">
               {/* 총 내가 쓴 일기 개수 */}
-              <h1>1</h1>
+              <h1>{myDiaryCount}</h1>
               <h2>
                 MY DREAM DIARY <br />
                 ENTRIES PENNED
@@ -54,7 +59,7 @@ const MainFourth = () => {
             </div>
             <div className="MyStatistics-transaction">
               {/* >내가 거래한 일기 개수 */}
-              <h1>1</h1>
+              <h1>{myTransactionCount}</h1>
               <h2>
                 MY DREAM DIARY <br />
                 ENTRIES TRADED
@@ -72,7 +77,7 @@ const MainFourth = () => {
             </div>
             <div className="AllUserStatistics-transaction">
               {/* 모든 유저가 거래한 일기 개수 */}
-              <h1>5,486,209,356</h1>
+              <h1>{allTransactionCount}</h1>
               <h2>
                 EVERY DREAM DIARY <br />
                 TRADED SO FAR
