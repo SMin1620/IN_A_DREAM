@@ -39,6 +39,7 @@
     "react-dom": "^18.2.0",
     "react-flip-move": "^3.0.5",
     "react-pageflip": "^2.0.3",
+    "react-progressive-graceful-image": "^0.7.0",
     "react-query": "^3.39.3",
     "react-redux": "^8.1.2",
     "react-responsive": "^9.0.2",
