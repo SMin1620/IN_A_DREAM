@@ -14,26 +14,28 @@ interface Item {
 interface KeywordCloudProps {
   startDate: string;
   endDate: string;
-  myDate: boolean;
+  mydate: boolean;
 }
 
-const KeywordCloudWrapper = S.div<{ myDate?: boolean }>`
+const KeywordCloudWrapper = S.div.withConfig({
+  shouldForwardProp: (prop) => !["mydate"].includes(prop),
+})<{ mydate?: boolean }>`
   background-color: #eee;
-  width: ${(props) => (props.myDate ? "20vw" : "30vw")};
-  height: ${(props) => (props.myDate ? "15vw" : "25vw")};
+  width: ${(props) => (props.mydate ? "20vw" : "30vw")};
+  height: ${(props) => (props.mydate ? "15vw" : "25vw")};
   overflow: hidden;
   border-radius: 20px;
 
   @media (max-width: 768px) {
-    width: ${(props) => (props.myDate ? "30vw" : "50vw")};
-    height: ${(props) => (props.myDate ? "30vw" : "50vw")};
+    width: ${(props) => (props.mydate ? "30vw" : "50vw")};
+    height: ${(props) => (props.mydate ? "30vw" : "50vw")};
   }
 `;
 
 const KeywordCloud: React.FC<KeywordCloudProps> = ({
   startDate,
   endDate,
-  myDate,
+  mydate,
 }) => {
   const response = useKeywordStatistics(startDate, endDate);
   const myResponse = useMyKeywordStatistics();
@@ -61,10 +63,10 @@ const KeywordCloud: React.FC<KeywordCloudProps> = ({
     return <div>Loading...</div>;
   }
 
-  const words = transformData(myDate ? myData : data);
+  const words = transformData(mydate ? myData : data);
 
   return (
-    <KeywordCloudWrapper myDate={myDate}>
+    <KeywordCloudWrapper mydate={mydate}>
       <WordCloud
         data={words}
         fontSize={fontSize}
