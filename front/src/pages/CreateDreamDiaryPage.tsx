@@ -6,6 +6,8 @@ import DateForm from "../components/common/DateForm";
 import { border } from "./../../node_modules/@mui/system/index.d";
 import useKarlo from "../hooks/useKarlo";
 import Loading from "../components/features/LoadingComponents/Loading";
+import ProgressiveImage from "react-progressive-graceful-image";
+import placeholderSrc from "../assets/background/loading4.png";
 
 const CreateDreamDiaryPage = () => {
   const [sell, setSell] = useState<boolean>(false);
@@ -22,13 +24,28 @@ const CreateDreamDiaryPage = () => {
           className={`create-dream-diary-left ${diaryImage ? "on-diary" : ""}`}
         >
           <div className="create-dream-diary-left-top">
-            {Karloloading ? (
+            <ProgressiveImage
+              src={imageUrl as string}
+              placeholder={placeholderSrc}
+            >
+              {(src, loading) => (
+                <img
+                  className={`image${loading ? " loading" : " loaded"}`}
+                  src={src}
+                  alt="diagram"
+                  width="700"
+                  height="465"
+                />
+              )}
+            </ProgressiveImage>
+
+            {/* {Karloloading ? (
               <div>
                 <Loading />
               </div>
             ) : (
               imageUrl && <img src={imageUrl} alt="diagram" />
-            )}
+            )} */}
           </div>
         </div>
 

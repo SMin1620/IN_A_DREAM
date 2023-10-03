@@ -85,7 +85,7 @@ const NavbarMyModal: React.FC<isModalOpen> = ({
       {isModalOpen && <ExchangeCoin closeModal={closeModal} />}
       <div className="coin-box">
         {Object.keys(COIN_INFO).map((key) => (
-          <CoinComponent>
+          <CoinComponent key={key}>
             <img src={COIN_INFO[key].imgSrc} alt={`${key} Coin`} />
             <span className="coin-box-count">
               {userInfo && userInfo[(key + "Coin") as keyof UserInfo]}
