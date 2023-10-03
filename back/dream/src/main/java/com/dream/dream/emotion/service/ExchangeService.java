@@ -24,17 +24,17 @@ public class ExchangeService {
         Member member = memberRepository.findByEmail(memberEmail).orElseThrow(()->new BusinessLogicException(ExceptionCode.MEMBER_NOT_FOUND));
         int coin = requestBody.getCoin();
         if(requestBody.getKind().equals("positive")){
-            if(member.getPositiveCoin() - coin < 0) throw new BusinessLogicException(ExceptionCode.COIN_LACK);
+            if(member.getNeutralCoin() - coin < 0 || member.getNegativeCoin() - coin < 0) throw new BusinessLogicException(ExceptionCode.COIN_LACK);
             member.setPositiveCoin(member.getPositiveCoin() + coin);
             member.setNeutralCoin(member.getNeutralCoin() - coin);
             member.setNegativeCoin(member.getNegativeCoin() - coin);
         } else if (requestBody.getKind().equals("negative")) {
-            if(member.getNegativeCoin() - coin < 0) throw new BusinessLogicException(ExceptionCode.COIN_LACK);
+            if(member.getPositiveCoin() - coin < 0 || member.getNeutralCoin() - coin < 0) throw new BusinessLogicException(ExceptionCode.COIN_LACK);
             member.setPositiveCoin(member.getPositiveCoin() - coin);
             member.setNeutralCoin(member.getNeutralCoin() - coin);
             member.setNegativeCoin(member.getNegativeCoin() + coin);
         }else if (requestBody.getKind().equals("neutral")){
-            if(member.getNeutralCoin() - coin < 0) throw new BusinessLogicException(ExceptionCode.COIN_LACK);
+            if(member.getPositiveCoin() - coin < 0 || member.getNegativeCoin() - coin < 0) throw new BusinessLogicException(ExceptionCode.COIN_LACK);
             member.setPositiveCoin(member.getPositiveCoin() - coin);
             member.setNeutralCoin(member.getNeutralCoin() + coin);
             member.setNegativeCoin(member.getNegativeCoin() - coin);

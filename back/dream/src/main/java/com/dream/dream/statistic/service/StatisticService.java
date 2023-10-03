@@ -52,7 +52,7 @@ public class StatisticService {
         SearchRequest searchRequest = new SearchRequest(statisticDailyName);
         searchRequest.source().size(0);
 
-        if (from.equals("nullT00:00:00") && to.equals("nullT00:00:00")) {
+        if (! from.equals("nullT00:00:00") && ! to.equals("nullT00:00:00")) {
             searchRequest.source().query(QueryBuilders.rangeQuery("@timestamp").gte(from).lt(to));
         }
 //        searchRequest.source().query(QueryBuilders.rangeQuery("@timestamp").gte(from).lt(to));

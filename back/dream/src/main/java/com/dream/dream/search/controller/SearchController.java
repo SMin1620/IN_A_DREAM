@@ -22,6 +22,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.io.IOException;
 import java.util.List;
 
 @RestController
@@ -44,7 +45,7 @@ public class SearchController {
     public BaseResponse searchDiary(
             HttpServletRequest request,
             @RequestParam(value = "keyword") String keyword
-    ) {
+    ) throws IOException {
         //////////////////////// 토큰으로 인가된 사용자 정보 처리하는 로직
         String token = jwtTokenProvider.resolveToken(request);
         jwtTokenProvider.validateToken(token);

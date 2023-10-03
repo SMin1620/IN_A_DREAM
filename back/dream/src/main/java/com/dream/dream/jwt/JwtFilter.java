@@ -1,5 +1,7 @@
 package com.dream.dream.jwt;
 
+import com.dream.dream.exception.BusinessLogicException;
+import com.dream.dream.exception.ExceptionCode;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
@@ -31,7 +33,7 @@ public class JwtFilter extends OncePerRequestFilter {
      */
 
     @Override
-    protected  void doFilterInternal(
+    protected void doFilterInternal(
             HttpServletRequest request,
             HttpServletResponse response,
             FilterChain filterChain
@@ -48,12 +50,12 @@ public class JwtFilter extends OncePerRequestFilter {
             SecurityContextHolder.clearContext();
 //            throw new IllegalArgumentException("레디스 잘못 됨");
 //            throw new BaseException(REDIS_ERROR);
-            return;
+            throw new BusinessLogicException(ExceptionCode.INVALID_REFRESH_TOKEN);
         }catch (Exception e){
             e.printStackTrace();
 //            throw new BaseException(INVALID_JWT);
 //            throw new IllegalArgumentException("토큰 잘못 됨");
-            return;
+            throw new BusinessLogicException(ExceptionCode.INVALID_REFRESH_TOKEN);
         }
         filterChain.doFilter(request, response);
     }

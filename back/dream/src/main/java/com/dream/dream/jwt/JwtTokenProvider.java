@@ -1,5 +1,7 @@
 package com.dream.dream.jwt;
 
+import com.dream.dream.exception.BusinessLogicException;
+import com.dream.dream.exception.ExceptionCode;
 import io.jsonwebtoken.*;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -164,10 +166,10 @@ public class JwtTokenProvider {
             Jwts.parser().setSigningKey(secretKey).parseClaimsJws(token);
             return true;
         }catch(ExpiredJwtException e){
-            e.printStackTrace();
-            throw new IllegalArgumentException("토큰 잘못 됨1");
+            return false;
         }catch(JwtException e){
-            throw new IllegalArgumentException("토큰 잘못 됨2");
+            e.printStackTrace();
+            return false;
         }
     }
 

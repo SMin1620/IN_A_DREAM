@@ -28,13 +28,10 @@ public interface DiaryMapper {
         return result;
     }
 
-    DiaryDto.DiaryDetailResponseDto diaryToDetailResponseDto(Diary diary);
-
-    DiaryDto.DiaryListResponseDto toListResponseDto(Diary diary);
-    List<DiaryDto.DiaryListResponseDto> toListResponseDtos(List<Diary> diaryList);
-
     DiaryDto.SparkProduce toSparkProduce(Diary diary);
 
     Diary sparkConsumeToDiary(DiaryDto.SparkConsume diary);
+
+    DiaryDto.DiaryListResponseDto toListResponseDto(List<DiaryDto.DiaryResponseDto> diaryList, long totalPage, long currPage);
 
 }

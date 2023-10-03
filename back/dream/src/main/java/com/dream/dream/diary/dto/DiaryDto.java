@@ -7,6 +7,7 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.*;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 public class DiaryDto {
 
@@ -108,23 +109,11 @@ public class DiaryDto {
     @NoArgsConstructor
     @AllArgsConstructor
     @Builder
+    @ToString
     public static class DiaryListResponseDto {
-        private Long id;
-        private String image;
-        private String title;
-        private String content;
-//        private float positive;
-//        private float neutral;
-//        private float negative;
-        private int positivePoint;
-        private int neutralPoint;
-        private int negativePoint;
-        private int likeCount;
-        private boolean open;
-        private boolean sale;
-        @JsonFormat(pattern = "yyyy-MM-dd")
-        private LocalDateTime createdAt;
-        private Emotion emotion;
+        private long totalPage;
+        private long currPage;
+        private List<DiaryResponseDto> diaryList;
     }
 
 

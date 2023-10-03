@@ -160,16 +160,16 @@ public class DiaryService {
         long memberId = message.getMemberId();
         Member member = memberRepository.findById(memberId).orElseThrow(() -> new BusinessLogicException(ExceptionCode.MEMBER_NOT_FOUND));
 
-        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        System.out.println(principal);
+//        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+//        System.out.println(principal);
 
         // 인증 객체 생성
-        UserDetails userDetails = userDetailsService.loadUserByUsername(member.getEmail());
-
-        Authentication auth = new UsernamePasswordAuthenticationToken(member.getEmail(), "", userDetails.getAuthorities());
-
-        // Security Context 설정
-        SecurityContextHolder.getContext().setAuthentication(auth);
+//        UserDetails userDetails = userDetailsService.loadUserByUsername(member.getEmail());
+//
+//        Authentication auth = new UsernamePasswordAuthenticationToken(member.getEmail(), "", userDetails.getAuthorities());
+//
+//        // Security Context 설정
+//        SecurityContextHolder.getContext().setAuthentication(auth);
 
         Diary diary = diaryMapper.sparkConsumeToDiary(message);
 

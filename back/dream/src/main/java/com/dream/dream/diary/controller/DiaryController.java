@@ -5,6 +5,8 @@ import com.dream.dream.diary.dto.DiaryDto;
 import com.dream.dream.diary.entity.Diary;
 import com.dream.dream.diary.mapper.DiaryMapper;
 import com.dream.dream.diary.service.DiaryService;
+import com.dream.dream.exception.BusinessLogicException;
+import com.dream.dream.exception.ExceptionCode;
 import com.dream.dream.jwt.JwtTokenProvider;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -44,7 +46,12 @@ public class DiaryController {
             @RequestBody DiaryDto.DiaryCreateRequestDto requestBody) {
 
         String token = jwtTokenProvider.resolveToken(request);
-        jwtTokenProvider.validateToken(token);
+
+        if(!jwtTokenProvider.validateToken(token)){
+            throw new BusinessLogicException(ExceptionCode.INVALID_ACCESS_TOKEN);
+        }
+
+
         String memberEmail = jwtTokenProvider.getUserEmail(token);
 
         return diaryService.diaryCreate(requestBody, memberEmail);
@@ -79,7 +86,10 @@ public class DiaryController {
             HttpServletRequest request,
             @PageableDefault(size = 3, sort = "id", direction = Sort.Direction.DESC) Pageable pageable) {
         String token = jwtTokenProvider.resolveToken(request);
-        jwtTokenProvider.validateToken(token);
+
+        if(!jwtTokenProvider.validateToken(token)){
+            throw new BusinessLogicException(ExceptionCode.INVALID_ACCESS_TOKEN);
+        }
 
         String memberEmail = jwtTokenProvider.getUserEmail(token);
 
@@ -88,7 +98,7 @@ public class DiaryController {
 
         List<Boolean> likedList = diaryService.getMyLikes(memberEmail, diaryList);
 
-        return new BaseResponse(HttpStatus.OK, "일기 목록 반환 성공", diaryMapper.toResponseDtos(diaryList, likedList));
+        return new BaseResponse(HttpStatus.OK, "일기 목록 반환 성공", diaryMapper.toListResponseDto(diaryMapper.toResponseDtos(diaryList, likedList), diaryPage.getTotalPages(), diaryPage.getNumber()));
     }
 
     /**
@@ -107,7 +117,7 @@ public class DiaryController {
         List<Diary> diaryList = diaryPage.getContent();
         List<Boolean> likedList = diaryService.getMyLikes(memberEmail, diaryList);
 
-        return new BaseResponse(HttpStatus.OK, "내 일기 목록 반환 성공", diaryMapper.toResponseDtos(diaryList, likedList));
+        return new BaseResponse(HttpStatus.OK, "내 일기 목록 반환 성공", diaryMapper.toListResponseDto(diaryMapper.toResponseDtos(diaryList, likedList), diaryPage.getTotalPages(), diaryPage.getNumber()));
     }
 
     /**
