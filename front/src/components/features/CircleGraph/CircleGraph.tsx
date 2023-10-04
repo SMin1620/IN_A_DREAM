@@ -1,5 +1,12 @@
 import React from "react";
-import { PieChart, Pie, Cell, LabelList, ResponsiveContainer } from "recharts";
+import {
+  PieChart,
+  Pie,
+  Cell,
+  LabelList,
+  Tooltip,
+  ResponsiveContainer,
+} from "recharts";
 
 interface PieData {
   name: string;
@@ -31,13 +38,14 @@ const CircleGraph: React.FC<CircleGraphProps> = ({ data }) => {
           <LabelList
             dataKey="name"
             position="outside"
-            fontSize="1.4vw"
+            fontSize="1rem"
             fontFamily="omyu_pretty"
             offset={10}
             fill="black"
             stroke="#646464"
           />
         </Pie>
+        <Tooltip />
       </PieChart>
     </ResponsiveContainer>
   );

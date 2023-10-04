@@ -4,7 +4,7 @@ import {
   fetchIndividualKeywordStatistics,
 } from "../api/services/statisticsAPI";
 
-export const useKeywordStatistics = (fromDate: string, toDate: string) => {
+export const useKeywordStatistics = (fromDate?: string, toDate?: string) => {
   return useQuery(["KeywordStatistics", fromDate, toDate], () =>
     fetchKeywordStatistics(fromDate, toDate)
   );

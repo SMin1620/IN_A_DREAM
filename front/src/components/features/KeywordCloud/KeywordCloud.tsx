@@ -12,30 +12,36 @@ interface Item {
 }
 
 interface KeywordCloudProps {
-  startDate: string;
-  endDate: string;
+  startDate?: string;
+  endDate?: string;
   mydate: boolean;
+  width?: string;
+  height?: string;
 }
 
-const KeywordCloudWrapper = S.div.withConfig({
-  shouldForwardProp: (prop) => !["mydate"].includes(prop),
-})<{ mydate?: boolean }>`
+const KeywordCloudWrapper = S.div<{ width?: string; height?: string }>`
   background-color: #eee;
-  width: ${(props) => (props.mydate ? "20vw" : "30vw")};
-  height: ${(props) => (props.mydate ? "15vw" : "25vw")};
+  width: ${(props) => props.width || "30vw"};
+  height: ${(props) => props.height || "25vw"};
   overflow: hidden;
   border-radius: 20px;
-
-  
+  @media (max-width: 768px) {
+    width: 80vw;
+    height: 80vw;
+  }
 `;
 
 const KeywordCloud: React.FC<KeywordCloudProps> = ({
   startDate,
   endDate,
   mydate,
+  width,
+  height,
 }) => {
   const response = useKeywordStatistics(startDate, endDate);
   const myResponse = useMyKeywordStatistics();
+
+  console.log(response, "response");
 
   const fontSize = useCallback(
     (word: { value: number }) => Math.log2(word.value) * 5,
@@ -63,7 +69,7 @@ const KeywordCloud: React.FC<KeywordCloudProps> = ({
   const words = transformData(mydate ? myData : data);
 
   return (
-    <KeywordCloudWrapper mydate={mydate}>
+    <KeywordCloudWrapper width={width} height={height}>
       <WordCloud
         data={words}
         fontSize={fontSize}

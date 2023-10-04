@@ -2,20 +2,25 @@
   display: none;
 }
 .rdrDateRangePickerWrapper {
-  width: 50vw;
-  background-color: blue;
+  width: 40vw;
+  border-radius: 20px;
 }
-
+.rdrDateDisplayWrapper {
+  border-top-right-radius: 20px;
+  border-top-left-radius: 20px;
+}
 .rdrCalendarWrapper {
   width: 100%;
+  border-radius: 20px;
 }
 
 .rdrDateRangeWrapper {
   width: 100%;
+  border-radius: 20px;
 }
 
 .statistics-main {
-  background-color: white;
+  background-color: #fadad1;
 }
 
 .open {
@@ -28,4 +33,89 @@
   height: 0;
   overflow: hidden;
   transition: height 0.5s ease-in-out;
+}
+
+.keyword-statistics {
+  display: flex;
+  justify-content: space-around;
+  margin: 0 1rem;
+  margin-left: 5rem;
+}
+
+.keyword-statistics-left {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-bottom: 1vh;
+  padding-top: 2vh;
+}
+
+.keyword-statistics-left p {
+  font-size: 1.5rem;
+  margin: 1vh 0;
+}
+
+.keyword-statistics-left i {
+  font-size: 2.5vw;
+  font-style: italic;
+  color: #646464;
+  margin: 1rem 0;
+}
+
+.keyword-statistics-left p:hover {
+  color: #ff7a00;
+}
+
+.emotion-statistics-left {
+  width: 50vh;
+  height: 50vh;
+  padding-top: 2rem;
+}
+
+.bar-statistics {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-bottom: 1rem;
+}
+
+.bar-statics-main {
+  width: 80vw;
+  height: 50vh;
+}
+
+@media (max-width: 768px) {
+  .statistics-main {
+    width: 100vw;
+    margin: 0;
+    padding: 0;
+  }
+  .keyword-statistics {
+    display: flex;
+    flex-direction: column;
+    margin: 0;
+  }
+
+  .keyword-statistics-left {
+    padding: 0;
+    padding-top: 1rem;
+  }
+
+  .rdrDateRangePickerWrapper {
+    width: 60vw;
+    border-radius: 20px;
+  }
+
+  .open {
+    height: 50vh;
+  }
+
+  .emotion-statistics-left {
+    width: 100vw;
+    height: 100vw;
+  }
+
+  .bar-statics-main {
+    width: 90vw;
+  }
 }

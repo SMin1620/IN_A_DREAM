@@ -51,6 +51,8 @@ const MyPage = () => {
             startDate="2023-08-26"
             endDate="2023-12-31"
             mydate={true}
+            width="20vw"
+            height="15vw"
           />
         </div>
         <div className="mypage-top-statistics">
