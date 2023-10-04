@@ -12,9 +12,9 @@ import {
 import { useRoute, useLocation } from "wouter";
 import { easing } from "maath";
 import getUuid from "uuid-by-string";
-import { extend } from "@react-three/fiber";
-import { OrbitControls, TransformControls } from "three-stdlib";
-extend({ OrbitControls, TransformControls });
+// import { extend } from "@react-three/fiber";
+// import { OrbitControls, TransformControls } from "three-stdlib";
+// extend({ OrbitControls, TransformControls });
 
 const GalleryName = {
   neutralPoint: "SOSO GALLERY",
@@ -32,19 +32,20 @@ export const ImageGallery = ({ images, sortKey }) => (
       <Frames images={images} sortKey={sortKey} />
       <mesh rotation={[-Math.PI / 2, 0, 0]}>
         <planeGeometry args={[50, 50]} />
-
-        <MeshReflectorMaterial
-          blur={[300, 100]}
-          resolution={2048}
-          mixBlur={1}
-          mixStrength={80}
-          roughness={1}
-          depthScale={1.2}
-          minDepthThreshold={0.4}
-          maxDepthThreshold={1.4}
-          color="#050505"
-          metalness={0.5}
-        />
+        <>
+          <MeshReflectorMaterial
+            blur={[300, 100]}
+            resolution={2048}
+            mixBlur={1}
+            mixStrength={80}
+            roughness={1}
+            depthScale={1.2}
+            minDepthThreshold={0.4}
+            maxDepthThreshold={1.4}
+            color="#050505"
+            metalness={0.5}
+          />
+        </>
       </mesh>
     </group>
     <Environment preset="city" />
