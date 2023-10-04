@@ -27,8 +27,6 @@ const ImgCard: React.FC<ImgCardProps> = ({
 
   if (isMobile) {
     borderRadius = "8px";
-    width = "20vw";
-    height = "15vw";
   }
 
   const cardStyle: React.CSSProperties = {
