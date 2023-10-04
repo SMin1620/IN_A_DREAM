@@ -12,6 +12,7 @@ const useRecomendDiary = () => {
       const response = await recommendedDiaries(diaryId);
       setRecomendDiaryList(response.data.data);
     } catch (error: any) {
+      console.log("현재비슷한일기없어오");
       console.error(error);
     }
   };

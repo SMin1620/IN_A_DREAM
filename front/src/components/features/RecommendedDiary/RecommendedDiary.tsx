@@ -24,13 +24,13 @@ const RecommendedDiary: React.FC<OwnProps> = ({ diaryId }) => {
   };
 
   return recomendDiaryList ? (
-    <>
+    <div style={{ margin: "5%" }}>
       <h1>이 일기와 비슷한 일기들</h1>
       <div className="recommend-diary-box">
         {recomendDiaryList.map((diary: DiaryInfo) => {
           return (
             <span key={diary.id} className="recommend-diary">
-              <SlideSpan startposition={1200} endposition={-1200} speed={70}>
+              <SlideSpan startposition={300} endposition={-300} speed={15}>
                 <img
                   src={`${SERVER_URL}/${diary.image}`}
                   alt="비슷한 일기들"
@@ -43,8 +43,10 @@ const RecommendedDiary: React.FC<OwnProps> = ({ diaryId }) => {
           );
         })}
       </div>
-    </>
-  ) : null;
+    </div>
+  ) : (
+    <h1>비슷한 일기가 없어용</h1>
+  );
 };
 
 export default RecommendedDiary;

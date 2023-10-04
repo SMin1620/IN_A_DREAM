@@ -31,8 +31,8 @@
 
 @media (max-width: 1024px) {
   .detail-etc {
-    display: flex;
-    flex-direction: column;
+    /* display: flex;
+    flex-direction: column; */
   }
 
   .etc-buy {
