@@ -1,4 +1,5 @@
 import * as THREE from "three";
+import { MeshStandardMaterial } from "three";
 import { useEffect, useRef, useState } from "react";
 import { Canvas, useFrame, extend } from "@react-three/fiber";
 import {
@@ -30,7 +31,8 @@ export const ImageGallery = ({ images, sortKey }) => (
       <Frames images={images} sortKey={sortKey} />
       <mesh rotation={[-Math.PI / 2, 0, 0]}>
         <planeGeometry args={[50, 50]} />
-        {/* <MeshReflectorMaterial
+        <MeshReflectorMaterial
+          attach="material"
           blur={[300, 100]}
           resolution={2048}
           mixBlur={1}
@@ -41,7 +43,7 @@ export const ImageGallery = ({ images, sortKey }) => (
           maxDepthThreshold={1.4}
           color="#050505"
           metalness={0.5}
-        /> */}
+        />
       </mesh>
     </group>
     <Environment preset="city" />
@@ -86,7 +88,7 @@ function Frames({
       )}
       onPointerMissed={() => setLocation(`/gallery/${sortKey}`)}
     >
-      <Html
+      {/* <Html
         position={[-1, 3.3, 0]}
         style={{
           color: "#C3BAA5",
@@ -99,8 +101,7 @@ function Frames({
         }}
       >
         {GalleryName[sortKey]}
-        {/* {sortKey} */}
-      </Html>
+      </Html> */}
       {images.map(
         (props) => <Frame key={props.url} {...props} /> /* prettier-ignore */
       )}

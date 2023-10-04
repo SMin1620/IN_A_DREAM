@@ -8,7 +8,7 @@
     "@mui/icons-material": "^5.14.8",
     "@mui/material": "^5.14.10",
     "@react-spring/web": "^9.7.3",
-    "@react-three/drei": "^9.85.0",
+    "@react-three/drei": "^9.86.3",
     "@react-three/fiber": "^8.14.3",
     "@reduxjs/toolkit": "^1.9.5",
     "@testing-library/jest-dom": "^5.17.0",
