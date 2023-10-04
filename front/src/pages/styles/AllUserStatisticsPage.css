@@ -1,6 +1,31 @@
 .rdrDefinedRangesWrapper {
   display: none;
 }
-.rdrCalendarWrapper rdrDateRangeWrapper {
-  width: 512px;
+.rdrDateRangePickerWrapper {
+  width: 50vw;
+  background-color: blue;
+}
+
+.rdrCalendarWrapper {
+  width: 100%;
+}
+
+.rdrDateRangeWrapper {
+  width: 100%;
+}
+
+.statistics-main {
+  background-color: white;
+}
+
+.open {
+  height: 40vh;
+  transition: height 0.5s ease-in-out;
+  overflow: hidden;
+}
+
+.close {
+  height: 0;
+  overflow: hidden;
+  transition: height 0.5s ease-in-out;
 }

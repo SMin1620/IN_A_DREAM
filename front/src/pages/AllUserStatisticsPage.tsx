@@ -10,12 +10,14 @@ import "react-date-range-ts/dist/theme/default.css";
 import { ko } from "date-fns/locale";
 
 const AllUserStatisticsPage = () => {
-  //일단 날짜 하드코딩 나중에 바꾸자
+  const [sDate, setSDate] = useState(formatDate(new Date()));
+  const [eDate, setEDate] = useState(formatDate(new Date()));
+
   const {
     data: response,
     isLoading,
     isError,
-  } = useEmotionStatistics("2023-01-01", "2023-12-01");
+  } = useEmotionStatistics(sDate, eDate);
 
   const data = response?.data.data;
   const chartData = data?.map((item: any) => ({
@@ -23,23 +25,15 @@ const AllUserStatisticsPage = () => {
     value: item.count,
   }));
 
-  const selectionRange = {
-    startDate: new Date(),
-    endDate: new Date(),
-    key: "selection",
-  };
+  function formatDate(date: any) {
+    const year = date.getFullYear();
+    const month = String(date.getMonth() + 1).padStart(2, "0");
+    const day = String(date.getDate()).padStart(2, "0");
 
-  const handleSelect = (event: any) => {
-    console.log("start", event.selection.startDate);
-    console.log("end", event.selection.endDate);
-    setState([
-      {
-        startDate: event.selection.startDate,
-        endDate: event.selection.endDate,
-        key: "selection",
-      },
-    ]);
-  };
+    return `${year}-${month}-${day}`;
+  }
+
+  const [totalKeyword, setTotalKeyword] = useState<boolean>(false);
 
   const [state, setState] = useState([
     {
@@ -49,20 +43,39 @@ const AllUserStatisticsPage = () => {
     },
   ]);
 
+  const handleSelect = (event: any) => {
+    setSDate(formatDate(event.selection.startDate));
+    setEDate(formatDate(event.selection.endDate));
+    setState([
+      {
+        startDate: event.selection.startDate,
+        endDate: event.selection.endDate,
+        key: "selection",
+      },
+    ]);
+  };
+
+  console.log("sDate", sDate);
+  console.log("eDate", eDate);
+
   if (isLoading) return <div>Loading...</div>;
   if (isError || !response) return <div>Error occurred</div>;
   return (
-    <div>
-      <div>CircleGraph</div>
+    <div className="statistics-main">
       <div className="date-picker">
-        <DateRangePicker
-          locale={ko}
-          showSelectionPreview={true}
-          months={2}
-          direction="horizontal"
-          ranges={state}
-          onChange={(event) => handleSelect(event)}
-        />
+        <p onClick={() => setTotalKeyword(!totalKeyword)}>
+          날짜를 선택해 주세요!
+        </p>
+        <div className={totalKeyword ? "open" : "close"}>
+          <DateRangePicker
+            locale={ko}
+            showSelectionPreview={true}
+            months={2}
+            direction="horizontal"
+            ranges={state}
+            onChange={(event) => handleSelect(event)}
+          />
+        </div>
       </div>
 
       <div>
