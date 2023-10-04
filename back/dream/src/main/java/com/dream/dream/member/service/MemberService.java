@@ -105,7 +105,8 @@ public class MemberService {
             HttpServletResponse response
     ){
         // 1. Request Header 에서 JWT Token 추출
-        String token = jwtTokenProvider.resolveToken(request);
+//        String token = jwtTokenProvider.resolveToken(request);
+        String token = jwtTokenProvider.resolveRefreshToken(request);
 
         // 2.엑세스 토큰 유효성 검사
 //        if(token == null || !jwtTokenProvider.validateToken(token)){
