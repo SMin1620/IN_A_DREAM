@@ -1,18 +1,14 @@
 import * as THREE from "three";
-import { MeshStandardMaterial } from "three";
 import { useEffect, useRef, useState } from "react";
-import { Canvas, useFrame, extend } from "@react-three/fiber";
-import {
-  useCursor,
-  MeshReflectorMaterial,
-  Image,
-  Text,
-  Environment,
-  Html,
-} from "@react-three/drei";
+import { Canvas, useFrame } from "@react-three/fiber";
+import { useCursor, Image, Text, Environment, Html } from "@react-three/drei";
 import { useRoute, useLocation } from "wouter";
 import { easing } from "maath";
 import getUuid from "uuid-by-string";
+
+import { extend } from "@react-three/fiber";
+import { MeshReflectorMaterial } from "@react-three/drei";
+
 extend({ MeshReflectorMaterial });
 
 const GalleryName = {
