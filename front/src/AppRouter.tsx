@@ -14,12 +14,14 @@ import DreamShopPage from "./pages/DreamShopPage";
 import DreamDetailPage from "./pages/DreamDetailPage";
 import AllUserStatisticsPage from "./pages/AllUserStatisticsPage";
 import CloudPage from "./pages/CloudPage";
+import StartPage from "./pages/StartPage";
 
 function AppRouter() {
   return (
     <div>
       <BrowserRouter>
         <Routes>
+          <Route path="/" element={<StartPage />}></Route>
           <Route path="/Main" element={<MainPage />}></Route>
           <Route path="/Intro" element={<IntroPage />}></Route>
           <Route path="/Login" element={<LoginPage />}></Route>
