@@ -1,0 +1,6 @@
+.rdrDefinedRangesWrapper {
+  display: none;
+}
+.rdrCalendarWrapper rdrDateRangeWrapper {
+  width: 512px;
+}
