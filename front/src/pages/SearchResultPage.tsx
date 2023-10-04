@@ -11,15 +11,25 @@ const SearchResultPage = () => {
   const { data: diarieswithKeyword, isLoading } = useDiarywithKeyword(keyword);
 
   const [diaries, setDiaries] = useState<DiaryInfo[]>([]);
+  const [correctedKeyword, setCorrectedKeyword] = useState<string | null>(null);
+
   useEffect(() => {
     if (diarieswithKeyword) {
       setDiaries(diarieswithKeyword.data.data);
+      if (diarieswithKeyword.data.data.length > 0) {
+        setCorrectedKeyword(diarieswithKeyword.data.data[0].correctKeyword);
+      }
     }
   }, [diarieswithKeyword]);
 
   return (
     <div className="search-result-wrapper">
       <Navbar />
+      {keyword !== correctedKeyword && correctedKeyword && (
+        <p style={{ color: "white", fontSize: "30px", marginTop: "5%" }}>
+          수정된 검색어로 검색한 결과: "{correctedKeyword}"
+        </p>
+      )}
       {diaries.length === 0 ? (
         <p style={{ color: "white", fontSize: "200px" }}>
           검색 결과가 없습니다.
