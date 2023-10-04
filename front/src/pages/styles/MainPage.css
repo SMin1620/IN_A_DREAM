@@ -28,3 +28,13 @@
 * {
   cursor: url("../../assets/logo/cursor2.png") 14 14, auto;
 }
+
+.cloud-bar {
+  position: fixed;
+  right: 5%;
+  top: 5%;
+  cursor: pointer;
+  width: 5%;
+  height: auto;
+  z-index: 999;
+}

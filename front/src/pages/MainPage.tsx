@@ -8,14 +8,15 @@ import MainFourth from "../components/layout/MainFourth";
 import MainFifth from "../components/layout/MainFifth";
 import MainSixth from "../components/layout/MainSixth";
 import { useMediaQuery } from "react-responsive";
-// import useMousePosition from "../hooks/useMousPosition";
-// import MouseCursor from "../components/features/MouseCursor/MouseCursor";
+import CloudBar from "../assets/image/cloudBar.png";
+import { useNavigate } from "react-router-dom";
 
 import "./styles/MainPage.css";
 
 const MainPage = () => {
   const [showIntro, setShowIntro] = useState(true);
   const [bgColor, setBgColor] = useState("black");
+  const navigate = useNavigate();
 
   const isMobileView = useMediaQuery({
     query: "(max-width: 768px)",
@@ -58,6 +59,14 @@ const MainPage = () => {
       }}
     >
       {!showIntro && <NavBar />}
+      {!showIntro && (
+        <img
+          src={CloudBar}
+          alt="Cloud Bar"
+          className="cloud-bar"
+          onClick={() => navigate("/cloud")}
+        />
+      )}
       {/* 네브바 옆에 중앙정렬을 위해 마진레프트 네브바 만큼줬씀다 */}
       <div style={{ marginLeft: !showIntro && !isMobileView ? "4rem" : "0" }}>
         {showIntro ? <MainPageIntro /> : <MainStart />}
