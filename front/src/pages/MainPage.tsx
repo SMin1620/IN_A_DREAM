@@ -36,9 +36,9 @@ const MainPage = () => {
     const handleScroll = () => {
       let currentScrollY = window.scrollY;
 
-      if (currentScrollY >= window.innerHeight * 4.7) {
+      if (currentScrollY >= window.innerHeight * 7.7) {
         setBgColor("black");
-      } else if (currentScrollY >= window.innerHeight * 2.5) {
+      } else if (currentScrollY >= window.innerHeight * 3.5) {
         setBgColor("#E9E4D9");
       } else {
         setBgColor("black");

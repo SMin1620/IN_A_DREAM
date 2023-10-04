@@ -84,3 +84,7 @@ export const fetchAllTransactionCount = () =>
 
 // 내가 쓴 일기 갯수 조회
 export const fetchMyDiaryCount = () => api1.get(`/api/diary/myDiaryCount`);
+
+// 일기 감정과 판매여부 상관관계 조회
+export const fetchEmotionSaleCorrelation = () =>
+  api1.get(`/api/statistic/relation`);
