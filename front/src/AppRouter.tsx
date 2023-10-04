@@ -15,35 +15,99 @@ import DreamDetailPage from "./pages/DreamDetailPage";
 import AllUserStatisticsPage from "./pages/AllUserStatisticsPage";
 import CloudPage from "./pages/CloudPage";
 import StartPage from "./pages/StartPage";
+import PrivateRoute from "./PrivateRoute";
 
 function AppRouter() {
   return (
     <div>
       <BrowserRouter>
         <Routes>
-          <Route path="/" element={<StartPage />}></Route>
-          <Route path="/Main" element={<MainPage />}></Route>
-          <Route path="/Intro" element={<IntroPage />}></Route>
-          <Route path="/Login" element={<LoginPage />}></Route>
+          {/* 보안없이 접속이 가능해야 하는 페이지 */}
+          <Route path="/" element={<StartPage />} />
+          <Route path="/Intro" element={<IntroPage />} />
+          <Route path="/Login" element={<LoginPage />} />
+          <Route path="/Signup" element={<SignUpPage />} />
+          {/* 라우터 보안 걸어줘야 하는 페이지들 */}
+          <Route
+            path="/Main"
+            element={[
+              <PrivateRoute>
+                <MainPage />
+              </PrivateRoute>,
+            ]}
+          />
           <Route
             path="/CreateDreamDiary"
-            element={<CreateDreamDiaryPage />}
-          ></Route>
-          <Route path="/Signup" element={<SignUpPage />}></Route>
-          <Route path="/Mypage" element={<MyPage />}></Route>
-          <Route path="/gallery/:sortKey" element={<GalleryPage />} />
+            element={[
+              <PrivateRoute>
+                <CreateDreamDiaryPage />
+              </PrivateRoute>,
+            ]}
+          />
+          <Route
+            path="/Mypage"
+            element={[
+              <PrivateRoute>
+                <MyPage />
+              </PrivateRoute>,
+            ]}
+          />
+          <Route
+            path="/gallery/:sortKey"
+            element={[
+              <PrivateRoute>
+                <GalleryPage />
+              </PrivateRoute>,
+            ]}
+          />
           <Route
             path="/SearchResult/:keyword"
-            element={<SearchResultPage />}
-          ></Route>
-          <Route path="/DreamShop" element={<DreamShopPage />}></Route>
-          <Route path="/DreamDetail/:id" element={<DreamDetailPage />}></Route>
+            element={[
+              <PrivateRoute>
+                <SearchResultPage />
+              </PrivateRoute>,
+            ]}
+          />
+          <Route
+            path="/DreamShop"
+            element={[
+              <PrivateRoute>
+                <DreamShopPage />
+              </PrivateRoute>,
+            ]}
+          />
+          <Route
+            path="/DreamDetail/:id"
+            element={[
+              <PrivateRoute>
+                <DreamDetailPage />
+              </PrivateRoute>,
+            ]}
+          />
           <Route
             path="/AllUserStatistics"
-            element={<AllUserStatisticsPage />}
-          ></Route>
-          <Route path="/Gallery" element={<GalleryPage />}></Route>
-          <Route path="/Cloud" element={<CloudPage />}></Route>
+            element={[
+              <PrivateRoute>
+                <AllUserStatisticsPage />
+              </PrivateRoute>,
+            ]}
+          />
+          <Route
+            path="/Gallery"
+            element={[
+              <PrivateRoute>
+                <GalleryPage />
+              </PrivateRoute>,
+            ]}
+          />
+          <Route
+            path="/Cloud"
+            element={[
+              <PrivateRoute>
+                <CloudPage />
+              </PrivateRoute>,
+            ]}
+          />
         </Routes>
       </BrowserRouter>
     </div>
