@@ -55,6 +55,7 @@ function CloudPage() {
           url: SERVER_URL + "/" + diary.image,
           title: diary.title,
           nickname: diary.member.nickname,
+          content: diary.content,
         }))
       : [];
 
