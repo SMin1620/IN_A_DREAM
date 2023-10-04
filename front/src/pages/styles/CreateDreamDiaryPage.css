@@ -113,3 +113,9 @@
     justify-content: center;
   }
 }
+
+@media (max-width: 768px) {
+  .create-dream-diary-main {
+    padding-left: 2rem;
+  }
+}

@@ -23,10 +23,12 @@ text-shadow: 1px 1px 1px black;
 
 @media (max-width: 1024px) {
 width:14vw;
-font-size: 0.3rem;
+font-size: 0.8rem;
 }
 @media (max-width: 768px) {
   width:16vw;
+font-size: 0.3rem;
+
   }
 `;
 
