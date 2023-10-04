@@ -53,6 +53,7 @@ const PreloaderBtnHold = styled.div`
   line-height: 20px;
   font-weight: 800;
   letter-spacing: normal;
+  pointer-events: none;
 `;
 
 type CastleProps = {
