@@ -12,6 +12,9 @@ import {
 import { useRoute, useLocation } from "wouter";
 import { easing } from "maath";
 import getUuid from "uuid-by-string";
+import { extend } from "@react-three/fiber";
+import { OrbitControls, TransformControls } from "three-stdlib";
+extend({ OrbitControls, TransformControls });
 
 const GalleryName = {
   neutralPoint: "SOSO GALLERY",
