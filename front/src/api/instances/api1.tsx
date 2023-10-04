@@ -43,6 +43,7 @@ api1.interceptors.response.use(
     if (error.response.status === 401 && !originalRequest._retry) {
       originalRequest._retry = true;
       const refreshToken = localStorage.getItem("refreshtoken");
+      const token = localStorage.getItem("token");
       console.log("401에러감지감지");
 
       try {
@@ -51,7 +52,7 @@ api1.interceptors.response.use(
           "/api/members/refresh",
           {},
           {
-            headers: { refreshToken: refreshToken },
+            headers: { Authorization: token, refreshToken: refreshToken },
           }
         );
 
