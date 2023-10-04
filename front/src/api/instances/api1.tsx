@@ -58,8 +58,8 @@ api1.interceptors.response.use(
         );
 
         // 새 accessToken 저장
-        localStorage.setItem("token", res.headers.Authorization);
-        localStorage.setItem("refreshtoken", res.headers.refreshToken);
+        localStorage.setItem("token", res.headers.authorization);
+        // localStorage.setItem("refreshtoken", res.headers.refreshToken);
         console.log("리프레쉬도즈언!!");
 
         // 실패한 요청 다시 보내기
