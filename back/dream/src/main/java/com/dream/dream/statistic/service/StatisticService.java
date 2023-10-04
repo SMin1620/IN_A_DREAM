@@ -262,15 +262,13 @@ public class StatisticService {
     }
 
     public RelationDto.StatisticResponseDto relation() {
-        Relation relation = relationRepository.findFirstByOrderByIdDesc();
-
-
+        Relation relation = relationRepository.findTop1ByOrderByIdDesc();
 
         RelationDto.StatisticResponseDto statisticResponseDto = RelationDto.StatisticResponseDto.builder().
-                avgPositiveWhenTrue(relation().getAvgPositiveWhenTrue()).
-                avgPositiveWhenFalse(relation().getAvgPositiveWhenFalse()).
-                avgNeutralWhenFalse(relation().getAvgNeutralWhenFalse()).
-                avgNegativeWhenFalse(relation().getAvgNegativeWhenFalse()).
+                avgPositiveWhenTrue(relation.getAvgPositiveWhenTrue()).
+                avgPositiveWhenFalse(relation.getAvgPositiveWhenFalse()).
+                avgNeutralWhenFalse(relation.getAvgNeutralWhenFalse()).
+                avgNegativeWhenFalse(relation.getAvgNegativeWhenFalse()).
                 avgNegativeWhenTrue(relation.getAvgNegativeWhenTrue()).
                 avgNeutralWhenTrue(relation.getAvgNeutralWhenTrue()).build();
 
