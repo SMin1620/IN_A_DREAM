@@ -31,7 +31,7 @@ const CircleGraph: React.FC<CircleGraphProps> = ({ data }) => {
           <LabelList
             dataKey="name"
             position="outside"
-            fontSize="1.2rem"
+            fontSize="1.4vw"
             fontFamily="omyu_pretty"
             offset={10}
             fill="black"

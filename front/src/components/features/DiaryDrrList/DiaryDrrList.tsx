@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import { useMyDiaries } from "../../../hooks/useMyDiary";
 import { DiaryInfo } from "../../../types/ApiType";
@@ -14,15 +14,13 @@ const DiaryContainer = styled.div<{ selected?: boolean }>`
   overflow: hidden;
   color: black;
   position: relative;
-
   padding-top: ${(props) => (props.selected ? "4%" : "1%")};
   padding-bottom: ${(props) => (props.selected ? "4%" : "1%")};
-
-  transition: transform 0.1s ease-in-out;
+  height: ${(props) => (props.selected ? "30vh" : "10vh")};
   margin: 20px;
   z-index: ${(props) => (props.selected ? "2" : "1")};
-  transition: padding-top 1s ease-in-out, padding-bottom 1s ease-in-out;
-
+  transition: padding-top 0.5s ease-in-out, padding-bottom 0.5s ease-in-out,
+    height 0.5s ease-in-out;
   display: flex;
   align-items: center;
   justify-content: space-evenly;
@@ -44,6 +42,23 @@ const DiaryDrrList = ({ diaries }: DiaryDrrListProps) => {
   const colors = ["#E9E4D9", "#EFBCAE", "#FF7C7C"];
 
   const navigate = useNavigate();
+
+  const [delayedImageSrc, setDelayedImageSrc] = useState<string | null>(null);
+
+  useEffect(() => {
+    if (selectedDiaryId !== null) {
+      const selectedDiary = diaries.find(
+        (diary) => diary.id === selectedDiaryId
+      );
+      if (selectedDiary) {
+        setTimeout(() => {
+          setDelayedImageSrc(`${SERVER_URL}/${selectedDiary.image}`);
+        }, 100);
+      }
+    } else {
+      setDelayedImageSrc(null);
+    }
+  }, [selectedDiaryId]);
 
   const getColor = (emotion: string) => {
     if (emotion === "POSITIVE") {
@@ -74,11 +89,11 @@ const DiaryDrrList = ({ diaries }: DiaryDrrListProps) => {
             </div>
             <div className="diary-drrlist-title">{diary.title}</div>
             <div className="diary-drrlist-img">
-              {selectedDiaryId === diary.id && (
+              {selectedDiaryId === diary.id && delayedImageSrc && (
                 <Image
                   src={`${SERVER_URL}/${diary.image}`}
                   onClick={() => navigate(`/DreamDetail/${diary.id}`)}
-                ></Image>
+                />
               )}
             </div>
 
