@@ -188,7 +188,7 @@ const IntroPage: React.FC = () => {
     };
     console.log(
       "document.documentElement.scrollHeight",
-      document.documentElement.scrollHeight,
+      document.documentElement.scrollHeight
     );
 
     const observer = new IntersectionObserver(observerCallback);
@@ -260,12 +260,12 @@ const IntroPage: React.FC = () => {
       <BackGround>
         <button className="skip" onClick={handleSkip}>
           {/* <div className="skip-wrapper"> */}
-          <p>Skip</p>
-          <img
+          <p>Skip &gt; &gt;</p>
+          {/* <img
             id="leftRight"
             src="./skip-arrow.png"
             alt="skip arrow icon"
-          ></img>
+          ></img> */}
           {/* </div> */}
         </button>
         <div id="intro-main">
@@ -287,27 +287,31 @@ const IntroPage: React.FC = () => {
         <HangImg src={hangingImg} alt="img" ref={imageRef} />
         <ul id="list-item-wrapper">
           <div className="introtext" ref={ref1}>
-            당신은 어떤 꿈을 꾸셨나요?
+            오늘 당신은 어떤 꿈을 꾸셨나요?
           </div>
           <div className="introtext" ref={ref2}>
             아름다운 꿈이었나요, 아니면 조금 무서웠나요?
           </div>
           <div className="introtext" ref={ref3}>
-            당신의 꿈은 당신만의 이야기입니다.
+            당신의 꿈, 그것은 당신만의 독특한 이야기입니다.
           </div>
           <div className="introtext" ref={ref4}>
             그 이야기를 우리와 함께 나누어 보시겠어요?
           </div>
+
           <div className="introtext" ref={ref5}>
-            지금 바로 당신의 꿈일기를 시작하세요!
+            여러분이 기록하는 각각의 이야기가 다른 사람들에게도
+            <br />
+            작은 위안과 공감, 그리고 힘이 될 수 있습니다.
           </div>
           <div className="introtext" ref={ref6}>
-            여러분의 독특한 이야기가 다른 사람들에게도 <br /> 도움이 될 수
-            있습니다.
+            지금 바로, 당신만의 꿈을 적어보세요.
+            <br />
+            여러분의 소중한 꿈일기를 시작하세요!
           </div>
         </ul>
         <div id="hold-on">
-          <p id="dream-text">Hold On!</p>
+          <p id="dream-text">HOLD ON!</p>
           <img
             id="down-arrow-icon"
             src="./down-arrow.png"

@@ -135,6 +135,13 @@
     url("//cdn.jsdelivr.net/korean-webfonts/1/corps/lottemart/LotteMartHappy/LotteMartHappyMedium.woff")
       format("woff");
 }
+@font-face {
+  font-family: "Middleschool_student";
+  src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/naverfont_08@1.0/Middleschool_student.woff")
+    format("woff");
+  font-weight: normal;
+  font-style: normal;
+}
 
 .App {
   text-align: center;

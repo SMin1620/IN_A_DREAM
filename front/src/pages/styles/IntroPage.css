@@ -19,6 +19,7 @@
   font-size: 8vh;
   font-weight: 500;
   gap: 20px;
+  font-family: "PartialSansKR-Regular";
 }
 
 #join-us-text {
@@ -26,6 +27,7 @@
   font-size: 4vh;
   font-weight: 400;
   opacity: 0.75;
+  font-family: "KyoboHandwriting2022khn";
 }
 
 #intro-main p {
@@ -88,6 +90,8 @@
   transition: 1.5s;
   position: relative;
   z-index: 4;
+  font-family: "Middleschool_student";
+  text-shadow: 2px 6px 2px gray;
 }
 
 .skip {
@@ -97,7 +101,7 @@
   right: 0;
   display: flex;
   flex-direction: row;
-  width: 8vw;
+  width: 10vw;
   align-items: center;
   color: white;
   font-size: 2vw;
@@ -105,6 +109,8 @@
   background-color: transparent;
   opacity: 0.6;
   animation: leftAndRight 3s infinite;
+  border: none;
+  font-family: "BMDOHYEON";
 }
 
 #leftRight {
@@ -131,7 +137,17 @@
 }
 
 #dream-text {
-  font-size: 4vh;
+  font-size: 4vw;
   font-weight: 400;
   opacity: 0.75;
+  font-family: "LotteMartHappy";
+}
+
+@media (max-width: 768px) {
+  .introtext {
+    font-size: 1rem;
+  }
+  #dream-text {
+    font-size: 1.2rem;
+  }
 }
