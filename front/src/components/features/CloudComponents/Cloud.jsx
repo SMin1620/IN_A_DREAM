@@ -1,11 +1,11 @@
 import * as THREE from "three";
-import { useRef, useState, Suspense } from "react";
+import { useRef, useState, Suspense, useEffect } from "react";
 import { Canvas, useFrame, useThree, useLoader } from "@react-three/fiber";
 import { useSpring } from "@react-spring/web";
 import { a } from "@react-spring/three";
 import { useDrag, useWheel } from "@use-gesture/react";
 import { createGlobalStyle } from "styled-components";
-import { useTexture, Plane, MapControls, Stat, Html } from "@react-three/drei";
+import { useTexture, Plane, Html } from "@react-three/drei";
 
 const GlobalStyle = createGlobalStyle`
 body {
@@ -42,6 +42,7 @@ export default function Cloud({ images }) {
       {...bindDrag()}
       {...bindWheel()}
       style={{
+        zIndex: 1,
         width: "100%",
         height: "100%",
         position: "absolute",
@@ -111,13 +112,20 @@ function ImageTexture(props) {
   const ref = useRef();
   // Hold state for hovered and clicked events
   const [hovered, hover] = useState(false);
-  const [clicked, click] = useState(false);
   const [position, setPosition] = useState(() => {
     const randomX = (Math.random() - 0.5) * MAX_POSITION_WIDTH;
     const randomY = (Math.random() - 0.5) * MAX_POSITION_HEIGHT;
     const randomZ = (Math.random() - 0.5) * 2 * MAX_POSITION;
     return [randomX, randomY, randomZ];
   });
+
+  useEffect(() => {
+    // `props.url`이 변경되면 `position` 상태를 업데이트합니다.
+    const randomX = (Math.random() - 0.5) * MAX_POSITION_WIDTH;
+    const randomY = (Math.random() - 0.5) * MAX_POSITION_HEIGHT;
+    const randomZ = (Math.random() - 0.5) * 2 * MAX_POSITION;
+    setPosition([randomX, randomY, randomZ]);
+  }, [props.url]);
 
   // const [x, y, z] = props.position || [0, 0, 0];
   const [x, y, z] = position;

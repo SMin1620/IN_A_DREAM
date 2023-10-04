@@ -5,3 +5,19 @@
 .Cloud {
   height: 100vh;
 }
+
+.random {
+  position: fixed;
+  z-index: 10;
+  top: 0;
+  right: 0;
+  display: flex;
+  flex-direction: row;
+  width: 8vw;
+  align-items: center;
+  /* color: white; */
+  font-size: 2vw;
+  font-weight: 500;
+  /* background-color: transparent; */
+  opacity: 0.8;
+}
