@@ -1,6 +1,6 @@
 import * as THREE from "three";
 import { useEffect, useRef, useState } from "react";
-import { Canvas, useFrame } from "@react-three/fiber";
+import { Canvas, useFrame, extend } from "@react-three/fiber";
 import {
   useCursor,
   MeshReflectorMaterial,
@@ -12,9 +12,7 @@ import {
 import { useRoute, useLocation } from "wouter";
 import { easing } from "maath";
 import getUuid from "uuid-by-string";
-// import { extend } from "@react-three/fiber";
-// import { OrbitControls, TransformControls } from "three-stdlib";
-// extend({ OrbitControls, TransformControls });
+extend({ MeshReflectorMaterial });
 
 const GalleryName = {
   neutralPoint: "SOSO GALLERY",
