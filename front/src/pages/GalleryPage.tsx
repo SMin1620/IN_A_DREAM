@@ -13,7 +13,7 @@ const GalleryPage = () => {
   const { sortKey } = useParams<string>();
   const validSortKey = sortKey || "";
 
-  console.log("지금 5");
+  console.log("지금 10");
 
   const {
     data: response,

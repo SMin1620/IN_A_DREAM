@@ -23,14 +23,15 @@ const GalleryName = {
 const GOLDENRATIO = 1.61803398875;
 
 export const ImageGallery = ({ images, sortKey }) => (
-  <Canvas dpr={[1, 1.5]} camera={{ fov: 70, position: [0, 2, 15] }}>
-    <color attach="background" args={["#191920"]} />
-    <fog attach="fog" args={["#191920", 0, 15]} />
-    <group position={[0, -0.5, 0]}>
-      <Frames images={images} sortKey={sortKey} />
-      <mesh rotation={[-Math.PI / 2, 0, 0]}>
-        <planeGeometry args={[50, 50]} />
-        <Html as="div">
+  <>
+    <Canvas dpr={[1, 1.5]} camera={{ fov: 70, position: [0, 2, 15] }}>
+      <color attach="background" args={["#191920"]} />
+      <fog attach="fog" args={["#191920", 0, 15]} />
+      <group position={[0, -0.5, 0]}>
+        <Frames images={images} sortKey={sortKey} />
+        <mesh rotation={[-Math.PI / 2, 0, 0]}>
+          <planeGeometry args={[50, 50]} />
+
           <MeshReflectorMaterial
             blur={[300, 100]}
             resolution={2048}
@@ -43,11 +44,11 @@ export const ImageGallery = ({ images, sortKey }) => (
             color="#050505"
             metalness={0.5}
           />
-        </Html>
-      </mesh>
-    </group>
-    <Environment preset="city" />
-  </Canvas>
+        </mesh>
+      </group>
+      <Environment preset="city" />
+    </Canvas>
+  </>
 );
 
 function Frames({
