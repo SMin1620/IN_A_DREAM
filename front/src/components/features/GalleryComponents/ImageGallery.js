@@ -30,7 +30,7 @@ export const ImageGallery = ({ images, sortKey }) => (
       <Frames images={images} sortKey={sortKey} />
       <mesh rotation={[-Math.PI / 2, 0, 0]}>
         <planeGeometry args={[50, 50]} />
-        <MeshReflectorMaterial
+        {/* <MeshReflectorMaterial
           blur={[300, 100]}
           resolution={2048}
           mixBlur={1}
@@ -41,7 +41,7 @@ export const ImageGallery = ({ images, sortKey }) => (
           maxDepthThreshold={1.4}
           color="#050505"
           metalness={0.5}
-        />
+        /> */}
       </mesh>
     </group>
     <Environment preset="city" />
