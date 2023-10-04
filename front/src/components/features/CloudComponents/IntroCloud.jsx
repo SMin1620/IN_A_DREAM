@@ -1,4 +1,4 @@
-import { useRef, useEffect, useState, Suspense } from "react";
+import { useRef, useEffect, useState, Suspense, useMemo } from "react";
 import { Canvas, useFrame, useLoader, useThree } from "@react-three/fiber";
 import * as THREE from "three";
 import { mergeBufferGeometries } from "three-stdlib";
@@ -12,53 +12,66 @@ body {
 }
 `;
 
-const Clouds = () => {
-  const { camera } = useThree(); // 카메라에 접근하기 위해 useThree 훅 사용
-  const meshRef = useRef();
+const CloudMesh = ({ position }) => {
+  const mesh = useRef();
+  useFrame(() => (mesh.current.rotation.z += 0.001));
   const texture = useLoader(THREE.TextureLoader, "/cloud.png");
-  const [start, setStart] = useState(Date.now());
 
-  useEffect(() => {
-    texture.magFilter = THREE.LinearMipMapLinearFilter;
-    texture.minFilter = THREE.LinearMipMapLinearFilter;
-  }, [texture]);
-
-  useFrame(() => {
-    if (camera) {
-      let time = (Date.now() - start) * 0.005;
-      camera.position.z -= time; // 카메라의 Z 위치를 변경하여 구름 속으로 이동하는 애니메이션 효과 생성
-    }
+  const [scale, setScale] = useState(() => {
+    const randomScale = 0.5 + Math.random() * 1.5; // 0.5에서 2 사이의 랜덤한 크기
+    return [randomScale];
   });
-
-  let geometries = [];
-  let planeGeometry = new THREE.PlaneGeometry(64, 64);
-
-  for (var i = 0; i < 8000; i++) {
-    let plane = planeGeometry.clone();
-    plane.translate(Math.random() * 1000 - 500, Math.random() * 200 - 15, i);
-    plane.rotateZ(Math.random() * Math.PI);
-    plane.scale(
-      Math.random() * Math.random() * 1.5 + 0.5,
-      Math.random() * Math.random() * 1.5 + 0.5,
-      1,
-    );
-    geometries.push(plane);
-  }
-
-  let mergedGeometry = mergeBufferGeometries(geometries);
+  // 직접 필터 속성 설정 GPU 메모리를 절약
+  texture.magFilter = THREE.LinearMipMapLinearFilter;
+  texture.minFilter = THREE.LinearMipMapLinearFilter;
 
   return (
     <>
-      <mesh ref={meshRef} geometry={mergedGeometry}></mesh>
-      <mesh ref={meshRef} geometry={mergedGeometry} position-z={-8000}></mesh>
+      <ambientLight color={0xffffff} intensity={1} />
+      <mesh ref={mesh} position={position} scale={[scale, scale, scale]}>
+        <planeGeometry attach="geometry" args={[100, 100]} />
+        <meshStandardMaterial
+          attach="material"
+          map={texture}
+          transparent={true}
+        />
+      </mesh>
     </>
   );
 };
+
+const Clouds = () => {
+  const { camera } = useThree();
+  const clouds = useMemo(() => {
+    const temp = [];
+    for (let i = 500; i < 1000; i++) {
+      const x = (Math.random() - 0.5) * 2 * 1000 - 500;
+      const y = (Math.random() - 0.5) * 2 * 200 - 15;
+      const z = i;
+      temp.push(<CloudMesh key={i} position={[x, y, z]} />);
+    }
+    return temp;
+  }, []);
+
+  useFrame(() => {
+    camera.position.z -= 1;
+  });
+
+  return <>{clouds}</>;
+};
+
+const Lighting = () => (
+  <>
+    <ambientLight intensity={1} />
+    <pointLight position={[0, 0, 1300]} intensity={1} />
+  </>
+);
 
 const CloudComponent = () => {
   return (
     <div
       style={{
+        zIndex: 2,
         width: "100%",
         height: "100%",
         position: "absolute",
@@ -71,10 +84,11 @@ const CloudComponent = () => {
       <Canvas
         style={{ width: "100%", height: "100%" }}
         camera={{
-          position: [0, 0, 8300],
+          position: [0, 0, 1100],
         }}
       >
         <Clouds />
+        <Lighting />
       </Canvas>
     </div>
   );
