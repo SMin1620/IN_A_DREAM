@@ -32,6 +32,7 @@ export const ImageGallery = ({ images, sortKey }) => (
       <Frames images={images} sortKey={sortKey} />
       <mesh rotation={[-Math.PI / 2, 0, 0]}>
         <planeGeometry args={[50, 50]} />
+
         <MeshReflectorMaterial
           blur={[300, 100]}
           resolution={2048}
