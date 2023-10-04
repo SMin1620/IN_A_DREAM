@@ -14,7 +14,6 @@ interface OwnProps {
 }
 
 const DetailETC: React.FC<OwnProps> = ({ diaryDetail, diaryId }) => {
-  const [isLiked, setIsLiked] = useState<boolean>(false);
   const currentUser = useSelector((state: any) => state.userInfo.data);
   const {
     postLiked,
@@ -27,14 +26,18 @@ const DetailETC: React.FC<OwnProps> = ({ diaryDetail, diaryId }) => {
     open,
     setSale,
     sale,
+    setIsLiked,
+    isLiked,
   } = useDetailDiaryETC();
 
   useEffect(() => {
     setSale(diaryDetail.sale);
     setOpen(diaryDetail.open);
     setLikeCount(diaryDetail.likeCount);
+    setIsLiked(diaryDetail.liked);
   }, [diaryDetail]);
 
+  console.log(diaryDetail);
   return (
     <div className="detail-etc">
       {isLiked ? (

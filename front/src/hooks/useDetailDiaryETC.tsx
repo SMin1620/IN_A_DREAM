@@ -11,13 +11,16 @@ const useDetailDiaryETC = () => {
   const [likeCount, setLikeCount] = useState<number>();
   const [sale, setSale] = useState<boolean>();
   const [open, setOpen] = useState<boolean>();
+  const [isLiked, setIsLiked] = useState<boolean>();
   const { setDiaryDetail } = useDetailDiary();
   const navigate = useNavigate();
 
   const postLiked = async (diaryId: number) => {
     try {
       const response = await toggleLikeDiary(diaryId);
+      console.log(response);
       setLikeCount(response.data.data.likeCount);
+      setIsLiked(response.data.data.liked);
     } catch (error) {
       console.error(error);
     }
@@ -111,6 +114,8 @@ const useDetailDiaryETC = () => {
     open,
     setSale,
     sale,
+    isLiked,
+    setIsLiked,
   };
 };
 
