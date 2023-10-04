@@ -12,6 +12,7 @@ interface OwnProps {
   setImageUrl: (url: string | null) => void;
   fetchData: (prompt: string) => Promise<string | null>;
   KarloimageUrl: string | null;
+  imageUrl: string | null;
 }
 
 const CreateDreamDiaryForm: React.FC<OwnProps> = ({
@@ -19,6 +20,7 @@ const CreateDreamDiaryForm: React.FC<OwnProps> = ({
   setImageUrl,
   fetchData,
   KarloimageUrl,
+  imageUrl,
 }: OwnProps) => {
   const {
     diaryData,
@@ -28,7 +30,6 @@ const CreateDreamDiaryForm: React.FC<OwnProps> = ({
     postDiary,
   } = useMakeDiary();
 
-  const [clicked, setClicked] = useState<boolean>(false);
   // const { KarloimageUrl, fetchData } = useKarlo();
   const [sell, setSell] = useState<boolean>(false);
   const [isPublic, setIsPublic] = useState<boolean>(true);
@@ -41,6 +42,9 @@ const CreateDreamDiaryForm: React.FC<OwnProps> = ({
   const handleCreateImage = async () => {
     // 로직처리 후 다이어리 이미지 넣어주기
     console.log("클릭했음");
+    setDiaryImage(true);
+    setImageUrl(null);
+
     if (diaryData.content && diaryData.title) {
       const gptResult = await fetchGPTData(diaryData.content);
 
@@ -49,8 +53,6 @@ const CreateDreamDiaryForm: React.FC<OwnProps> = ({
           "Cute, Pastel tone, Animation, Fantasy " + gptResult;
         console.log(finalResponse);
         fetchData(finalResponse).then(setImageUrl);
-        setDiaryImage(true);
-        setClicked(true);
       }
     } else if (!diaryData.title) {
       Swal.fire({
@@ -149,7 +151,7 @@ const CreateDreamDiaryForm: React.FC<OwnProps> = ({
         placeholder="내용을 입력해 주세요."
       />
       <div className="create-dream-diary-form-button-box">
-        {clicked ? (
+        {imageUrl ? (
           <div>
             <button
               className="create-diary-form-button"

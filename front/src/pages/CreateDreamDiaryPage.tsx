@@ -38,7 +38,6 @@ const CreateDreamDiaryPage = () => {
                 />
               )}
             </ProgressiveImage>
-
             {/* {Karloloading ? (
               <div>
                 <Loading />
@@ -58,6 +57,7 @@ const CreateDreamDiaryPage = () => {
             setImageUrl={setImageUrl}
             fetchData={fetchData}
             KarloimageUrl={KarloimageUrl}
+            imageUrl={imageUrl}
           />
         </div>
       </div>

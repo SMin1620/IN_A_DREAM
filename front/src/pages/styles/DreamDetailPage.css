@@ -57,7 +57,7 @@
 }
 
 .diary-title {
-  font-size: 2.2vw;
+  font-size: 2.5rem;
   font-family: omyu_pretty;
   text-align: left;
   /* display: flex; */
@@ -95,7 +95,7 @@
 .diary-detail-right-bottom {
   margin-top: 3rem;
   padding: 0 1rem;
-  font-size: 2vw;
+  font-size: 2rem;
   font-weight: lighter;
   font-family: omyu_pretty;
   text-align: left;
@@ -147,6 +147,15 @@
   .diary-detail-main {
     display: flex;
     flex-direction: column;
+    padding-left: 0;
+  }
+  .diary-detail-right-bottom {
+    font-size: 1rem;
+  }
+  .diary-title {
+    font-size: 1.5rem;
+    display: flex;
+    align-items: center;
   }
 
   .diary-detail-left {
@@ -195,5 +204,14 @@
     width: 100%;
     display: flex;
     justify-content: space-around;
+  }
+  .diary-member {
+    font-size: 0.8rem;
+  }
+  .diary-buyer {
+    font-size: 0.8rem;
+  }
+  .diary-writer {
+    font-size: 0.8rem;
   }
 }
