@@ -53,7 +53,7 @@ const Impimg = styled.img`
 
   &.second {
     @media (max-height: 520px) {
-      height: 50vh;
+      height: 200vh;
     }
   }
 `;
