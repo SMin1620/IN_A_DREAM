@@ -169,12 +169,12 @@ function Frame({
         position={[0, GOLDENRATIO / 2, 0]}
       >
         <boxGeometry />
-        <meshStandardMaterial
+        {/* <meshStandardMaterial
           color="#151515"
           metalness={0.5}
           roughness={0.5}
           envMapIntensity={2}
-        />
+        /> */}
         <mesh
           ref={frame}
           raycast={() => null}
