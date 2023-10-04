@@ -43,6 +43,9 @@ const PreloaderBtn = styled.button`
   margin-left: -60px;
   text-shadow: 1px 0px #494949, 0px 1px #494949, 1px 0px #494949,
     0px 1px #494949;
+  @media (max-width: 768px) {
+    scale: 0.6;
+  }
 `;
 
 const PreloaderBtnHold = styled.div`
@@ -59,8 +62,8 @@ type CastleProps = {
 const Castle = styled.img.attrs({
   src: castleImg,
 })<CastleProps>`
-  height: 70vh; // 높이를 자동으로 설정하여 이미지의 원래 비율을 유지합니다.
-  width: auto; // 너비도 자동으로 설정합니다.
+  height: auto; // 높이를 자동으로 설정하여 이미지의 원래 비율을 유지합니다.
+  width: 50%; // 너비도 자동으로 설정합니다.
   left: 50%;
   bottom: 0;
   transform: translateX(-49%);
@@ -157,6 +160,8 @@ const HoldOn = forwardRef<HTMLDivElement>((props, ref) => {
         ref={btnRef}
         onMouseDown={handleMouseDown}
         onMouseUp={handleMouseUp}
+        onTouchStart={handleMouseDown}
+        onTouchEnd={handleMouseUp}
       >
         <PreloaderBtnHold ref={textRef}>
           IN <br />A <br />
