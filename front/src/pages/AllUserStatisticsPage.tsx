@@ -23,14 +23,6 @@ const AllUserStatisticsPage = () => {
       <div>CircleGraph</div>
       <div>
         <CircleGraph data={chartData} />
-        <iframe
-          title="vimeo-player"
-          src="https://player.vimeo.com/video/870217449?h=4e51cf5daf"
-          width="640"
-          height="360"
-          frameBorder={0} // 수정된 부분
-          allowFullScreen // 수정된 부분
-        ></iframe>
       </div>
     </div>
   );

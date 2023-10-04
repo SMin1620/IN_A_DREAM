@@ -5,6 +5,7 @@ import cloud from "../../assets/image/cloud.png";
 import sleep1 from "../../assets/image/sleep1.png";
 import sleep2 from "../../assets/image/sleep2.png";
 import { styled } from "styled-components";
+import { useNavigate } from "react-router-dom";
 
 interface ImgProps {
   $isHovered: boolean;
@@ -30,6 +31,7 @@ const ImageLeft = styled.img<ImgProps>`
 
 const MainSixth = () => {
   const [isHovered, setIsHovered] = useState<boolean>(false);
+  const navigate = useNavigate();
 
   return (
     <div className="main-sixth-wrapper">
@@ -37,7 +39,7 @@ const MainSixth = () => {
         <div>Let's see all dream</div>
       </div>
       <div className="SixthMainBox">
-        <div className="main-sixth-left">
+        <div className="main-sixth-left" onClick={() => navigate("/cloud")}>
           <h2>IN A</h2>
           <h1
             onMouseEnter={() => setIsHovered(true)}
