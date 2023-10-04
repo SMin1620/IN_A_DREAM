@@ -5,7 +5,7 @@ import { useSpring } from "@react-spring/web";
 import { a } from "@react-spring/three";
 import { useDrag, useWheel } from "@use-gesture/react";
 import { createGlobalStyle } from "styled-components";
-import { useTexture, Plane } from "@react-three/drei";
+import { useTexture, Plane, MapControls, Stat, Html } from "@react-three/drei";
 
 const GlobalStyle = createGlobalStyle`
 body {
@@ -24,6 +24,8 @@ const MAX_POSITION_HEIGHT = 80;
 export default function Cloud({ images }) {
   const [dragStyle, setDrag] = useSpring(() => ({ x: 0, y: 0 }));
   const [scrollStyle, setScroll] = useSpring(() => ({ x: 0, y: 0 }));
+
+  const [clickedIndex, setClickedIndex] = useState(null);
 
   const bindDrag = useDrag(({ offset: [ox, oy], down }) => {
     if (down) {
@@ -54,6 +56,8 @@ export default function Cloud({ images }) {
           position: [0, 0, 20],
         }}
       >
+        {/* <MapControls screenSpacePanning enableZoom={false} /> */}
+        {/* <Stats /> */}
         <DraggableCameraControls
           dragStyle={dragStyle}
           scrollStyle={scrollStyle}
@@ -61,7 +65,17 @@ export default function Cloud({ images }) {
 
         <ambientLight intensity={0.5} />
         {images.map((image, idx) => (
-          <ImageTexture key={idx} position={image.position} url={image.url} />
+          <ImageTexture
+            key={idx}
+            index={idx}
+            position={image.position}
+            url={image.url}
+            nickname={image.nickname}
+            content={image.content}
+            title={image.title}
+            clickedIndex={clickedIndex}
+            setClickedIndex={setClickedIndex}
+          />
         ))}
         <Suspense fallback={null}>
           {Array.from({ length: NUM_IMAGES }).map((_, index) => (
@@ -90,6 +104,8 @@ function DraggableCameraControls({ dragStyle, scrollStyle }) {
 }
 
 function ImageTexture(props) {
+  const { camera } = useThree();
+
   const texture = useTexture(props.url);
   // const texture = new THREE.TextureLoader().load(props.url);
   const ref = useRef();
@@ -108,9 +124,21 @@ function ImageTexture(props) {
 
   const hoveredZ = 3.01;
 
+  // const springProps = useSpring({
+  //   scale: hovered || clicked ? [1.5, 1.5, 1.5] : [1, 1, 1],
+  //   // position: hovered || clicked ? [x, y, hoveredZ] : [x, y, z],
+  //   position: clicked
+  //     ? [camera.position.x, camera.position.y, hoveredZ]
+  //     : [x, y, z],
+  // });
+
   const springProps = useSpring({
-    scale: clicked ? [1.5, 1.5, 1.5] : [1, 1, 1],
-    position: hovered ? [x, y, hoveredZ] : [x, y, z],
+    scale: props.index === props.clickedIndex ? [1.5, 1.5, 1.5] : [1, 1, 1],
+
+    position:
+      props.index === props.clickedIndex
+        ? [camera.position.x - 5, camera.position.y, hoveredZ]
+        : [x, y, hovered ? hoveredZ : z], // clicked가 아닌 경우에는 원래 랜덤한 위치를 사용
   });
 
   return (
@@ -118,10 +146,56 @@ function ImageTexture(props) {
       {...props}
       {...springProps}
       ref={ref}
-      onClick={(event) => click(!clicked)}
+      onClick={(event) => {
+        if (props.index !== props.clickedIndex) {
+          props.setClickedIndex(props.index); // 현재 컴포넌트가 클릭되면 해당 인덱스 정보를 저장합니다.
+        } else {
+          props.setClickedIndex(null);
+        }
+      }}
+      // onClick={(event) => click(!clicked)}
       onPointerOver={(event) => hover(true)}
       onPointerOut={(event) => hover(false)}
     >
+      {props.index === props.clickedIndex && (
+        <Html
+          position={[3, 2.6, 0]}
+          // onOcclude={set}
+          style={{
+            color: "black",
+            position: "relative",
+            right: "0",
+            bottom: "0",
+            fontFamily: "Pretendard Variable",
+            textAlign: "left",
+            whiteSpace: "pre-wrap",
+            width: "400px",
+            overflowWrap: "break-word",
+            pointerEvents: "none",
+            backgroundColor: "rgba(255, 255, 255, 0.8)",
+            padding: "5%",
+            fontWeight: "bold",
+            borderRadius: "20px",
+          }}
+        >
+          <div
+            style={{
+              fontSize: "1.3rem",
+              // fontWeight: "bold",
+              marginBottom: "10%",
+            }}
+          >
+            {props.title}
+          </div>
+          <div style={{ letterSpacing: "1px", lineHeight: "1.3rem" }}>
+            {props.content}
+          </div>
+          <div style={{ fontSize: "0.8rem", marginTop: "10%" }}>
+            작성자 : {props.nickname}
+          </div>
+        </Html>
+      )}
+
       <Plane args={[5, 5]} material-map={texture} />
     </a.mesh>
   );
@@ -130,20 +204,28 @@ function ImageTexture(props) {
 function RandomClouds() {
   const texture = useLoader(THREE.TextureLoader, "/cloud.png");
   // 랜덤한 위치 및 크기 생성
-  const randomX = (Math.random() - 0.5) * MAX_POSITION_WIDTH;
-  const randomY = (Math.random() - 0.5) * MAX_POSITION_HEIGHT;
-  const randomZ = -Math.random() * MAX_POSITION + 0.9;
-  const randomScale = 0.5 + Math.random() * 1.5; // 0.5에서 2 사이의 랜덤한 크기
+
+  const [scale, setScale] = useState(() => {
+    const randomScale = 0.5 + Math.random() * 1.5; // 0.5에서 2 사이의 랜덤한 크기
+    return [randomScale];
+  });
+
+  const [position, setPosition] = useState(() => {
+    const randomX = (Math.random() - 0.5) * MAX_POSITION_WIDTH;
+    const randomY = (Math.random() - 0.5) * MAX_POSITION_HEIGHT;
+    const randomZ = -Math.random() * MAX_POSITION + 0.9;
+    return [randomX, randomY, randomZ];
+  });
+  //  나중에 클릭이벤트 확인불필요할때 적자
+  // // const [x, y, z] = props.position || [0, 0, 0];
+  const [x, y, z] = position;
 
   return (
     <>
       <ambientLight color={0xffffff} intensity={1} />
       <directionalLight color={0xffffff} intensity={1.0} position={[0, 0, 1]} />
 
-      <mesh
-        position={[randomX, randomY, randomZ]}
-        scale={[randomScale, randomScale, randomScale]}
-      >
+      <mesh position={[x, y, z]} scale={[scale, scale, scale]}>
         <planeGeometry attach="geometry" args={[10, 10]} />
         <meshStandardMaterial
           attach="material"
