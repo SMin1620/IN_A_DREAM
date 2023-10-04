@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import "./styles/NavbarModal.css";
 import Box from "../../common/Box";
 import { isModalOpen } from "../../../types/index";
@@ -10,6 +11,7 @@ import neutral from "../../../assets/coin/neutral.png";
 import negative from "../../../assets/coin/negative.png";
 import useFetchAndStoreUserInfo from "../../../hooks/useFetchAndStoreUserInfo";
 import S from "styled-components";
+import Swal from "sweetalert2";
 import { RootState } from "../../../stores/stores";
 
 import { useSelector } from "react-redux";
@@ -46,11 +48,27 @@ const CoinComponent = S.div`
 `;
 
 const NavbarModal: React.FC<isModalOpen> = ({ isNavbarModalOpen, onClose }) => {
+  const navigate = useNavigate();
   const [isOpen, setIsOpen] = useState(false);
   const isMobileView = useMediaQuery({
     query: "(max-width:768px)",
   });
   const closeModal = () => setIsModalOpen(false);
+  const deleteToken = () => {
+    Swal.fire({
+      title: "로그아웃",
+      text: "정말 로그아웃 하시겠습니까?",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonText: "네",
+      cancelButtonText: "아니오",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        localStorage.clear();
+        navigate("/Login");
+      }
+    });
+  };
 
   useEffect(() => {
     if (isNavbarModalOpen) {
@@ -200,7 +218,7 @@ const NavbarModal: React.FC<isModalOpen> = ({ isNavbarModalOpen, onClose }) => {
 
       {isMobileView ? (
         <div>
-          <div className="coin-box">
+          <div className="coin-box-mobile">
             {Object.keys(COIN_INFO).map((key) => (
               <CoinComponent>
                 <img src={COIN_INFO[key].imgSrc} alt={`${key} Coin`} />
@@ -276,6 +294,9 @@ const NavbarModal: React.FC<isModalOpen> = ({ isNavbarModalOpen, onClose }) => {
               <span>{"    "}</span>
             </SlideSpan>
           </a>
+          <button className="mobile-modal-logout" onClick={deleteToken}>
+            Logout
+          </button>
         </div>
       ) : (
         ""

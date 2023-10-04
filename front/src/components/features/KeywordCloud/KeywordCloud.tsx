@@ -26,10 +26,7 @@ const KeywordCloudWrapper = S.div.withConfig({
   overflow: hidden;
   border-radius: 20px;
 
-  @media (max-width: 768px) {
-    width: ${(props) => (props.mydate ? "30vw" : "50vw")};
-    height: ${(props) => (props.mydate ? "30vw" : "50vw")};
-  }
+  
 `;
 
 const KeywordCloud: React.FC<KeywordCloudProps> = ({
