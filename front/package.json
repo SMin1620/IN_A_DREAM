@@ -30,6 +30,7 @@
     "chartjs-chart-wordcloud": "^4.3.0",
     "d3-cloud": "^1.2.7",
     "d3-scale-chromatic": "^3.0.0",
+    "date-fns": "^2.30.0",
     "echarts": "^5.4.3",
     "echarts-for-react": "^3.0.2",
     "framer-motion": "^10.16.4",

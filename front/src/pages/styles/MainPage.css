@@ -29,6 +29,18 @@
   cursor: url("../../assets/logo/cursor2.png") 14 14, auto;
 }
 
+@keyframes upAndDown {
+  0% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+  100% {
+    transform: translateY(0);
+  }
+}
+
 .cloud-bar {
   position: fixed;
   right: 5%;
@@ -37,4 +49,5 @@
   width: 5%;
   height: auto;
   z-index: 999;
+  animation: upAndDown 3s infinite;
 }
