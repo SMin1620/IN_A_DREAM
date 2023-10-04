@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 
 export interface ImgCardProps {
   image: string;
@@ -17,6 +17,20 @@ const ImgCard: React.FC<ImgCardProps> = ({
   border = "none",
   objectFit = "cover",
 }) => {
+  const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
+
+  useEffect(() => {
+    window.addEventListener("resize", () => {
+      setIsMobile(window.innerWidth <= 768);
+    });
+  }, []);
+
+  if (isMobile) {
+    borderRadius = "8px";
+    width = "20vw";
+    height = "15vw";
+  }
+
   const cardStyle: React.CSSProperties = {
     width,
     height,

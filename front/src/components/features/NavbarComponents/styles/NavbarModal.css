@@ -131,6 +131,33 @@
   font-family: "KOTRA_BOLD-Bold";
 }
 
+@media (max-width: 1024px) {
+  .navbar-font1 {
+    font-size: 1.6rem;
+  }
+  .navbar-font2 {
+    font-size: 2.1rem;
+  }
+  .navbar-font3 {
+    font-size: 2.1rem;
+  }
+  .navbar-font4 {
+    font-size: 1.8rem;
+  }
+  .navbar-font5 {
+    font-size: 2.1rem;
+  }
+  .navbar-font6 {
+    font-size: 2.1rem;
+  }
+  .navbar-font7 {
+    font-size: 1.7rem;
+  }
+  .navbar-font8 {
+    font-size: 2.1rem;
+  }
+}
+
 @media (max-width: 768px) {
   .navbar-mypage {
     top: 15%;

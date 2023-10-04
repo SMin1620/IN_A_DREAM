@@ -43,6 +43,7 @@ const PreloaderBtn = styled.button`
   margin-left: -60px;
   text-shadow: 1px 0px #494949, 0px 1px #494949, 1px 0px #494949,
     0px 1px #494949;
+  pointer-events: none;
   @media (max-width: 768px) {
     scale: 0.6;
   }
