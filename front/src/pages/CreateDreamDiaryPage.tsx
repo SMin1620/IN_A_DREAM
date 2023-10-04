@@ -24,20 +24,22 @@ const CreateDreamDiaryPage = () => {
           className={`create-dream-diary-left ${diaryImage ? "on-diary" : ""}`}
         >
           <div className="create-dream-diary-left-top">
-            <ProgressiveImage
-              src={imageUrl as string}
-              placeholder={placeholderSrc}
-            >
-              {(src, loading) => (
-                <img
-                  className={`image${loading ? " loading" : " loaded"}`}
-                  src={src}
-                  alt="diagram"
-                  width="700"
-                  height="465"
-                />
-              )}
-            </ProgressiveImage>
+            {diaryImage && (
+              <ProgressiveImage
+                src={imageUrl as string}
+                placeholder={placeholderSrc}
+              >
+                {(src, loading) => (
+                  <img
+                    className={`image${loading ? " loading" : " loaded"}`}
+                    src={src}
+                    alt="diagram"
+                    width="700"
+                    height="465"
+                  />
+                )}
+              </ProgressiveImage>
+            )}
             {/* {Karloloading ? (
               <div>
                 <Loading />
