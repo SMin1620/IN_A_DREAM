@@ -17,6 +17,7 @@ export interface DiaryInfo {
   positive: number;
   neutral: number;
   negative: number;
+  liked: boolean;
 }
 
 export interface UserInfo {
