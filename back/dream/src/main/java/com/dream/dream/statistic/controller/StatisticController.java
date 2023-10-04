@@ -129,14 +129,11 @@ public class StatisticController {
 
     /**
      * 감정 코인과 sale의 상관관계
-     * @param request
      * @return
      */
     @Operation(summary = "감정 코인과 sale의 상관관계")
     @GetMapping("/relation")
-    public BaseResponse relation(
-            HttpServletRequest request
-    ) {
+    public BaseResponse relation() {
         RelationDto.StatisticResponseDto statisticResponseDto = statisticService.relation();
 
         return new BaseResponse(HttpStatus.OK, "감정 코인과 sale의 상관관계 조회", statisticResponseDto);

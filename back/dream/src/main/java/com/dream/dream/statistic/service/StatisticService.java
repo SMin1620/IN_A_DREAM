@@ -262,7 +262,7 @@ public class StatisticService {
     }
 
     public RelationDto.StatisticResponseDto relation() {
-        Relation relation = relationRepository.findTopByOrderByIdDesc();
+        Relation relation = relationRepository.findFirstByOrderByIdDesc();
 
 
 
