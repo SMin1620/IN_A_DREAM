@@ -12,6 +12,7 @@ import useFetchAndStoreUserInfo from "../../../hooks/useFetchAndStoreUserInfo";
 import { RootState } from "../../../stores/stores";
 import { useSelector } from "react-redux";
 import ExchangeCoin from "../ExchageCoin/ExchangeCoin";
+import Swal from "sweetalert2";
 
 const COIN_INFO: CoinInfo = {
   positive: { name: "해피코인", imgSrc: positive },
@@ -51,12 +52,28 @@ const NavbarMyModal: React.FC<isModalOpen> = ({
 }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const { getUserInfo } = useFetchAndStoreUserInfo();
+  const navigate = useNavigate();
 
   const userInfo = useSelector(
     (state: RootState) => state.userInfo.data as UserInfo
   );
 
-  const { getUserInfo } = useFetchAndStoreUserInfo();
+  const deleteToken = () => {
+    Swal.fire({
+      title: "로그아웃",
+      text: "정말 로그아웃 하시겠습니까?",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonText: "네",
+      cancelButtonText: "아니오",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        localStorage.clear();
+        navigate("/Login");
+      }
+    });
+  };
 
   useEffect(() => {
     getUserInfo();
@@ -76,7 +93,7 @@ const NavbarMyModal: React.FC<isModalOpen> = ({
   return (
     <Box
       position="fixed"
-      width={50}
+      width={80}
       height={5}
       left={3}
       bottom={1}
@@ -95,6 +112,9 @@ const NavbarMyModal: React.FC<isModalOpen> = ({
         <CoinComponent>
           <span onClick={() => setIsModalOpen(true)}> 코인교환 &gt;&gt;</span>
         </CoinComponent>
+        <button className="modal-logout" onClick={deleteToken}>
+          Logout
+        </button>
       </div>
     </Box>
   );
