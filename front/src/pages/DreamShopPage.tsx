@@ -29,7 +29,9 @@ const DreamShopPage = () => {
   if (error) return <div>error</div>;
 
   const diaries =
-    data?.pages.flatMap((pageData) => pageData.data.data.diaryList) || [];
+    data?.pages
+      .flatMap((pageData) => pageData.data.data.diaryList)
+      .filter((diary) => diary.sale === true) || [];
 
   return (
     <div>
