@@ -79,13 +79,13 @@ function CloudPage() {
       document.documentElement.scrollHeight / 2 - window.innerHeight / 2;
     window.scrollTo(centerOfWidth, centerOfHeight);
 
+    const cloudTimer = setTimeout(() => {
+      setShowCloud(true);
+    }, 2000); // After 2 seconds
+
     const introTimer = setTimeout(() => {
       setShowIntro(false);
     }, 5000); // After 5 seconds
-
-    const cloudTimer = setTimeout(() => {
-      setShowCloud(true);
-    }, 3000); // After 3 seconds
 
     return () => {
       clearTimeout(introTimer);
