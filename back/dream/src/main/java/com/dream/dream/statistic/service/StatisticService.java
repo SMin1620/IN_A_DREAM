@@ -147,7 +147,7 @@ public class StatisticService {
         searchRequest.source().size(0);
 
         if (! from.equals("nullT00:00:00") && !to.equals("nullT00:00:00")) {
-            searchRequest.source().query(QueryBuilders.rangeQuery("@timestamp").gte(from).lt(to));
+            searchRequest.source().query(QueryBuilders.rangeQuery("created_at").gte(from).lt(to));
         }
 
         searchRequest.source().aggregation(AggregationBuilders.terms("keywords").field("emotion").size(20));
@@ -185,7 +185,7 @@ public class StatisticService {
             boolQueryBuilder = QueryBuilders.boolQuery()
                     .must(filter);
         } else {
-            rangeFilter = QueryBuilders.rangeQuery("@timestamp").gte(from).lt(to);
+            rangeFilter = QueryBuilders.rangeQuery("created_at").gte(from).lt(to);
 
             boolQueryBuilder = QueryBuilders.boolQuery()
                     .must(filter)
