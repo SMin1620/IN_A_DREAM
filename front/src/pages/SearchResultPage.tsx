@@ -5,6 +5,7 @@ import Navbar from "../components/features/NavbarComponents/Navbar";
 import "./styles/SearchResultPage.css";
 import { useDiarywithKeyword } from "../hooks/useDiarywithKeyword";
 import { DiaryInfo } from "../types/ApiType";
+import SearchBar from "./../components/features/SearchBarComponents/SearchBar";
 
 const SearchResultPage = () => {
   const { keyword } = useParams();
@@ -25,9 +26,30 @@ const SearchResultPage = () => {
   return (
     <div className="search-result-wrapper">
       <Navbar />
-      {keyword !== correctedKeyword && correctedKeyword && (
-        <p style={{ color: "white", fontSize: "30px", marginTop: "5%" }}>
+      <div className="search-result-search-bar">
+        <SearchBar />
+      </div>
+      {keyword !== correctedKeyword && correctedKeyword ? (
+        <p
+          style={{
+            color: "white",
+            fontSize: "30px",
+            marginTop: "5%",
+            marginBottom: "5%",
+          }}
+        >
           수정된 검색어로 검색한 결과: "{correctedKeyword}"
+        </p>
+      ) : (
+        <p
+          style={{
+            color: "white",
+            fontSize: "30px",
+            marginTop: "5%",
+            marginBottom: "5%",
+          }}
+        >
+          {keyword} 으로 검색한 결과
         </p>
       )}
       {diaries.length === 0 ? (

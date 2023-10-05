@@ -1,12 +1,11 @@
 .search-result-wrapper {
   width: calc(100%-4rem);
-  /* height: 100vh; */
+  height: 110vh;
   background-color: #000000;
 }
 
-@media (max-width: 1024px) {
-  .search-result-wrapper {
-    margin-left: 4rem;
-    height: 110vh;
-  }
+.search-result-search-bar {
+  margin-top: 3rem;
+  margin-left: 2rem;
+  margin-bottom: 2rem;
 }
