@@ -11,6 +11,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -70,6 +71,7 @@ public class MemberService {
                 .neutralCoin(0)
                 .birth(requestBody.getBirth())
                 .createAt(LocalDateTime.now())
+                .isWrite(1)
                 .build();
 
         memberRepository.save(member);
@@ -166,4 +168,10 @@ public class MemberService {
 
         return member;
     }
+
+
+//    @Scheduled(cron = "0 0 19 * * *")
+//    public void resetMemberIsWrite(){
+//        List<Member>
+//    }
 }

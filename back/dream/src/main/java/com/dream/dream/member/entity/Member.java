@@ -43,6 +43,6 @@ public class Member {
     // 리프레시 토큰
     private String refreshToken;
 
-    private int isWrite = 1;
+    private int isWrite;
 
 }
