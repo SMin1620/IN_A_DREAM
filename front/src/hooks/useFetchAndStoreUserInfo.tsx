@@ -11,7 +11,7 @@ const useFetchAndStoreUserInfo = () => {
   const getUserInfo = async () => {
     try {
       const response = await userInfo();
-      console.log("얌마", response.data.data);
+      console.log("iswrite", response.data.data);
       dispatch(setUserInfo(response.data.data));
       // setMyInfo(response.data.data);
       return response.data.data;
