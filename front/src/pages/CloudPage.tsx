@@ -7,6 +7,8 @@ import { DiaryInfo } from "../types/ApiType";
 import { useParams } from "react-router-dom";
 import { SERVER_URL } from "../constants";
 import Navbar from "../components/features/NavbarComponents/Navbar";
+import cloudMore from "../assets/image/cloudMore.png";
+
 import "./styles/CloudPage.css";
 
 interface CloudProps {
@@ -112,9 +114,12 @@ function CloudPage() {
 
   return (
     <>
-      <button className="random" onClick={reShuffleDiaries}>
-        다른일기
-      </button>
+      <img
+        src={cloudMore}
+        alt="more"
+        className="random"
+        onClick={reShuffleDiaries}
+      ></img>
       <Navbar />
       <div className="cloud-wrapper">
         <Overlay>
