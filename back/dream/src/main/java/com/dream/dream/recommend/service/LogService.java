@@ -26,10 +26,10 @@ public class LogService {
     /**
      * 꿈 일기 상세 조회시, 로그 생성
      */
-    public void diaryLog(Diary diary) {
+    public void diaryLog(Diary diary, Long memberId) {
         RecommendDto.DiaryDetailLog diaryDetailLog = recommendMapper.recommendLogDto(diary);
         diaryDetailLog.setDiaryId(diary.getId());
-        diaryDetailLog.setMemberId(diary.getMember().getId());
+        diaryDetailLog.setMemberId(memberId);
         kafkaProducerService.sendRecommend(diaryDetailLog);
     }
 
