@@ -20,6 +20,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -170,8 +171,11 @@ public class MemberService {
     }
 
 
-//    @Scheduled(cron = "0 0 19 * * *")
-//    public void resetMemberIsWrite(){
-//        List<Member>
-//    }
+    @Scheduled(cron = "0 1 * * * *")
+    public void resetMemberIsWrite(){
+        System.out.println("######################스케줄러 발동#######################");
+        List<Member> memberList = memberRepository.findMembersByIsWrite(0);
+        memberList.stream().forEach(member -> member.setIsWrite(1));
+        memberRepository.saveAll(memberList);
+    }
 }
