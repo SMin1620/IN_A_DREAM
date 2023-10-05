@@ -20,12 +20,19 @@ const SearchBar = () => {
     navigate(`/SearchResult/${searchKeyword}`);
   };
 
+  const handleKeyPress = (e: any) => {
+    if (e.key === "Enter") {
+      postSearch();
+    }
+  };
+
   return (
     <div className="search-main">
       <input
         type="text"
         placeholder="검색어를 입력하세요"
         onChange={(e) => setSearchKeyword(e.target.value)}
+        onKeyPress={handleKeyPress}
       />
       <button onClick={postSearch}>
         <span>

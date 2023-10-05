@@ -16,6 +16,7 @@ import AllUserStatisticsPage from "./pages/AllUserStatisticsPage";
 import CloudPage from "./pages/CloudPage";
 import StartPage from "./pages/StartPage";
 import PrivateRoute from "./PrivateRoute";
+import Error404Page from "./pages/Error404Page";
 
 function AppRouter() {
   return (
@@ -27,6 +28,7 @@ function AppRouter() {
           <Route path="/Intro" element={<IntroPage />} />
           <Route path="/Login" element={<LoginPage />} />
           <Route path="/Signup" element={<SignUpPage />} />
+          <Route path="/*" element={<Error404Page />} />
           {/* 라우터 보안 걸어줘야 하는 페이지들 */}
           <Route
             path="/Main"
@@ -105,6 +107,14 @@ function AppRouter() {
             element={[
               <PrivateRoute>
                 <CloudPage />
+              </PrivateRoute>,
+            ]}
+          />
+          <Route
+            path="/Error404"
+            element={[
+              <PrivateRoute>
+                <Error404Page />
               </PrivateRoute>,
             ]}
           />
