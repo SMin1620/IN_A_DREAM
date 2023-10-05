@@ -3,28 +3,111 @@ version: '3' # docker-compose 버전 지정
 services:  # docker-compose의 경우 docker 컨테이너로 수행될 서비스들은 services 하위에 기술
 
   zookeeper: # 서비스 이름. service 하위에 작성하면 해당 이름으로 동작
-    image: wurstmeister/zookeeper # 도커 이미지
+    image: bitnami/zookeeper:3.9.0
     container_name: zookeeper
+    environment:
+      - ALLOW_ANONYMOUS_LOGIN=yes
     ports: # 외부포트:컨테이너내부포트
       - "2181:2181"
-#    healthcheck:
-#      test: [ "CMD-SHELL", "echo 'ruok' | nc localhost 2181 | grep -q imok" ]
-#      interval: 10s
-#      timeout: 10s
-#      retries: 5
 
   kafka:
-    image: wurstmeister/kafka
+#    image: wurstmeister/kafka
+    image: bitnami/kafka:3.5.1
     container_name: kafka
     ports: # 외부포트:컨테이너내부포트
-      - "9092:9092"
+      - "9094:9094"
     environment: # kafka 브로터를 위한 환경 변수 지정
-      - KAFKA_ADVERTISED_LISTENERS=PLAINTEXT://127.0.0.1:9092
-      - KAFKA_LISTENERS=PLAINTEXT://127.0.0.1:9092
-      - KAFKA_ADVERTISED_HOST_NAME=127.0.0.1
-      - KAFKA_ZOOKEEPER_CONNECT=zookeeper:2181 # kafka가 zookeeper에 커넥션하기 위한 대상을 지정
+      KAFKA_ADVERTISED_LISTENERS: INSIDE://:9092,OUTSIDE://localhost:9094
+      KAFKA_LISTENERS: INSIDE://:9092,OUTSIDE://0.0.0.0:9094
+      KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: INSIDE:PLAINTEXT,OUTSIDE:PLAINTEXT
+      KAFKA_INTER_BROKER_LISTENER_NAME: INSIDE
+      KAFKA_CREATE_TOPICS: "member_log:1:1"
+      KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
     depends_on:
       - zookeeper
-#        condition: service_healthy # Zookeeper 서비스가 건강한 상태일 때만 시작합니다.
+
+  kafka-ui:
+    image: provectuslabs/kafka-ui
+    container_name: kafka-ui
+    ports:
+      - "8089:8080"
+    restart: always
+    environment:
+      - KAFKA_CLUSTERS_0_NAME=local
+      - KAFKA_CLUSTERS_0_BOOTSTRAPSERVERS=kafka:9092
+      - KAFKA_CLUSTERS_0_ZOOKEEPER=zookeeper:2181
+    depends_on:
+      - kafka
+
+  elasticsearch:
+    restart: unless-stopped
+    build: ./elastic/elasticsearch
+    container_name: elasticsearch
+    volumes:
+      - ./elastic/elasticsearch/config/elasticsearch.yml:/usr/share/elasticsearch/config/elasticsearch.yml
+      - ./elastic/elasticsearch/config/dict.txt:/usr/share/elasticsearch/config/dict.txt
+      - ./elastic/elasticsearch/data:/usr/share/elasticsearch/data
+    environment:
+      - TZ=Asia/Seoul
+      - opendistro_security.disabled=true
+#      - ELASTIC_PASSWORD=elasticpassword
+      - node.name=elasticsearch
+      - bootstrap.memory_lock=true
+      - discovery.type=single-node
+      - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
+      - opendistro_security.ssl.http.enabled=false
+      - opendistro_security.ssl.transport.enabled=false
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
+    ports:
+      - "9200:9200"
+
+  kibana:
+    restart: unless-stopped
+    build: ./elastic/kibana
+    container_name: kibana
+    environment:
+      - TZ=Asia/Seoul
+    volumes:
+      - ./elastic/kibana/config/kibana.yml:/usr/share/kibana/config/kibana.yml:ro,z
+    ports:
+      - "5601:5601" ## 키바나의 기본포트는 5601 이다.
+    depends_on:
+      - elasticsearch
+
+  logstash:
+    restart: unless-stopped
+    build: ./elastic/logstash
+    container_name: logstash
+    volumes:
+      - ./elastic/logstash/config/logstash.yml:/usr/share/logstash/config/logstash.yml
+      - ./elastic/logstash/pipeline/logstash.conf:/usr/share/logstash/pipeline/logstash.conf
+      - ./elastic/logstash/drivers/:/opt/logstash/vendor/jar/jdbc/
+    environment:
+      - TZ=Asia/Seoul
+      - "LS_JAVA_OPTS=-Xmx256m -Xms256m"
+    ports:
+      - "5044:5044"
+      - "9600:9600"
+    depends_on:
+      - elasticsearch
+
+  mysql:
+    image: mysql
+    container_name: mysql
+    volumes:
+      - ./:/app/server/mysql/
+    environment:
+      MYSQL_DATABASE: dream
+      MYSQL_ROOT_PASSWORD: 1234
+    ports:
+      - "3306:3306"
+    command:
+      - --character-set-server=utf8mb4
+      - --collation-server=utf8mb4_unicode_ci
+      - --default-authentication-plugin=mysql_native_password  # 추가한 부분
+    restart: always
