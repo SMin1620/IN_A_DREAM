@@ -44,7 +44,7 @@ const Clouds = () => {
   const { camera } = useThree();
   const clouds = useMemo(() => {
     const temp = [];
-    for (let i = 730; i < 1000; i++) {
+    for (let i = 750; i < 1000; i++) {
       const x = (Math.random() - 0.5) * 2 * 50;
       const y = (Math.random() - 0.5) * 2 * 50;
       const z = i;

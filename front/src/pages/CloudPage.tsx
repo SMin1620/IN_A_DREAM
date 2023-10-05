@@ -80,7 +80,7 @@ function CloudPage() {
 
     const introTimer = setTimeout(() => {
       setShowIntro(false);
-    }, 5100); // After 5.1 seconds
+    }, 5000); // After 5 seconds
 
     return () => {
       clearTimeout(introTimer);
@@ -110,7 +110,7 @@ function CloudPage() {
     // 일정 시간 후에 다시 숨깁니다.
     const introTimer = setTimeout(() => {
       setShowIntro(false);
-    }, 5100); // 예를 들어 5.1초 후에 숨깁니다.
+    }, 5000); // 예를 들어 5초 후에 숨깁니다.
 
     // 컴포넌트가 언마운트되면 타이머를 클리어합니다.
     return () => {
