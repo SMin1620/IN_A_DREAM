@@ -53,3 +53,36 @@
 .diary-drrlist-img {
   width: 40%;
 }
+
+@media (max-width: 768px) {
+  .mypage-top {
+    display: flex;
+    flex-direction: column;
+    height: 80%;
+    margin-left: 0;
+  }
+  .mypage-bottom {
+    margin-left: 0;
+  }
+
+  .mypage-top-calendar {
+    order: 1;
+  }
+  .mypage-top-keyword {
+    order: 2;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-top: 5%;
+  }
+
+  .mypage-top-statistics {
+    order: 3;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-top: 5%;
+  }
+}

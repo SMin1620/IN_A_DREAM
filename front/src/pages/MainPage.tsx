@@ -58,17 +58,15 @@ const MainPage = () => {
         transition: "background-color 1.5s",
       }}
     >
-      {!showIntro && <NavBar />}
-      {!showIntro && (
-        <img
-          src={CloudBar}
-          alt="Cloud Bar"
-          className="cloud-bar"
-          onClick={() => navigate("/cloud")}
-        />
-      )}
+      <NavBar />
+      <img
+        src={CloudBar}
+        alt="Cloud Bar"
+        className="cloud-bar"
+        onClick={() => navigate("/cloud")}
+      />
       {/* 네브바 옆에 중앙정렬을 위해 마진레프트 네브바 만큼줬씀다 */}
-      <div style={{ marginLeft: !showIntro && !isMobileView ? "4rem" : "0" }}>
+      <div style={{ marginLeft: !isMobileView ? "4rem" : "0" }}>
         {showIntro ? <MainPageIntro /> : <MainStart />}
         <MainSecond />
         <MainThird />

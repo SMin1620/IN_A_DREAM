@@ -5,6 +5,7 @@ import { DiaryInfo } from "../../../types/ApiType";
 import { padNumber } from "../../../hooks";
 import { SERVER_URL } from "../../../constants";
 import { useNavigate } from "react-router-dom";
+import "./DiaryDrrList.css";
 
 interface DiaryDrrListProps {
   diaries: DiaryInfo[];
@@ -26,6 +27,9 @@ const DiaryContainer = styled.div<{ selected?: boolean }>`
   justify-content: space-evenly;
 
   font-size: 1.2rem;
+  @media (max-width: 768px) {
+    font-size: 0.7rem;
+  }
 `;
 
 const Image = styled.img`
