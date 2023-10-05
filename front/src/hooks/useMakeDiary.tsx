@@ -61,6 +61,12 @@ const useMakeDiary = () => {
     } catch (error) {
       Swal.close();
       console.error(error);
+
+      await Swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: "Spark BOOM!",
+      });
     }
   };
 

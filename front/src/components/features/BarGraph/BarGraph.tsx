@@ -26,8 +26,8 @@ const BarGraph: React.FC = () => {
         <YAxis />
         <Tooltip />
         <Legend />
-        <Bar dataKey="WhenFalse" fill="#8884d8" />
-        <Bar dataKey="WhenTrue" fill="#82ca9d" />
+        <Bar dataKey="보관비율" fill="#8884d8" />
+        <Bar dataKey="판매비율" fill="#82ca9d" />
       </BarChart>
     </ResponsiveContainer>
   );

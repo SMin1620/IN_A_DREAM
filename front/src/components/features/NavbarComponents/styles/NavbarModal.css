@@ -86,75 +86,75 @@
 
 .navbar-font1 {
   font-family: PartialSansKR-Regular;
-  font-size: 3.2rem;
+  font-size: 3.2vw;
   margin-right: 2%;
 }
 
 .navbar-font2 {
   font-family: omyu_pretty;
   margin-right: 2%;
-  font-size: 3.6rem;
+  font-size: 3.2vw;
 }
 
 .navbar-font3 {
   font-family: IAMAPLAYER;
   margin-right: 2%;
-  font-size: 3.5rem;
+  font-size: 3.2vw;
 }
 
 .navbar-font4 {
   font-family: OKDDUNG;
   margin-right: 2%;
-  font-size: 3.4rem;
+  font-size: 3.2vw;
 }
 
 .navbar-font5 {
   margin-right: 2%;
-  font-size: 3.7rem;
+  font-size: 3.2vw;
   font-family: "Freckle Face";
 }
 
 .navbar-font6 {
   margin-right: 2%;
-  font-size: 3.5rem;
+  font-size: 3.2vw;
   font-family: "CookieRun-Regular";
 }
 
 .navbar-font7 {
   margin-right: 2%;
-  font-size: 3.5rem;
+  font-size: 3.2vw;
   font-family: "BMDOHYEON";
 }
 .navbar-font8 {
   margin-right: 2%;
-  font-size: 3.5rem;
+  font-size: 3.2vw;
   font-family: "KOTRA_BOLD-Bold";
 }
 
 @media (max-width: 1024px) {
   .navbar-font1 {
-    font-size: 1.6rem;
+    font-size: 1.6vw;
   }
   .navbar-font2 {
-    font-size: 2.1rem;
+    font-size: 2.1vw;
   }
   .navbar-font3 {
-    font-size: 2.1rem;
+    font-size: 2.1vw;
   }
   .navbar-font4 {
-    font-size: 1.8rem;
+    font-size: 1.8vw;
   }
   .navbar-font5 {
-    font-size: 2.1rem;
+    font-size: 2.1vw;
   }
   .navbar-font6 {
-    font-size: 2.1rem;
+    font-size: 2.1vw;
   }
   .navbar-font7 {
-    font-size: 1.7rem;
+    font-size: 1.7vw;
   }
   .navbar-font8 {
-    font-size: 2.1rem;
+    font-size: 2.1vw;
   }
 }
 
@@ -188,28 +188,28 @@
     color: black;
   }
   .navbar-font1 {
-    font-size: 1.5rem;
+    font-size: 1.5vw;
   }
   .navbar-font2 {
-    font-size: 2rem;
+    font-size: 2vw;
   }
   .navbar-font3 {
-    font-size: 2rem;
+    font-size: 2vw;
   }
   .navbar-font4 {
-    font-size: 1.7rem;
+    font-size: 1.7vw;
   }
   .navbar-font5 {
-    font-size: 2rem;
+    font-size: 2vw;
   }
   .navbar-font6 {
-    font-size: 2rem;
+    font-size: 2vw;
   }
   .navbar-font7 {
-    font-size: 1.6rem;
+    font-size: 1.6vw;
   }
   .navbar-font8 {
-    font-size: 2rem;
+    font-size: 2vw;
   }
   .navbar-body-search {
     height: 15%;

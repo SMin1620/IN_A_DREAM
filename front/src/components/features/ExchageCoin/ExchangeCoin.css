@@ -5,7 +5,7 @@
 
   /* right: 50%; */
   /* left: calc(50% + 4rem); */
-  left: 50%;
+  left: calc(40% - 4rem);
   /* transform: translate(-50%, -50%); */
   width: 50vw;
   height: 55vh;
@@ -19,6 +19,11 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
+}
+.exchange-close {
+  position: absolute;
+  top: 2%;
+  right: 2%;
 }
 .exchange-wrapper img {
   width: 5vw;

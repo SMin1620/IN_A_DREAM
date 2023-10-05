@@ -156,7 +156,7 @@ const AllUserStatisticsPage = () => {
         </div>
       </div>
       <div className="bar-statistics">
-        감정코인과 sale의 상관관계
+        <i>감정코인별 판매와 보관 비율</i>
         <div className="bar-statics-main">
           <BarGraph />
         </div>
