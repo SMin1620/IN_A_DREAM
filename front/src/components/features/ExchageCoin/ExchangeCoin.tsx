@@ -7,6 +7,8 @@ import Button from "../../common/Button2";
 import Input from "../../common/Input";
 import useExchangeCoin from "../../../hooks/useExchangeCoin";
 import useFetchAndStoreUserInfo from "../../../hooks/useFetchAndStoreUserInfo";
+import { useSelector } from "react-redux";
+import { RootState } from "../../../stores/stores";
 
 type CoinType = "positive" | "neutral" | "negative";
 
@@ -25,6 +27,12 @@ interface CoinInfo {
 interface ExchangeCoinProps {
   closeModal: () => void;
 }
+interface UserInfo {
+  positiveCoin?: number;
+  neutralCoin?: number;
+  negativeCoin?: number;
+  // Add other possible properties here...
+}
 
 const ExchangeCoin: React.FC<ExchangeCoinProps> = ({ closeModal }) => {
   const [selectCoin, setSelectCoin] = useState<
@@ -42,8 +50,16 @@ const ExchangeCoin: React.FC<ExchangeCoinProps> = ({ closeModal }) => {
     await getUserInfo();
     closeModal();
   };
+
+  const userInfo = useSelector(
+    (state: RootState) => state.userInfo.data as UserInfo
+  );
+
   return (
     <div className="exchange-wrapper">
+      <p className="exchange-close" onClick={closeModal}>
+        X
+      </p>
       {step === 1 ? (
         <>
           <h1>수령할 코인을 선택하세요.</h1>
@@ -63,6 +79,7 @@ const ExchangeCoin: React.FC<ExchangeCoinProps> = ({ closeModal }) => {
                     onClick={() => setSelectCoin(key as CoinType)}
                   />
                 </div>
+                {userInfo && userInfo[(key + "Coin") as keyof UserInfo]}
                 <span>{COIN_INFO[key].name}</span>
               </div>
             ))}
@@ -91,6 +108,10 @@ const ExchangeCoin: React.FC<ExchangeCoinProps> = ({ closeModal }) => {
                   <div key={key} className="exchange-rest-coin">
                     <img src={COIN_INFO[key].imgSrc} alt={`${key} Coin`} />
                     <p>{coin}</p>
+                    <p>/</p>
+                    <p>
+                      {userInfo && userInfo[(key + "Coin") as keyof UserInfo]}
+                    </p>
                   </div>
                 ))}
             </div>
@@ -102,6 +123,7 @@ const ExchangeCoin: React.FC<ExchangeCoinProps> = ({ closeModal }) => {
                 src={COIN_INFO[selectCoin].imgSrc}
                 alt={`${COIN_INFO[selectCoin].name}`}
               />
+              {userInfo && userInfo[(selectCoin + "Coin") as keyof UserInfo]}
               <Input
                 type="number"
                 placeholder="0"
