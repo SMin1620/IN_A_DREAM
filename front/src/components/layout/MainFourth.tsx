@@ -128,8 +128,8 @@ const MainFourth = () => {
                 >
                   <img
                     style={{
-                      width: index % 2 === 0 ? "360px" : "300px",
-                      height: index % 2 === 0 ? "300px" : "340px",
+                      width: index % 2 === 0 ? "300px" : "260px",
+                      height: index % 2 === 0 ? "260px" : "300px",
                       borderRadius: "40px",
                       margin: "40px",
                       objectFit: "cover",

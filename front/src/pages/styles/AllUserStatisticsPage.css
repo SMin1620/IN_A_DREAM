@@ -56,10 +56,10 @@
 }
 
 .keyword-statistics-left i {
-  font-size: 2.5vw;
-  font-style: italic;
+  font-size: 2.3vw;
   color: #646464;
   margin: 1rem 0;
+  font-family: "SBAggroB";
 }
 
 .keyword-statistics-left p:hover {
@@ -70,6 +70,7 @@
   width: 50vh;
   height: 50vh;
   padding-top: 2rem;
+  margin-top: 5%;
 }
 
 .bar-statistics {
@@ -80,12 +81,13 @@
 }
 
 .bar-statistics i {
+  padding-top: 5%;
   font-size: 3rem;
   font-weight: bold;
   margin-bottom: 2rem;
-  font-style: italic;
   color: #646464;
-  font-family: "Francois One";
+  font-family: "BMDOHYEON";
+  font-weight: lighter;
 }
 
 .bar-statics-main {
