@@ -30,93 +30,94 @@ function AppRouter() {
           <Route path="/Signup" element={<SignUpPage />} />
           <Route path="/*" element={<Error404Page />} />
           {/* 라우터 보안 걸어줘야 하는 페이지들 */}
+          x
           <Route
             path="/Main"
-            element={[
+            element={
               <PrivateRoute>
                 <MainPage />
-              </PrivateRoute>,
-            ]}
+              </PrivateRoute>
+            }
           />
           <Route
             path="/CreateDreamDiary"
-            element={[
+            element={
               <PrivateRoute>
                 <CreateDreamDiaryPage />
-              </PrivateRoute>,
-            ]}
+              </PrivateRoute>
+            }
           />
           <Route
             path="/Mypage"
-            element={[
+            element={
               <PrivateRoute>
                 <MyPage />
-              </PrivateRoute>,
-            ]}
+              </PrivateRoute>
+            }
           />
           <Route
             path="/gallery/:sortKey"
-            element={[
+            element={
               <PrivateRoute>
                 <GalleryPage />
-              </PrivateRoute>,
-            ]}
+              </PrivateRoute>
+            }
           />
           <Route
             path="/SearchResult/:keyword"
-            element={[
+            element={
               <PrivateRoute>
                 <SearchResultPage />
-              </PrivateRoute>,
-            ]}
+              </PrivateRoute>
+            }
           />
           <Route
             path="/DreamShop"
-            element={[
+            element={
               <PrivateRoute>
                 <DreamShopPage />
-              </PrivateRoute>,
-            ]}
+              </PrivateRoute>
+            }
           />
           <Route
             path="/DreamDetail/:id"
-            element={[
+            element={
               <PrivateRoute>
                 <DreamDetailPage />
-              </PrivateRoute>,
-            ]}
+              </PrivateRoute>
+            }
           />
           <Route
             path="/AllUserStatistics"
-            element={[
+            element={
               <PrivateRoute>
                 <AllUserStatisticsPage />
-              </PrivateRoute>,
-            ]}
+              </PrivateRoute>
+            }
           />
           <Route
             path="/Gallery"
-            element={[
+            element={
               <PrivateRoute>
                 <GalleryPage />
-              </PrivateRoute>,
-            ]}
+              </PrivateRoute>
+            }
           />
           <Route
             path="/Cloud"
-            element={[
+            element={
               <PrivateRoute>
                 <CloudPage />
-              </PrivateRoute>,
-            ]}
+              </PrivateRoute>
+            }
           />
           <Route
             path="/Error404"
-            element={[
+            element={
               <PrivateRoute>
                 <Error404Page />
-              </PrivateRoute>,
-            ]}
+              </PrivateRoute>
+            }
           />
         </Routes>
       </BrowserRouter>
