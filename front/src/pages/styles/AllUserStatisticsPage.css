@@ -79,6 +79,15 @@
   padding-bottom: 1rem;
 }
 
+.bar-statistics i {
+  font-size: 3rem;
+  font-weight: bold;
+  margin-bottom: 2rem;
+  font-style: italic;
+  color: #646464;
+  font-family: "Francois One";
+}
+
 .bar-statics-main {
   width: 80vw;
   height: 50vh;
@@ -101,6 +110,13 @@
     padding-top: 1rem;
   }
 
+  .keyword-statistics-left i {
+    font-size: 5vw;
+    font-style: italic;
+    color: #646464;
+    margin: 1rem 0;
+  }
+
   .rdrDateRangePickerWrapper {
     width: 60vw;
     border-radius: 20px;
@@ -113,6 +129,10 @@
   .emotion-statistics-left {
     width: 100vw;
     height: 100vw;
+  }
+
+  .bar-statistics i {
+    font-size: 1.5rem;
   }
 
   .bar-statics-main {

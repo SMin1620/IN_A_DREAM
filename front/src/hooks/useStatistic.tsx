@@ -16,8 +16,8 @@ interface StaticsData {
 }
 interface BarData {
   name: string;
-  WhenFalse: number;
-  WhenTrue: number;
+  보관비율: number;
+  판매비율: number;
 }
 
 const useStatistic = () => {
@@ -45,18 +45,18 @@ const useStatistic = () => {
     const transformedData: BarData[] = [
       {
         name: "Negative",
-        WhenFalse: data.avgNegativeWhenFalse,
-        WhenTrue: data.avgNegativeWhenTrue,
+        보관비율: data.avgNegativeWhenFalse,
+        판매비율: data.avgNegativeWhenTrue,
       },
       {
         name: "Neutral",
-        WhenFalse: data.avgNeutralWhenFalse,
-        WhenTrue: data.avgNeutralWhenTrue,
+        보관비율: data.avgNeutralWhenFalse,
+        판매비율: data.avgNeutralWhenTrue,
       },
       {
         name: "Positive",
-        WhenFalse: data.avgPositiveWhenFalse,
-        WhenTrue: data.avgPositiveWhenTrue,
+        보관비율: data.avgPositiveWhenFalse,
+        판매비율: data.avgPositiveWhenTrue,
       },
     ];
     setRelationData(transformedData);
