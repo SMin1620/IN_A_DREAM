@@ -20,7 +20,7 @@ interface KeywordCloudProps {
 }
 
 const KeywordCloudWrapper = S.div<{ width?: string; height?: string }>`
-  background-color: #eee;
+  background-color: #fff;
   width: ${(props) => props.width || "30vw"};
   height: ${(props) => props.height || "25vw"};
   overflow: hidden;
@@ -44,7 +44,8 @@ const KeywordCloud: React.FC<KeywordCloudProps> = ({
   console.log(response, "response");
 
   const fontSize = useCallback(
-    (word: { value: number }) => Math.log2(word.value) * 5,
+    // (word: { value: number }) => Math.log2(word.value) * 5,
+    (word: { value: number }) => word.value,
     []
   );
 
@@ -58,7 +59,7 @@ const KeywordCloud: React.FC<KeywordCloudProps> = ({
   const myData = myResponse.data?.data?.data;
 
   const transformData = (data: Item[]) =>
-    data?.map(({ keyword, count }) => ({ text: keyword, value: count * 100 }));
+    data?.map(({ keyword, count }) => ({ text: keyword, value: count }));
 
   if (!data) {
     return <div>Loading...</div>;
