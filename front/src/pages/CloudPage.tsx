@@ -52,7 +52,7 @@ function CloudPage() {
   const [diaries, setDiaries] = useState<DiaryInfo[]>([]);
   const [shuffledDiaries, setShuffledDiaries] = useState<DiaryInfo[]>([]);
   const { sortKey } = useParams<string>();
-  const validSortKey = sortKey || "";
+  // const validSortKey = sortKey || "";
 
   const {
     data: response,
@@ -78,11 +78,13 @@ function CloudPage() {
       document.documentElement.scrollHeight / 2 - window.innerHeight / 2;
     window.scrollTo(centerOfWidth, centerOfHeight);
 
-    const timer = setTimeout(() => {
+    const introTimer = setTimeout(() => {
       setShowIntro(false);
-    }, 3100); // After 3 seconds
+    }, 5100); // After 5.1 seconds
 
-    return () => clearTimeout(timer); // Clean up on unmount
+    return () => {
+      clearTimeout(introTimer);
+    }; // Clean up on unmount
   }, []);
 
   // 응답으로 받은 다이어리 데이터 세팅
@@ -103,13 +105,17 @@ function CloudPage() {
     // IntroCloud를 잠시 보여줍니다.
     setShowIntro(true);
 
+    // 일정시간 후 렌더링 시작
+
     // 일정 시간 후에 다시 숨깁니다.
-    const timer = setTimeout(() => {
+    const introTimer = setTimeout(() => {
       setShowIntro(false);
-    }, 3100); // 예를 들어 3초 후에 숨깁니다.
+    }, 5100); // 예를 들어 5.1초 후에 숨깁니다.
 
     // 컴포넌트가 언마운트되면 타이머를 클리어합니다.
-    return () => clearTimeout(timer);
+    return () => {
+      clearTimeout(introTimer);
+    };
   };
 
   return (

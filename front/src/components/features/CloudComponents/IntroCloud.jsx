@@ -14,11 +14,11 @@ body {
 
 const CloudMesh = ({ position }) => {
   const mesh = useRef();
-  useFrame(() => (mesh.current.rotation.z += 0.001));
+  // useFrame(() => (mesh.current.rotation.z += 0.001));
   const texture = useLoader(THREE.TextureLoader, "/cloud.png");
 
   const [scale, setScale] = useState(() => {
-    const randomScale = 0.5 + Math.random() * 3.5; // 0.5에서 4 사이의 랜덤한 크기
+    const randomScale = 0.15 + Math.random() * 0.35; // 0.15에서 0.5 사이의 랜덤한 크기
     return [randomScale];
   });
   // 직접 필터 속성 설정 GPU 메모리를 절약
@@ -44,9 +44,9 @@ const Clouds = () => {
   const { camera } = useThree();
   const clouds = useMemo(() => {
     const temp = [];
-    for (let i = 700; i < 1000; i++) {
-      const x = (Math.random() - 0.5) * 2 * 1000 - 500;
-      const y = (Math.random() - 0.5) * 2 * 200 - 15;
+    for (let i = 730; i < 1000; i++) {
+      const x = (Math.random() - 0.5) * 2 * 50;
+      const y = (Math.random() - 0.5) * 2 * 50;
       const z = i;
       temp.push(<CloudMesh key={i} position={[x, y, z]} />);
     }
@@ -54,18 +54,17 @@ const Clouds = () => {
   }, []);
 
   useFrame(() => {
-    camera.position.z -= 1;
+    camera.position.z -= 0.5;
   });
 
   return <>{clouds}</>;
 };
 
-const Lighting = () => (
-  <>
-    <ambientLight intensity={1} />
-    <pointLight position={[0, 0, 1300]} intensity={1} />
-  </>
-);
+// const Lighting = () => (
+//   <>
+//     <ambientLight intensity={1} />
+//   </>
+// );
 
 const CloudComponent = () => {
   return (
@@ -84,11 +83,11 @@ const CloudComponent = () => {
       <Canvas
         style={{ width: "100%", height: "100%" }}
         camera={{
-          position: [0, 0, 1100],
+          position: [0, 0, 1000],
         }}
       >
         <Clouds />
-        <Lighting />
+        {/* <Lighting /> */}
       </Canvas>
     </div>
   );
