@@ -40,7 +40,7 @@ const DreamShopPage = () => {
       <div className="dreamShoptitle">
         DREAM <br />
         SHOP <br />
-        🌜🎪🌕
+        {/* 🌜🎪🌕 */}
       </div>
 
       <CardList diaries={diaries} />
