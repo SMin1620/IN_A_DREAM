@@ -28,6 +28,12 @@ const SearchBar = () => {
     }
   };
 
+  const handleKeyPress = (e: any) => {
+    if (e.key === "Enter") {
+      postSearch();
+    }
+  };
+
   return (
     <div className="search-main">
       <input

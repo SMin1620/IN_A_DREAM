@@ -18,7 +18,7 @@ const CloudMesh = ({ position }) => {
   const texture = useLoader(THREE.TextureLoader, "/cloud.png");
 
   const [scale, setScale] = useState(() => {
-    const randomScale = 0.5 + Math.random() * 1.5; // 0.5에서 2 사이의 랜덤한 크기
+    const randomScale = 0.5 + Math.random() * 3.5; // 0.5에서 4 사이의 랜덤한 크기
     return [randomScale];
   });
   // 직접 필터 속성 설정 GPU 메모리를 절약
@@ -29,7 +29,7 @@ const CloudMesh = ({ position }) => {
     <>
       <ambientLight color={0xffffff} intensity={1} />
       <mesh ref={mesh} position={position} scale={[scale, scale, scale]}>
-        <planeGeometry attach="geometry" args={[100, 100]} />
+        <planeGeometry attach="geometry" args={[64, 64]} />
         <meshStandardMaterial
           attach="material"
           map={texture}
@@ -44,7 +44,7 @@ const Clouds = () => {
   const { camera } = useThree();
   const clouds = useMemo(() => {
     const temp = [];
-    for (let i = 500; i < 1000; i++) {
+    for (let i = 700; i < 1000; i++) {
       const x = (Math.random() - 0.5) * 2 * 1000 - 500;
       const y = (Math.random() - 0.5) * 2 * 200 - 15;
       const z = i;

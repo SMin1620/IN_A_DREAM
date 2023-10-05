@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Navbar from "../components/features/NavbarComponents/Navbar";
 import "./styles/CreateDreamDiaryPage.css";
 import CreateDreamDiaryForm from "../components/features/CreateDreamDiary/CreateDreamDiaryForm";
@@ -8,6 +8,9 @@ import useKarlo from "../hooks/useKarlo";
 import Loading from "../components/features/LoadingComponents/Loading";
 import ProgressiveImage from "react-progressive-graceful-image";
 import placeholderSrc from "../assets/background/loading4.png";
+import { useNavigate } from "react-router-dom";
+import useFetchAndStoreUserInfo from "../hooks/useFetchAndStoreUserInfo";
+import Swal from "sweetalert2";
 
 const CreateDreamDiaryPage = () => {
   const [sell, setSell] = useState<boolean>(false);
@@ -15,6 +18,23 @@ const CreateDreamDiaryPage = () => {
   const [imageUrl, setImageUrl] = useState<string | null>(null);
 
   const { KarloimageUrl, fetchData, Karloloading } = useKarlo();
+  const navigate = useNavigate();
+  const { getUserInfo } = useFetchAndStoreUserInfo();
+
+  useEffect(() => {
+    (async () => {
+      const userInfo = await getUserInfo();
+      if (userInfo && userInfo.isWrite === 0) {
+        Swal.fire({
+          icon: "error",
+          title: "Oops...",
+          text: "오늘 쓸 수 있는 일기가 0회입니다.",
+        }).then(() => {
+          navigate("/main");
+        });
+      }
+    })();
+  }, [getUserInfo, navigate]);
 
   return (
     <div className="create-dream-diary">
@@ -40,13 +60,6 @@ const CreateDreamDiaryPage = () => {
                 )}
               </ProgressiveImage>
             )}
-            {/* {Karloloading ? (
-              <div>
-                <Loading />
-              </div>
-            ) : (
-              imageUrl && <img src={imageUrl} alt="diagram" />
-            )} */}
           </div>
         </div>
 
