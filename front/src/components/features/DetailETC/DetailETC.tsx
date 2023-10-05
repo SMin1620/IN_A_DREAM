@@ -4,7 +4,6 @@ import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import { DiaryInfo } from "../../../types/ApiType";
 import { useSelector } from "react-redux";
 import useDetailDiaryETC from "./../../../hooks/useDetailDiaryETC";
-import useDetailDiary from "../../../hooks/useDetailDiary";
 import "./DetailETC.css";
 import Toggle from "../../common/Toggle";
 
@@ -37,19 +36,18 @@ const DetailETC: React.FC<OwnProps> = ({ diaryDetail, diaryId }) => {
     setIsLiked(diaryDetail.liked);
   }, [diaryDetail]);
 
-  console.log(diaryDetail);
   return (
     <div className="detail-etc">
       {isLiked ? (
         <FavoriteIcon
           onClick={() => postLiked(diaryId)}
-          style={{ fontSize: "2.5vw" }}
+          style={{ fontSize: "2rem" }}
           className="like-icon"
         />
       ) : (
         <FavoriteBorderIcon
           onClick={() => postLiked(diaryId)}
-          style={{ fontSize: "2.5vw" }}
+          style={{ fontSize: "2rem" }}
           className="like-icon"
         />
       )}
