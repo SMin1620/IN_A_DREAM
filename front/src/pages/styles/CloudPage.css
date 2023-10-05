@@ -9,8 +9,8 @@
 .random {
   position: fixed;
   z-index: 10;
-  top: 0;
-  right: 0;
+  right: 2%;
+  top: 2%;
   display: flex;
   flex-direction: row;
   width: 8vw;
