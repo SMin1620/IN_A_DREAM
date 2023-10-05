@@ -81,6 +81,10 @@ public class DiaryService {
     public DeferredResult<BaseResponse> diaryCreate(DiaryDto.DiaryCreateRequestDto requestBody, String memberEmail) {
         Member member = memberRepository.findByEmail(memberEmail).orElseThrow(() -> new BusinessLogicException(ExceptionCode.MEMBER_NOT_FOUND));
 
+        if(member.getIsWrite() == 0){
+            throw new BusinessLogicException(ExceptionCode.DIARY_ALREADY_WRITE);
+        }
+
         // 이미지 저장 결로
         File uploadDir = new File(uploadPath + File.separator + uploadFolder);
         log.error(uploadDir.getAbsolutePath());
@@ -160,17 +164,6 @@ public class DiaryService {
         long memberId = message.getMemberId();
         Member member = memberRepository.findById(memberId).orElseThrow(() -> new BusinessLogicException(ExceptionCode.MEMBER_NOT_FOUND));
 
-//        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-//        System.out.println(principal);
-
-        // 인증 객체 생성
-//        UserDetails userDetails = userDetailsService.loadUserByUsername(member.getEmail());
-//
-//        Authentication auth = new UsernamePasswordAuthenticationToken(member.getEmail(), "", userDetails.getAuthorities());
-//
-//        // Security Context 설정
-//        SecurityContextHolder.getContext().setAuthentication(auth);
-
         Diary diary = diaryMapper.sparkConsumeToDiary(message);
 
         diary.setPositivePoint(Math.round(message.getPositive()));
@@ -203,9 +196,12 @@ public class DiaryService {
         if (this.deferredResults.containsKey(memberId)) {
             BaseResponse baseResponse = new BaseResponse(HttpStatus.OK, "스파크 처리 완료", diaryMapper.diaryToResponseDto(diary));
             this.deferredResults.get(memberId).setResult(baseResponse);
-            System.out.println("##########################-------------------------------");
-            System.out.println(deferredResults.get(memberId).getResult());
-            System.out.println("##########################-------------------------------");
+
+            member.setIsWrite(member.getIsWrite() - 1);
+            memberRepository.save(member);
+//            System.out.println("##########################-------------------------------");
+//            System.out.println(deferredResults.get(memberId).getResult());
+//            System.out.println("##########################-------------------------------");
             this.deferredResults.remove(memberId);
         }
     }

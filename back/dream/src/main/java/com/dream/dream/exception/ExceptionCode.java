@@ -27,7 +27,9 @@ public enum ExceptionCode {
     FILE_NOT_FOUND(404, "File Not Found"),
     LIKE_NOT_FOUND(404, "Like Not Found"),
     NOT_OWNER_OF(409,"Not owner of item"),
-    DIARY_NOT_FOUND(404, "Diary Not Found");
+    DIARY_NOT_FOUND(404, "Diary Not Found"),
+
+    DIARY_ALREADY_WRITE(409, "Diary Already Write");
 
 
     @Getter
