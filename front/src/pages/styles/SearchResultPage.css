@@ -3,3 +3,10 @@
   /* height: 100vh; */
   background-color: #000000;
 }
+
+@media (max-width: 1024px) {
+  .search-result-wrapper {
+    margin-left: 4rem;
+    height: 110vh;
+  }
+}

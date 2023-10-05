@@ -9,7 +9,6 @@ import { useMediaQuery } from "react-responsive";
 import positive from "../../../assets/coin/positive.png";
 import neutral from "../../../assets/coin/neutral.png";
 import negative from "../../../assets/coin/negative.png";
-import useFetchAndStoreUserInfo from "../../../hooks/useFetchAndStoreUserInfo";
 import S from "styled-components";
 import Swal from "sweetalert2";
 import { RootState } from "../../../stores/stores";
@@ -80,7 +79,7 @@ const NavbarModal: React.FC<isModalOpen> = ({ isNavbarModalOpen, onClose }) => {
     }
   }, [isNavbarModalOpen]);
   const userInfo = useSelector((state: RootState) => state.userInfo.data);
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
 
   return (
     <Box

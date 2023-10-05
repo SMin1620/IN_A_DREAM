@@ -18,6 +18,14 @@ const SearchBar = () => {
   const postSearch = () => {
     // API 요청
     navigate(`/SearchResult/${searchKeyword}`);
+    setSearchKeyword("");
+  };
+
+  const postEnterSearch = (event: React.KeyboardEvent<HTMLInputElement>) => {
+    if (event.key === "Enter") {
+      navigate(`/SearchResult/${searchKeyword}`);
+      setSearchKeyword("");
+    }
   };
 
   const handleKeyPress = (e: any) => {
@@ -32,7 +40,7 @@ const SearchBar = () => {
         type="text"
         placeholder="검색어를 입력하세요"
         onChange={(e) => setSearchKeyword(e.target.value)}
-        onKeyPress={handleKeyPress}
+        onKeyUp={(event) => postEnterSearch(event)}
       />
       <button onClick={postSearch}>
         <span>

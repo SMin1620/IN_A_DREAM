@@ -9,7 +9,6 @@ import { DiaryInfo } from "../types/ApiType";
 const SearchResultPage = () => {
   const { keyword } = useParams();
   const { data: diarieswithKeyword, isLoading } = useDiarywithKeyword(keyword);
-
   const [diaries, setDiaries] = useState<DiaryInfo[]>([]);
   const [correctedKeyword, setCorrectedKeyword] = useState<string | null>(null);
 
@@ -21,6 +20,7 @@ const SearchResultPage = () => {
       }
     }
   }, [diarieswithKeyword]);
+  console.log(diarieswithKeyword);
 
   return (
     <div className="search-result-wrapper">

@@ -2,20 +2,14 @@ import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router";
 import LoginForm from "../components/features/LoginComponents/LoginForm";
 import "./styles/LoginPage.css";
-import MainPageIntro from "./../components/layout/MainPageIntro";
-
-// import { useFetchAndStoreUserInfo } from "../hooks/useFetchAndStoreUserInfo";
 
 const LoginPage = () => {
   const navigate = useNavigate();
   const [isExpanded, setIsExpanded] = useState(false);
   const [fadeIn, setFadeIn] = useState(false);
-  // const fetchAndStoreUserInfo = useFetchAndStoreUserInfo();
-  // const dispatch = useDispatch();
 
   const handleLoginSuccess = () => {
     setIsExpanded(true);
-    // fetchAndStoreUserInfo();
   };
 
   useEffect(() => {
