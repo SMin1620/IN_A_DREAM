@@ -4,7 +4,7 @@ import { fetchAllDiaries } from "../api/services/diaryAPI";
 import { DiaryInfo, pageable } from "../types/ApiType";
 
 export const useAllDiary = (pageable: pageable) => {
-  return useQuery(["diaries", pageable], () => fetchAllDiaries(pageable), {
+  return useQuery(["diaries"], () => fetchAllDiaries(pageable), {
     staleTime: 60 * 1000, // 1 분
   });
 };

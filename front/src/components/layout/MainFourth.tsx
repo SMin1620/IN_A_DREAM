@@ -4,6 +4,7 @@ import ImageSlide from "../features/ImgSlide/ImgSlide";
 
 import { SlideSpan } from "../common/SlideSpan";
 import { useAllDiary } from "../../hooks/useAllDiary";
+import { useRecommendUserDiary } from "../../hooks/useRecommendUserDiary";
 import { DiaryInfo } from "../../types/ApiType";
 import { useNavigate } from "react-router-dom";
 import { SERVER_URL } from "../../constants";
@@ -14,6 +15,8 @@ import useFourthpageStatistics from "../../hooks/useFourthpageStatistics";
 
 const MainFourth = () => {
   const [diaries, setDiaries] = useState<DiaryInfo[]>([]);
+  const [diariesRecommend, setDiariesRecommend] = useState<DiaryInfo[]>([]);
+  const { data: response1 } = useRecommendUserDiary();
   const {
     data: response,
     isLoading,
@@ -30,6 +33,12 @@ const MainFourth = () => {
       setDiaries(response.data?.data?.diaryList);
     }
   }, [response]);
+
+  useEffect(() => {
+    if (response1) {
+      setDiariesRecommend(response1.data?.data);
+    }
+  }, [response1]);
 
   return (
     <div className="main-fourth-wrapper ">
@@ -106,8 +115,8 @@ const MainFourth = () => {
             width="100%"
             display="flex"
           >
-            {diaries &&
-              diaries.map((diary, index) => (
+            {diariesRecommend &&
+              diariesRecommend.map((diary, index) => (
                 <div
                   key={index}
                   style={{
