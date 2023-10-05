@@ -1,0 +1,218 @@
+.diary-detail {
+  width: 100vw;
+  height: 100vh;
+  background-color: #f1e7d1;
+  overflow-x: hidden;
+  /* font-family: Pretendard Variable; */
+}
+
+.diary-detail-main {
+  display: flex;
+  height: 100vh;
+  width: 100%;
+  padding-left: 4rem;
+}
+
+.diary-detail-left {
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+}
+
+.diary-detail-left-top {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 60%;
+  margin-top: 2vh;
+}
+
+.diary-image {
+  width: auto;
+  height: 80%;
+  /* object-fit: contain; */
+  margin-bottom: 1rem;
+  border-radius: 2.4rem;
+}
+
+.diary-detail-left-bottom {
+  height: 40%;
+  display: flex;
+  flex-direction: column;
+}
+
+.diary-detail-right {
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+  margin-right: 2%;
+  /* border: red solid 1px; */
+}
+
+.diary-detail-right-top {
+  display: flex;
+  justify-content: space-between;
+  padding: 0 1rem;
+  margin-top: 15vh;
+}
+
+.diary-title {
+  font-size: 2.5rem;
+  font-family: omyu_pretty;
+  text-align: left;
+}
+
+.diary-member {
+  display: flex;
+}
+
+.diary-writer {
+  font-size: 1rem;
+  margin: 0.2rem 0.5rem;
+  padding: 0.5rem 1rem;
+  background-color: #c3baa5;
+  color: white;
+  border: none;
+  border-radius: 10px;
+  text-align: center;
+  /* font-weight: lighter; */
+}
+
+.diary-buyer {
+  font-size: 1rem;
+  margin: 0.2rem 0.5rem;
+  padding: 0.5rem 1rem;
+  background-color: #efbcae;
+  color: white;
+  border: none;
+  border-radius: 10px;
+  /* font-weight: lighter; */
+}
+
+.diary-detail-right-bottom {
+  margin-top: 3rem;
+  padding: 0 1rem;
+  font-size: 2rem;
+  font-weight: lighter;
+  font-family: omyu_pretty;
+  text-align: left;
+}
+
+.coin-wrapper {
+  display: flex;
+  /* justify-content: space-around; */
+  justify-content: center;
+}
+
+.coin-count-wraper {
+  display: flex;
+  /* justify-content: center; */
+
+  justify-content: space-around;
+}
+
+.diary-coin-box {
+  display: flex;
+  width: 20%;
+  align-content: center;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+.diary-coin-box img {
+  width: 3.5vw;
+  padding-bottom: 3%;
+}
+
+/* .coin-wrapper > img {
+  width: 4vw;
+  margin: 0 1vw;
+} */
+
+.coin-count-wrapper > p {
+  font-size: 1.5vw;
+}
+
+.diary-detail-left-bottom-etc {
+  margin-top: 1rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+@media (max-width: 1024px) {
+  .diary-detail-main {
+    display: flex;
+    flex-direction: column;
+    padding-left: 0;
+    margin-bottom: 20%;
+  }
+  .diary-detail-right-bottom {
+    font-size: 1rem;
+  }
+  .diary-title {
+    font-size: 1.5rem;
+    display: flex;
+    align-items: center;
+  }
+
+  .diary-detail-left {
+    width: 100%;
+    height: 60vh;
+    /* flex-direction: row; */
+    flex-direction: column-reverse;
+    align-items: center;
+    margin-bottom: 5%;
+    margin-top: 5%;
+  }
+
+  .diary-detail-left-top {
+    width: 70%;
+    margin: 0;
+  }
+
+  .diary-image {
+    margin: 0;
+    width: 80%;
+    height: 100%;
+    margin-bottom: 1rem;
+  }
+
+  .diary-detail-left-bottom {
+    width: 50%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .diary-detail-right {
+    width: 100%;
+    height: 40vh;
+  }
+
+  .diary-detail-right-top {
+    margin: 0 10vw;
+  }
+  .coin-wrapper {
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+  }
+
+  .coin-count-wrapper {
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+  }
+  .diary-member {
+    font-size: 0.8rem;
+  }
+  .diary-buyer {
+    font-size: 0.8rem;
+  }
+  .diary-writer {
+    font-size: 0.8rem;
+  }
+}

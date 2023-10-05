@@ -1,0 +1,14 @@
+.gallery-wrapper {
+  width: calc(100% - 4rem);
+  margin-left: 4rem;
+}
+.gallery {
+  height: 100vh;
+}
+
+@media (max-width: 768px) {
+  .gallery-wrapper {
+    width: 100%;
+    margin-left: 0;
+  }
+}

@@ -1,0 +1,14 @@
+.MainSecond {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 10%;
+}
+
+.VideoBox {
+  width: 70%;
+  height: 80%;
+  background-color: black;
+  transition: transform 0.5s ease-out;
+}

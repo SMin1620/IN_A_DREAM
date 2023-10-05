@@ -1,0 +1,48 @@
+.signup-form-nicknameBox {
+  margin-bottom: 1rem;
+  display: flex;
+  justify-content: space-between;
+}
+
+.signup-form-nicknameBox > button {
+  border: none;
+  background-color: black;
+  color: white;
+}
+
+.signup-form-nicknameBox > button:active {
+  background-color: lightgray;
+  color: black;
+}
+
+.signup-form-nicknameBox > button:hover {
+  cursor: pointer;
+}
+
+.signup-form-genderbox {
+  display: flex;
+  justify-content: space-around;
+  margin-bottom: 1.5rem;
+}
+
+.signup-form-genderbox > button:hover {
+  cursor: pointer;
+}
+
+.active {
+  border: none;
+  width: 50%;
+  height: 3rem;
+  background-color: black;
+  color: white;
+  border: 1px solid white;
+}
+
+.basic {
+  border: none;
+  width: 50%;
+  height: 3rem;
+  background-color: lightgray;
+  color: black;
+  border: 1px solid white;
+}

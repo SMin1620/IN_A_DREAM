@@ -1,0 +1,31 @@
+.recommend-diary-box {
+  display: flex;
+  width: 100%;
+  overflow-x: scroll;
+  padding-bottom: 1rem;
+}
+
+.recommend-diary-box::-webkit-scrollbar {
+  display: none;
+}
+
+.recommend-diary {
+  display: flex;
+  width: 14rem;
+  height: 14rem;
+  margin: 1vw;
+}
+
+.recommend-diary-image {
+  width: 14rem;
+  height: 14rem;
+  object-fit: cover;
+  border-radius: 10px;
+  flex-wrap: nowrap;
+}
+
+.recommend-diary-image:hover {
+  cursor: pointer;
+  opacity: 80%;
+  background-color: #ff7a00;
+}

@@ -1,0 +1,36 @@
+.main-third-wrapper {
+  height: 180vh;
+  color: white;
+  /* color: #c3baa5; */
+  padding-left: 3%;
+}
+.main-third-storeshop {
+  height: 100%;
+  width: 100%;
+  padding-right: 6%;
+  /* border: #ff24d3 1px solid; */
+}
+.main-third-box {
+  text-decoration-line: none;
+  text-align: left;
+  color: #fff;
+}
+
+.main-third-wrapper h1 {
+  font-weight: bolder;
+  font-style: italic;
+  font-size: 7vw;
+  color: #e9e4d9;
+}
+
+.main-third-wrapper h5 {
+  padding-left: 1%;
+  font-size: 1.2rem;
+  font-weight: lighter;
+  font-family: "SBAggroB";
+}
+@media (max-width: 1024px) {
+  .main-third-wrapper h5 {
+    font-size: 0.8rem;
+  }
+}

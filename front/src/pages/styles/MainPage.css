@@ -1,0 +1,53 @@
+/* .mouse-cursor {
+  position: fixed;
+  transform: translate(-50%, -50%);
+  width: 3vw;
+  height: 3vw;
+  border-radius: 50%;
+  background-color: #c3baa5;
+  transition: all 0.02s;
+  z-index: 1000;
+  mix-blend-mode: difference;
+  pointer-events: none;
+}
+
+.mouse-image {
+  position: fixed;
+  transform: translate(-50%, -50%);
+  width: 2vw;
+  height: 2vw;
+  transition: all 0.02s;
+  pointer-events: none;
+  pointer-events: none;
+  background-image: url("../../assets/logo/cursor.png");
+  background-size: contain;
+  background-repeat: no-repeat;
+  z-index: 1001;
+} */
+
+* {
+  cursor: url("../../assets/logo/cursor2.png") 14 14, auto;
+}
+
+@keyframes upAndDown {
+  0% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+  100% {
+    transform: translateY(0);
+  }
+}
+
+.cloud-bar {
+  position: fixed;
+  right: 2%;
+  top: 2%;
+  cursor: pointer;
+  width: 5%;
+  height: auto;
+  z-index: 999;
+  animation: upAndDown 3s infinite;
+}
