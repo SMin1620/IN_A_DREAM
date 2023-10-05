@@ -6,6 +6,7 @@ import sleep1 from "../../assets/image/sleep1.png";
 import sleep2 from "../../assets/image/sleep2.png";
 import { styled } from "styled-components";
 import { useNavigate } from "react-router-dom";
+import { useMediaQuery } from "react-responsive";
 
 interface ImgProps {
   $isHovered: boolean;
@@ -33,13 +34,20 @@ const MainSixth = () => {
   const [isHovered, setIsHovered] = useState<boolean>(false);
   const navigate = useNavigate();
 
+  const isMobileView = useMediaQuery({
+    query: "(max-width: 768px)",
+  });
+
   return (
     <div className="main-sixth-wrapper">
       <div className="main-sixth-box">
         <div>Let's see all dream</div>
       </div>
       <div className="SixthMainBox">
-        <div className="main-sixth-left" onClick={() => navigate("/cloud")}>
+        <div
+          className="main-sixth-left"
+          onClick={() => navigate(isMobileView ? "/dreamshop" : "/cloud")}
+        >
           <h2>IN A</h2>
           <h1
             onMouseEnter={() => setIsHovered(true)}

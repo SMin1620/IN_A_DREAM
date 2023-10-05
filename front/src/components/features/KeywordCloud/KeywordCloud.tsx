@@ -45,7 +45,7 @@ const KeywordCloud: React.FC<KeywordCloudProps> = ({
 
   const fontSize = useCallback(
     // (word: { value: number }) => Math.log2(word.value) * 5,
-    (word: { value: number }) => word.value,
+    (word: { value: number }) => word.value * 1.5,
     []
   );
 
