@@ -1,0 +1,11 @@
+.dreamShoptitle {
+  font-size: 14rem;
+  color: white;
+  padding-bottom: 20%;
+}
+
+@media (max-width: 1024px) {
+  .dreamShoptitle {
+    font-size: 6rem;
+  }
+}

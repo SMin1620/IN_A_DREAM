@@ -1,16 +1,17 @@
 import React, { useEffect, useState } from "react";
-
+import _ from "lodash";
 import CardList from "../components/features/Card/CardList";
 import { DiaryInfo } from "../types/ApiType";
 import { useAllDiary, useInfiniteDiary } from "../hooks/useAllDiary";
 import Navbar from "../components/features/NavbarComponents/Navbar";
+import "./styles/DreamShopPage.css";
 
 const DreamShopPage = () => {
   const { data, isLoading, error, fetchNextPage, hasNextPage } =
     useInfiniteDiary({ page: 0, size: 24 });
 
   useEffect(() => {
-    const handleScroll = () => {
+    const handleScroll = _.throttle(() => {
       if (
         window.innerHeight + document.documentElement.scrollTop <
           document.documentElement.offsetHeight - 50 ||
@@ -19,7 +20,7 @@ const DreamShopPage = () => {
         return;
 
       fetchNextPage();
-    };
+    }, 200);
 
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
@@ -36,6 +37,12 @@ const DreamShopPage = () => {
   return (
     <div>
       <Navbar />
+      <div className="dreamShoptitle">
+        DREAM <br />
+        SHOP <br />
+        🌜🎪🌕
+      </div>
+
       <CardList diaries={diaries} />
     </div>
   );
