@@ -334,11 +334,11 @@ public class DiaryService {
      * @param diaryId
      * @return
      */
-    public Diary getDiary(Long diaryId) {
+    public Diary getDiary(Long diaryId, Long memberId) {
         Diary diary = diaryRepository.findById(diaryId).orElseThrow(() -> new BusinessLogicException(ExceptionCode.DIARY_NOT_FOUND));
 
         // 로그 생성
-        logService.diaryLog(diary);
+        logService.diaryLog(diary, memberId);
 
         return diary;
     }
