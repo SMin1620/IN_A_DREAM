@@ -67,6 +67,8 @@ export const buyDiary = (
 // 추천일기 조회
 export const recommendedDiaries = (diaryId: number) =>
   api1.get(`/api/recommend/${diaryId}`);
+// 사용자 맞춤추천일기 조회
+export const recommendedUserDiaries = () => api1.get(`/api/recommend`);
 
 //일기 검색
 export const fetchDiaryWithKeyword = (keyword: string | undefined) =>

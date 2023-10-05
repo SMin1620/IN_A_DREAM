@@ -44,8 +44,8 @@ const KeywordCloud: React.FC<KeywordCloudProps> = ({
   console.log(response, "response");
 
   const fontSize = useCallback(
-    // (word: { value: number }) => Math.log2(word.value) * 5,
-    (word: { value: number }) => word.value * 1.5,
+    (word: { value: number }) => Math.log2(word.value) * 10,
+    // (word: { value: number }) => word.value,
     []
   );
 
@@ -58,8 +58,11 @@ const KeywordCloud: React.FC<KeywordCloudProps> = ({
   const data = response.data?.data?.data;
   const myData = myResponse.data?.data?.data;
 
-  const transformData = (data: Item[]) =>
-    data?.map(({ keyword, count }) => ({ text: keyword, value: count }));
+  const transformData = (data: Item[], multiply: boolean = false) =>
+    data?.map(({ keyword, count }) => ({
+      text: keyword,
+      value: multiply ? count * 10 : count * 5,
+    }));
 
   if (!data) {
     return <div>Loading...</div>;
@@ -67,7 +70,7 @@ const KeywordCloud: React.FC<KeywordCloudProps> = ({
     return <div>Loading...</div>;
   }
 
-  const words = transformData(mydate ? myData : data);
+  const words = transformData(mydate ? myData : data, mydate);
 
   return (
     <KeywordCloudWrapper width={width} height={height}>
