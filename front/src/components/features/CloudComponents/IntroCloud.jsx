@@ -17,7 +17,7 @@ const CloudMesh = ({ position }) => {
   // useFrame(() => (mesh.current.rotation.z += 0.001));
   const texture = useLoader(THREE.TextureLoader, "/cloud.png");
 
-  const scale = useState(() => {
+  const [scale, setScale] = useState(() => {
     const randomScale = 0.15 + Math.random() * 0.35; // 0.15에서 0.5 사이의 랜덤한 크기
     return [randomScale];
   });

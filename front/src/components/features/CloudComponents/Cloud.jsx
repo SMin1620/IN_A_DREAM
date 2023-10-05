@@ -18,8 +18,8 @@ body {
 
 const NUM_IMAGES = 50; // 원하는 이미지 개수
 const MAX_POSITION = 3; // 이미지가 배치될 수 있는 최대 z위치
-const MAX_POSITION_WIDTH = 150;
-const MAX_POSITION_HEIGHT = 80;
+const MAX_POSITION_WIDTH = 105; // 높이 * 1.618 황금비
+const MAX_POSITION_HEIGHT = 65;
 
 export default function Cloud({ images }) {
   const [dragStyle, setDrag] = useSpring(() => ({ x: 0, y: 0 }));
