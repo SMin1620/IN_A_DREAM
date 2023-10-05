@@ -1,3 +1,15 @@
+@keyframes upAndDown {
+  0% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+  100% {
+    transform: translateY(0);
+  }
+}
+
 .Cloud-wrapper {
   width: calc(100% - 4rem);
   margin-left: 4rem;
@@ -20,4 +32,5 @@
   font-weight: 500;
   /* background-color: transparent; */
   opacity: 0.8;
+  animation: upAndDown 3s infinite;
 }
