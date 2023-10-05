@@ -33,13 +33,22 @@ const useMakeDiary = () => {
   const postDiary = async (diaryData: DiaryData) => {
     console.log(diaryData);
     try {
+      Swal.fire({
+        title: "Loading...",
+        allowOutsideClick: false,
+      });
+
+      Swal.showLoading();
+
       const response = await createDiary(diaryData);
       console.log("반응", response.data.data);
+
+      Swal.close();
 
       const { neutralPoint, positivePoint, negativePoint } = response.data.data;
 
       await Swal.fire({
-        title: "Points 획득!",
+        title: "Coins 획득!",
         html: `
         <p style="font-size: 1.2em">HAPPY COIN <strong>${positivePoint}</strong>개 획득</p>
           <p style="font-size: 1.2em">SOSO COIN <strong>${neutralPoint}</strong>개 획득</p>
@@ -50,6 +59,7 @@ const useMakeDiary = () => {
 
       navigate(`/DreamDetail/${response.data.data.id}`);
     } catch (error) {
+      Swal.close();
       console.error(error);
     }
   };
