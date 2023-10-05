@@ -1,9 +1,9 @@
-import { useRef, useEffect, useState, Suspense, useMemo } from "react";
+import { useRef, useState, useMemo } from "react";
 import { Canvas, useFrame, useLoader, useThree } from "@react-three/fiber";
 import * as THREE from "three";
-import { mergeBufferGeometries } from "three-stdlib";
+// import { mergeBufferGeometries } from "three-stdlib";
 import { createGlobalStyle } from "styled-components";
-import { useTexture, Plane } from "@react-three/drei";
+// import { useTexture, Plane } from "@react-three/drei";
 
 const GlobalStyle = createGlobalStyle`
 body {
@@ -17,7 +17,7 @@ const CloudMesh = ({ position }) => {
   // useFrame(() => (mesh.current.rotation.z += 0.001));
   const texture = useLoader(THREE.TextureLoader, "/cloud.png");
 
-  const [scale, setScale] = useState(() => {
+  const scale = useState(() => {
     const randomScale = 0.15 + Math.random() * 0.35; // 0.15에서 0.5 사이의 랜덤한 크기
     return [randomScale];
   });
