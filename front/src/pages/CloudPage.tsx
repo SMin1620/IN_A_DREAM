@@ -49,6 +49,7 @@ function shuffleArray(array: any[]) {
 
 function CloudPage() {
   const [showIntro, setShowIntro] = useState(true);
+  const [showCloud, setShowCloud] = useState(false);
   const [diaries, setDiaries] = useState<DiaryInfo[]>([]);
   const [shuffledDiaries, setShuffledDiaries] = useState<DiaryInfo[]>([]);
   const { sortKey } = useParams<string>();
@@ -82,8 +83,13 @@ function CloudPage() {
       setShowIntro(false);
     }, 5000); // After 5 seconds
 
+    const cloudTimer = setTimeout(() => {
+      setShowCloud(true);
+    }, 3000); // After 3 seconds
+
     return () => {
       clearTimeout(introTimer);
+      clearTimeout(cloudTimer);
     }; // Clean up on unmount
   }, []);
 
@@ -131,7 +137,7 @@ function CloudPage() {
         <Overlay>
           <div className="cloud">
             {showIntro && <IntroCloud />}
-            {images && <Cloud images={images} />}
+            {showCloud && images && <Cloud images={images} />}
           </div>
         </Overlay>
       </div>
