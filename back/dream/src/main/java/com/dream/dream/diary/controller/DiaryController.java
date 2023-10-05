@@ -8,6 +8,8 @@ import com.dream.dream.diary.service.DiaryService;
 import com.dream.dream.exception.BusinessLogicException;
 import com.dream.dream.exception.ExceptionCode;
 import com.dream.dream.jwt.JwtTokenProvider;
+import com.dream.dream.member.entity.Member;
+import com.dream.dream.member.repository.MemberRepository;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.servlet.http.HttpServletRequest;
@@ -34,6 +36,7 @@ public class DiaryController {
     private final JwtTokenProvider jwtTokenProvider;
     private final DiaryService diaryService;
     private final DiaryMapper diaryMapper;
+    private final MemberRepository memberRepository;
 
 
     /**
@@ -133,7 +136,10 @@ public class DiaryController {
 
         String memberEmail = jwtTokenProvider.getUserEmail(token);
 
-        Diary diary = diaryService.getDiary(diaryId);
+        Member member = memberRepository.findByEmail(memberEmail)
+                .orElseThrow(() -> new BusinessLogicException(ExceptionCode.MEMBER_NOT_FOUND));
+
+        Diary diary = diaryService.getDiary(diaryId, member.getId());
 
         boolean liked = diaryService.getMyLike(memberEmail, diary);
 
