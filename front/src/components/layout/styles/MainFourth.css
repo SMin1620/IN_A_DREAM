@@ -87,6 +87,11 @@
 .MovingImgs {
   height: 100%;
 }
+.MovigImgBox h1 {
+  font-size: 2rem;
+  padding-top: 5%;
+  font-family: "LotteMartHappy";
+}
 
 .StatisticsNum h1 {
   font-size: 2rem;
@@ -129,6 +134,11 @@
   }
   .StatisticsNum h2 {
     font-size: 1rem;
+  }
+  .MovigImgBox h1 {
+    font-size: 1.2rem;
+    padding-top: 5%;
+    font-family: "LotteMartHappy";
   }
 }
 

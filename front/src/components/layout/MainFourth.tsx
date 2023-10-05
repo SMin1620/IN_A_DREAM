@@ -95,6 +95,7 @@ const MainFourth = () => {
       </div>
 
       <div className="MovigImgBox">
+        <h1>The Diary Recommended Just For You</h1>
         <div
           className="MovingImgs"
           style={{ display: "flex", overflow: "hidden" }}
