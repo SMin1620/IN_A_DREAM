@@ -33,7 +33,7 @@ const LoginForm: React.FC<LoginFormProps> = ({ onLoginSuccess }) => {
         <LogoImg src={logoImg} />
       </div>
 
-      <Label>아이디</Label>
+      <Label>이메일</Label>
       <Input placeholder="Email" type="text" onChange={handleEmailChange} />
       <br />
       <Label>비밀번호</Label>
