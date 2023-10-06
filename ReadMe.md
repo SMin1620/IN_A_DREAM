@@ -401,8 +401,8 @@
 <div align=center>
 <img src="./contents/forReadme/UI/gifs/makediary.gif" width="45%">
 <img src="./contents/forReadme/UI/gifs/remakediary.gif" width="45%">
-<img src="./contents/forReadme/mobileUI/mobileCreate.jpg" width="23%">
-<img src="./contents/forReadme/mobileUI/mobileCreate2.jpg" width="23%">
+<img src="./contents/forReadme/mobileUI/create.jpg" width="23%">
+<img src="./contents/forReadme/mobileUI/create2.jpg" width="23%">
 </div>
 
 - 꿈 일기를 작성하고, 이미지를 생성합니다.
