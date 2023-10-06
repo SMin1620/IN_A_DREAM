@@ -335,10 +335,10 @@
 <div align=center>
 <img src="./contents/forReadme/UI/gifs/mainpage.gif" width="90%">
 <div>
-<img src="./contents/forReadme/mobileUI/MobileMain4.jpg" width="18%">
-<img src="./contents/forReadme/mobileUI/MobileMain1.jpg" width="18%">
-<img src="./contents/forReadme/mobileUI/mobilemain2.jpg" width="18%">
-<img src="./contents/forReadme/mobileUI/MobileMain3.jpg" width="18%">
+<img src="./contents/forReadme/mobileUI/mobileMain4.jpg" width="18%">
+<img src="./contents/forReadme/mobileUI/mobileMain1.jpg" width="18%">
+<img src="./contents/forReadme/mobileUI/mobileMain2.jpg" width="18%">
+<img src="./contents/forReadme/mobileUI/mobileMain3.jpg" width="18%">
 <img src="./contents/forReadme/mobileUI/mobileMain5.jpg" width="18%">
 </div>
 </div>
