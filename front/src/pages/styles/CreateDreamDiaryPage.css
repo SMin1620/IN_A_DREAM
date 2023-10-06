@@ -1,0 +1,122 @@
+.loading {
+  filter: blur(3px);
+  clip-path: inset(0);
+}
+.loaded {
+  filter: blur(0px);
+  transition: filter 0.2s linear;
+}
+
+.create-dream-diary {
+  /* width: calc(100% - 4rem); */
+  height: 100vh;
+  background-color: #f1e7d1;
+  display: flex;
+  flex-direction: column;
+  overflow-x: hidden;
+  font-family: "Pretendard Variable";
+}
+
+.create-dream-diary-main {
+  display: flex;
+  padding-left: 4rem;
+  padding-right: 2rem;
+  width: 100%;
+}
+
+.create-dream-diary-main::-webkit-scrollbar {
+  display: none;
+}
+
+.create-dream-diary-left {
+  width: 0vw;
+  transition: width 1s cubic-bezier(0.22, 0.61, 0.36, 1);
+}
+
+.on-diary {
+  width: 50%;
+}
+
+.create-dream-diary-left-top {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.create-dream-diary-left-top > img {
+  width: 80%;
+  height: auto;
+  /* height: 80%; */
+  object-fit: contain;
+  padding: 1rem;
+  border-radius: 2.4rem;
+}
+
+.create-dream-diary-right {
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+  background-color: #f1e7d1;
+  justify-content: center;
+}
+
+.create-dream-diary-date-box {
+  /* width: 15vw; */
+  /* margin-left: auto; */
+  /* height: 3rem; */
+  /* font-size: 2vw; */
+  /* background-color: #0f006a; */
+  /* color: #bcbcbc; */
+  /* border: none; */
+  /* border-radius: 10px; */
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  margin-bottom: 1rem;
+}
+
+@media (max-width: 1024px) {
+  .create-dream-diary-main {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .create-dream-diary-left {
+    display: flex;
+    width: 100%;
+    height: 0;
+    transition: height 1s cubic-bezier(0.22, 0.61, 0.36, 1);
+  }
+
+  .on-diary {
+    height: 45vh;
+  }
+
+  .create-dream-diary-right {
+    width: 100%;
+    height: 80vh;
+  }
+
+  .create-dream-diary-left-top {
+    height: 45vh;
+    width: 100%;
+  }
+
+  .create-dream-diary-left-top > img {
+    width: 100%;
+    height: 100%;
+
+    object-fit: contain;
+  }
+
+  .create-dream-diary-date-box {
+    justify-content: center;
+  }
+}
+
+@media (max-width: 768px) {
+  .create-dream-diary-main {
+    padding-left: 2rem;
+  }
+}

@@ -1,0 +1,36 @@
+@keyframes upAndDown {
+  0% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+  100% {
+    transform: translateY(0);
+  }
+}
+
+.Cloud-wrapper {
+  width: calc(100% - 4rem);
+  margin-left: 4rem;
+}
+.Cloud {
+  height: 100vh;
+}
+
+.random {
+  position: fixed;
+  z-index: 10;
+  right: 2%;
+  top: 2%;
+  display: flex;
+  flex-direction: row;
+  width: 8vw;
+  align-items: center;
+  /* color: white; */
+  font-size: 2vw;
+  font-weight: 500;
+  /* background-color: transparent; */
+  opacity: 0.8;
+  animation: upAndDown 3s infinite;
+}

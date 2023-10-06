@@ -1,0 +1,34 @@
+cluster.name: "docker-cluster"  ## 이 이름에 큰 의미 없음, 왜냐하면 싱글클러스터로 운영할 계획이기 때문에
+network.host: 0.0.0.0
+# X-Pack 세팅, 보안설정
+## 자세한 내용은 https://www.elastic.co/guide/en/elasticsearch/reference/current/setup-xpack.html
+
+#xpack.license.self_generated.type: trial
+#xpack.security.enabled: true
+#xpack.monitoring.collection.enabled: true
+
+
+######## Start OpenDistro for Elasticsearch Security Demo Configuration ########
+# WARNING: revise all the lines below before you go into production
+opendistro_security.ssl.transport.pemcert_filepath: esnode.pem
+opendistro_security.ssl.transport.pemkey_filepath: esnode-key.pem
+opendistro_security.ssl.transport.pemtrustedcas_filepath: root-ca.pem
+opendistro_security.ssl.transport.enforce_hostname_verification: false
+opendistro_security.ssl.http.enabled: true
+opendistro_security.ssl.http.pemcert_filepath: esnode.pem
+opendistro_security.ssl.http.pemkey_filepath: esnode-key.pem
+opendistro_security.ssl.http.pemtrustedcas_filepath: root-ca.pem
+opendistro_security.allow_unsafe_democertificates: true
+opendistro_security.allow_default_init_securityindex: true
+opendistro_security.authcz.admin_dn:
+  - CN=kirk,OU=client,O=client,L=test, C=de
+
+opendistro_security.audit.type: internal_elasticsearch
+opendistro_security.enable_snapshot_restore_privilege: true
+opendistro_security.check_snapshot_restore_write_privileges: true
+opendistro_security.restapi.roles_enabled: ["all_access", "security_rest_api_access"]
+opendistro_security.system_indices.enabled: true
+opendistro_security.system_indices.indices: [".opendistro-alerting-config", ".opendistro-alerting-alert*", ".opendistro-anomaly-results*", ".opendistro-anomaly-detector*", ".opendistro-anomaly-checkpoints", ".opendistro-anomaly-detection-state", ".opendistro-reports-*", ".opendistro-notifications-*", ".opendistro-notebooks", ".opendistro-asynchronous-search-response*"]
+cluster.routing.allocation.disk.threshold_enabled: false
+node.max_local_storage_nodes: 3
+######## End OpenDistro for Elasticsearch Security Demo Configuration ########

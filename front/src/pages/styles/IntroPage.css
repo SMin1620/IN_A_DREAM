@@ -1,0 +1,153 @@
+@import url("https://fonts.googleapis.com/css2?family=Fjalla+One&family=Noto+Sans+KR&display=swap");
+@import "./reset.css";
+
+.intro {
+  background-color: #111111;
+  font-family: "omyu_pretty", "Noto Sans KR", sans-serif;
+}
+
+#intro-main {
+  position: relative;
+  z-index: 50;
+  display: flex;
+  flex-direction: column;
+  padding-top: 54px;
+  margin: 0px auto;
+  width: 300px;
+  align-items: center;
+  color: white;
+  font-size: 8vh;
+  font-weight: 500;
+  gap: 20px;
+  font-family: "PartialSansKR-Regular";
+}
+
+#join-us-text {
+  margin-top: 73px;
+  font-size: 4vh;
+  font-weight: 400;
+  opacity: 0.75;
+  font-family: "KyoboHandwriting2022khn";
+}
+
+#intro-main p {
+  text-align: center;
+}
+
+@keyframes upAndDown {
+  0% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+  100% {
+    transform: translateY(0);
+  }
+}
+
+@keyframes leftAndRight {
+  0% {
+    transform: translateX(0);
+  }
+  50% {
+    transform: translateX(-10px); /* 원하는 거리만큼 우측으로 이동 */
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
+
+#image-wrapper {
+  display: flex;
+  align-items: center; /* 교차축의 중앙에 배치 */
+  flex-direction: column;
+  z-index: 2;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+#down-arrow-icon {
+  width: 33px;
+  animation: upAndDown 2s infinite;
+}
+#list-item-wrapper {
+  margin: 60vh auto 500px;
+  width: 70vw;
+  position: relative;
+  z-index: 4;
+}
+/*  Moon보다 상위 레이어로 설정
+ z-index를 위해 필요 */
+.introtext {
+  font-size: 5vh;
+  font-weight: 600;
+  margin-top: 40vh;
+  color: white;
+  text-align: center;
+  opacity: 0;
+  transition: 1.5s;
+  position: relative;
+  z-index: 4;
+  font-family: "Middleschool_student";
+  text-shadow: 1px 3px 1px gray;
+}
+
+.skip {
+  position: fixed;
+  z-index: 10;
+  top: 0;
+  right: 0;
+  display: flex;
+  flex-direction: row;
+  width: 10vw;
+  align-items: center;
+  color: white;
+  font-size: 2vw;
+  font-weight: 500;
+  background-color: transparent;
+  opacity: 0.6;
+  animation: leftAndRight 3s infinite;
+  border: none;
+  font-family: "BMDOHYEON";
+}
+
+#leftRight {
+  width: 2vw;
+}
+
+#hold-on {
+  position: absolute;
+  z-index: 6;
+
+  display: flex;
+  flex-direction: column;
+  padding-top: 54px;
+  margin: 0px auto;
+  width: 300px;
+  align-items: center;
+  color: white;
+  font-size: 8vh;
+  font-weight: 500;
+  gap: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  bottom: 15vh;
+}
+
+#dream-text {
+  font-size: 4vw;
+  font-weight: 400;
+  opacity: 0.75;
+  font-family: "LotteMartHappy";
+}
+
+@media (max-width: 768px) {
+  .introtext {
+    font-size: 1rem;
+  }
+  #dream-text {
+    font-size: 1.2rem;
+  }
+}

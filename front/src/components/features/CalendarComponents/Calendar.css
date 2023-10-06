@@ -1,0 +1,26 @@
+.calendar-main {
+  display: grid;
+  grid-template-columns: repeat(7, auto);
+  gap: 0.5vw;
+  width: 25vw;
+  padding: 1vw;
+  margin: auto;
+}
+
+.day {
+  width: 3vw;
+  height: 3vw;
+  background-color: #c3baa5;
+  border-radius: 10px;
+}
+
+.empty-day {
+  width: 3vw;
+  height: 3vw;
+  border-radius: 10px;
+  background-color: transparent;
+}
+
+.active-day {
+  background-color: #ff7c7c;
+}

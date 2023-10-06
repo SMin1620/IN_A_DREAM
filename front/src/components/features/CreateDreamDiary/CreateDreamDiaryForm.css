@@ -1,0 +1,124 @@
+.create-dream-diary-form {
+  display: flex;
+  flex-direction: column;
+  border: #c3baa5 solid 0.4rem;
+  margin-left: 3%;
+  border-radius: 20px;
+  padding-bottom: 3%;
+  padding-left: 3%;
+}
+
+.create-dream-diary-form-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-left: 1rem;
+  width: 100%;
+  padding-top: 3%;
+}
+
+.create-dream-diary-form-top > input {
+  border: none;
+  background-color: transparent;
+  font-size: 2rem;
+  width: 20vw;
+  height: 3rem;
+  font-family: omyu_pretty;
+  font-weight: bold;
+}
+
+.create-dream-diary-form-top > input:focus {
+  outline: none;
+  border: none;
+}
+
+.create-dream-diary-form-top > input:focus::placeholder {
+  color: gray;
+}
+
+.create-dream-diary-form-top > input::placeholder {
+  color: black;
+}
+
+.create-dream-diary-form-toggle-box {
+  display: flex;
+}
+
+.create-dream-diary-form-label-box {
+  display: flex;
+  padding: 0 1rem;
+  justify-content: space-around;
+}
+
+.create-dream-diary-form-textarea {
+  width: 100%;
+  height: 50vh;
+  padding: 1rem;
+  font-size: 2rem;
+  font-weight: bold;
+  resize: none;
+  border: none;
+  background-color: transparent;
+  font-family: omyu_pretty;
+  font-weight: normal;
+}
+
+.create-dream-diary-form-textarea:focus {
+  outline: none;
+}
+
+.create-dream-diary-form-textarea::placeholder {
+  color: black;
+}
+
+.create-dream-diary-form-textarea:focus::placeholder {
+  color: gray;
+}
+
+.create-dream-diary-form-textarea::-webkit-scrollbar {
+  display: none;
+}
+
+.create-diary-form-button {
+  background-color: #c2ac79;
+  margin: 0 1rem;
+  color: white;
+  width: 8vw;
+  height: 3rem;
+  margin-top: 1rem;
+  border: none;
+  border-radius: 2.4rem;
+  align-self: flex-end;
+  cursor: pointer;
+  font-family: "Pretendard Variable";
+  font-weight: bold;
+  font-size: 1.2vw;
+}
+
+.create-diary-form-button:active {
+  background-color: #c3baa5;
+}
+
+@media (max-width: 1024px) {
+  .create-dream-diary-form-textarea {
+    height: 40vh;
+  }
+
+  .create-dream-diary-form-top {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .create-dream-diary-form-top > input {
+    width: 40vw;
+  }
+  .create-diary-form-button {
+    border-radius: 1srem;
+  }
+  .create-dream-diary-form-textarea {
+    font-size: 1.5rem;
+  }
+  .create-dream-diary-form-top > input {
+    font-size: 1.7rem;
+  }
+}

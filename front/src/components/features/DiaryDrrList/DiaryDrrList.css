@@ -1,0 +1,9 @@
+@media (max-width: 768px) {
+  .diary-drrlist-nickname {
+    width: 20%;
+    font-weight: bold;
+  }
+  .diary-drrlist-title {
+    white-space: nowrap;
+  }
+}

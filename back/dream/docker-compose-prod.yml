@@ -1,0 +1,94 @@
+version: '3' # docker-compose 버전 지정
+
+services:  # docker-compose의 경우 docker 컨테이너로 수행될 서비스들은 services 하위에 기술
+
+  mysql:
+    image: mysql
+    container_name: mysql
+    volumes:
+      - ./:/app/server/mysql/
+    environment:
+      MYSQL_DATABASE: dream
+      MYSQL_ROOT_PASSWORD: ssafy124
+    ports:
+      - "3306:3306"
+    command:
+      - --character-set-server=utf8mb4
+      - --collation-server=utf8mb4_unicode_ci
+      - --default-authentication-plugin=mysql_native_password  # 추가한 부분
+    restart: always
+
+
+  redis:
+    image: redis
+    container_name: redis
+    ports:
+      - 6379:6379
+    restart: always
+
+
+  spring:
+    build:
+      context: ./
+      dockerfile: Dockerfile
+    container_name: spring
+    volumes:
+      - ./:/app/server/dream/dream-spring/
+      - /home/ubuntu/image/:/home/ubuntu/image/
+    ports:
+      - 8082:8082
+    expose:
+      - 8082
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://mysql:3306/dream
+      SPRING_DATASOURCE_USERNAME: root
+      SPRING_DATASOURCE_PASSWORD: ssafy124
+
+    depends_on:
+      - mysql
+      - redis
+    links:
+      - mysql
+      - redis
+    restart: always
+
+
+  zookeeper: # 서비스 이름. service 하위에 작성하면 해당 이름으로 동작
+    image: bitnami/zookeeper:3.9.0
+    container_name: zookeeper
+    environment:
+      - ALLOW_ANONYMOUS_LOGIN=yes
+    ports: # 외부포트:컨테이너내부포트
+      - "2181:2181"
+
+  kafka:
+    image: bitnami/kafka:3.5.1
+    container_name: kafka
+    ports: # 외부포트:컨테이너내부포트
+      - "9094:9094"
+      - "9095:9095"
+    environment: # kafka 브로터를 위한 환경 변수 지정
+      KAFKA_ADVERTISED_LISTENERS: INSIDE://:9092,OUTSIDE://13.124.105.1:9094,SPARK://172.26.1.149:9095
+      KAFKA_LISTENERS: INSIDE://:9092,OUTSIDE://0.0.0.0:9094,SPARK://0.0.0.0:9095
+      KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: INSIDE:PLAINTEXT,OUTSIDE:PLAINTEXT,SPARK:PLAINTEXT
+      KAFKA_INTER_BROKER_LISTENER_NAME: INSIDE
+      KAFKA_CREATE_TOPICS: "member_log:1:1"
+      KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    depends_on:
+      - zookeeper
+      - spring
+
+  kafka-ui:
+    image: provectuslabs/kafka-ui
+    container_name: kafka-ui
+    ports:
+      - "8089:8080"
+    restart: always
+    environment:
+      - KAFKA_CLUSTERS_0_NAME=local
+      - KAFKA_CLUSTERS_0_BOOTSTRAPSERVERS=kafka:9092
+      - KAFKA_CLUSTERS_0_ZOOKEEPER=zookeeper:2181
+    depends_on:
+      - kafka

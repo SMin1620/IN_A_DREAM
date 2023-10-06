@@ -1,6 +1,9 @@
 package com.dream.dream.kafka.config;
 
-import com.dream.dream.kafka.LogDto;
+
+import com.dream.dream.diary.dto.DiaryDto;
+import com.dream.dream.kafka.dto.LogDto;
+import com.dream.dream.statistic.dto.RelationDto;
 import org.apache.kafka.clients.consumer.ConsumerConfig;
 import org.apache.kafka.common.serialization.StringDeserializer;
 import org.springframework.beans.factory.annotation.Value;
@@ -39,4 +42,45 @@ public class KafkaLogDtoConsumerConfig {
         factory.setConsumerFactory(logDtoConsumer());
         return factory;
     }
+
+    @Bean
+    public ConsumerFactory<String, DiaryDto.SparkConsume> diaryConsumer() {
+
+        Map<String, Object> configs = new HashMap<>();
+        configs.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, bootstrapServers);
+        configs.put(ConsumerConfig.GROUP_ID_CONFIG, "loggroup");
+
+        return new DefaultKafkaConsumerFactory<>(
+                configs,
+                new StringDeserializer(),
+                new JsonDeserializer<>(DiaryDto.SparkConsume.class,false));
+    }
+
+    @Bean
+    public ConcurrentKafkaListenerContainerFactory<String, DiaryDto.SparkConsume> diaryListener(){
+        ConcurrentKafkaListenerContainerFactory<String, DiaryDto.SparkConsume> factory = new ConcurrentKafkaListenerContainerFactory<>();
+        factory.setConsumerFactory(diaryConsumer());
+        return factory;
+    }
+
+
+    @Bean
+    public ConsumerFactory<String, RelationDto.Statistic> diaryRelationConsumer(){
+        Map<String, Object> configs = new HashMap<>();
+        configs.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, bootstrapServers);
+        configs.put(ConsumerConfig.GROUP_ID_CONFIG, "loggroup");
+
+        return new DefaultKafkaConsumerFactory<>(
+                configs,
+                new StringDeserializer(),
+                new JsonDeserializer<>(RelationDto.Statistic.class, false));
+    }
+
+    @Bean
+    public ConcurrentKafkaListenerContainerFactory<String, RelationDto.Statistic> diaryRelationListener(){
+        ConcurrentKafkaListenerContainerFactory<String, RelationDto.Statistic> factory = new ConcurrentKafkaListenerContainerFactory<>();
+        factory.setConsumerFactory(diaryRelationConsumer());
+        return factory;
+    }
+
 }

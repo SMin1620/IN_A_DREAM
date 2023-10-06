@@ -1,0 +1,29 @@
+.navbar-wrapper {
+  height: 100%;
+  width: 4rem;
+  position: fixed;
+  z-index: 10;
+  left: 0;
+  top: 0;
+  margin: 0;
+  padding: 0;
+}
+
+.hamburger-menu {
+  display: none;
+  background: url("../../../../assets/logo/cursor.png") no-repeat center center; /* 'no-repeat' added */
+  background-size: contain;
+  width: 30px; /* Adjust the width of the button */
+  height: 30px;
+}
+
+@media screen and (max-width: 768px) {
+  /* adjust this value based on when you want the switch to happen */
+  .navbar-body {
+    display: none;
+  }
+
+  .hamburger-menu {
+    display: block;
+  }
+}
