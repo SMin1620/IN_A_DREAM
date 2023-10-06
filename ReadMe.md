@@ -338,13 +338,13 @@
 
 <div align=center>
 <img src="./contents/forReadme/UI/gifs/mainpage.gif" width="90%">
-
+<div>
 <img src="./contents/forReadme/mobileUI/mobileMain4.jpg" width="18%">
 <img src="./contents/forReadme/mobileUI/mobileMain1.jpg" width="18%">
 <img src="./contents/forReadme/mobileUI/mobileMain2.jpg" width="18%">
 <img src="./contents/forReadme/mobileUI/mobileMain3.jpg" width="18%">
 <img src="./contents/forReadme/mobileUI/mobileMain5.jpg" width="18%">
-
+</div>
 </div>
 
 - 웹사이트의 모든 기능을 보여주는 화면입니다.
@@ -355,6 +355,7 @@
 <div align=center>
 <img src="./contents/forReadme/UI/gifs/cloud.gif" width="90%">
 </div>
+
 - 전체 꿈 일기를 볼 수 있는 페이지입니다.
 - three.js를 활용하여 제작해, 꿈과 같은 몽환적인 느낌을 줍니다.
 
@@ -363,8 +364,8 @@
 <div align=center>
 <img src="./contents/forReadme/UI/gifs/mypage.gif" width="70%">
 <img src="./contents/forReadme/mobileUI/mobileMypage.jpg" width="23%">
-
 </div>
+
 - 사용자만의 일기 작성 스태틱, 감정, 키워드를 한 눈에 볼 수 있습니다.
 - 사용자가 직접 소유한 일기를 볼 수 있습니다.
 
@@ -375,6 +376,7 @@
 <img src="./contents/forReadme/mobileUI/mobileDreamshop.jpg" width="23%">
 
 </div>
+
 - 구매가 가능한 꿈 일기를 모두 모아볼 수 있습니다.
 - 인피니티 스크롤을 사용하여 api 요청을 처리하였고, 아래에 도착시 새로운 일기정보들이 인터렉티브하게 표시됩니다.
 
@@ -384,8 +386,8 @@
 <img src="./contents/forReadme/UI/gifs/statics.gif" width="90%">
 <img src="./contents/forReadme/mobileUI/mobileStat1.jpg" width="23%">
 <img src="./contents/forReadme/mobileUI/mobileStat2.jpg" width="23%">
-
 </div>
+
 - 기간을 설정해 모든 유저의 키워드, 감정을 한 눈에 볼 수 있습니다.
 - 기간을 설정해 나의 키워드, 감정을 한 눈에 볼 수 있습니다.
 - 작성된 일기의 감정별 판매여부와 보관여부의 비율을 볼 수 있습니다. 이를 통해 사용자의 감정에 따라 판매를 얼마나 하고 싶은지 상관관계를 예측할 수 있습니다.
@@ -395,17 +397,16 @@
 <div align=center>
 <img src="./contents/forReadme/UI/gifs/gallery.gif" width="90%">
 </div>
+
 - 감정별 탑 8개의 일기를 보여주며, three.js를 활용해 실제 갤러리에 있는 듯한 느낌을 구현했습니다.
 
 ### 10. 꿈 일기 작성
 
-<h3>수업</h3>
 <div align=center>
 <img src="./contents/forReadme/UI/gifs/makediary.gif" width="45%">
 <img src="./contents/forReadme/UI/gifs/remakediary.gif" width="45%">
 <img src="./contents/forReadme/mobileUI/mobileCreate.jpg" width="23%">
 <img src="./contents/forReadme/mobileUI/mobileCreate2.jpg" width="23%">
-
 </div>
 
 - 꿈 일기를 작성하고, 이미지를 생성합니다.
@@ -415,6 +416,7 @@
 
 <div align=center>
 <img src="./contents/forReadme/UI/gifs/recommand.gif" width="90%"></div>
+
 - 사용자의 로그를 분석하여 꿈을 추천해줍니다.
 
 <br/>
