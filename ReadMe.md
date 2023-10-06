@@ -66,12 +66,6 @@
 **"IN A DREAM"** 은 이런 배경 속에서 탄생한 플랫폼으로, 꿈 일기를 작성하고 꿈을 사고 팔면서 그 속에서 나오는 이야기와 감정을 공유하는 공간입니다. 사용자들은 자신의 꿈을 기록하고, 꿈에서 얻은 다양한 이야기와 감정을 서로 나눌 수 있습니다. 또한, 꿈에 등장한 물건이나 상황을 거래할 수 있는 공간도 제공하여, 꿈이 가지는 다양한 가치와 의미를 탐구할 수 있는 기회를 제공합니다.
 <br/>
 
-**주요 기능**
-
-- 일기의 키워드를 통한 그림생성
--
--
-
 <div align="right"><a href="#tableContents">목차로 이동</a></div>
 
 <br/>
@@ -82,86 +76,35 @@
 
 <a name="mainContents"></a>
 
-### 혼자 공부
+### 꿈 일기 작성
 
-<h4> 실시간 수업이 종료되면, 학생에게 숙제가 부여됩니다.</h4>
+- 사용자가 꿈 일기를 작성합니다.
+- 꿈 내용을 통해 그림이 자동 생성됩니다.
+- 꿈 내용을 분석하여 해당 꿈의 감정을 추출하고, 해당 감정만큼 감정코인을 얻게됩니다.
 
-- 학생은 **혼자 공부**에서 받아쓰기, 읽기, 일기 생성, 생성된 일기 읽기를 할 수 있습니다.
-
-<h4>학생의 혼자 공부에서 사용자와 상호작용을 높이기 위해 음성 기반으로 문답을 제공합니다.</h4>
-
-- Speech-To-Text(STT)로 사용자의 발화를 text로 변환해 정답 판별합니다.
-- Text-To-Speech(TTS)로 사용자에게 문제를 읽어주고, 피드백 제공합니다.
-- Optimal Character Recognition(OCR)로 이미지에 있는 글자를 판별해 받아쓰기 정답을 체크합니다.
-- Kakao의 Karlo를 활용해, 학생이 생성한 일기를 그림으로 변환해서 그림일기를 제공합니다.
+<h4> Kakao의 Karlo를 활용해, 그림일기를 제공합니다.</h4>
 
 ---
 
-### 실시간 수업
+### 꿈 거래
 
-<h4>실시간 교육 기능을 통해 학생들에게 더욱 활발하고 직접적인 교육 경험을 제공합니다.</h4>
-<h4>선생님이 반을 선택하여 강의를 생성합니다.</h4>
+- 다른 사용자가 작성한 꿈을, 해당 감정만큼 지불하여 꿈을 구매합니다.
 
-- 현재 접속 중인 학생들은 SSE 통신을 통해 실시간 알림을 받아 강의 페이지로 자동 이동합니다.
-- 앞으로 로그인하는 학생들은 실시간 강의 여부에 따라 강의 페이지로 자동 이동합니다.
+---
 
-<h4>실시간 강의에서는 단순한 화상 통화를 넘어, 다양한 보조 기능들을 통해 효과적인 교육을 지원합니다.</h4>
+### 꿈 통계
 
-- 선생님의 마우스 포인터 위치를 실시간으로 학생들에게 보여주는 마우스 트레이싱 기능이 탑재되어 있어, 학생들이 선생님의 지시를 쉽게 파악할 수 있습니다.
-- 선생님이 학생의 페이지를 원격으로 제어하거나, 자신의 페이지 이동을 학생에게도 동기화시켜 수업의 질을 높입니다.
-- 선생님이 학생들의 마이크를 제어하여 수업이 원활하게 진행 될 수 있습니다.
+- 설정된 기간에 따른, 사용자의 꿈의 키워드 분석 및 감정 분석을 통해 꿈 키워드와 감정을 한꺼번에 볼 수 있습니다.
 
-<div align="right"><a href="#tableContents">목차로 이동</a></div>
+---
 
-<br/>
+### 꿈 추천
 
-## 🌟 주요 차별점
-
-### 노인을 위한 서비스란?
-
-<h4>저희 생각에는 단순히 글자가 크고, 심플한 디자인이 노인을 위한 서비스라 생각하였습니다.</h4>
-<h4>하지만, 그게 정말 노인을 위한 서비스일까요?</h4>
-<h4>저희는 이에 대한 답을 찾기 위해 여러 논문 자료를 참고하여 제작하였습니다.</h4>
-
-- 노인은 눈동자의 황변으로 하위범주 (파랑, 초록)보다 상위범주(노랑, 빨강)에서 잘 식별한다.
-  - 김응철, 김후성.(2020), 치매 예방을 위한 교구재 디자인 색상 적용 연구
-- 백색 바탕에 검정 문자에서 높은 가독성을 보였다.
-  - 정신해, 손정식, 곽호원, 유동식.(2014), 노안 연령에서 배경색에 따른 한글서체의 가독성 평가
-- 서체 선호도 및 가독성 2차 설문 조사 결과 ➡️ Kopub 바탕체
-- 노인은 필요없는 정보를 식별하는 시각 판별력이 떨어진다.
-  - 미국 브라운대 인식언어 및 심리학과 타케오 와타나베 교수, 노인 시간 판별력 실험
-- 반응속도가 늦어지고, 정보처리과정에서 저장된 정보를 적시에 이용하지 못하는 등 기억력 감퇴의 학습 장애의 요인을 갖고 있다. ➡️ 반복 학습 필요성
-  - 최예식.(2020), 언택트 시대 노인 학습자 일상 변화의 연구: 복지관 이용자를 중심으로
-- 교육에 대해 만족도가 높았으나, 교육의 활용도에 만족도가 낮은 것으로 나타나 실생활과 연계된 교육프로그램을 강화할 필요가... ➡️ 실생활과 관련된 커리큘럼 구성
-  - 김정엽, 이재모.(2010), 노인 교육에 관한 노인의 욕구분석 -노인의 연령별 차이를 중심으로-
-
-<div align="right"><a href="#tableContents">목차로 이동</a></div>
+- 사용자의 로그를 분석해 사용자에게 맞는 꿈을 추천해줍니다.
+- 꿈을 분석해 비슷한 꿈을 분석해줍니다.
 
 <br/>
 
-<!------- 업무 분장 시작 -------->
-
-## 💡 업무 분장
-
-<a name="divisionOfDuties"></a>
-
-#### FrontEnd
-
-- **윤자현** : UI/UX 구현, 요구사항 분석 및 설계, three.js 및 애니메이션을 사용해 인터렉티브 화면 구현
-- **김동현** : UI/UX 구현, Redux, React Query를 활용해 데이터 상태 관리, 인터렉티브 메인 화면 구현
-
-- **김현빈** : UI/UX 구현, three.js 및 애니메이션을 사용해 인터렉티브 화면 구현, 성능 최적화
-- **정수완** : UI/UX 구현, CR(Create, Read) 기능 구현해 전반적인 페이지 개발, 반응형 웹 디자인 구현
-  <br/>
-
-#### BackEnd
-
-- **이승민** : spring boot api 개발, ELk Stack을 활용한 로그 관리 및 데이터 분석, 검색엔진, 거래내역 이상징후 탐지, 추천기능
-- **차민준** : spring boot api 개발, jenkins/docker를 활용한 ci/cd 자동화 구축 spark를 활용한 빅데이터 분석
-- **조현덕** : 빅데이터 시스템 구축, spark를 활용한 빅데이터 분석, spark streaming을 실시간 데이터 처리, spring boot api 개발
-
-<div align="right"><a href="#tableContents">목차로 이동</a></div>
-<br/>
 <!------- 시스템 아키텍쳐 시작 -------->
 
 ## ⚙️ 시스템 아키텍쳐
@@ -169,8 +112,6 @@
 <a name="systemArchitecture"></a>
 
 <img src="./contents/forReadme/architecture.png">
-
-<div align="right"><a href="#tableContents">목차로 이동</a></div>
 
 <br/>
 
@@ -370,12 +311,11 @@
 ### 1. 인트로 페이지
 
 <div align=center>
-<img src="./contents/forReadme/UI/gifs/intro.gif" width="90%">
+<img src="./contents/forReadme/UI/gifs/intro.gif" width="70%">
+<img src="./contents/forReadme/mobileUI/mobileIntro.jpg" width="23%">
 </div>
 
-- face-api.js를 활용해 얼굴 로그인을 진행합니다.
-- 로그인은 박스 영역에 들어와야 로그인 진행이 됩니다.
-- 사용자가 박스 영역에 잘 들어올 수 있도록 TTS로 얼굴 이동을 안내합니다.
+- 사이트의 대략적인 분위기와 기획의도를 설명해주며 꿈을 주제로 하는만큼 감성적인 요소와 인터렉티브한 요소들을 사용하여 사용자에게 사이트 이용에 몰입감을 제공해 줍니다.
 
 ### 2. 인트로 to login
 
@@ -384,169 +324,126 @@
 <img src="./contents/forReadme/UI/gifs/introtologin2.gif" width="45%">
 </div>
 
-<h3>기능</h3>
-
-- 실시간 수업 시작
-- 야학 단체에 등록된 학생 확인
-- 학습 교재 확인
+- 성에 들어가는 느낌을 주어, 몰입감을 향상시킵니다.
 
 ### 3. Login
 
-<h3>실시간 수업 시작</h3>
 <div align=center>
-<img src="./contents/forReadme/UI/gifs/login.gif" width="90%">
+<img src="./contents/forReadme/UI/gifs/login.gif" width="70%">
+<img src="./contents/forReadme/mobileUI/mobileLogin.jpg" width="23%">
+
 </div>
 
-- 수업을 시작을 누르면, 학생들은 실시간 수업으로 들어올 수 있습니다.
+### 4. MainPage
 
-<h3>MainPage</h3>
 <div align=center>
 <img src="./contents/forReadme/UI/gifs/mainpage.gif" width="90%">
+
+<img src="./contents/forReadme/mobileUI/mobileMain4.jpg" width="18%">
+<img src="./contents/forReadme/mobileUI/mobileMain1.jpg" width="18%">
+<img src="./contents/forReadme/mobileUI/mobileMain2.jpg" width="18%">
+<img src="./contents/forReadme/mobileUI/mobileMain3.jpg" width="18%">
+<img src="./contents/forReadme/mobileUI/mobileMain5.jpg" width="18%">
+
 </div>
 
-- 수업을 위해 교사는 커리큘럼과 강의 자료를 선택합니다.
-- 강의자료 선택 후, 단어 읽기, 단어 받아쓰기 등의 수업을 진행합니다.
+- 웹사이트의 모든 기능을 보여주는 화면입니다.
+- 인터랙티브 요소를 추가하여 사용자에게 즐거움을 제공합니다.
 
-<h4>Cloud</h4>
+### 5. Cloud
+
 <div align=center>
 <img src="./contents/forReadme/UI/gifs/cloud.gif" width="90%">
 </div>
+- 전체 꿈 일기를 볼 수 있는 페이지입니다.
+- three.js를 활용하여 제작해, 꿈과 같은 몽환적인 느낌을 줍니다.
 
-<h4>MyPage</h4>
-<div align=center>
-<img src="./contents/forReadme/UI/gifs/mypage.gif" width="90%">
-</div>
-
-<h4>Shop</h4>
-<div align=center>
-<img src="./contents/forReadme/UI/gifs/shop.gif" width="90%">
-</div>
-
-### 4. 학생 메인 페이지
+### 6. Mypage
 
 <div align=center>
-<img src="./contents/forReadme/UI/학생메인.png" width="90%">
+<img src="./contents/forReadme/UI/gifs/mypage.gif" width="70%">
+<img src="./contents/forReadme/mobileUI/mobileMypage.jpg" width="23%">
+
 </div>
+- 사용자만의 일기 작성 스태틱, 감정, 키워드를 한 눈에 볼 수 있습니다.
+- 사용자가 직접 소유한 일기를 볼 수 있습니다.
 
-<h3>기능</h3>
-  
-  - 실시간 수업 : 강사가 방을 열었을 경우 자동 참여
-  - 혼자 공부하기
-  - 일기장 보기
+### 7. ShopPgage
 
-### 5. 학생 실시간 페이지
+<div align=center>
+<img src="./contents/forReadme/UI/gifs/shop.gif" width="70%">
+<img src="./contents/forReadme/mobileUI/mobileDreamshop.jpg" width="23%">
 
-<h3>실시간 수업 입장</h3>
+</div>
+- 구매가 가능한 꿈 일기를 모두 모아볼 수 있습니다.
+- 인피니티 스크롤을 사용하여 api 요청을 처리하였고, 아래에 도착시 새로운 일기정보들이 인터렉티브하게 표시됩니다.
+
+### 8. StaticsPgage
+
 <div align=center>
 <img src="./contents/forReadme/UI/gifs/statics.gif" width="90%">
-</div>
+<img src="./contents/forReadme/mobileUI/mobileStat1.jpg" width="23%">
+<img src="./contents/forReadme/mobileUI/mobileStat2.jpg" width="23%">
 
----
+</div>
+- 기간을 설정해 모든 유저의 키워드, 감정을 한 눈에 볼 수 있습니다.
+- 기간을 설정해 나의 키워드, 감정을 한 눈에 볼 수 있습니다.
+- 작성된 일기의 감정별 판매여부와 보관여부의 비율을 볼 수 있습니다. 이를 통해 사용자의 감정에 따라 판매를 얼마나 하고 싶은지 상관관계를 예측할 수 있습니다.
+
+### 9. GalleryPgage
 
 <div align=center>
 <img src="./contents/forReadme/UI/gifs/gallery.gif" width="90%">
 </div>
+- 감정별 탑 8개의 일기를 보여주며, three.js를 활용해 실제 갤러리에 있는 듯한 느낌을 구현했습니다.
+
+### 10. 꿈 일기 작성
 
 <h3>수업</h3>
 <div align=center>
 <img src="./contents/forReadme/UI/gifs/makediary.gif" width="45%">
 <img src="./contents/forReadme/UI/gifs/remakediary.gif" width="45%">
+<img src="./contents/forReadme/mobileUI/mobileCreate.jpg" width="23%">
+<img src="./contents/forReadme/mobileUI/mobileCreate2.jpg" width="23%">
+
 </div>
 
-- 학생들은 강사가 공유하는 교재를 보며 실시간 수업을 받습니다.
-- 단어 읽기, 받아쓰기 등의 수업이 진행됩니다.
+- 꿈 일기를 작성하고, 이미지를 생성합니다.
+- 이미지가 마음에 들지 않을 경우, 다시 생성이 가능하고 코인을 5개 지불해야 합니다.
 
-<h4>단어 읽기</h4>
+### 11. 꿈 추천
+
 <div align=center>
 <img src="./contents/forReadme/UI/gifs/recommand.gif" width="90%"></div>
-<h4>단어 힌트 - 단어 읽기 힘들어 할 경우</h4>
-<div align=center>
-<img src="./contents/forReadme/UI/dogdream.png" width="90%">
-<img src="./contents/forReadme/UI/pipeline.png" width="90%">
-<img src="./contents/forReadme/UI/engtokor.png" width="90%">
-<img src="./contents/forReadme/UI/recommanddream.png" width="90%">
-<img src="./contents/forReadme/UI/wrongword.png" width="90%">
-<img src="./contents/forReadme/UI/searchspeed.png" width="90%">
-</div>
-<h4>단어 받아쓰기</h4>
-<div align=center>
-<img src="./contents/forReadme/UI/받아쓰기-학생.png" width="80%">
-</div>
-
-### 6. 혼자 공부하기
-
-<div align=center>
-<img src="./contents/forReadme/UI/혼자학습1.png" width="90%" >
-</div>
-
----
-
-<div align=center>
-<img src="./contents/forReadme/UI/혼자학습2.png" width="90%">
-</div>
-
-<h3>기능</h3>
-
-- 단어 읽고, 받아쓰기
-- 오늘의 일기 생성 및 읽기
-
----
-
-<h4>단어 읽기</h4>
-<div align=center>
-<img src="./contents/forReadme/UI/gifs/혼자단어읽기.gif" width="90%">
-</div>
-
-- 학생의 음성을 통해 정답 판별을 합니다.
-
-<h4>공책 선택</h4>
-<div align=center>
-<img src="./contents/forReadme/UI/gifs/공책선택.gif" width="90%">
-</div>
-
-<h4>받아쓰기 - 공책 없음</h4>
-<div align=center>
-<img src="./contents/forReadme/UI/gifs/공책없음.gif" width="90%">
-</div>
-
-- 공책이 없는 경우, 캔버스를 통해서 받아쓰기를 할 수 있습니다.
-
-<h4>받아쓰기 - 공책 있음</h4>
-<div align=center>
-<img src="./contents/forReadme/UI/gifs/혼자학습공책.gif" width="90%">
-</div>
-
-- OCR을 통해 사진에 있는 text를 인식해 정답을 비교합니다.
-
----
-
-<h4>일기 생성</h4>
-<div align=center>
-<img src="./contents/forReadme/UI/gifs/그림일기생성전.gif" width="90%">
-</div>
-
-- 사용자와의 대화를 기반으로 일기를 생성합니다.
-
-<h4>생성된 일기로 읽기</h4>
-<div align=center>
-<img src="./contents/forReadme/UI/gifs/그림일기생성.gif" width="90%">
-</div>
-
-- 일기 완성 후 생성된 일기 내용으로 학습을 이어갑니다.
-- 일기 내용을 기반으로 그림일기도 제공합니다.
-
-### 7. 일기
-
-<div align=center>
-<img src="./contents/forReadme/UI/gifs/일기장보기.gif" width="90%">
-</div>
-
-- 혼자 공부를 통해 생성된 일기들을 볼 수 있습니다.
-
-<div align="right"><a href="#tableContents">목차로 이동</a></div>
+- 사용자의 로그를 분석하여 꿈을 추천해줍니다.
 
 <br/>
 
+## 🖥️ 기술
+
+### 1. 형태소 분석
+
+<div align=center>
+<img src="./contents/forReadme/UI/dogdream.png" width="90%">
+</div>
+
+### 2. 빅데이터 파이프라인
+
+<div align=center>
+<img src="./contents/forReadme/UI/pipeline.png" width="90%">
+</div>
+
+### 3. 검색페이지 : 오타 교정, 한/영변환
+
+<div align=center>
+<img src="./contents/forReadme/UI/engtokor.png" width="90%">
+<img src="./contents/forReadme/UI/wrongword.png" width="90%">
+
+</div>
+
+<br/>
+
+<br/>
 <!------- 팀원 소개 시작 -------->
 
 ## 👥 팀원 소개
@@ -559,4 +456,23 @@
 | **Position** |               Leader <br/> Frontend                |                      Frontend                      |                      Frontend                      |                      Frontend                      |                                      Backend                                      |                      Backend                       |                      Backend                       |
 |   **Git**    |      [GitHub](https://github.com/YOONJAHYUN)       |     [GitHub](https://github.com/dongdongx2x2)      |     [GitHub](https://github.com/HyeonBhinKim)      |       [GitHub](https://github.com/SWan9710)        | [GitHub](https://github.com/SMin1620) <br/> [Blog](https://smin1620.tistory.com/) |       [GitHub](https://github.com/whwhdnfl2)       |      [GitHub](https://github.com/gusejr4547)       |
 
-<div align="right"><a href="#tableContents">목차로 이동</a></div>
+<!------- 업무 분장 시작 -------->
+
+## 💡 업무 분장
+
+<a name="divisionOfDuties"></a>
+
+#### FrontEnd
+
+- **윤자현** : UI/UX 구현, 요구사항 분석 및 설계, three.js 및 애니메이션을 사용해 인터렉티브 화면 구현
+- **김동현** : UI/UX 구현, Redux, React Query를 활용해 데이터 상태 관리, 인터렉티브 메인 화면 구현
+
+- **김현빈** : UI/UX 구현, three.js 및 애니메이션을 사용해 인터렉티브 화면 구현, 성능 최적화
+- **정수완** : UI/UX 구현, CR(Create, Read) 기능 구현해 전반적인 페이지 개발, 반응형 웹 디자인 구현
+  <br/>
+
+#### BackEnd
+
+- **이승민** : spring boot api 개발, ELk Stack을 활용한 로그 관리 및 데이터 분석, 검색엔진, 거래내역 이상징후 탐지, 추천기능
+- **차민준** : spring boot api 개발, jenkins/docker를 활용한 ci/cd 자동화 구축 spark를 활용한 빅데이터 분석
+- **조현덕** : 빅데이터 시스템 구축, spark를 활용한 빅데이터 분석, spark streaming을 실시간 데이터 처리, spring boot api 개발
