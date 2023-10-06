@@ -369,7 +369,7 @@
 
 <div align=center>
 <img src="./contents/forReadme/UI/gifs/shop.gif" width="70%">
-<img src="./contents/forReadme/mobileUI/mobileDreamshop.jpg" width="23%">
+<img src="./contents/forReadme/mobileUI/dreamshop.jpg" width="23%">
 
 </div>
 
