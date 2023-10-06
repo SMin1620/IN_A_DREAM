@@ -1,0 +1,75 @@
+.card-wrapper {
+  width: 30%;
+  /* box-shadow: 0 2px 5px rgba(255, 255, 255, 0.2); */
+  transition: transform 1.2s ease; /* transform 속성에 대한 부드러운 전환 설정 */
+
+  /* 필요한 다른 스타일을 추가하세요 */
+}
+
+.card-wrapper img {
+  border-radius: 20px;
+}
+
+.card-date {
+  display: flex;
+  justify-content: flex-end;
+  position: relative;
+  top: -6%;
+  float: none; /* float 제거*/
+}
+
+.card-content {
+  display: flex;
+  justify-content: space-between;
+  top: -6%;
+  position: relative;
+}
+
+.card-nickname {
+  background-color: #f1e7d1;
+  color: black;
+  border-radius: 8px;
+  width: auto;
+  min-width: 5vw;
+  max-width: 10vw;
+  margin-left: 10%;
+  /* width: auto; */
+  text-align: center;
+  height: auto;
+  /* height: auto; */
+  padding-top: 3%;
+  padding-bottom: 3%;
+  font-size: 1rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.card-title {
+  white-space: nowrap; /* 텍스트를 한 줄에 표시 */
+  overflow: hidden; /* 넘치는 내용은 숨김 */
+  text-overflow: ellipsis; /* 넘치는 내용은 ...으로 표시 */
+  flex-grow: 1;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  padding-left: 1%;
+}
+
+@media (max-width: 1024px) {
+  .card-nickname {
+    font-size: 0.5rem;
+  }
+  .card-title {
+    font-size: 0.8rem;
+  }
+  .card-wrapper img {
+    border-radius: 10px;
+  }
+}
+@media (max-width: 768px) {
+  .card-nickname {
+    font-size: 0.2rem;
+    width: 8vw;
+  }
+}

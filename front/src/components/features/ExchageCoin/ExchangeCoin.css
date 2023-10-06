@@ -1,0 +1,140 @@
+.exchange-wrapper {
+  position: relative;
+  padding-top: 10%;
+  bottom: 1400%;
+
+  /* right: 50%; */
+  /* left: calc(50% + 4rem); */
+  left: calc(40% - 4rem);
+  /* transform: translate(-50%, -50%); */
+  width: 50vw;
+  height: 55vh;
+  background-color: black;
+  border: 0.4rem dashed #fff;
+  border-radius: 20px;
+  z-index: 50;
+  padding: 20px;
+  color: #fff;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.exchange-close {
+  position: absolute;
+  top: 2%;
+  right: 2%;
+}
+.exchange-wrapper img {
+  width: 5vw;
+  height: 5vw;
+}
+.exchange-wrapper h1 {
+  font-size: 1.6vw;
+  padding-top: 8%;
+}
+.exchange-coin-box {
+  display: flex;
+  justify-content: space-evenly;
+  padding-top: 5%;
+  padding-bottom: 10%;
+}
+
+.exchange-button {
+  position: absolute;
+  bottom: 5%;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.exchange-coin {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.exchange-coin-selected {
+  border: #fff dashed 0.25rem;
+  border-radius: 50%;
+  width: 6vw;
+  height: 6vw;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  margin-bottom: 15%;
+}
+.exchange-coin-nonselected {
+  display: flex;
+  width: 6vw;
+  height: 6vw;
+  align-items: center;
+  justify-content: center;
+  opacity: 0.3;
+  flex-direction: column;
+  margin-bottom: 15%;
+}
+
+.exchange-result {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+}
+.exchange-rest-coin {
+  display: flex;
+  align-items: center;
+  height: 10vw;
+}
+.exchange-rest-coin p {
+  width: 3vw;
+  font-size: 1.6vw;
+  padding-left: 10%;
+}
+.exchange-change-coin {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-evenly;
+  height: 18vw;
+}
+
+@media (max-width: 768px) {
+  .exchange-wrapper {
+    width: 100%;
+    left: 0;
+    top: 0;
+  }
+  .exchange-wrapper h1 {
+    font-size: 1rem;
+  }
+
+  .exchange-coin-selected {
+    border: #fff dashed 0.25rem;
+    border-radius: 50%;
+    width: 4rem;
+    height: 4rem;
+  }
+  .exchange-coin-nonselected {
+    display: flex;
+    width: 4rem;
+    height: 4rem;
+  }
+  .exchange-wrapper img {
+    width: 3.3rem;
+    height: 3.3rem;
+  }
+  .exchange-rest-coin {
+    height: 22vw;
+  }
+  .exchange-rest-coin p {
+    font-size: 1rem;
+    padding-left: 10%;
+  }
+  .exchange-change-coin h1 {
+    padding-bottom: 0.5rem;
+  }
+  .exchange-change-coin img {
+    margin-bottom: 0.5rem;
+  }
+}

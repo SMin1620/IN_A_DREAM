@@ -1,0 +1,39 @@
+.login-form-main {
+  width: 100%;
+  height: 100%;
+}
+
+.login-form-logo {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 1rem;
+}
+
+.login-form-logo > img {
+  width: 14vw;
+  /* height: 14vh; */
+}
+
+.login-form-register {
+  position: relative;
+  margin-top: 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border-top: 1px solid black;
+}
+
+.login-form-register-line {
+  position: absolute;
+  top: -20%;
+  background-color: white;
+  padding: 0 1rem;
+}
+
+.signup-btn {
+  margin-top: 1rem;
+}
+
+.signup-btn:hover {
+  cursor: pointer;
+}

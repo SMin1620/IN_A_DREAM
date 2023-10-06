@@ -1,0 +1,17 @@
+.dreamShoptitle {
+  font-size: 10rem;
+  color: white;
+  margin-top: 20%;
+  margin-bottom: 20%;
+  font-family: "PartialSansKR-Regular";
+}
+
+.dreamShoptitle:hover {
+  color: #ff7a00;
+}
+
+@media (max-width: 768px) {
+  .dreamShoptitle {
+    font-size: 3rem;
+  }
+}

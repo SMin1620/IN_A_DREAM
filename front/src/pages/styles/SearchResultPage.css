@@ -1,0 +1,11 @@
+.search-result-wrapper {
+  width: calc(100%-4rem);
+  height: 110vh;
+  background-color: #000000;
+}
+
+.search-result-search-bar {
+  margin-top: 3rem;
+  margin-left: 2rem;
+  margin-bottom: 2rem;
+}
