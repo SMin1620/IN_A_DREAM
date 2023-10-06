@@ -341,7 +341,7 @@
 <div>
 <img src="./contents/forReadme/mobileUI/mobileMain4.jpg" width="18%">
 <img src="./contents/forReadme/mobileUI/mobileMain1.jpg" width="18%">
-<img src="./contents/forReadme/mobileUI/mobileMain2.jpg" width="18%">
+<img src="./contents/forReadme/mobileUI/mobilemain2.jpg" width="18%">
 <img src="./contents/forReadme/mobileUI/mobileMain3.jpg" width="18%">
 <img src="./contents/forReadme/mobileUI/mobileMain5.jpg" width="18%">
 </div>
