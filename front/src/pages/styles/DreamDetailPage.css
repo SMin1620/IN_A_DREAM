@@ -141,6 +141,15 @@
 }
 
 @media (max-width: 1024px) {
+  .diary-coin-box img {
+    width: 10vw;
+    padding-bottom: 3%;
+  }
+  .diary-detail-left-bottom-etc {
+    scale: 0.8;
+    margin-top: 0.5rem;
+    width: 100%;
+  }
   .diary-detail-main {
     display: flex;
     flex-direction: column;
@@ -149,11 +158,13 @@
   }
   .diary-detail-right-bottom {
     font-size: 1rem;
+    margin-top: 1rem;
   }
   .diary-title {
     font-size: 1.5rem;
     display: flex;
     align-items: center;
+    padding-top: 5%;
   }
 
   .diary-detail-left {
@@ -169,17 +180,18 @@
   .diary-detail-left-top {
     width: 70%;
     margin: 0;
+    flex-direction: column-reverse;
   }
 
   .diary-image {
     margin: 0;
     width: 80%;
     height: 100%;
-    margin-bottom: 1rem;
+    margin-top: 1rem;
   }
 
   .diary-detail-left-bottom {
-    width: 50%;
+    width: 80%;
     height: 100%;
     display: flex;
     flex-direction: column;
@@ -194,6 +206,9 @@
 
   .diary-detail-right-top {
     margin: 0 10vw;
+    align-items: center;
+    flex-direction: column-reverse;
+    align-items: center;
   }
   .coin-wrapper {
     width: 100%;

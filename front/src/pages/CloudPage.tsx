@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import clImage from "../assets/background/CLcloud.jpg";
 import Cloud from "../components/features/CloudComponents/Cloud";
 import IntroCloud from "../components/features/CloudComponents/IntroCloud";
-import { useAllDiary } from "../hooks/useAllDiary";
+import { useCloudAllDiary } from "../hooks/useCloudAllDiary";
 import { DiaryInfo } from "../types/ApiType";
 import { useParams } from "react-router-dom";
 import { SERVER_URL } from "../constants";
@@ -49,6 +49,7 @@ function shuffleArray(array: any[]) {
 
 function CloudPage() {
   const [showIntro, setShowIntro] = useState(true);
+  const [showCloud, setShowCloud] = useState(false);
   const [diaries, setDiaries] = useState<DiaryInfo[]>([]);
   const [shuffledDiaries, setShuffledDiaries] = useState<DiaryInfo[]>([]);
   const { sortKey } = useParams<string>();
@@ -58,7 +59,7 @@ function CloudPage() {
     data: response,
     isLoading,
     error,
-  } = useAllDiary({ page: 0, size: 500 });
+  } = useCloudAllDiary({ page: 0, size: 500 });
 
   const images =
     shuffledDiaries.length > 1
@@ -78,12 +79,17 @@ function CloudPage() {
       document.documentElement.scrollHeight / 2 - window.innerHeight / 2;
     window.scrollTo(centerOfWidth, centerOfHeight);
 
+    const cloudTimer = setTimeout(() => {
+      setShowCloud(true);
+    }, 2000); // After 2 seconds
+
     const introTimer = setTimeout(() => {
       setShowIntro(false);
     }, 5000); // After 5 seconds
 
     return () => {
       clearTimeout(introTimer);
+      clearTimeout(cloudTimer);
     }; // Clean up on unmount
   }, []);
 
@@ -131,7 +137,7 @@ function CloudPage() {
         <Overlay>
           <div className="cloud">
             {showIntro && <IntroCloud />}
-            {images && <Cloud images={images} />}
+            {showCloud && images && <Cloud images={images} />}
           </div>
         </Overlay>
       </div>

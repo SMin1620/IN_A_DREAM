@@ -30,6 +30,7 @@ const CircleGraph: React.FC<CircleGraphProps> = ({ data }) => {
           cy="30%"
           outerRadius="50%"
           fill="#8884d8"
+          stroke="#646464"
         >
           {data.map((entry, index) => (
             <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
@@ -39,7 +40,8 @@ const CircleGraph: React.FC<CircleGraphProps> = ({ data }) => {
             dataKey="name"
             position="outside"
             fontSize="1rem"
-            fontFamily="omyu_pretty"
+            fontFamily="Godo"
+            fontWeight="lighter"
             offset={10}
             fill="black"
             stroke="#646464"
