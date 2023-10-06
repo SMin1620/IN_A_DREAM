@@ -28,13 +28,13 @@
 
 1. <a href="#subject">🎯 기획 배경</a>
 1. <a href="#mainContents">⭐️ 주요 기능</a>
-1. <a href="#divisionOfDuties">💡 업무 분장</a>
 1. <a href="#systemArchitecture">⚙️ 시스템 아키텍쳐</a>
 1. <a href="#skills">🛠️ 기술 스택</a>
 1. <a href="#directories">🗂️ 파일 구조</a>
 1. <a href="#erd">💾 ERD</a>
 1. <a href="#contents">🖥️ 화면 소개</a>
 1. <a href="#developers">👥 팀원 소개</a>
+1. <a href="#divisionOfDuties">💡 업무 분장</a>
 
 <br/>
 
@@ -64,10 +64,6 @@
 - 일기 작성의 트렌드: 꿈을 기록하면서 그 안에서 얻은 감정과 이야기를 기억에 남기고 싶어하는 사람들이 있습니다.
 
 **"IN A DREAM"** 은 이런 배경 속에서 탄생한 플랫폼으로, 꿈 일기를 작성하고 꿈을 사고 팔면서 그 속에서 나오는 이야기와 감정을 공유하는 공간입니다. 사용자들은 자신의 꿈을 기록하고, 꿈에서 얻은 다양한 이야기와 감정을 서로 나눌 수 있습니다. 또한, 꿈에 등장한 물건이나 상황을 거래할 수 있는 공간도 제공하여, 꿈이 가지는 다양한 가치와 의미를 탐구할 수 있는 기회를 제공합니다.
-<br/>
-
-<div align="right"><a href="#tableContents">목차로 이동</a></div>
-
 <br/>
 
 <!------- 주요 기능 시작 -------->
@@ -339,10 +335,10 @@
 <div align=center>
 <img src="./contents/forReadme/UI/gifs/mainpage.gif" width="90%">
 <div>
-<img src="./contents/forReadme/mobileUI/mobileMain4.jpg" width="18%">
-<img src="./contents/forReadme/mobileUI/mobileMain1.jpg" width="18%">
+<img src="./contents/forReadme/mobileUI/MobileMain4.jpg" width="18%">
+<img src="./contents/forReadme/mobileUI/MobileMain1.jpg" width="18%">
 <img src="./contents/forReadme/mobileUI/mobilemain2.jpg" width="18%">
-<img src="./contents/forReadme/mobileUI/mobileMain3.jpg" width="18%">
+<img src="./contents/forReadme/mobileUI/MobileMain3.jpg" width="18%">
 <img src="./contents/forReadme/mobileUI/mobileMain5.jpg" width="18%">
 </div>
 </div>
