@@ -476,7 +476,7 @@
 
 #### BackEnd
 
-- **이승민** : spring boot api 개발, ELk Stack을 활용한 로그 관리 및 데이터 분석, 검색엔진, 거래내역 이상징후 탐지, 추천기능
+- **이승민** : spring boot api 개발, ELk Stack을 활용한 로그 관리 및 데이터 분석, 검색엔진, 거래내역 이상징후 탐지, 사용자 맞춤형 추천기능
 - **차민준** : spring boot api 개발, jenkins/docker를 활용한 ci/cd 자동화 구축 spark를 활용한 빅데이터 분석
 - **조현덕** : 빅데이터 시스템 구축, spark를 활용한 빅데이터 분석, spark streaming을 실시간 데이터 처리, spring boot api 개발
 
